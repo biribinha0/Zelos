@@ -45,7 +45,7 @@ Antes de começar, é necessário ter as seguintes ferramentas instaladas em sua
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/Paivs/Zelos.git
+git clone https://github.com/biribinha0/Zelos.git
 cd Zelos
 ```
 
