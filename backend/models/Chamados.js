@@ -21,10 +21,10 @@ const criarChamado = async (chamadoData) => {
     }
 };
 
-// Lista de chamads feitas por um usuários específico
+// Lista de chamadas feitas por um usuários específico
 const listarChamadosPorUsuario = async (id) => {
     try {
-        await readAll('chamados', `usuario_id = ${id}`)
+        return await readAll('chamados', `usuario_id = ${id}`)
     } catch (error) {
         console.error('Erro ao listar chamados por usuário: ', error);
         throw error;
@@ -34,7 +34,7 @@ const listarChamadosPorUsuario = async (id) => {
 // Detalhes de um chamado específico
 const obterChamadoPorId = async (id) => {
     try {
-        await read('chamados', `id = ${id}`)
+        return await read('chamados', `id = ${id}`)
     } catch (error) {
         console.error('Erro ao obter chamado por ID: ', error);
         throw error;

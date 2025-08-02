@@ -10,6 +10,17 @@ const listarPools = async () => {
     }
 };
 
+// Obter pool por id
+const obterPoolPorId = async (id) => {
+    try {
+        return await read('pool', `id = ${id}`)
+    } catch (error) {
+        console.error('Erro ao obter pool por Id: ', error);
+        throw error;
+    }
+}
+
+
 // Lista de pools que um técnico pode fazer
 const listarPoolsPorTecnico = async (id) => {
     try {
@@ -53,11 +64,12 @@ const editarPool = async (id, poolData) => {
 // Deletar (desativar) tipo de manutenção
 const deletarPool = async (id) => {
     try {
-        return await update('pool', {}, `id = ${id}`)
+        return await update('pool', { status: 'inativo' }, `id = ${id}`)
     } catch (error) {
         console.error('Erro ao editar pool: ', error);
         throw error;
     }
 }
 
-export {listarPools, listarPoolsPorTecnico, listarTecnicoPorPools, criarPool, editarPool, deletarPool}
+
+export { listarPools, obterPoolPorId, listarPoolsPorTecnico, listarTecnicoPorPools, criarPool, editarPool, deletarPool }
