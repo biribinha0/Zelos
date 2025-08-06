@@ -127,7 +127,7 @@ const criarChamadoController = async (req, res) => {
             chamadoId
         })
     } catch (error) {
-        console.error('Erro ao listar criar chamado: ', error);
+        console.error('Erro ao criar chamado: ', error);
         return res.status(500).json({ error: 'Ocorreu um erro interno ao criar o chamado.' });
     }
 }
@@ -152,14 +152,14 @@ const editarChamadoController = async (req, res) => {
             status
         }
 
-        const chamadoId = await editarChamado(chamadoId, chamadoData);
+        const idChamado = await editarChamado(chamadoId, chamadoData);
         return res.status(200).json({
             mensagem: 'Chamado registrado com sucesso.',
-            chamadoId
+            idChamado
         })
     } catch (error) {
-        console.error('Erro ao listar criar chamado: ', error);
-        return res.status(500).json({ error: 'Ocorreu um erro interno ao criar o chamado.' });
+        console.error('Erro ao editar chamado: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro interno ao editar o chamado.' });
     }
 }
 

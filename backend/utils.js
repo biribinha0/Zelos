@@ -1,6 +1,5 @@
 export function formatarTituloPool(titulo) {
-
-    switch (pool.titulo) {
+    switch (titulo) {
         case 'externo':
             return 'Externo';
 
@@ -16,4 +15,18 @@ export function formatarTituloPool(titulo) {
         default:
             return null
     }
+}
+
+export async function carregarPoolsParaTecnico(idTecnico) {
+    const relacoesPoolTecnico = await listarPoolsPorTecnico(idTecnico);
+    const poolsCompletos = await Promise.all(
+        relacoesPoolTecnico.map(async ({ id_pool }) => {
+            const pool = await obterPoolPorId(id_pool);
+            return {
+                ...pool,
+                nome_formatado: formatarTituloPool(pool.titulo)
+            };
+        })
+    );
+    return poolsCompletos
 }
