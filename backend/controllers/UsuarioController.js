@@ -1,6 +1,5 @@
 import { listarUsuarios, obterUsuarioPorId, criarUsuario, editarUsuario } from "../models/Usuarios.js";
-import { listarPoolsPorTecnico } from "../models/Pools.js";
-import { obterPoolPorId } from "../models/Pools.js";
+
 import { carregarPoolsParaTecnico } from "../utils.js";
 
 const listarUsuariosController = async (req, res) => {
@@ -85,4 +84,33 @@ const criarUsuarioController = async (req, res) => {
         console.error('Erro ao criar usuário: ', error);
         return res.status(500).json({ error: 'Ocorreu um erro interno ao criar o usuário.' });
     }
+}
+
+const editarUsuarioController = async (req, res) => {
+    const { nome, senha, email, funcao } = req.body;
+    const usuarioId = req.params.id;
+
+    if (!nome || !senha || !email || !funcao) {
+        return res.status(400).json({ error: 'Todos os campos obrigatórios devem ser preenchidos.' });
+    }
+
+    const usuarioData = {
+        nome,
+        senha,
+        email,
+        funcao
+    }
+
+    try {
+        const response = await editarUsuario(usuarioData)
+        return res.status(200).json({
+            mensagem: 'Usuario editado com sucesso.',
+            response
+        });
+    } catch (error) {
+        console.error('Erro ao editar usuário: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro interno ao editar o usuário.' });
+    }
 } 
+
+export {listarUsuariosController, obterUsuarioPorIdController, criarUsuarioController, editarUsuarioController}

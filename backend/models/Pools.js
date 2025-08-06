@@ -3,7 +3,7 @@ import { create, readAll, read, update, deleteRecord } from '../config/database.
 // Lista de pools disponíveis
 const listarPools = async () => {
     try {
-        return await readAll('pool', `status = ativo`);
+        return await readAll('pool', `status = 'ativo'`);
     } catch (error) {
         console.error('Erro ao listar pools: ', error);
         throw error;
@@ -13,7 +13,7 @@ const listarPools = async () => {
 // Obter pool por id
 const obterPoolPorId = async (id) => {
     try {
-        return await read('pool', `id = ${id}`)
+        return await read('pool', `id = ${id}`);
     } catch (error) {
         console.error('Erro ao obter pool por Id: ', error);
         throw error;
@@ -24,7 +24,7 @@ const obterPoolPorId = async (id) => {
 // Lista de pools que um técnico pode fazer
 const listarPoolsPorTecnico = async (id) => {
     try {
-        return await readAll('pool_tecnico', `id_tecnico = ${id}`);
+        return await readAll('pool_tecnico', `id_tecnico = ${id} AND status = 'ativo'`);
     } catch (error) {
         console.error('Erro ao listar pools por técnico: ', error);
         throw error;
@@ -34,7 +34,7 @@ const listarPoolsPorTecnico = async (id) => {
 // Lista de técnicos que podem fazer uma pool
 const listarTecnicosPorPool = async (id) => {
     try {
-        return await readAll('pool_tecnico', `id_pool = ${id} status = ativo`);
+        return await readAll('pool_tecnico', `id_pool = ${id} AND status = 'ativo'`);
     } catch (error) {
         console.error('Erro ao listar técnicos por pool: ', error);
         throw error;

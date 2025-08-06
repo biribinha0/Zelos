@@ -1,3 +1,6 @@
+import { listarPoolsPorTecnico } from "./models/Pools.js";
+import { obterPoolPorId } from "./models/Pools.js";
+
 export function formatarTituloPool(titulo) {
     switch (titulo) {
         case 'externo':

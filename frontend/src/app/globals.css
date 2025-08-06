@@ -1,13 +1,14 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --preto: #0b090aff;
+  --preto-claro: #161a1dff;
+  --vihno : #681413ff;
+  --vermelho-escuro: #9a1915ff;
+  --vermelho: #e30613ff;
+  --cinza: #878787ff;
+  --cinza-claro: #d3d3d3ff;
+  --branco-cinzento: #f5f3f4ff;
+  --branco: #ffffffff;
 }
 
 html,
@@ -16,12 +17,8 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body{
+  font-family: "Montserrat";
 }
 
 * {
@@ -35,8 +32,17 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.bg-vermelho {
+  background-color: var(--vermelho);
+}
+.bg-vermelho a,
+.bg-vermelho p,
+.bg-vermelho h1,
+.bg-vermelho h2,
+.bg-vermelho h3,
+.bg-vermelho h4,
+.bg-vermelho h5,
+.bg-vermelho h6,
+.bg-vermelho li{
+   color: var(--branco);
 }

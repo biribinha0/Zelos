@@ -4,7 +4,7 @@ import { create, readAll, read, update } from '../config/database.js';
 // Lista de chamados para usuários sem login
 const listarChamadosPublicos = async () => {
     try {
-        return await readAll('chamados', `status = em andamento`);
+        return await readAll('chamados', `status = 'em andamento'`);
     } catch (error) {
         console.error('Erro ao listar chamados públicos: ', error);
         throw error;
