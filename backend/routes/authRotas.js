@@ -5,6 +5,7 @@ const router = express.Router();
 
 // Rota de Login
 router.post('/login', (req, res, next) => {
+
   // Middleware de autenticação com tratamento de erros
   passport.authenticate('ldapauth', { session: true }, (err, user, info) => {
     try {

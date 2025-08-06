@@ -1,4 +1,4 @@
-import { create, readAll, read, update, deleteRecord } from '../config/database.js';
+import { create, readAll, read, update } from '../config/database.js';
 
 // Lista de pools disponíveis
 const listarPools = async () => {

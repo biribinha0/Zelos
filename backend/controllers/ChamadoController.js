@@ -49,6 +49,8 @@ const listarChamadosPorUsuarioController = async (req, res) => {
     }
 }
 
+
+
 const obterChamadoPorIdController = async (req, res) => {
     const chamadoId = req.params.id;
     try {
@@ -80,7 +82,7 @@ const obterChamadoPorIdController = async (req, res) => {
 
 const listarChamadosController = async (req, res) => {
     try {
-        const chamados = await listarChamadosPublicos();
+        const chamados = await listarChamados();
 
         const chamadosDetalhados = await Promise.all(
             chamados.map(async (chamado) => {
@@ -163,4 +165,4 @@ const editarChamadoController = async (req, res) => {
     }
 }
 
-export {criarChamadoController, editarChamadoController, obterChamadoPorIdController, listarChamadosController, listarChamadosController, listarChamadosPorUsuarioController}
+export { listarChamadosPublicosController, criarChamadoController, editarChamadoController, obterChamadoPorIdController, listarChamadosController, listarChamadosController, listarChamadosPorUsuarioController}

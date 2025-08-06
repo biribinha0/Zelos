@@ -1,7 +1,7 @@
 
 /* Fundo com imagem customizada */
-.login-background {
-    background-image: url('/imgLogin/imgFundo.png');
+.loginBackground {
+    background-image: url('/img/imgFundo.png');
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -9,14 +9,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 /* Container com efeito fosco */
-.login-container {
+.loginContainer {
     background: rgba(255, 255, 255, 0.267);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-radius: 10px;
+    border-radius: 0px;
     padding: 30px 25px;
     width: 100%;
     max-width: 380px;
@@ -26,7 +27,7 @@
 }
 
 /* Título */
-.login-container h2 {
+.loginContainer h2 {
     text-align: center;
     margin-bottom: 20px;
     font-style: italic;
@@ -35,29 +36,29 @@
 }
 
 /* Campos de input */
-label {
+.label {
     display: block;
     margin-top: 12px;
     font-size: 14px;
 }
 
-.input-wrapper {
+.inputWrapper {
     position: relative;
     margin-top: 5px;
 }
 
-.input-wrapper input {
+.inputWrapper input {
     width: 100%;
     padding: 10px 35px 10px 10px;
     background: rgba(255, 255, 255, 0.2);
     border: none;
-    border-radius: 6px;
+    border-radius: 0px;
     color: white;
     outline: none;
     font-size: 14px;
 }
 
-.input-wrapper .icon {
+.inputWrapper .icon {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -74,11 +75,10 @@ label {
 .btn {
     transition: all 0.3s ease-in-out;
     font-family: "Dosis", sans-serif;
-
     width: 90%;
     max-width: 330px;
     height: 40px;
-    border-radius: 50px;
+    border-radius: 0px;
     background-image: linear-gradient(135deg, #e30613 0%, #681413 100%);
     box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
     outline: none;
@@ -110,35 +110,35 @@ label {
 }
 
 /* Texto de registro */
-.register-text {
+.registerText {
     text-align: center;
     margin-top: 15px;
     font-size: 13px;
 }
 
-.register-text a {
+.registerText a {
     color: #eee;
     text-decoration: underline;
 }
 
 /* Responsividade total */
 @media (max-width: 450px) {
-    .login-container {
+    .loginContainer {
         padding: 25px 20px;
     }
 
-    .input-wrapper input {
+    .inputWrapper input {
         font-size: 13px;
     }
 
-    .register-text,
-    .login-options {
+    .registerText,
+    .loginOptions {
         font-size: 12px;
         flex-direction: column;
         gap: 5px;
     }
 
-    .login-options {
+    .loginOptions {
         align-items: flex-start;
     }
 }

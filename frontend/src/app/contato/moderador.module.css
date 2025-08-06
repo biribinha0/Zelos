@@ -5,3 +5,37 @@ background-color: #862922;
 .texto1Contato{
     color: #862922;
 }
+
+.iconeContato{
+    color: #862922;
+}
+
+.tituloContato{
+ color: #862922;
+ font-weight: bold;
+}
+
+.subtituloContato{
+    color: #862922;
+    font-weight: 100;
+    font-size: small;
+}
+
+.banner {
+    background-image: url('/img/bannerContato.png'); 
+    background-size: cover;
+    background-position: center;
+    height: 400px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.espaco{
+    margin-top: 120px;
+}
+
+
+
+
+
