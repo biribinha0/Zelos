@@ -1,9 +1,9 @@
-import { listarChamadosPublicos, criarChamado, listarChamadosPorUsuario, obterChamadoPorId, listarChamados, editarChamado, chamadosSemTecnico } from "../models/Chamados.js";
+import { listarChamadosPublicos, criarChamado, listarChamadosPorUsuario, listarChamadosPorTecnico, obterChamadoPorId, listarChamados, editarChamado, chamadosSemTecnico } from "../models/Chamados.js";
 import { listarApontamentosPorChamado } from "../models/Apontamentos.js";
 import { obterPoolPorId, listarPoolsPorTecnico } from "../models/Pools.js";
 import { formatarTituloPool } from "../utils.js";
 import { obterUsuarioPorId } from "../models/Usuarios.js";
-
+import { obterEquipamentoPorPatrimonio } from "../models/Equipamentos.js";
 
 const listarChamadosPublicosController = async (req, res) => {
     try {
@@ -37,9 +37,15 @@ const listarChamadosPorUsuarioController = async (req, res) => {
         const chamadosComPool = await Promise.all(
             chamados.map(async (chamado) => {
                 const pool = await obterPoolPorId(chamado.tipo_id);
+
+                let patrimonio = [];
+                if (chamado.patrimonio !== null) {
+                    patrimonio = await obterEquipamentoPorPatrimonio(patrimonio)
+                }
                 return {
                     ...chamado,
-                    pool: pool ? formatarTituloPool(pool.titulo) : null
+                    pool: pool ? formatarTituloPool(pool.titulo) : null,
+                    patrimonio: patrimonio ? patrimonio : null
                 }
             })
         )
@@ -47,6 +53,35 @@ const listarChamadosPorUsuarioController = async (req, res) => {
     } catch (error) {
         console.error('Erro ao listar chamados por usuario: ', error);
         return res.status(500).json({ error: 'Ocorreu um erro interno ao listar os chamados do usuário.' });
+    }
+}
+
+const listarChamadosPorTecnicoController = async (req, res) => {
+    const tecnicoId = req.params.id
+    try {
+        const chamados = await listarChamadosPorTecnico(tecnicoId);
+
+        if (chamados.length === 0) return res.status(204)
+
+        const chamadosComPool = await Promise.all(
+            chamados.map(async (chamado) => {
+                const pool = await obterPoolPorId(chamado.tipo_id);
+
+                let patrimonio = [];
+                if (chamado.patrimonio !== null) {
+                    patrimonio = await obterEquipamentoPorPatrimonio(patrimonio)
+                }
+                return {
+                    ...chamado,
+                    pool: pool ? formatarTituloPool(pool.titulo) : null,
+                    patrimonio: patrimonio ? patrimonio : null
+                }
+            })
+        )
+        res.status(200).json(chamadosComPool);
+    } catch (error) {
+        console.error('Erro ao listar chamados por tecnico: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro interno ao listar os chamados do técnico.' });
     }
 }
 
@@ -64,10 +99,14 @@ const obterChamadoPorIdController = async (req, res) => {
         const usuario = await obterUsuarioPorId(chamado.usuario_id, 'usuario');
         const tecnico = chamado.tecnico_id ? await obterUsuarioPorId(chamado.tecnico_id, 'tecnico') : null;
         const apontamentos = await listarApontamentosPorChamado(chamadoId)
-
+        let patrimonio = [];
+        if (chamado.patrimonio !== null) {
+            patrimonio = await obterEquipamentoPorPatrimonio(patrimonio)
+        }
         const chamadoDetalhado = {
             ...chamado,
             pool: pool ? formatarTituloPool(pool.titulo) : null,
+            patrimonio: patrimonio ? patrimonio : null,
             usuario,
             tecnico,
             apontamentos
@@ -91,10 +130,14 @@ const listarChamadosController = async (req, res) => {
                 const usuario = await obterUsuarioPorId(chamado.usuario_id, 'usuario');
                 const tecnico = chamado.tecnico_id ? await obterUsuarioPorId(chamado.tecnico_id, 'usuario') : null;
                 const apontamentos = await listarApontamentosPorChamado(chamado.id);
-
+                let patrimonio = [];
+                if (chamado.patrimonio !== null) {
+                    patrimonio = await obterEquipamentoPorPatrimonio(patrimonio)
+                }
                 return {
                     ...chamado,
                     pool: pool ? formatarTituloPool(pool.titulo) : null,
+                    patrimonio: patrimonio ? patrimonio : null,
                     usuario,
                     tecnico,
                     apontamentos,
@@ -111,7 +154,7 @@ const listarChamadosController = async (req, res) => {
 }
 
 const criarChamadoController = async (req, res) => {
-    const { titulo, descricao, tipo_id, usuario_id } = req.body
+    const { titulo, descricao, tipo_id, usuario_id, patrimonio } = req.body
     if (!titulo || !descricao || !tipo_id || !usuario_id) {
         return res.status(400).json({ error: 'Todos os campos obrigatórios devem ser preenchidos.' });
     }
@@ -121,7 +164,8 @@ const criarChamadoController = async (req, res) => {
             titulo,
             descricao,
             tipo_id,
-            usuario_id
+            usuario_id,
+            patrimonio: patrimonio ? patrimonio : null
         }
 
         const chamadoId = await criarChamado(chamadoData);
@@ -139,7 +183,7 @@ const criarChamadoController = async (req, res) => {
 
 const editarChamadoController = async (req, res) => {
     const chamadoId = req.params.id;
-    const { titulo, descricao, tipo_id, usuario_id, tecnico_id, status } = req.params
+    const { titulo, descricao, tipo_id, usuario_id, tecnico_id, status, patrimonio } = req.params
 
     if (!titulo || !descricao || !tipo_id || !usuario_id || !tecnico_id || !status) {
         return res.status(400).json({ error: 'Todos os campos obrigatórios devem ser preenchidos.' });
@@ -152,7 +196,8 @@ const editarChamadoController = async (req, res) => {
             tipo_id,
             usuario_id,
             tecnico_id,
-            status
+            status,
+            patrimonio: patrimonio ? patrimonio : null
         }
 
         const idChamado = await editarChamado(chamadoId, chamadoData);
@@ -217,7 +262,7 @@ const autoAtribuirAoChamadoController = async (req, res) => {
 const fecharChamadoController = async (req, res) => {
     const chamadoId = req.params.id;
     try {
-        const idChamado = await editarChamado(chamadoId, { status: 'concluído'});
+        const idChamado = await editarChamado(chamadoId, { status: 'concluído' });
 
         if (!idChamado) {
             return res.status(404).json({ error: 'Chamado não encontrado.' });
@@ -243,6 +288,7 @@ export {
     obterChamadoPorIdController,
     listarChamadosController,
     listarChamadosPorUsuarioController,
+    listarChamadosPorTecnicoController,
     chamadosSemTecnicoController,
     autoAtribuirAoChamadoController,
     fecharChamadoController

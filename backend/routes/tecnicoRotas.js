@@ -1,17 +1,17 @@
 import express from "express";
-import { chamadosSemTecnicoController, autoAtribuirAoChamadoController, obterChamadoPorIdController, listarChamadosPorUsuarioController } from "../controllers/ChamadoController.js";
+import { chamadosSemTecnicoController, autoAtribuirAoChamadoController, obterChamadoPorIdController, listarChamadosPorTecnicoController } from "../controllers/ChamadoController.js";
 import { criarApontamentoController } from "../controllers/ApontamentoController.js";
 
 const router = express.Router();
 
 //Lista de chamados disponíveis para autoatribuição
-router.post('/pool-chamadas', chamadosSemTecnicoController)
+router.post('/:id/pool-chamadas', chamadosSemTecnicoController)
 
 //Atribui chamado ao técnico logado
 router.post('/chamados/:id/atribuir/', autoAtribuirAoChamadoController)
 
-// Lista de Chamados do Usuário
-router.get('/:id/chamados', listarChamadosPorUsuarioController)
+// Lista de Chamados do Técnico
+router.get('/:id/chamados', listarChamadosPorTecnicoController)
 
 // Detalhes de um chamado específico (com status, histórico de apontamentos etc)
 router.get('/chamados/:id', obterChamadoPorIdController);

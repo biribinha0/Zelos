@@ -1,6 +1,8 @@
 import { listarUsuarios, obterUsuarioPorId, criarUsuario, editarUsuario } from "../models/Usuarios.js";
 
 import { carregarPoolsParaTecnico } from "../utils.js";
+import { buscarEquipamentos, obterEquipamentoPorPatrimonio } from "../models/Equipamentos.js";
+import e from "express";
 
 const listarUsuariosController = async (req, res) => {
     const { funcao, status, email, nome } = req.query;
@@ -105,12 +107,37 @@ const editarUsuarioController = async (req, res) => {
         const response = await editarUsuario(usuarioData)
         return res.status(200).json({
             mensagem: 'Usuario editado com sucesso.',
-            response
+            usuarioId
         });
     } catch (error) {
         console.error('Erro ao editar usuário: ', error);
         return res.status(500).json({ error: 'Ocorreu um erro interno ao editar o usuário.' });
     }
-} 
+}
 
-export {listarUsuariosController, obterUsuarioPorIdController, criarUsuarioController, editarUsuarioController}
+const buscarEquipamentosController = async (req, res) => {
+    const { patrimonio, sala, equipamento } = req.query
+    // Armazenar individualmente
+    const conditions = [];
+
+    if (patrimonio) {
+        conditions.push(`PATRIMONIO LIKE '%${patrimonio}%'`);
+    }
+    if (sala) {
+        conditions.push(`SALA LIKE '%${sala}%'`);
+    }
+    if (equipamento) {
+        conditions.push(`EQUIPAMENTO LIKE '%${equipamento}%'`);
+    }
+
+    // Se tiver condições, coloca AND entre as condições, se não, retorna tudo
+    const whereClause = conditions.length > 0 ? `${conditions.join(' AND ')}` : '';
+    try {
+        const equipamentos = await buscarEquipamentos(whereClause);
+
+        return res.status(200).json(equipamentos)
+    } catch (error) {
+
+    }
+}
+export { listarUsuariosController, obterUsuarioPorIdController, criarUsuarioController, editarUsuarioController, buscarEquipamentosController }

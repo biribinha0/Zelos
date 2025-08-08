@@ -1,5 +1,6 @@
 .formContato{
 background-color: #862922;
+color: white;
 }
 
 .texto1Contato{
@@ -33,6 +34,10 @@ background-color: #862922;
 
 .espaco{
     margin-top: 120px;
+}
+
+.bannerP img{
+    height: 100px;
 }
 
 

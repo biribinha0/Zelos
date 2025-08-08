@@ -31,6 +31,16 @@ const listarChamadosPorUsuario = async (id) => {
     }
 }
 
+// Lista de chamadas feitas por um usuários específico
+const listarChamadosPorTecnico = async (id) => {
+    try {
+        return await readAll('chamados', `tecnico_id = ${id}`)
+    } catch (error) {
+        console.error('Erro ao listar chamados por técnico: ', error);
+        throw error;
+    }
+}
+
 // Detalhes de um chamado específico
 const obterChamadoPorId = async (id) => {
     try {
@@ -75,4 +85,4 @@ const chamadosSemTecnico = async (whereClause) => {
 };
 
 
-export { listarChamadosPublicos, criarChamado, listarChamadosPorUsuario, obterChamadoPorId, listarChamados, editarChamado, chamadosSemTecnico };
+export { listarChamadosPublicos, criarChamado, listarChamadosPorUsuario, obterChamadoPorId, listarChamados, editarChamado, chamadosSemTecnico, listarChamadosPorTecnico };

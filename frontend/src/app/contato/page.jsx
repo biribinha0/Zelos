@@ -3,6 +3,7 @@ import styles from "./moderador.module.css";
 
 const Contato = () => {
     return (
+        <>
         <div className="container-fluid p-0">
             <div className={`banner ${styles.banner}`}>
             </div>
@@ -19,19 +20,19 @@ const Contato = () => {
                             <form>
                                 <div className="mb-2">
                                     <label htmlFor="name" className="form-label fw-semibold">Nome:</label>
-                                    <input type="text" className="form-control bg-white bg-opacity-25 border-0" id="name" />
+                                    <input type="text" className="form-control bg-white bg-opacity-25 border-0 text-white" id="name" />
                                 </div>
                                 <div className="mb-2">
                                     <label htmlFor="email" className="form-label fw-semibold">Email:</label>
-                                    <input type="email" className="form-control bg-white bg-opacity-25 border-0" id="email"  />
+                                    <input type="email" className="form-control bg-white bg-opacity-25 border-0 text-white" id="email"  />
                                 </div>
                                 <div className="mb-2">
                                     <label htmlFor="title" className="form-label fw-semibold">Título:</label>
-                                    <input type="text" className="form-control bg-white bg-opacity-25 border-0" id="title" />
+                                    <input type="text" className="form-control bg-white bg-opacity-25 border-0 text-white" id="title" />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="message" className="form-label fw-semibold">Mensagem:</label>
-                                    <textarea className="form-control bg-white bg-opacity-25 border-0" id="message" rows="3" ></textarea>
+                                    <textarea className="form-control bg-white bg-opacity-25 border-0 text-white" id="message" rows="3" ></textarea>
                                 </div>
                                 <button type="submit" className="btn btn-outline-light w-100 fw-bold" >ENVIAR</button>
                             </form>
@@ -84,10 +85,23 @@ const Contato = () => {
                     </div>
                 </div>
             </div>
-            <div className={`${styles.espaco}`}></div>
+            
+            
+            <div className=" justify-content-center p-5">
+                <div className="bannerP">
+    <img src="/img/bannerContato2.png"  className="img-fluid" alt="banner" />
+    </div>
+</div> 
+
         </div>
+
         
+        
+       
+       </>
     );
 };
 
 export default Contato;
+
+
