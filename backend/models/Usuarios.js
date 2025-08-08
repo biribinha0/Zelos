@@ -13,7 +13,7 @@ const listarUsuarios = async (where) => {
 // Obtém usuario pelo id e função
 const obterUsuarioPorId = async (id, funcao) => {
     try {
-        return await read('usuarios', `id = ${id} AND funcao = ${funcao}`)
+        return await read('usuarios', `id = ${id} AND funcao = '${funcao}'`)
     } catch (error) {
         console.error('Erro ao obter usuario por id: ', error);
         throw error;

@@ -1,13 +1,16 @@
 import express from "express";
-import { listarChamadosPublicosController, criarChamadoController, editarChamadoController, obterChamadoPorIdController, listarChamadosController, listarChamadosController, listarChamadosPorUsuarioController } from "../controllers/ChamadoController.js";
+import { criarChamadoController, obterChamadoPorIdController, listarChamadosPorUsuarioController } from "../controllers/ChamadoController.js";
 
 const router = express.Router();
 
+// Rota para criação de chamado
 router.post('/chamados', criarChamadoController);
 
-router.get('/chamados/usuario/:id', listarChamadosPorUsuarioController);
+// Rota para listar chamados de um usuario
+router.get('/:id/chamados/', listarChamadosPorUsuarioController);
 
-router.get('chamados/:id', obterChamadoPorIdController);
+// Rota para detalhes de um chamado (apontamento, histórico)
+router.get('/chamados/:id', obterChamadoPorIdController);
 
 export default router;
 

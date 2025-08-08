@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'Senai@123',
+    password: '',
     database: 'zelos',
     waitForConnections: true,
     connectionLimit: 10,
@@ -118,4 +118,15 @@ async function compare(senha, hash) {
     }
 }
 
-export { create, readAll, read, update, deleteRecord, compare };
+async function readRaw(sql, params = []) {
+  const connection = await getConnection();
+  try {
+    const [rows] = await connection.execute(sql, params);
+    return rows;
+  } finally {
+    connection.release();
+  }
+}
+
+
+export { create, readAll, read, update, deleteRecord, compare, readRaw };

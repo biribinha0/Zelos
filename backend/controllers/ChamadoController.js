@@ -1,8 +1,9 @@
-import { listarChamadosPublicos, criarChamado, listarChamadosPorUsuario, obterChamadoPorId, listarChamados, editarChamado } from "../models/Chamados.js";
+import { listarChamadosPublicos, criarChamado, listarChamadosPorUsuario, obterChamadoPorId, listarChamados, editarChamado, chamadosSemTecnico } from "../models/Chamados.js";
 import { listarApontamentosPorChamado } from "../models/Apontamentos.js";
-import { obterPoolPorId } from "../models/Pools.js";
-import { formatarTituloPool } from "../utils";
+import { obterPoolPorId, listarPoolsPorTecnico } from "../models/Pools.js";
+import { formatarTituloPool } from "../utils.js";
 import { obterUsuarioPorId } from "../models/Usuarios.js";
+
 
 const listarChamadosPublicosController = async (req, res) => {
     try {
@@ -61,7 +62,7 @@ const obterChamadoPorIdController = async (req, res) => {
         }
         const pool = await obterPoolPorId(chamado.tipo_id);
         const usuario = await obterUsuarioPorId(chamado.usuario_id, 'usuario');
-        const tecnico = chamado.tecnico_id ? await obterUsuarioPorId(chamado.tecnico_id, 'usuario') : null;
+        const tecnico = chamado.tecnico_id ? await obterUsuarioPorId(chamado.tecnico_id, 'tecnico') : null;
         const apontamentos = await listarApontamentosPorChamado(chamadoId)
 
         const chamadoDetalhado = {
@@ -156,7 +157,7 @@ const editarChamadoController = async (req, res) => {
 
         const idChamado = await editarChamado(chamadoId, chamadoData);
         return res.status(200).json({
-            mensagem: 'Chamado registrado com sucesso.',
+            mensagem: 'Chamado editado com sucesso.',
             idChamado
         })
     } catch (error) {
@@ -165,4 +166,84 @@ const editarChamadoController = async (req, res) => {
     }
 }
 
-export { listarChamadosPublicosController, criarChamadoController, editarChamadoController, obterChamadoPorIdController, listarChamadosController, listarChamadosController, listarChamadosPorUsuarioController}
+const chamadosSemTecnicoController = async (req, res) => {
+    const tecnicoId = req.params.id;
+    try {
+        const poolsTecnico = await listarPoolsPorTecnico(tecnicoId);
+
+        const chamadosPorPool = await Promise.all(
+            poolsTecnico.map(async ({ id_pool }) => {
+                return await chamadosSemTecnico(`id_pool = ${id_pool}`);
+            })
+        );
+        const chamados = chamadosPorPool.flat();
+
+        if (chamados.length === 0) {
+            return res.status(404).json({ error: 'Nenhum chamado disponível para autoatribuição' });
+        }
+
+        return res.status(200).json(chamados);
+    } catch (error) {
+        console.error('Erro ao buscar chamados para autoatribuição: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro ao buscar chamados para autoatribuição.' });
+    }
+};
+
+const autoAtribuirAoChamadoController = async (req, res) => {
+    const chamadoId = req.params.id;
+    const { tecnico_id } = req.body;
+
+    if (!tecnico_id) {
+        return res.status(400).json({ error: 'O campo tecnico_id é obrigatório.' });
+    }
+
+    try {
+        const idChamado = await editarChamado(chamadoId, { tecnico_id });
+
+        if (!idChamado) {
+            return res.status(404).json({ error: 'Chamado não encontrado.' });
+        }
+
+        return res.status(200).json({
+            mensagem: 'Chamado autoatribuído com sucesso.',
+            idChamado
+        });
+    } catch (error) {
+        console.error('Erro ao editar chamado: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro interno ao editar o chamado.' });
+    }
+};
+
+const fecharChamadoController = async (req, res) => {
+    const chamadoId = req.params.id;
+    try {
+        const idChamado = await editarChamado(chamadoId, { status: 'concluído'});
+
+        if (!idChamado) {
+            return res.status(404).json({ error: 'Chamado não encontrado.' });
+        }
+
+        return res.status(200).json({
+            mensagem: 'Chamado fechado com sucesso.',
+            idChamado
+        });
+    } catch (error) {
+        console.error('Erro ao fechar o chamado: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro ao fechar o chamado.' });
+    }
+}
+
+
+
+
+export {
+    listarChamadosPublicosController,
+    criarChamadoController,
+    editarChamadoController,
+    obterChamadoPorIdController,
+    listarChamadosController,
+    listarChamadosPorUsuarioController,
+    chamadosSemTecnicoController,
+    autoAtribuirAoChamadoController,
+    fecharChamadoController
+}

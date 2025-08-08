@@ -3,7 +3,7 @@ import { create, readAll } from '../config/database.js';
 // Listagem de apontamentos de um chamado especifico
 const listarApontamentosPorChamado = async (id) => {
   try {
-    return await readAll('apontamentos',  `chamado_id = ${id} ORDER BY data_criacao ASC`);
+    return await readAll('apontamentos',  `chamado_id = ${id} ORDER BY criado_em ASC`);
   } catch (error) {
     console.error('Erro ao listar apontamentos:', error);
     throw error;

@@ -64,4 +64,15 @@ const editarChamado = async (id, chamadoData) => {
 };
 
 
-export { listarChamadosPublicos, criarChamado, listarChamadosPorUsuario, obterChamadoPorId, listarChamados, editarChamado };
+// Chamados disponíveis para o um tecnico ser atribuido
+const chamadosSemTecnico = async (whereClause) => {
+    try {
+        return await update('chamados', `tecnico_ id IS NULL AND status IN ('pendente', 'em andamento') ${whereClause ? `AND ${whereClause}` : ''}`);
+    } catch (error) {
+        console.error('Erro ao editar chamado: ', error);
+        throw error;
+    }
+};
+
+
+export { listarChamadosPublicos, criarChamado, listarChamadosPorUsuario, obterChamadoPorId, listarChamados, editarChamado, chamadosSemTecnico };
