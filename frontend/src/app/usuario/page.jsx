@@ -1,13 +1,17 @@
 import styles from "./usuario.module.css";
-import SideBarUsuario from '@/components/SideBarUsuario/SideBarUsuario';
+import { getDecodedToken } from "@/utils/auth";
 
-export default function Usuario() {
+export default async function Usuario() {
+    const decoded = await getDecodedToken();
     return (
         <>
-           <SideBarUsuario/>
 
-           <h1 className={styles.nomeComeco}>Bem vindo(a), Lídia!</h1>
+                <h1 className={styles.nomeComeco}>Seja bem vindo(a),<h1 className={styles.nomeComeco1}>{decoded.id}!</h1></h1>
 
+                <img src="/img/imgBannerUsuario.png" className={`img-fluid ${styles.bannerUsuario}`} alt="" />
+
+                <h2 className="text-center">Confira seus últimos chamados:</h2>
+            
         </>
     )
 }

@@ -1,9 +1,9 @@
+
 import "@fontsource/montserrat/index.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
 import { Header, Footer } from "@/components/layout";
-
 export const metadata = {
   title: "Zelos",
   description: "Sistema de Chamados de Manutenção do SENAI",

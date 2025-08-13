@@ -24,8 +24,12 @@ export default function Header() {
             label: 'Contato'
         },
         {
-            href: '/login',
-            label: 'Login'
+            href: '/login/usuario',
+            label: 'Login Usuário'
+        },
+        {
+            href: '/login/profissional',
+            label: 'Login Profissional'
         }
     ]
 

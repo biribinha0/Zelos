@@ -1,6 +1,21 @@
 
+
 .nomeComeco{
-    text-align: center;
+    text-align: center !important;
     font-style: italic;
     color: #FE0000;
+    font-size: 28px;
+}
+
+.nomeComeco1{
+    text-align: center !important;
+    font-style: italic;
+    color: #605e5e;
+    font-size: 28px;
+}
+
+.bannerUsuario {
+    width: 90%;
+    display: block;
+    margin: auto;
 }

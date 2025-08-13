@@ -13,15 +13,6 @@ router.post('/entrar', loginController);
 // Rota de Login própria
 router.post('/login', (req, res, next) => {
 
-  // const { username, password } = req.body;
-  // if (username === 'bernardo') return res.status(200).json({
-  //   message: 'Autenticado com sucesso',
-  //   user: {
-  //     username: 'Bernardo de Souza Madureira',
-  //     displayName: 'Bernardo',
-  //     email: 'bernardomadureira.souza@gmail.com'
-  //   }
-  // });
 
   // Middleware de autenticação com tratamento de erros
   passport.authenticate('ldapauth', { session: true }, (err, user, info) => {
@@ -44,9 +35,13 @@ router.post('/login', (req, res, next) => {
         }
 
 
+        // Rota de autenticação para login de usuarios do sistema, admins e tecnicos são puxados do banco local
+
         // Verifica se há registro no banco local
         const usuarioCadastrado = await verificarCadastro(user.sAMAccountName, user.userPrincipalName);
         console.log(usuarioCadastrado)
+
+        //Se não tiver registro, cria um novo usuário no banco local
         if (usuarioCadastrado === null) {
           const { password } = req.body;
           const senhaHasheada = await generateHashedPassword(password)
@@ -61,6 +56,7 @@ router.post('/login', (req, res, next) => {
           await criarUsuario(usuarioData);
         }
 
+        // Obtém as informações do usuário
         const usuario = await obterUsuarioPorId(user.sAMAccountName, 'usuario');
 
         // Gerar o token JWT

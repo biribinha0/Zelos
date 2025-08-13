@@ -1,6 +1,17 @@
+'use client'
+import { removeToken } from '@/utils/auth';
 import './styleSideBarUsuario.css';
+import axios from 'axios';
+import { API_URL } from '@/utils/api';
+import { useRouter } from 'next/navigation';
 
 export default function SideBarUsuario() {
+    const router = useRouter();
+    const handleLogout = () => {
+        // axios.post(`${API_URL}/auth/logout`)
+        removeToken();
+        router.push('/');
+    }
     return (
         <>
             <aside className="sidebar bg-dark text-light d-flex flex-column align-items-stretch">
@@ -39,7 +50,7 @@ export default function SideBarUsuario() {
 
                 {/* SAIR */}
                 <div className="px-2">
-                    <a className="nav-link sidebar-link text-light" href="#">
+                    <a className="nav-link sidebar-link text-light" role='button' onClick={handleLogout}>
                         <i className="bi bi-box-arrow-left sidebar-icon"></i>
                         <span className="link-text">Sair</span>
                     </a>

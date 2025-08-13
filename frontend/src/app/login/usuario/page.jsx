@@ -2,18 +2,25 @@
 import axios from 'axios';
 import styles from './login.module.css';
 import Link from 'next/link';
-import { useState } from 'react';
-import { setToken, getDecodedToken } from '@/utils/auth';
+import { useEffect, useState } from 'react';
+import { setToken, getDecodedToken, getToken } from '@/utils/auth';
 import { useRouter } from 'next/navigation';
 import { API_URL } from '@/utils/api';
 
-export default function Login() {
+export default function LoginUsuario() {
     const router = useRouter();
     const [loginParams, setLoginParams] = useState({
         username: '',
         password: ''
     })
-
+    useEffect(() => {
+        const token = getToken();
+        if (token) {
+            const decoded = getDecodedToken();
+            router.push(decoded.funcao)
+            alert('Você Já está logado');
+        }
+    }, [])
     const handleLogin = async () => {
         try {
             axios.post(`${API_URL}/auth/login`, loginParams, {
@@ -22,11 +29,9 @@ export default function Login() {
                 }
             })
                 .then(function (response) {
-
                     setToken(response.data.token)
                     const decoded = getDecodedToken()
-                    console.log(response);
-
+                    setLoginParams({ username: '', password: '' })
                     router.push(`/${decoded.funcao}`)
                 })
                 .catch(function (error) {
@@ -68,7 +73,6 @@ export default function Login() {
                             <span className={styles.icon}><i className="bi bi-lock-fill" />
                             </span>
                         </div>
-
                         <button className={styles.btn} type='submit'>Entrar</button>
 
                         <p className={styles.registerText}>

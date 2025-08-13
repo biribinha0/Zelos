@@ -3,25 +3,25 @@ import { read, compare } from '../config/database.js';
 import { JWT_SECRET } from '../config/jwt.js'; // Importar a chave secreta
 
 const loginController = async (req, res) => {
-  const { email, senha } = req.body;
+  const { username, password } = req.body;
 
   try {
     // Verificar se o usuário existe no banco de dados
-    const usuario = await read('usuarios', `email = '${email}'`);
+    const usuario = await read('usuarios', `email = '${username}'`);
 
     if (!usuario) {
       return res.status(404).json({ mensagem: 'Usuário não encontrado' });
     }
 
     // Verificar se a senha está correta (comparar a senha enviada com o hash armazenado)
-    const senhaCorreta = await compare(senha, usuario.senha);
+    const senhaCorreta = await compare(password, usuario.senha);
 
     if (!senhaCorreta) {
       return res.status(401).json({ mensagem: 'Senha incorreta' });
     }
 
     // Gerar o token JWT
-    const token = jwt.sign({ id: usuario.id, funcao: usuario.funcao }, JWT_SECRET, {
+    const token = jwt.sign({ id: usuario.id, funcao: usuario.funcao, email: usuario.email, nome: usuario.nome }, JWT_SECRET, {
       expiresIn: '1h',
     });
 

@@ -40,9 +40,9 @@ export default function Sobre() {
           </div>
         </div>
 
-        <div className="col">
-          <div className="card h-100">
-            <img src="/img/sobre-sino.jpeg" className="card-img-top" alt="..." />
+        <div  className="col">
+          <div className="card h-100 positio-relative">
+            <img  src="/img/sobre-sino.jpeg" className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title fw-bold fst-italic text-center ">Chamados</h5>
               <p className="card-text">
