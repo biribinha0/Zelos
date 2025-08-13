@@ -1,12 +1,16 @@
 import express from 'express';
 import passport from '../config/ldap.js';
 import { loginController } from '../controllers/AuthController.js';
+import { criarUsuario, verificarCadastro, obterUsuarioPorId } from "../models/Usuarios.js";
+import { generateHashedPassword } from "../hashPassword.js";
+import { JWT_SECRET } from '../config/jwt.js';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
 router.post('/entrar', loginController);
 
-// Rota de Login
+// Rota de Login própria
 router.post('/login', (req, res, next) => {
 
   // const { username, password } = req.body;
@@ -33,21 +37,46 @@ router.post('/login', (req, res, next) => {
       }
 
       // Loga o usuário manualmente para garantir a sessão
-      req.logIn(user, (loginErr) => {
+      req.logIn(user, async (loginErr) => {
         if (loginErr) {
           console.error('Erro ao criar sessão:', loginErr);
           return res.status(500).json({ error: 'Erro ao criar sessão' });
         }
 
-        console.log('Usuário autenticado:', user.username);
-        return res.json({
-          message: 'Autenticado com sucesso',
-          user: {
-            username: user.username,
-            displayName: user.displayName,
-            email: user.mail
+
+        // Verifica se há registro no banco local
+        const usuarioCadastrado = await verificarCadastro(user.sAMAccountName, user.userPrincipalName);
+        console.log(usuarioCadastrado)
+        if (usuarioCadastrado === null) {
+          const { password } = req.body;
+          const senhaHasheada = await generateHashedPassword(password)
+          const usuarioData = {
+            id: user.sAMAccountName,
+            email: user.userPrincipalName,
+            nome: user.displayName,
+            senha: senhaHasheada,
+            funcao: 'usuario'
           }
+          console.log(usuarioData)
+          await criarUsuario(usuarioData);
+        }
+
+        const usuario = await obterUsuarioPorId(user.sAMAccountName, 'usuario');
+
+        // Gerar o token JWT
+        const token = jwt.sign({
+          id: usuario.id,
+          funcao: usuario.funcao,
+          displayName: user.displayName,
+          givenName: user.givenName,
+          email: user.userPrincipalName,
+        }, JWT_SECRET, {
+          expiresIn: '1h',
         });
+
+
+        console.log('Usuário autenticado:', user.displayName);
+        return res.json({ message: 'Autenticado com sucesso', token });
       });
     } catch (error) {
       console.error('Erro inesperado:', error);

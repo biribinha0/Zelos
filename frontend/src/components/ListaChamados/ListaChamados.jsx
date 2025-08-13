@@ -1,0 +1,39 @@
+"use client";
+import { useState, useEffect, use } from "react";
+import { ItemChamado } from "../common";
+import axios from "axios";
+import { API_URL } from "@/utils/api";
+
+export default function ListaChamados() {
+    const [chamados, setChamados] = useState({});
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        setLoading(true)
+        axios.get(`${API_URL}/publico/chamados`)
+            .then(function (response) {
+                console.log(response.data); // The data returned by the server
+                setChamados(response.data)
+                console.log(response.status); // HTTP status code (e.g., 200)
+                setLoading(false)
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+        setLoading(false)
+    }, []);
+
+    if (loading) return (<h1>LOADING</h1>)
+    return (
+        <div className="list-group">
+            {Array.isArray(chamados) && chamados.length > 0 ?
+
+                chamados.map((chamado, index) => {
+                    return (
+                        <ItemChamado chamado={chamado} key={index} />
+                    )
+                })
+                : ''
+            }
+        </div>
+    )
+}

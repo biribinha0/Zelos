@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 
-async function generateHashedPassword() {
-  const password = 'Limp@Carlos2025!'; // Substitua pela senha que você deseja hashear
+export async function generateHashedPassword(senha) {
+  const password = senha; // Substitua pela senha que você deseja hashear
   try {
     // Gerar o salt
     const salt = await bcrypt.genSalt(10);
@@ -10,11 +10,12 @@ async function generateHashedPassword() {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     console.log('Senha Hasheada:', hashedPassword);
+    return(hashedPassword);
     process.exit(0); // Encerra o processo após exibir o hash
   } catch (error) {
     console.error('Erro ao hashear a senha:', error);
+    return error
     process.exit(1); // Encerra o processo com código de erro
   }
 }
 
-generateHashedPassword();

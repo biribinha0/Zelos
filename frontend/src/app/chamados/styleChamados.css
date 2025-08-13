@@ -1,0 +1,79 @@
+.banner{
+  width: 100%;
+}
+
+.fundo{
+  background-image: url('/img/imgFundoChamados.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.tituloChamados{
+  color: #990000;
+  text-align: center;
+  font-style: italic;
+  margin-top: 2%;
+  margin-bottom: 3%;
+}
+
+.list-group {
+  border-radius: 0px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.397);
+  max-width: 90%;
+  margin: 20px auto;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.list-group-item-chamados {
+  background-color: #fff;
+  border: none;
+  padding: 16px 20px;
+  transition: all 0.3s ease-in-out;
+  cursor: default; /* Não parece clicável */ 
+  border-bottom: 1px solid #b30000; /* Linha separadora vermelha */
+}
+
+.list-group-item-chamados:last-child {
+  border-bottom: none; /* Remove a linha do último item */
+}
+
+.list-group-item-chamados h5 {
+  margin: 0 0 6px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #b30000;
+}
+
+.list-group-item-chamados p {
+  margin: 0 0 4px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.list-group-item-chamados small {
+  color: #888;
+}
+
+.list-group-item-chamados:hover {
+  background-color: rgb(247, 247, 247);
+  transform: translateX(5px);
+}
+
+.list-group-item-chamados.active {
+  background-color: #b30000;
+  color: #fff;
+}
+
+.list-group-item-chamados.active h5,
+.list-group-item-chamados.active p,
+.list-group-item-chmados.active small {
+  color: #fff;
+}
+
+.list-group-item-chamados.active:hover {
+  background-color: #990000;
+}

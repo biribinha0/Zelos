@@ -1,8 +1,13 @@
 import styles from "./usuario.module.css";
-export default function Usuario () {
+import SideBarUsuario from '@/components/SideBarUsuario/SideBarUsuario';
+
+export default function Usuario() {
     return (
-        <div className={styles.container}>
-            Usuário
-        </div>
+        <>
+           <SideBarUsuario/>
+
+           <h1 className={styles.nomeComeco}>Bem vindo(a), Lídia!</h1>
+
+        </>
     )
 }

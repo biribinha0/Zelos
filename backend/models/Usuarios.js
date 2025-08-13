@@ -20,6 +20,14 @@ const obterUsuarioPorId = async (id, funcao) => {
     }
 }
 
+const verificarCadastro = async (id, email) => {
+    try {
+        return await read('usuarios', `id = ${id} OR email = '${email}'`);
+    } catch (error) {
+        console.error('Erro ao verificar cadastro: ', error);
+        throw error;
+    }
+}
 
 // funções de admin
 
@@ -43,4 +51,4 @@ const editarUsuario = async (usuarioData, id) => {
     }
 }
 
-export {listarUsuarios, obterUsuarioPorId, criarUsuario, editarUsuario}
+export { listarUsuarios, obterUsuarioPorId, criarUsuario, editarUsuario, verificarCadastro }
