@@ -1,20 +1,23 @@
 import express from 'express';
 import passport from '../config/ldap.js';
+import { loginController } from '../controllers/AuthController.js';
 
 const router = express.Router();
+
+router.post('/entrar', loginController);
 
 // Rota de Login
 router.post('/login', (req, res, next) => {
 
-  const { username, password } = req.body;
-  if (username === 'bernardo') return res.status(200).json({
-    message: 'Autenticado com sucesso',
-    user: {
-      username: 'Bernardo de Souza Madureira',
-      displayName: 'Bernardo',
-      email: 'bernardomadureira.souza@gmail.com'
-    }
-  });
+  // const { username, password } = req.body;
+  // if (username === 'bernardo') return res.status(200).json({
+  //   message: 'Autenticado com sucesso',
+  //   user: {
+  //     username: 'Bernardo de Souza Madureira',
+  //     displayName: 'Bernardo',
+  //     email: 'bernardomadureira.souza@gmail.com'
+  //   }
+  // });
 
   // Middleware de autenticação com tratamento de erros
   passport.authenticate('ldapauth', { session: true }, (err, user, info) => {
