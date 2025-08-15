@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { ItemChamado } from "../common";
 import axios from "axios";
 import { API_URL } from "@/utils/api";

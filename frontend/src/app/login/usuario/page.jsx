@@ -3,7 +3,7 @@ import axios from 'axios';
 import styles from './login.module.css';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { setToken, getDecodedToken, getToken } from '@/utils/auth';
+import { setToken, getDecodedToken, getToken, isAuthenticated } from '@/utils/auth';
 import { useRouter } from 'next/navigation';
 import { API_URL } from '@/utils/api';
 
@@ -14,11 +14,12 @@ export default function LoginUsuario() {
         password: ''
     })
     useEffect(() => {
-        const token = getToken();
-        if (token) {
+        const isAuth = isAuthenticated();
+        if (isAuth) {
             const decoded = getDecodedToken();
-            router.push(decoded.funcao)
-            alert('Você Já está logado');
+            router.push(`/${decoded.funcao}`);
+            alert('Vc ta logado ja bb');
+            return
         }
     }, [])
     const handleLogin = async () => {
@@ -29,10 +30,10 @@ export default function LoginUsuario() {
                 }
             })
                 .then(function (response) {
-                    setToken(response.data.token)
-                    const decoded = getDecodedToken()
-                    setLoginParams({ username: '', password: '' })
-                    router.push(`/${decoded.funcao}`)
+                    setToken(response.data.token);
+                    const decoded = getDecodedToken();
+                    setLoginParams({ username: '', password: '' });
+                    router.push(`/${decoded.funcao}`);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -46,7 +47,7 @@ export default function LoginUsuario() {
         <>
             <div className={styles.loginBackground}>
                 <div className={styles.loginContainer}>
-                    <h2>Login</h2>
+                    <h2>Login Usuario</h2>
                     <form action={handleLogin}>
                         <label htmlFor="matricula" className={styles.label}>Número de Matrícula:</label>
                         <div className={styles.inputWrapper}>

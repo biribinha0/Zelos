@@ -1,13 +1,13 @@
 import { jwtDecode } from "jwt-decode";
 
-const TOKEN_KEY = "token"; 
-
-export function getToken() {
-  return localStorage.getItem(TOKEN_KEY);
-}
+const TOKEN_KEY = "token";
 
 export function setToken(token) {
   localStorage.setItem(TOKEN_KEY, token);
+}
+
+export function getToken() {
+  return localStorage.getItem(TOKEN_KEY);
 }
 
 export function removeToken() {
@@ -20,7 +20,7 @@ export function getDecodedToken() {
   try {
     return jwtDecode(token);
   } catch (err) {
-    console.error("Token inválido:", err);
+    console.error("Token inválido: ", err);
     return null;
   }
 }

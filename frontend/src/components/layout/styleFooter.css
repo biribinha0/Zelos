@@ -1,4 +1,6 @@
 .footer {
+    padding-left: 60px;
+    padding-right: 60px;
     background-color: #f0f0f0;
     font-family: Arial, sans-serif;
     color: #333;
@@ -99,3 +101,42 @@
     padding: 8px;
     font-size: 14px;
 }
+
+.avaliacao {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.avaliacao i {
+    cursor: pointer;
+    color: #aaa;
+    transition: color 0.3s;
+}
+
+.avaliacao i.active {
+    color: red;
+}
+
+.avaliacao i {
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.avaliacao i.active {
+    color: red;
+}
+
+.avaliacao i:hover {
+    color: darkred;
+}
+
+.avaliacao a {
+    text-decoration: none;
+}
+.logo-footer {
+    width: 250px;
+    height: auto; 
+  }

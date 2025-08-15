@@ -1,0 +1,26 @@
+.categoriasHome {
+    background-image: url('/img/bGUmHome.png');
+    padding: 10%;
+}
+
+.tituloCategoriasHome h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 0 0 10px #fff, 0 0 0px #fff, 0 0 20px #fff, 0 0 20px;
+}
+
+.cardCategoriasHome {
+    background-color: #ffffff00;
+    border: none;
+    text-align: center;
+    font-size: x-large;
+    width: 15%;
+    padding: 1%;
+}
+
+.textEquipamentosHome {
+    color: #fff;
+    font-weight: bold;
+}

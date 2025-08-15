@@ -1,14 +1,12 @@
 'use client'
 import { removeToken } from '@/utils/auth';
+import Link from 'next/link';
 import './styleSideBarUsuario.css';
-import axios from 'axios';
-import { API_URL } from '@/utils/api';
 import { useRouter } from 'next/navigation';
 
-export default function SideBarUsuario() {
+export default function SideBarUsuario({ decoded }) {
     const router = useRouter();
     const handleLogout = () => {
-        // axios.post(`${API_URL}/auth/logout`)
         removeToken();
         router.push('/');
     }
@@ -29,22 +27,22 @@ export default function SideBarUsuario() {
                 {/* MENU */}
                 <ul className="nav flex-column flex-grow-1 w-100 px-2 gap-1" id="icones">
                     <li className="nav-item">
-                        <a className="nav-link sidebar-link text-light" href="#">
+                        <Link className="nav-link sidebar-link text-light" href="/usuario">
                             <i className="bi bi-house-door sidebar-icon"></i>
                             <span className="link-text">Home</span>
-                        </a>
+                        </Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link sidebar-link text-light" href="#">
+                        <Link className="nav-link sidebar-link text-light" href={'/usuario/criar'}>
                             <i className="bi bi-plus-circle sidebar-icon"></i>
                             <span className="link-text">Criar Chamado</span>
-                        </a>
+                        </Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link sidebar-link text-light" href="#">
+                        <Link className="nav-link sidebar-link text-light" href={'/usuario/chamados'}>
                             <i className="bi bi-card-list sidebar-icon"></i>
                             <span className="link-text">Meus Chamados</span>
-                        </a>
+                        </Link>
                     </li>
                 </ul>
 
@@ -60,8 +58,8 @@ export default function SideBarUsuario() {
                 <div className="user-block border-top border-secondary d-flex align-items-center px-2 py-3">
                     <i className="bi bi-person-circle sidebar-icon justify-content-center"></i>
                     <div className="link-text">
-                        <strong>Lídia Nogueira de Matos</strong>
-                        <div className="small opacity-75">lidia.matos@alunosenai.br</div>
+                        <strong className="nomeUsuario">{decoded.displayName}</strong>
+                        <div className="small opacity-75 emailUsuario">{decoded.email}</div>
                     </div>
                 </div>
             </aside>

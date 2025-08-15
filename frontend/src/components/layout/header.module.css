@@ -1,4 +1,139 @@
-a.ativo{
-    color: #ffffffff;
-    font-weight: bold;
+.Header {
+    background-color: #9A1915;
+    margin: 0 !important;
+}
+
+.espacamentoNav {
+    padding: 0% 4% !important;
+    padding-right: 5.5% !important;
+}
+
+.logo {
+    margin: 10% 0%;
+}
+
+.itensHeader {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+.iconNav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: xx-large !important;
+}
+
+.iconTecnicoNav i,
+.iconTecnicoNav p {
+    transition: 0.4s;
+}
+
+.iconTecnicoNav:hover i,
+.iconTecnicoNav:hover p {
+    color: rgb(190, 189, 189);
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+.iconUsuarioNav i,
+.iconUsuarioNav p {
+    transition: 0.4s;
+}
+
+.iconUsuarioNav:hover i,
+.iconUsuarioNav:hover p {
+    color: rgb(190, 189, 189);
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+.noMargin {
+    margin: 0 !important;
+}
+
+.pLoginNav {
+    color: #ccc;
+    font-weight: 500;
+    font-size: smaller;
+}
+
+.botaoChamadoNav {
+    background-color: #EFEFEF;
+    padding: 7% 13% !important;
+    margin: 5% 5% !important;
+    border: none;
+    font-size: small;
+    line-height: 120%;
+    color: #E30613;
+    font-weight: 600;
+}
+
+.botaoChamadoNav:hover {
+    background-color: rgb(190, 189, 189);
+    transition: 0.4s;
+    transform: scale(1.08);
+}
+
+/* Nav item link */
+li.itens a {
+    --primary-color: #111;
+    --hovered-color: rgb(190, 189, 189);
+    position: relative;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+li.itens a:hover {
+    color: var(--hovered-color);
+    transition: color 0.4s;
+}
+
+li.itens a.ativo {
+    color: var(--hovered-color);
+    font-weight: 600;
+    font-style: italic;
+}
+
+/* Linha */
+li.itens a::after {
+    content: "";
+    position: absolute;
+    bottom: 0.8px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--hovered-color);
+    transition: width 0.7s ease-out;
+}
+
+/* Bolinha */
+li.itens a::before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;              
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--hovered-color);
+    opacity: 0;
+    transition: left 0.7s ease-out, opacity 0.7s ease-out;
+    transform: scale(1.4) !important;
+    margin-bottom: 0.8%;
+}
+
+/* Hover linha */
+li.itens a:hover::after {
+    width: 100%;           
+}
+
+/* Hover bolinha */
+li.itens a:hover::before {
+    opacity: 1;
+    left: 100%;
+    transform: translateX(-50%);
 }

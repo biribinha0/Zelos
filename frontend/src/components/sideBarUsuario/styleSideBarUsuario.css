@@ -150,11 +150,20 @@
     font-size: 1.5rem; /* opcional para aumentar o tamanho */
 }
 
+.nomeUsuario{
+    font-size: 9px;
+}
+
+.emailUsuario{
+    font-size: 10px;
+}
+
 /* ----- MOBILE ----- */
 @media (max-width: 768px) {
     .sidebar {
         position: absolute;
         z-index: 1000;
+        height: 100%;
     }
 }
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 import styles from './login.module.css';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { setToken, getDecodedToken, getToken } from '@/utils/auth';
+import { setToken, getDecodedToken, isAuthenticated } from '@/utils/auth';
 import { useRouter } from 'next/navigation';
 import { API_URL } from '@/utils/api';
 
@@ -14,11 +14,12 @@ export default function LoginProfissional() {
         password: ''
     })
     useEffect(() => {
-        const token = getToken();
-        if (token) {
+        const isAuth = isAuthenticated();
+        if (isAuth) {
             const decoded = getDecodedToken();
-            alert('Você Já está logado');
-            router.push(decoded.funcao)
+            router.push(`/${decoded.funcao}`);
+            alert('Vc ta logado ja bb');
+            return
         }
     }, [])
     const handleLogin = async () => {
@@ -46,7 +47,7 @@ export default function LoginProfissional() {
         <>
             <div className={styles.loginBackground}>
                 <div className={styles.loginContainer}>
-                    <h2>Login</h2>
+                    <h2>Login Profissional</h2>
                     <form action={handleLogin}>
                         <label htmlFor="email" className={styles.label}>Email :</label>
                         <div className={styles.inputWrapper}>

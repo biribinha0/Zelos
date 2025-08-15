@@ -5,7 +5,7 @@ const Contato = () => {
     return (
         <>
         <div className="container-fluid p-0">
-            <div className={`banner ${styles.banner}`}>
+            <div className={`img-fluid ${styles.banner}`}>
             </div>
 
             <div className={`${styles.espaco}`}></div>
