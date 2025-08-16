@@ -1,13 +1,20 @@
 import jwt from 'jsonwebtoken';
 import { read, compare } from '../config/database.js';
 import { JWT_SECRET } from '../config/jwt.js'; // Importar a chave secreta
+import { formatarNome, primeiroNome } from '../utils.js';
 
 const loginController = async (req, res) => {
   const { username, password } = req.body;
 
   try {
     // Verificar se o usuário existe no banco de dados
-    const usuario = await read('usuarios', `email = '${username}'`);
+    let query = null
+    if (isNaN(username)) {
+      query = `email = '${username}'`
+    } else {
+      query = `id = ${username}`
+    }
+    const usuario = await read('usuarios', query);
 
     if (!usuario) {
       return res.status(404).json({ mensagem: 'Usuário não encontrado' });
@@ -21,7 +28,13 @@ const loginController = async (req, res) => {
     }
 
     // Gerar o token JWT
-    const token = jwt.sign({ id: usuario.id, funcao: usuario.funcao, email: usuario.email, nome: usuario.nome }, JWT_SECRET, {
+    const token = jwt.sign({
+      id: usuario.id,
+      funcao: usuario.funcao,
+      email: usuario.email,
+      nomeCompleto: formatarNome(usuario.nome),
+      nome: primeiroNome(usuario.nome)
+    }, JWT_SECRET, {
       expiresIn: '1h',
     });
 

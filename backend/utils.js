@@ -33,3 +33,23 @@ export async function carregarPoolsParaTecnico(idTecnico) {
     );
     return poolsCompletos
 }
+
+export function formatarNome(nomeCompleto) {
+  if (!nomeCompleto) return "";
+
+  // Coloca tudo em minúsculo e depois capitaliza cada palavra
+  const nomeFormatado = nomeCompleto
+    .toLowerCase()
+    .split(" ")
+    .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
+    .join(" ");
+
+  return nomeFormatado;
+}
+
+export function primeiroNome(nomeCompleto) {
+  if (!nomeCompleto) return "";
+
+  return nomeCompleto.split(" ")[0].charAt(0).toUpperCase() + 
+         nomeCompleto.split(" ")[0].slice(1).toLowerCase();
+}

@@ -8,7 +8,7 @@ export default function Usuario() {
     return (
         <>
             <div className={`px-8 ${styles.tituloNome}`}>
-                <h1 className={styles.nomeComeco}>Seja bem vindo(a),<span className={styles.nomeComeco1}> {decoded.givenName}!</span></h1>
+                <h1 className={styles.nomeComeco}>Seja bem vindo(a),<span className={styles.nomeComeco1}> {decoded.nome}!</span></h1>
             </div>
 
 

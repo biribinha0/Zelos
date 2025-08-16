@@ -58,7 +58,7 @@ export default function SideBarUsuario({ decoded }) {
                 <div className="user-block border-top border-secondary d-flex align-items-center px-2 py-3">
                     <i className="bi bi-person-circle sidebar-icon justify-content-center"></i>
                     <div className="link-text">
-                        <strong className="nomeUsuario">{decoded.displayName}</strong>
+                        <strong className="nomeUsuario">{decoded.nomeCompleto}</strong>
                         <div className="small opacity-75 emailUsuario">{decoded.email}</div>
                     </div>
                 </div>

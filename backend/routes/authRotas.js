@@ -63,8 +63,8 @@ router.post('/login', (req, res, next) => {
         const token = jwt.sign({
           id: usuario.id,
           funcao: usuario.funcao,
-          displayName: user.displayName,
-          givenName: user.givenName,
+          nomeCompleto: formatarNome(user.givenName),
+          nome: primeiroNome(user.givenName),
           email: user.userPrincipalName,
         }, JWT_SECRET, {
           expiresIn: '1h',

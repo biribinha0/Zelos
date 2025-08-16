@@ -37,16 +37,20 @@ const listarChamadosPorUsuarioController = async (req, res) => {
         const chamadosComPool = await Promise.all(
             chamados.map(async (chamado) => {
                 const pool = await obterPoolPorId(chamado.tipo_id);
-
-                let patrimonio = [];
+                let tecnico = null;
+                if (chamado.tecnico_id) {
+                    tecnico = await obterUsuarioPorId(chamado.tecnico_id, 'tecnico');
+                }
+                let patrimonio = null;
                 if (chamado.patrimonio !== null) {
                     patrimonio = await obterEquipamentoPorPatrimonio(patrimonio)
                 }
                 return {
                     ...chamado,
                     pool: pool ? formatarTituloPool(pool.titulo) : null,
-                    patrimonio: patrimonio ? patrimonio : null
-                }
+                    patrimonio: patrimonio ? patrimonio : null,
+                    tecnico: tecnico ? tecnico.nome : null
+                };
             })
         )
         res.status(200).json(chamadosComPool);

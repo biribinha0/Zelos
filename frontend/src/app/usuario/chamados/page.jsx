@@ -5,6 +5,8 @@ import './meusChamados.css';
 import { getDecodedToken } from '@/utils/auth';
 import { API_URL } from '@/utils/api';
 import axios from 'axios';
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 export default function MeusChamados() {
   const [chamados, setChamados] = useState({});
@@ -21,11 +23,7 @@ export default function MeusChamados() {
         setChamados(response.data)
         console.log(response.status); // HTTP status code (e.g., 200)
 
-        // const chamadosFiltrados = chamados.filter(chamado =>
-        //   (tipoChamado === 'todos' || chamado.tipo_id === tipoChamado) &&
-        //   (status === 'todos' || chamado.status === status)
-        // );
-        // setFilteredChamados(chamadosFiltrados)
+
 
         setLoading(false)
       })
@@ -38,7 +36,7 @@ export default function MeusChamados() {
   if (loading) return (<h1>LOADING</h1>)
 
   const [tipoChamado, setTipoChamado] = useState('todos');
-  const [status, setStatus] = useState('concluido');
+  const [status, setStatus] = useState('todos');
 
 
   const handleTipoChange = (e) => {
@@ -48,6 +46,23 @@ export default function MeusChamados() {
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
   };
+
+  // gerar lista filtrada
+  const chamadosFiltrados = Array.isArray(chamados)
+    ? chamados.filter((chamado) => {
+      // filtro por tipo
+      const tipoOk =
+        tipoChamado === "todos" ||
+        String(chamado.tipo_id) === String(tipoChamado);
+
+      // filtro por status
+      const statusOk =
+        status === "todos" ||
+        chamado.status.toLowerCase() === status.toLowerCase();
+
+      return tipoOk && statusOk;
+    })
+    : [];
 
 
   return (
@@ -72,8 +87,8 @@ export default function MeusChamados() {
                 onChange={handleTipoChange}
               >
                 <option value="todos">Todos</option>
-                <option value="1">Manutenção</option>
-                <option value="2">Apoio Técnico</option>
+                <option value="1">Apoio Técnico</option>
+                <option value="2">Manutenção</option>
                 <option value="3">Limpeza</option>
                 <option value="4">Externo</option>
               </select>
@@ -101,24 +116,34 @@ export default function MeusChamados() {
         <table className="table  mt-3">
           <thead className="thead-custom">
             <tr>
-              <th>Número do patrimônio</th>
+              <th>ID</th>
               <th>Tipo de chamado</th>
+              <th>Título</th>
               <th>Descrição</th>
+              <th>Patrimônio</th>
               <th>Status</th>
+              <th>Técnico</th>
+              <th>Data de Abertura</th>
+              <th>Última Atualização</th>
             </tr>
           </thead>
 
           <tbody>
 
-            {chamados.length > 0 ? (
-              chamados.map(chamado => (
-                <tr key={chamado.patrimonio}>
-                  <td className="textTabela text-black-50">{chamado.patrimonio}</td>
-                  <td className="textTabela text-black-50">{chamado.pool}</td>
-                  <td className="textTabela text-black-50">{chamado.descricao}</td>
+            {chamadosFiltrados.length > 0 ? (
+              chamadosFiltrados.map(chamado => (
+                <tr key={chamado.id}>
+                  <td className="textTabela text-black-75">{chamado.id}</td>
+                  <td className="textTabela text-black-75">{chamado.pool}</td>
+                  <td className="textTabela text-black-75">{chamado.titulo}</td>
+                  <td className="textTabela text-black-75">{chamado.descricao}</td>
+                  <td className="textTabela text-black-75">{chamado.patrimonio ?? "--"}</td>
                   <td className={`fw-bold text-${chamado.status === 'concluído' ? 'success' : chamado.status === 'pendente' ? 'warning' : 'danger'}`}>
                     {chamado.status}
                   </td>
+                  <td className="textTabela text-black-75">{chamado.tecnico ?? "--"}</td>
+                  <td className="textTabela text-black-75">{format(chamado.criado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
+                  <td className="textTabela text-black-75">{format(chamado.atualizado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
                 </tr>
               ))
             ) : (

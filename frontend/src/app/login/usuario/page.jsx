@@ -3,7 +3,7 @@ import axios from 'axios';
 import styles from './login.module.css';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { setToken, getDecodedToken, getToken, isAuthenticated } from '@/utils/auth';
+import { setToken, getDecodedToken, isAuthenticated } from '@/utils/auth';
 import { useRouter } from 'next/navigation';
 import { API_URL } from '@/utils/api';
 
@@ -24,7 +24,7 @@ export default function LoginUsuario() {
     }, [])
     const handleLogin = async () => {
         try {
-            axios.post(`${API_URL}/auth/login`, loginParams, {
+            axios.post(`${API_URL}/auth/entrar`, loginParams, {
                 headers: {
                     "Content-Type": 'application/json'
                 }
