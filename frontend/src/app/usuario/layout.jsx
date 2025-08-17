@@ -1,21 +1,28 @@
 'use client'
-import SideBarUsuario from "@/components/sideBarUsuario/SideBarUsuario";
-import { getDecodedToken } from "@/utils/auth";
-// import  AlertModal  from "@/components/common/AlertModal";
+import { getDecodedToken, isAuthenticated } from "@/utils/auth";
+import dynamic from 'next/dynamic';
+
+const SideBarUsuario = dynamic(() => import("@/components/sideBarUsuario/SideBarUsuario"), {
+    ssr: false
+});
+
+import AlertModal from "@/components/common/AlertModal";
 
 export default function UserLayout({ children }) {
-    // const isAuth = isAuthenticated()
-    // if (!isAuth) {
-    //     return (
-    //         < AlertModal titulo={"Erro"} descricao={"Você não está logado"} textoBotao={'sair'} linkBotao={'/login/usuario'} />
-    //     )
-    // }
+    const isAuth = isAuthenticated()
+    if (!isAuth) {
+        return (
+            <div className={'bgModal'}>
+                < AlertModal titulo={"Aviso"} descricao={"Você não está logado"} textoBotao={'Fazer Login'} linkBotao={'/login/usuario'} />
+            </div>
+        )
+    }
 
     const decoded = getDecodedToken();
     return (
         <div>
             <SideBarUsuario decoded={decoded} />
-            <div className="m-3">
+            <div className="ms-5">
                 {children}
             </div>
         </div>

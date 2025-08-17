@@ -107,7 +107,7 @@ const editarUsuarioController = async (req, res) => {
         const response = await editarUsuario(usuarioData)
         return res.status(200).json({
             mensagem: 'Usuario editado com sucesso.',
-            usuarioId
+            response
         });
     } catch (error) {
         console.error('Erro ao editar usuário: ', error);

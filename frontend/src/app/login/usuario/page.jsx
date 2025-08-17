@@ -6,6 +6,9 @@ import { useEffect, useState } from 'react';
 import { setToken, getDecodedToken, isAuthenticated } from '@/utils/auth';
 import { useRouter } from 'next/navigation';
 import { API_URL } from '@/utils/api';
+import AlertModal from "@/components/common/AlertModal";
+
+
 
 export default function LoginUsuario() {
     const router = useRouter();
@@ -13,15 +16,15 @@ export default function LoginUsuario() {
         username: '',
         password: ''
     })
-    useEffect(() => {
-        const isAuth = isAuthenticated();
-        if (isAuth) {
-            const decoded = getDecodedToken();
-            router.push(`/${decoded.funcao}`);
-            alert('Vc ta logado ja bb');
-            return
-        }
-    }, [])
+    const isAuth = isAuthenticated();
+    const decoded = getDecodedToken()
+    if (isAuth) {
+        return (
+            <div className={'bgModal'}>
+                < AlertModal titulo={"Aviso"} descricao={"Você já está logado"} textoBotao={'Painel de controle'} linkBotao={`/${decoded.funcao}`} />
+            </div>
+        )
+    }
     const handleLogin = async () => {
         try {
             axios.post(`${API_URL}/auth/entrar`, loginParams, {

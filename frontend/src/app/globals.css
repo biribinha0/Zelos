@@ -46,3 +46,10 @@ a {
 .bg-vermelho li{
    color: var(--branco);
 }
+
+
+.bgModal {
+  background-image: url('/img/fundoDetalhes.png');
+  min-height: 57vh
+}
+

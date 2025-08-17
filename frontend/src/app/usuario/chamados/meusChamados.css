@@ -28,6 +28,7 @@ body {
 .thead-custom th {
   background-color: black;
   color: white;
+  align-self:center;
 }
 
 .input-custom:focus {
@@ -39,7 +40,21 @@ body {
 }
 
 .textTabela {
-  color: rgb(128, 128, 128);
   font-size: 15px;
   font-weight: 500;
+}
+
+.tr-cinza {
+  background-color: rgba(210, 210, 210, 0.534);
+
+}
+
+.link-titulo{
+  color: #9a1915;
+  text-decoration: underline;
+  transition: .1s;
+}
+.link-titulo:hover{
+  color: #6b120f;
+  text-decoration: underline;
 }

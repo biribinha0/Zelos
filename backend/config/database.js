@@ -129,4 +129,4 @@ async function readRaw(sql, params = []) {
 }
 
 
-export { create, readAll, read, update, deleteRecord, compare, readRaw };
+export { pool, create, readAll, read, update, deleteRecord, compare, readRaw };

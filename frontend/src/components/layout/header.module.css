@@ -69,11 +69,11 @@
     line-height: 120%;
     color: #E30613;
     font-weight: 600;
+    transition: 0.4s;
 }
 
 .botaoChamadoNav:hover {
     background-color: rgb(190, 189, 189);
-    transition: 0.4s;
     transform: scale(1.08);
 }
 
@@ -85,11 +85,11 @@ li.itens a {
     color: rgb(255, 255, 255);
     text-decoration: none;
     white-space: nowrap;
+    transition: color 0.4s;
 }
 
 li.itens a:hover {
     color: var(--hovered-color);
-    transition: color 0.4s;
 }
 
 li.itens a.ativo {
@@ -115,7 +115,7 @@ li.itens a::before {
     content: "";
     position: absolute;
     bottom: -2px;
-    left: 0;              
+    left: 0;
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -128,7 +128,7 @@ li.itens a::before {
 
 /* Hover linha */
 li.itens a:hover::after {
-    width: 100%;           
+    width: 100%;
 }
 
 /* Hover bolinha */

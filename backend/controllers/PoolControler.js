@@ -1,11 +1,16 @@
 import { listarPools, obterPoolPorId, listarTecnicosPorPool, criarPool, editarPool, deletarPool } from "../models/Pools.js";
 import { obterUsuarioPorId } from "../models/Usuarios.js";
-import { carregarPoolsParaTecnico } from "../utils.js"
+import { carregarPoolsParaTecnico, formatarTituloPool } from "../utils.js"
 
 const listarPoolsController = async (req, res) => {
     try {
-        const pools = await listarPools();
-        return res.status(200), json(pools);
+        let pools = await listarPools();
+        pools = pools.map(({ titulo, id }) => ({
+            id,
+            titulo: formatarTituloPool(titulo)
+        }));
+
+        return res.status(200).json(pools);
     } catch (error) {
         console.error('Erro ao listar pools: ', error);
         return res.status(500).json({ error: 'Ocorreu um erro ao listar os tipos de chamados.' });

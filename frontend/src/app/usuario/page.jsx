@@ -1,14 +1,51 @@
-"use client"
+'use client'
 import styles from "./usuario.module.css";
 import { getDecodedToken } from "@/utils/auth";
 import Link from 'next/link';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { API_URL } from "@/utils/api";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 export default function Usuario() {
-    const decoded = getDecodedToken();
+    const [decoded, setDecoded] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [chamados, setChamados] = useState([]);
+
+    useEffect(() => {
+        setDecoded(getDecodedToken());
+    }, [])
+
+    useEffect(() => {
+        if (!decoded) return;
+
+        setLoading(true);
+        axios.get(`${API_URL}/usuario/${decoded.id}/chamados`)
+            .then((response) => {
+                setChamados(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+            .finally(() => setLoading(false));
+    }, [decoded]);
+
+    
+    const chamadosOrdenados = chamados.sort((a, b) => {
+        return new Date(b.criado_em) - new Date(a.criado_em);
+    });
+
     return (
         <>
             <div className={`px-8 ${styles.tituloNome}`}>
-                <h1 className={styles.nomeComeco}>Seja bem vindo(a),<span className={styles.nomeComeco1}> {decoded.nome}!</span></h1>
+                <h1 className={styles.nomeComeco}>
+                    Seja bem vindo(a),{' '}
+                    <span className={styles.nomeComeco1}>
+                        {decoded?.nome || 'Usuário'}!
+                    </span>
+                </h1>
+
             </div>
 
 
@@ -23,45 +60,34 @@ export default function Usuario() {
                 </h2>
             </div>
 
-            {/* lista dos chamados recentes  */}
-            <div className={styles.listaChamados}>
 
-                <div className={styles.chamado}>
-                    <div className={styles.chamadoHeader}>
-                        <span className={styles.local}>Laboratório de Informática</span>
-                        <Link href="/detalhes/1">
-                            <i className={`bi bi-tools ${styles.statusIcon} ${styles.andamento}`}></i>                        </Link>
-                    </div>
-                    <p className={styles.descricao}>
-                        Computadores não estão ligando e alguns cabos estão danificados.
-                    </p>
-                </div>
+            {chamadosOrdenados.length > 0 ? (
+                <div className={styles.listaChamados}>
+                    {chamadosOrdenados.slice(0, 3).map((chamado) => (
+                        <Link key={chamado.id} href={`/usuario/chamados/${chamado.id}`}>
+                            <div className={styles.chamado}>
+                                <div className={styles.chamadoHeader}>
+                                    <span className={styles.local}>{chamado.titulo}</span>
 
-                <div className={styles.chamado}>
-                    <div className={styles.chamadoHeader}>
-                        <span className={styles.local}>Quadra de Esportes</span>
-                        <Link href="/detalhes/2">
-                            <i className={`bi bi-tools ${styles.statusIcon} ${styles.andamento}`}></i>
+                                    <i className={`bi bi-tools ${styles.statusIcon} ${styles.andamento}`}></i>
+                                </div>
+                                <p className={styles.descricao}>
+                                    {chamado.descricao}
+                                </p>
+                            </div>
                         </Link>
-                    </div>
-                    <p className={styles.descricao}>
-                        Fiação da iluminação da quadra precisa ser trocada.
-                    </p>
+                    ))}
                 </div>
-
-                <div className={styles.chamado}>
-                    <div className={styles.chamadoHeader}>
-                        <span className={styles.local}>Biblioteca</span>
-                        <Link href="/detalhes/3">
-                            <i className={`bi bi-tools ${styles.statusIcon} ${styles.andamento}`}></i>                        </Link>
+            ) : (
+                loading ? (
+                    <div className="text-center my-5">
+                        <div className="spinner-border text-danger" role="status">
+                            <span className="visually-hidden">Carregando...</span>
+                        </div>
                     </div>
-                    <p className={styles.descricao}>
-                        Troca de lâmpadas queimadas e reparo de tomadas.
-                    </p>
-                </div>
-            </div>
-
-
+                ) :
+                    <h3 colSpan="4" className="text-center">Nenhum chamado encontrado</h3>
+            )}
         </>
     )
 }

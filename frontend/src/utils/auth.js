@@ -3,25 +3,34 @@ import { jwtDecode } from "jwt-decode";
 const TOKEN_KEY = "token";
 
 export function setToken(token) {
-  localStorage.setItem(TOKEN_KEY, token);
+  if (typeof window !== "undefined") {
+    localStorage.setItem(TOKEN_KEY, token);
+  }
 }
 
 export function getToken() {
-  return localStorage.getItem(TOKEN_KEY);
+  if (typeof window !== "undefined") {
+    return localStorage.getItem(TOKEN_KEY);
+  }
 }
 
 export function removeToken() {
-  localStorage.removeItem(TOKEN_KEY);
+  if (typeof window !== "undefined") {
+    localStorage.removeItem(TOKEN_KEY);
+  }
 }
 
 export function getDecodedToken() {
-  const token = getToken();
-  if (!token) return null;
-  try {
-    return jwtDecode(token);
-  } catch (err) {
-    console.error("Token inválido: ", err);
-    return null;
+  if (typeof window !== "undefined") {
+
+    const token = getToken();
+    if (!token) return null;
+    try {
+      return jwtDecode(token);
+    } catch (err) {
+      console.error("Token inválido: ", err);
+      return null;
+    }
   }
 }
 

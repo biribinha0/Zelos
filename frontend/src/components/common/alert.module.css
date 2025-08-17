@@ -1,0 +1,10 @@
+.btnVermelho{
+    background-color: #9A1915;
+    border: none;
+}
+.btnVermelho:hover{
+    background-color: #66110e;
+}
+.btnVermelho:active{
+    background-color: #4d0d0b !important;
+}

@@ -6,7 +6,8 @@ import authRotas from './routes/authRotas.js';
 import adminRotas from "./routes/adminRotas.js";
 import publicoRotas from "./routes/publicoRotas.js";
 import tecnicoRotas from "./routes/tecnicoRotas.js";
-import usuarioRotas from "./routes/usuarioRotas.js"
+import usuarioRotas from "./routes/usuarioRotas.js";
+import metaRotas from "./routes/metaRotas.js"
 import passport from './config/ldap.js';
 
 // 1. Carrega variáveis de ambiente PRIMEIRO
@@ -78,6 +79,8 @@ app.use('/publico', publicoRotas);
 app.use('/tecnico', tecnicoRotas);
 
 app.use('/usuario', usuarioRotas);
+
+app.use('/meta', metaRotas)
 
 // 6. Tratamento de erros robusto
 process.on('unhandledRejection', (reason, promise) => {
