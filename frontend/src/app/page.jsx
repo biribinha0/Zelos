@@ -1,8 +1,8 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
-import CategoriasHome from "@/components/home/Categorias";
-import SobreHome from "@/components/home/Sobre";
+import { CategoriasHome, ProfissionaisHome, SobreHome, CardProfissionalHome } from "@/components/home";
+
 
 export default function Home() {
   return (
@@ -19,6 +19,8 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        <CardProfissionalHome/>
+        <ProfissionaisHome/>
         <CategoriasHome/>
         <SobreHome/>
       </div>

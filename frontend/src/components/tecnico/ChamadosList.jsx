@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { FecharChamadoModal } from ".";
 
 export default function ChamadosList() {
     const [chamados, setChamados] = useState();
@@ -74,6 +75,8 @@ export default function ChamadosList() {
                                     <td className="textTabela text-black-75">{format(chamado.atualizado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
                                     <td className="textTabela ">
                                         <Link className='text-decoration-underline text-primary' key={chamado.id} href={`/tecnico/chamados/${chamado.id}`}>Ver Detalhes</Link>
+
+                                        <FecharChamadoModal chamado={chamado}/>
                                     </td>
                                 </tr>
                             ))}

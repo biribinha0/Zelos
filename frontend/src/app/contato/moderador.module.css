@@ -1,3 +1,7 @@
+.formularioInformacoes{
+    margin-top: -15%;
+}
+
 .formContato{
 background-color: #862922;
 color: white;
@@ -23,13 +27,7 @@ color: white;
 }
 
 .banner {
-    background-image: url('/img/bannerContato.png'); 
-    background-size: cover;
-    background-position: center;
-    height: 400px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
 }
 
 .espaco{

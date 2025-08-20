@@ -17,6 +17,19 @@ export default function Header() {
         { href: '/contato', label: 'Contato' }
     ];
 
+    // {
+    //     itensNav.map((item) => (
+    //         <li className={`nav-item fst-italic ${styles.itens}`} key={item.href}>
+    //             <Link
+    //                 className={`nav-link ${pathName === item.href ? styles.ativo : ''}`}
+    //                 aria-current="page"
+    //                 href={item.href}
+    //             >
+    //                 {item.label}
+    //             </Link>
+    //         </li>
+    //     ))
+    // }
 
     const [isAuth, setIsAuth] = useState(false);
     const [decoded, setDecoded] = useState(null);

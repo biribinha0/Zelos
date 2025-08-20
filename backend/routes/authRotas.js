@@ -5,6 +5,7 @@ import { criarUsuario, verificarCadastro, obterUsuarioPorId } from "../models/Us
 import { generateHashedPassword } from "../hashPassword.js";
 import { JWT_SECRET } from '../config/jwt.js';
 import jwt from 'jsonwebtoken';
+import { formatarNome, primeiroNome } from '../utils.js';
 
 const router = express.Router();
 

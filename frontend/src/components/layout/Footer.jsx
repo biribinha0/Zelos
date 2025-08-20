@@ -40,10 +40,10 @@ export default function Footer() {
 
         <div className="footer-middle">
           <div className="contact-info">
-            <p><i className="fa-solid fa-phone" /> (11) 4227-7450</p>
-            <p><i className="fa-solid fa-envelope" /> senai@sp.senai.br</p>
-            <p><i className="fa-brands fa-whatsapp" /> (11) 9876-5432</p>
-            <p><i className="fa-solid fa-location-dot" /> R. Boa Vista, 825 - Boa Vista, São Caetano do Sul</p>
+            <p><i className="bi bi-telephone-fill"></i> (11) 4227-7450</p>
+            <p><i className="bi bi-envelope-fill"></i> senai@sp.senai.br</p>
+            <p><i className="bi bi-whatsapp"></i> (11) 9876-5432</p>
+            <p><i className="bi bi-geo-alt-fill"></i> R. Boa Vista, 825 - Boa Vista, São Caetano do Sul</p>
           </div>
 
           <div className="footer-actions">

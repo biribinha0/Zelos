@@ -28,7 +28,7 @@ export default function LoginUsuario() {
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
-        axios.post(`${API_URL}/auth/entrar`, loginParams, {
+        axios.post(`${API_URL}/auth/login`, loginParams, {
             headers: {
                 "Content-Type": 'application/json'
             }
@@ -58,7 +58,7 @@ export default function LoginUsuario() {
     return (
         <div className={styles.loginBackground}>
             <div className={styles.loginContainer}>
-                <h2>Login Usuario</h2>
+                <h2>Login Usuário</h2>
                 <form onSubmit={handleLogin}>
                     <label htmlFor="matricula" className={styles.label}>Número de Matrícula:</label>
                     <div className={styles.inputWrapper}>

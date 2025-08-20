@@ -18,3 +18,13 @@
     background-color: #5c100d !important;
     color: #fff !important;
 }
+
+.input-vermelho:focus {
+    border-color: #9A1915;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgba(154, 25, 21, .25);
+}
+
+body.modal-open{
+    padding: 0 !important;
+}

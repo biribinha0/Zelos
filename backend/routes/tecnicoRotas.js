@@ -1,5 +1,5 @@
 import express from "express";
-import { chamadosSemTecnicoController, autoAtribuirAoChamadoController, obterChamadoPorIdController, listarChamadosPorTecnicoController } from "../controllers/ChamadoController.js";
+import { chamadosSemTecnicoController, autoAtribuirAoChamadoController, obterChamadoPorIdController, listarChamadosPorTecnicoController, fecharChamadoController } from "../controllers/ChamadoController.js";
 import { criarApontamentoController } from "../controllers/ApontamentoController.js";
 
 const router = express.Router();
@@ -18,5 +18,8 @@ router.get('/chamados/:id', obterChamadoPorIdController);
 
 // Cria novo apontamento
 router.post('/chamados/:id/apontamento', criarApontamentoController);
+
+// Fechar chamado com resolução
+router.post('/chamados/:id/fechar', fecharChamadoController);
 
 export default router;

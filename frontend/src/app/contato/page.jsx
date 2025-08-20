@@ -5,14 +5,15 @@ const Contato = () => {
     return (
         <>
         <div className="container-fluid p-0">
-            <div className={`img-fluid ${styles.banner}`}>
-            </div>
+            
+             <img src="/img/bannerContato.png" className={`img-fluid ${styles.banner}`} alt="" />
+           
 
             <div className={`${styles.espaco}`}></div>
 
         
             <div className="container my-3">
-                <div className="row justify-content-center g-5">
+                <div className={`row justify-content-center g-5 ${styles.formularioInformacoes}`}>
                     <div className="col-md-6">
                         <div className={`p-3  text-white ${styles.formContato}`}>
                             <h6>Contate-nos</h6>

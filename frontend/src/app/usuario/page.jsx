@@ -57,7 +57,7 @@ export default function Usuario() {
             </div>
 
             {/* título últimos chamados */}
-            <div>
+            <div className={styles.ultimosChamados}>
                 <h2 className="text-center">
                     <i className="bi bi-card-checklist"></i> Confira seus{' '}
                     <span className={styles.textoVermelho}>últimos</span> chamados:
@@ -98,7 +98,7 @@ export default function Usuario() {
                 <div className={styles.container}>
                     {/* Lado esquerdo (imagem pronta) */}
                     <div className={styles.left}>
-                        <img src="#" alt="" />
+                        <img src="/img/imgFormularioUsuario.png" className={`img-fluid ${styles.leftImg}`} alt="" />
                     </div>
 
                     {/* Lado direito (formulário) */}

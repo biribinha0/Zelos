@@ -140,7 +140,7 @@ export default function MeusChamados() {
                     </Link>
                   </td>
                   <td className="textTabela text-black-75">{chamado.descricao}</td>
-                  <td className="textTabela text-black-75">{chamado.patrimonio ?? "--"}</td>
+                  <td className="textTabela text-black-75">{JSON.stringify(chamado.patrimonio) ?? "--"}</td>
                   <td className={`fw-bold text-${chamado.status === 'concluído' ? 'success' : chamado.status === 'pendente' ? 'danger' : 'warning'}`}>
                     {chamado.status}
                   </td>

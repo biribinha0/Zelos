@@ -1,5 +1,5 @@
 import { listarChamadosPublicos, criarChamado, listarChamadosPorUsuario, listarChamadosPorTecnico, obterChamadoPorId, listarChamados, editarChamado, chamadosSemTecnico } from "../models/Chamados.js";
-import { listarApontamentosPorChamado } from "../models/Apontamentos.js";
+import { criarApontamento, listarApontamentosPorChamado } from "../models/Apontamentos.js";
 import { obterPoolPorId, listarPoolsPorTecnico } from "../models/Pools.js";
 import { formatarTituloPool } from "../utils.js";
 import { obterUsuarioPorId } from "../models/Usuarios.js";
@@ -137,7 +137,7 @@ const listarChamadosController = async (req, res) => {
                 const usuario = await obterUsuarioPorId(chamado.usuario_id, 'usuario');
                 const tecnico = chamado.tecnico_id ? await obterUsuarioPorId(chamado.tecnico_id, 'usuario') : null;
                 const apontamentos = await listarApontamentosPorChamado(chamado.id);
-                let patrimonio = [];
+                let patrimonio = null;
                 if (chamado.patrimonio !== null) {
                     patrimonio = await obterEquipamentoPorPatrimonio(patrimonio)
                 }
@@ -155,8 +155,8 @@ const listarChamadosController = async (req, res) => {
 
         res.status(200).json(chamadosDetalhados)
     } catch (error) {
-        console.error('Erro ao listar chamados públicos: ', error);
-        return res.status(500).json({ error: 'Ocorreu um erro interno ao listar os chamados públicos.' });
+        console.error('Erro ao listar chamados: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro interno ao listar os chamados.' });
     }
 }
 
@@ -261,7 +261,7 @@ const autoAtribuirAoChamadoController = async (req, res) => {
 
 
         return res.status(200).json({
-            mensagem: 'Chamado autoatribuído com sucesso.',
+            mensagem: 'Chamado atribuído com sucesso.',
             idChamado
         });
     } catch (error) {
@@ -272,7 +272,29 @@ const autoAtribuirAoChamadoController = async (req, res) => {
 
 const fecharChamadoController = async (req, res) => {
     const chamadoId = req.params.id;
+    const {
+        chamado_id,
+        tecnico_id,
+        descricao,
+        comeco,
+        fim
+    } = req.body;
+
+    if (!chamado_id ||
+        !tecnico_id ||
+        !descricao ||
+        !comeco ||
+        !fim) return res.status(500).json({ error: 'As informações do último apontamento estão vazias' });
+
     try {
+        await criarApontamento({
+            chamado_id,
+            tecnico_id,
+            descricao,
+            comeco,
+            fim
+        });
+
         const idChamado = await editarChamado(chamadoId, { status: 'concluído' });
 
         if (!idChamado) {

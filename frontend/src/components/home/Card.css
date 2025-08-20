@@ -1,0 +1,58 @@
+
+.card-link {
+  text-decoration: none;
+  display: block;
+  width: 18rem;
+}
+
+.card-custom {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.subirDiv {
+  margin-top: -10%;
+  width: 120%;
+  margin-bottom: 20%;
+}
+
+.card-custom:hover {
+  transform: translateY(-10px);
+  scale: 1.06;
+}
+
+.imagem-card {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.card-body-custom {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.card-titulo {
+  font-size: 1.2rem;
+  color: #a40000;
+}
+
+.principalBotao {
+  background-color: #4c690d;
+  border: none;
+  color: #ddbf91;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  width: 75%;
+  margin: 0.5rem 0;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.principalBotao:hover {
+  background-color: #c1934e;
+  color: #4c690d;
+}

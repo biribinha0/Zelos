@@ -1,0 +1,73 @@
+.principaisDiv {
+  overflow: hidden;
+}
+
+.bordaDiv img {
+  object-fit: cover;
+}
+.carrosselDiv {
+  padding-bottom: 2rem;
+  padding: 0 4% 4% 4% !important;
+  width: 100%;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.swiper {
+  padding: 2rem 1rem;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #6b4a19;
+}
+
+.imgMargem1,
+.imgMargem2 {
+  object-fit: cover;
+}
+
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after {
+  color: #a40000;
+}
+
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after {
+  color: #a40000;
+}
+
+.swiper-slide-active {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
+.swiper-slide {
+  transition: transform 0.5s ease;
+}
+
+.p-xx {
+  padding: 64px !important;
+}
+
+.swiper-scrollbar-drag {
+  background: #a40000 !important;
+}
+
+
+.principaisDiv {
+  background-image: url("/imagensProjeto/bg2.png");
+}
+
+.imgMargem2 {
+  width: 100%;
+}
+
+p.card-titulo {
+  margin-bottom: 0 !important;
+}
