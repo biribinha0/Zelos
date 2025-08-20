@@ -4,6 +4,8 @@ import { obterPoolPorId, listarPoolsPorTecnico } from "../models/Pools.js";
 import { formatarTituloPool } from "../utils.js";
 import { obterUsuarioPorId } from "../models/Usuarios.js";
 import { obterEquipamentoPorPatrimonio } from "../models/Equipamentos.js";
+import { formatarNome } from '../utils.js';
+
 
 const listarChamadosPublicosController = async (req, res) => {
     try {
@@ -70,15 +72,16 @@ const listarChamadosPorTecnicoController = async (req, res) => {
         const chamadosComPool = await Promise.all(
             chamados.map(async (chamado) => {
                 const pool = await obterPoolPorId(chamado.tipo_id);
-
-                let patrimonio = [];
+                const usuario = await obterUsuarioPorId(chamado.usuario_id, 'usuario')
+                let patrimonio = null;
                 if (chamado.patrimonio !== null) {
                     patrimonio = await obterEquipamentoPorPatrimonio(patrimonio)
                 }
                 return {
                     ...chamado,
                     pool: pool ? formatarTituloPool(pool.titulo) : null,
-                    patrimonio: patrimonio ? patrimonio : null
+                    patrimonio: patrimonio ? patrimonio : null,
+                    usuario: await formatarNome(usuario.nome)
                 }
             })
         )
@@ -103,9 +106,9 @@ const obterChamadoPorIdController = async (req, res) => {
         const usuario = await obterUsuarioPorId(chamado.usuario_id, 'usuario');
         const tecnico = chamado.tecnico_id ? await obterUsuarioPorId(chamado.tecnico_id, 'tecnico') : null;
         const apontamentos = await listarApontamentosPorChamado(chamadoId)
-        let patrimonio = [];
+        let patrimonio = null;
         if (chamado.patrimonio !== null) {
-            patrimonio = await obterEquipamentoPorPatrimonio(patrimonio)
+            patrimonio = await obterEquipamentoPorPatrimonio(chamado.patrimonio)
         }
         const chamadoDetalhado = {
             ...chamado,
@@ -221,15 +224,12 @@ const chamadosSemTecnicoController = async (req, res) => {
         const poolsTecnico = await listarPoolsPorTecnico(tecnicoId);
 
         const chamadosPorPool = await Promise.all(
-            poolsTecnico.map(async ({ id_pool }) => {
-                return await chamadosSemTecnico(`id_pool = ${id_pool}`);
-            })
+            poolsTecnico.map(({ id_pool }) =>
+                chamadosSemTecnico(`tipo_id = ${id_pool}`)
+            )
         );
-        const chamados = chamadosPorPool.flat();
 
-        if (chamados.length === 0) {
-            return res.status(404).json({ error: 'Nenhum chamado disponível para autoatribuição' });
-        }
+        const chamados = chamadosPorPool.flat();
 
         return res.status(200).json(chamados);
     } catch (error) {
@@ -237,6 +237,7 @@ const chamadosSemTecnicoController = async (req, res) => {
         return res.status(500).json({ error: 'Ocorreu um erro ao buscar chamados para autoatribuição.' });
     }
 };
+
 
 const autoAtribuirAoChamadoController = async (req, res) => {
     const chamadoId = req.params.id;
@@ -247,11 +248,17 @@ const autoAtribuirAoChamadoController = async (req, res) => {
     }
 
     try {
-        const idChamado = await editarChamado(chamadoId, { tecnico_id });
+        const chamado = await obterChamadoPorId(chamadoId);
+        if (chamado.tecnico_id !== null) {
+            return res.status(500).json({ error: 'O chamado já possui um técnico atribuído.' });
+
+        }
+        const idChamado = await editarChamado(chamadoId, { tecnico_id, status: 'em andamento' });
 
         if (!idChamado) {
             return res.status(404).json({ error: 'Chamado não encontrado.' });
         }
+
 
         return res.status(200).json({
             mensagem: 'Chamado autoatribuído com sucesso.',

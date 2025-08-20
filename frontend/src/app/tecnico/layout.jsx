@@ -4,13 +4,13 @@ import { getDecodedToken, isAuthenticated, isExpired } from "@/utils/auth";
 import "./globals.css";
 import dynamic from "next/dynamic";
 
-const SideBarUsuario = dynamic(() => import("@/components/sideBarUsuario/SideBarUsuario"), {
+const SideBarTecnico = dynamic(() => import("@/components/sideBarTecnico/SideBarTecnico"), {
     ssr: false,
 });
 
 import AlertModal from "@/components/common/AlertModal";
 
-export default function UserLayout({ children }) {
+export default function TecnicoLayout({ children }) {
     const [authChecked, setAuthChecked] = useState(false);
     const [isAuth, setIsAuth] = useState(false);
     const [isExp, setIsExp] = useState(false);
@@ -21,7 +21,6 @@ export default function UserLayout({ children }) {
         if (isExp) {
             setAuthChecked(true)
         }
-        
         const auth = isAuthenticated();
         setIsAuth(auth);
 
@@ -52,7 +51,7 @@ export default function UserLayout({ children }) {
                     titulo={"Aviso"}
                     descricao={"Você não está logado"}
                     textoBotao={"Fazer Login"}
-                    linkBotao={"/login/usuario"}
+                    linkBotao={"/login/profissional"}
                 />
             </div>
         );
@@ -69,7 +68,7 @@ export default function UserLayout({ children }) {
             </div>
         )
     }
-    if (decoded.funcao !== 'usuario') {
+    if (decoded.funcao !== 'tecnico') {
         return (
             <div className="bgModal">
                 <AlertModal
@@ -84,7 +83,7 @@ export default function UserLayout({ children }) {
 
     return (
         <div>
-            <SideBarUsuario decoded={decoded} />
+            <SideBarTecnico decoded={decoded} />
             <div className="ms-5">{children}</div>
         </div>
     );

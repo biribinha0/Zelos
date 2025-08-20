@@ -1,0 +1,91 @@
+.categoriasHome {
+    background-image: url('/img/bGUmHome.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover !important;
+}
+
+.divTituloCategoriasHome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: revert-layer;
+}
+
+.tituloCategoriasHome {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 0 0 40px #ffffff, 0 0 5px #ffffffb7, 0 0 50px #ffffffb7, 0 0 80px;
+    font-size: clamp(0.8em, 0.8em + 2vw, 3.5em);
+    padding-top: 7%;
+    padding-bottom: 0%;
+    text-transform: uppercase;
+}
+
+.cardCategoriasHome {
+    background-color: #ffffff00;
+    border: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 2%;
+    transition: 0.4s;
+}
+
+.cardCategoriasHome:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    text-shadow: 0 0 40px #ffffffb7, 0 0 5px #ffffffb7, 0 0 50px #ffffffb7, 0 0 80px;
+}
+
+.imgCardsCategoriasHome {
+    width: 100% !important;
+}
+
+.itensCategoriasHome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: revert-layer !important;
+    padding: 8% 0%;
+    padding-bottom: 3.5%;
+}
+
+.cardCategoriasHome h4 {
+    font-weight: bold;
+    font-size: clamp(0.8em, 0.5em + 0.8vw, 2.5em);
+}
+
+.cardCategoriasHome .card-title {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+@media (max-width: 576px) {
+  .cardCategoriasHome h4 {
+    font-size: clamp(0.8em, 1.2em + 0.8vw, 2.5em);
+}
+}
+
+@media (max-width: 768px) {
+  .categoriasHome {
+    background-image: url('/img/bGUmTabletHome.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .categoriasHome {
+    background-image: url('/img/bannerContato2.png');
+  }
+}

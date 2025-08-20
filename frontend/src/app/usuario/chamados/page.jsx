@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import './meusChamados.css';
-import { getDecodedToken } from '@/utils/auth';
+import { getDecodedToken, getToken } from '@/utils/auth';
 import { API_URL } from '@/utils/api';
 import axios from 'axios';
 import { format } from "date-fns";
@@ -12,12 +12,16 @@ import Link from 'next/link';
 export default function MeusChamados() {
   const [chamados, setChamados] = useState({});
   const [loading, setLoading] = useState(false);
-
+  const token = getToken();
   const decoded = getDecodedToken();
 
   useEffect(() => {
     setLoading(true)
-    axios.get(`${API_URL}/usuario/${decoded.id}/chamados`)
+    axios.get(`${API_URL}/usuario/${decoded.id}/chamados`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then(function (response) {
         console.log(response.data); // The data returned by the server
         setChamados(response.data)

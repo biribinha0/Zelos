@@ -7,7 +7,7 @@ import { getDecodedToken, getToken } from '@/utils/auth';
 import axios from 'axios';
 import { API_URL } from '@/utils/api';
 
-export default function DetalhesChamado() {
+export default function DetalhesChamadoTecnico() {
     const params = useParams();
     const [chamado, setChamado] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ export default function DetalhesChamado() {
 
     useEffect(() => {
         setLoading(true);
-        axios.get(`${API_URL}/usuario/chamados/${chamadoId}/`, {
+        axios.get(`${API_URL}/tecnico/chamados/${chamadoId}/`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -38,7 +38,7 @@ export default function DetalhesChamado() {
 
     if (loading) return <p className="text-center mt-4">Carregando...</p>;
     if (!chamado) return <p className="text-center mt-4">Chamado não encontrado.</p>;
-    if (chamado.usuario_id !== decoded.id) return <p className="text-center mt-4">403</p>
+    if (chamado.tecnico_id !== decoded.id) return <p className="text-center mt-4">403</p>
     return (
         <div className="dc-outer d-flex justify-content-center bg-detalhes">
             <div className="dc-inner p-4 shadow rounded bg-white" style={{ width: cardWidth }}>

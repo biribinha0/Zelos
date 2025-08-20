@@ -9,6 +9,7 @@ import tecnicoRotas from "./routes/tecnicoRotas.js";
 import usuarioRotas from "./routes/usuarioRotas.js";
 import metaRotas from "./routes/metaRotas.js"
 import passport from './config/ldap.js';
+import authMiddleware from './middlewares/authMiddleware.js';
 
 // 1. Carrega variáveis de ambiente PRIMEIRO
 dotenv.config();
@@ -24,7 +25,7 @@ try {
     credentials: true
   }));
   app.use(express.json());
-  
+
   app.use(session({
     secret: 'sJYMmuCB2Z187XneUuaOVYTVUlxEOb2K94tFZy370HjOY7T7aiCKvwhNQpQBYL9e',
     resave: false,
@@ -47,40 +48,40 @@ try {
 // 5. Rotas
 app.use('/auth', authRotas);
 
-app.get('/api/equipamentos/filtrar', (req, res) => {
-  const { query } = req.query;
+// app.get('/api/equipamentos/filtrar', (req, res) => {
+//   const { query } = req.query;
 
-  // if (!query || query.length < 4) {
-  //   return res.status(400).json({ error: 'Query deve ter pelo menos 4 caracteres' });
-  // }
+//   // if (!query || query.length < 4) {
+//   //   return res.status(400).json({ error: 'Query deve ter pelo menos 4 caracteres' });
+//   // }
 
-  const sql = `SELECT * FROM equipamentos WHERE CAST(patrimonio AS CHAR) LIKE ?`;
-  const values = [`${query}%`];
+//   const sql = `SELECT * FROM equipamentos WHERE CAST(patrimonio AS CHAR) LIKE ?`;
+//   const values = [`${query}%`];
 
-  db.query(sql, values, (err, results) => {
-    if (err) {
-      console.error('Erro ao buscar equipamentos:', err);
-      return res.status(500).json({ error: 'Erro ao buscar equipamentos' });
-    }
+//   db.query(sql, values, (err, results) => {
+//     if (err) {
+//       console.error('Erro ao buscar equipamentos:', err);
+//       return res.status(500).json({ error: 'Erro ao buscar equipamentos' });
+//     }
 
-    res.json(results);
-  });
-});
+//     res.json(results);
+//   });
+// });
 
 
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'online' });
 });
 
-app.use('/admin', adminRotas);
+app.use('/admin', authMiddleware(["admin"]), adminRotas);
 
 app.use('/publico', publicoRotas);
 
-app.use('/tecnico', tecnicoRotas);
+app.use('/tecnico', authMiddleware(["tecnico"]), tecnicoRotas);
 
-app.use('/usuario', usuarioRotas);
+app.use('/usuario', authMiddleware(["usuario"]), usuarioRotas);
 
-app.use('/meta', metaRotas)
+app.use('/meta', authMiddleware(["admin", "usuario", "tecnico"]), metaRotas)
 
 // 6. Tratamento de erros robusto
 process.on('unhandledRejection', (reason, promise) => {

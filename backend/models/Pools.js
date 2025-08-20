@@ -24,7 +24,7 @@ const obterPoolPorId = async (id) => {
 // Lista de pools que um técnico pode fazer
 const listarPoolsPorTecnico = async (id) => {
     try {
-        return await readAll('pool_tecnico', `id_tecnico = ${id} AND status = 'ativo'`);
+        return await readAll('pool_tecnico', `id_tecnico = ${id}`);
     } catch (error) {
         console.error('Erro ao listar pools por técnico: ', error);
         throw error;
@@ -34,7 +34,7 @@ const listarPoolsPorTecnico = async (id) => {
 // Lista de técnicos que podem fazer uma pool
 const listarTecnicosPorPool = async (id) => {
     try {
-        return await readAll('pool_tecnico', `id_pool = ${id} AND status = 'ativo'`);
+        return await readAll('pool_tecnico', `id_pool = ${id}`);
     } catch (error) {
         console.error('Erro ao listar técnicos por pool: ', error);
         throw error;

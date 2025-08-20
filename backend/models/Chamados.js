@@ -74,15 +74,25 @@ const editarChamado = async (id, chamadoData) => {
 };
 
 
-// Chamados disponíveis para o um tecnico ser atribuido
-const chamadosSemTecnico = async (whereClause) => {
+// Chamados disponíveis para um técnico ser atribuído
+const chamadosSemTecnico = async (whereClause = '') => {
     try {
-        return await update('chamados', `tecnico_ id IS NULL AND status IN ('pendente', 'em andamento') ${whereClause ? `AND ${whereClause}` : ''}`);
+        const baseCondition = `
+            tecnico_id IS NULL 
+            AND status IN ('pendente', 'em andamento')
+        `;
+
+        const finalCondition = whereClause 
+            ? `${baseCondition} AND ${whereClause}` 
+            : baseCondition;
+
+        return await readAll('chamados', finalCondition);
     } catch (error) {
-        console.error('Erro ao editar chamado: ', error);
+        console.error('Erro ao ler chamado para autoatribuição: ', error);
         throw error;
     }
 };
+
 
 
 export { listarChamadosPublicos, criarChamado, listarChamadosPorUsuario, obterChamadoPorId, listarChamados, editarChamado, chamadosSemTecnico, listarChamadosPorTecnico };

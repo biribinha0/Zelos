@@ -134,10 +134,10 @@ const buscarEquipamentosController = async (req, res) => {
     const whereClause = conditions.length > 0 ? `${conditions.join(' AND ')}` : '';
     try {
         const equipamentos = await buscarEquipamentos(whereClause);
-
         return res.status(200).json(equipamentos)
     } catch (error) {
-
+        console.error('Erro ao buscar equipamentos: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro ao buscar equipamentos.' });
     }
 }
 export { listarUsuariosController, obterUsuarioPorIdController, criarUsuarioController, editarUsuarioController, buscarEquipamentosController }

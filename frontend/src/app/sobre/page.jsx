@@ -24,6 +24,7 @@ export default function Sobre() {
       <img className="img-fluid"
       src="/img/bannerSobre3.jpeg"
       />
+      
 
 
       <img className="w-100 py-3 img-fluid"

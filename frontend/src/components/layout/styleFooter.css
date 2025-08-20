@@ -1,17 +1,17 @@
 .footer {
-    padding-left: 60px;
-    padding-right: 60px;
     background-color: #f0f0f0;
     font-family: Arial, sans-serif;
     color: #333;
 }
 
-/* Topo do footer */
+
 .footer-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid red;
+    border-bottom: 3px solid #892722;
+    margin-left: 40px;
+    margin-right: 40px;
     padding: 10px 20px;
 }
 
@@ -26,12 +26,12 @@
 .footer-menu a {
     text-decoration: none;
     color: #000;
-    font-weight: bold;
+   
 }
 
 .footer-menu a:nth-last-child(2),
 .footer-menu a:last-child {
-    color: red;
+    color:#000;
 }
 
 .footer-logo {
@@ -53,7 +53,10 @@
     padding: 15px 20px;
     flex-wrap: wrap;
     gap: 20px;
+    color: #656565;
+    font-weight: bold;
 }
+
 
 .contact-info p {
     margin: 5px 0;

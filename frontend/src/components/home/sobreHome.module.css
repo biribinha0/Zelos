@@ -1,0 +1,102 @@
+.sobreHome {
+    background-image: url('/img/bgTresHome.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover !important;
+    padding: 5%;
+}
+
+.perguntasFrequentes {
+    background-color: #f2ebeb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 7%;
+}
+
+.perguntasFrequentesTitulo {
+    display: block;
+    margin: auto;
+    text-transform: uppercase;
+    color: #862922;
+    padding: 0% 1%;
+    padding-bottom: 2%;
+    border-bottom: 4px solid;
+    border-image: linear-gradient(to right, #d10914, #892722) 1;
+    width: 80% !important;
+    text-align: center !important;
+    align-items: center !important;
+}
+
+.backgroundAccordionHome {
+    background-color: #f2ebeb !important;
+}
+
+.accordionItemBorderHome {
+    border-bottom: 3.5px solid #862922 !important;
+    border-image: linear-gradient(to right, #d1091386, #89272298) 1;
+}
+
+.perguntasFrequentes {
+    --bs-accordion-btn-focus-border-color: transparent;
+    --bs-accordion-btn-focus-box-shadow: none;
+}
+
+.perguntasFrequentes :global(.accordion-button:focus),
+.perguntasFrequentes :global(.accordion-button:focus-visible),
+.perguntasFrequentes :global(.accordion-button:not(.collapsed)) {
+    color: #000000 !important;
+}
+
+.perguntasFrequentes :global(.accordion-button:hover),
+.perguntasFrequentes :global(.accordion-button:focus-visible),
+.perguntasFrequentes :global(.accordion-button:not(.collapsed)) {
+    color: #b75c5c !important;
+}
+
+.perguntasFrequentes :global(.accordion-button) {
+    padding: 3%;
+}
+
+.perguntasFrequentes :global(.accordion-button::after) {
+    filter: invert(24%) sepia(92%) saturate(2196%) hue-rotate(345deg) brightness(91%) contrast(101%);
+}
+
+.perguntasFrequentes :global(.accordion-button:not(.collapsed)::after) {
+    filter: invert(15%) sepia(82%) saturate(1400%) hue-rotate(350deg) brightness(85%) contrast(105%);
+}
+
+.perguntasFrequentes :global(.accordion-button:not(.collapsed)) {
+    border-bottom: 2px solid rgb(211, 211, 211) !important;
+    box-shadow: none !important;
+}
+
+.perguntasFrequentes :global(.accordion-button:not(.collapsed)) {
+    position: relative;
+    padding-bottom: 15px;
+    border: none;
+    box-shadow: none !important;
+}
+
+/* Bolinha inicial */
+.perguntasFrequentes :global(.accordion-button:not(.collapsed))::before {
+    content: "";
+    position: absolute;
+    bottom: -3.5px;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgb(211, 211, 211);
+}
+
+/* Bolinha final usando span */
+.perguntasFrequentes :global(.accordion-button .bolinhaFinal) {
+    position: absolute;
+    bottom: -3.5px;
+    right: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgb(211, 211, 211);
+}

@@ -23,7 +23,7 @@ export default function Footer() {
       />
 
       <footer className="footer">
-        <div className="footer-top d-flex flex-wrap">
+        <div className="footer-top fst-italic d-flex flex-wrap">
           <ul className="footer-menu d-flex flex-wrap">
             <li><a href="#">Home</a></li>
             <li><a href="#">Sobre nós</a></li>
@@ -72,7 +72,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-bottom">
-          Sistema desenvolvido em 2024, MOLIERES. Todos os direitos reservados.
+          Sistema desenvolvido em 2024, ZELOS. Todos os direitos reservados.
         </div>
       </footer>
     </>

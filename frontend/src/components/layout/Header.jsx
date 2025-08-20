@@ -1,9 +1,12 @@
 'use client'
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import styles from "./header.module.css";
+import { getDecodedToken, getToken, isAuthenticated, removeToken } from "@/utils/auth";
+import { useState, useEffect } from "react";
 
 export default function Header() {
+    const router = useRouter()
     const pathName = usePathname();
 
     const itensNav = [
@@ -14,6 +17,32 @@ export default function Header() {
         { href: '/contato', label: 'Contato' }
     ];
 
+
+    const [isAuth, setIsAuth] = useState(false);
+    const [decoded, setDecoded] = useState(null);
+
+    useEffect(() => {
+        const checkAuth = () => {
+            setIsAuth(isAuthenticated());
+            setDecoded(getDecodedToken());
+        };
+
+        // Chama já na primeira renderização
+        checkAuth();
+
+        // Escuta mudanças no localStorage (inclusive de outros tabs)
+        window.addEventListener("storage", checkAuth);
+
+        return () => {
+            window.removeEventListener("storage", checkAuth);
+        };
+    }, []);
+
+
+    const handleLogout = () => {
+        removeToken();
+        router.push('/')
+    }
     return (
         <nav className={`navbar navbar-expand-lg ${styles.Header}`}>
             <div className={`container-fluid ${styles.espacamentoNav}`}>
@@ -56,16 +85,44 @@ export default function Header() {
                                 ))}
                             </ul>
 
-                            <div className={`d-flex ${styles.iconsHeader} px-4`}>
-                                <Link href={'/login/profissional'} className={`m-3 ${styles.iconTecnicoNav}`}>
-                                    <i className={`bi bi-person-fill-gear ${styles.iconNav}`}></i>
-                                    <p className={`${styles.noMargin} ${styles.pLoginNav}`}>Profissionais</p>
-                                </Link>
-                                <Link href={'/login/usuario'} className={`m-3 ${styles.iconUsuarioNav}`}>
-                                    <i className={`bi bi-person-fill ${styles.iconNav}`}></i>
-                                    <p className={`${styles.noMargin} ${styles.pLoginNav}`}>Usuário</p>
-                                </Link>
-                            </div>
+                            {!isAuth ?
+                                (
+                                    <div className={`d-flex px-4 ${styles.iconsHeader}`}>
+                                        <Link href={'/login/profissional'} className={`m-3 ${styles.iconTecnicoNav}`}>
+                                            <i className={`bi bi-person-fill-gear ${styles.iconNav}`}></i>
+                                            <p className={`${styles.noMargin} ${styles.pLoginNav}`}>Profissionais</p>
+                                        </Link>
+                                        <Link href={'/login/usuario'} className={`m-3 ${styles.iconUsuarioNav}`}>
+                                            <i className={`bi bi-person-fill ${styles.iconNav}`}></i>
+                                            <p className={`${styles.noMargin} ${styles.pLoginNav}`}>Usuário</p>
+                                        </Link>
+                                    </div>
+                                ) : (
+                                    <div className="dropdown">
+                                        <button
+                                            className="btn btn-outline-light dropdown-toggle"
+                                            type="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false"
+                                        >
+                                            <i className="bi bi-person-circle"></i> {decoded?.nome}
+                                        </button>
+                                        <ul className="dropdown-menu shadow">
+                                            <li>
+                                                <Link className="dropdown-item" href={`/${decoded?.funcao}`}>
+                                                    Painel de Controle
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <button className="dropdown-item" onClick={handleLogout}>
+                                                    <i className="bi bi-box-arrow-left"></i> Sair
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                )
+                            }
 
                             <a className="d-flex align-items-center justify-content-center text-decoration-none flex-column"
                                 href="#"
