@@ -3,11 +3,10 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 100vh;
+    height: 100%;
     margin: 0;
   }
 
-  
   .chamado {
     color: white;
     font-weight: 100;
@@ -85,4 +84,28 @@
   
 *{
   max-width: 100%;
+}
+
+
+
+.patrimonioMae{
+  margin-top: 35%;
+  margin-bottom: 5%;
+}
+
+
+@media (max-width: 1024px) {
+ .patrimonioPai{
+  margin-top: -5%;
+  display: block;
+  margin: auto;
+  margin-left: 5%;
+}
+
+.patrimonioMae{
+  margin-bottom: 5%;
+  margin-top: -5%;
+}
+
+
 }

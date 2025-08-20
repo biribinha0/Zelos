@@ -70,17 +70,7 @@ export default function Header() {
                         </Link>
                     </div>
                     <div className="col-md-10 d-flex justify-content-end align-items-center">
-                        <button
-                            className="navbar-toggler"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#navbarNavDropdown"
-                            aria-controls="navbarNavDropdown"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                        >
-                            <span className="navbar-toggler-icon" />
-                        </button>
+
 
                         <div className="collapse navbar-collapse" id="navbarNavDropdown">
 
@@ -111,44 +101,56 @@ export default function Header() {
                                         </Link>
                                     </div>
                                 ) : (
-                                    <div className="dropdown">
-                                        <button
-                                            className="btn btn-outline-light dropdown-toggle"
-                                            type="button"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false"
-                                        >
-                                            <i className="bi bi-person-circle"></i> {decoded?.nome}
-                                        </button>
-                                        <ul className="dropdown-menu shadow">
-                                            <li>
-                                                <Link className="dropdown-item" href={`/${decoded?.funcao}`}>
-                                                    Painel de Controle
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <button className="dropdown-item" onClick={handleLogout}>
-                                                    <i className="bi bi-box-arrow-left"></i> Sair
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <div className="d-flex justify-content-center px-3 pt-2">
 
+                                        <div className="dropdown">
+                                            <button
+                                                className="btn btn-outline-light dropdown-toggle"
+                                                type="button"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false"
+                                            >
+                                                <i className="bi bi-person-circle"></i> {decoded?.nome}
+                                            </button>
+                                            <ul className="dropdown-menu shadow">
+                                                <li>
+                                                    <Link className="dropdown-item" href={`/${decoded?.funcao}`}>
+                                                        Painel de Controle
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <button className="dropdown-item" onClick={handleLogout}>
+                                                        <i className="bi bi-box-arrow-left"></i> Sair
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 )
                             }
 
-                            <a className="d-flex align-items-center justify-content-center text-decoration-none flex-column"
+                            { (!isAuth || decoded.funcao === 'usuario') && <a className="d-flex align-items-center justify-content-center text-decoration-none flex-column"
                                 href="#"
                                 role="button">
 
                                 <button className={`${styles.botaoChamadoNav}`}>
                                     Solicite um <span className="text-decoration-underline text-center">chamado de manutenção</span>
                                 </button>
-                            </a>
+                            </a>}
                         </div>
+                        <button
+                            className="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarNavDropdown"
+                            aria-controls="navbarNavDropdown"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span className="navbar-toggler-icon" />
+                        </button>
                     </div>
                 </div>
-
             </div>
         </nav>
     );

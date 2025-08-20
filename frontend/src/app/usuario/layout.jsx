@@ -85,7 +85,7 @@ export default function UserLayout({ children }) {
     return (
         <div>
             <SideBarUsuario decoded={decoded} />
-            <div className="ms-5">{children}</div>
+            <div className="ms-60px">{children}</div>
         </div>
     );
 }

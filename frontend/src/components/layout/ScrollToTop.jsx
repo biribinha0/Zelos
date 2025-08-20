@@ -1,5 +1,5 @@
 "use client";
-import "./scroll.css";
+import styles from "./Scroll.module.css";
 import { useEffect, useState } from "react";
 
 export default function ScrollToTop() {
@@ -21,7 +21,7 @@ export default function ScrollToTop() {
     return (
         visivel && <button
         onClick={subir}
-        className="btn-voltar-topo"
+        className={`${styles.btnVoltarTopo}`}
         aria-label="Voltar ao Topo"
         >
             <i className="bi bi-arrow-up" ></i>

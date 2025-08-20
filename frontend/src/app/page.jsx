@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
-import { CategoriasHome, ProfissionaisHome, SobreHome, CardProfissionalHome } from "@/components/home";
+import { CategoriasHome, ProfissionaisHome, SobreHome } from "@/components/home";
 
 
 export default function Home() {
@@ -19,9 +19,8 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <CardProfissionalHome/>
-        <ProfissionaisHome/>
         <CategoriasHome/>
+        <ProfissionaisHome/>
         <SobreHome/>
       </div>
     </>

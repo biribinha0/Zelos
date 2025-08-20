@@ -36,16 +36,18 @@ export default function FecharChamadoModal({ chamado }) {
         }))
     }
 
+    const handleSubmit = () => {
+        console.log(apontamento)
+    }
     return (
         <>
             <button
                 type="button"
                 className="btn btn-vermelho py-0 px-2 small w-100"
                 data-bs-toggle="modal"
-                data-bs-target="#FecharModal"
-                data-bs-whatever="@mdo"
+                data-bs-target="#FecharModal"   
             >
-                <i className="bi bi-clipboard-check"></i> <span className="small">Fechar</span>
+                <i className="bi bi-clipboard-check"></i> <span className="small">Concluir</span>
             </button>
 
             <div
@@ -69,7 +71,7 @@ export default function FecharChamadoModal({ chamado }) {
                             />
                         </div>
                         <div className="modal-body">
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <div className="mb-3">
                                     <label htmlFor="message-text" className="col-form-label">
                                         Último apontamento:
@@ -80,6 +82,7 @@ export default function FecharChamadoModal({ chamado }) {
                                         name="descricao"
                                         defaultValue={apontamento.descricao}
                                         onChange={handleChange}
+                                        required
                                     />
                                 </div>
                                 <div className="mb-3 row">
@@ -95,7 +98,8 @@ export default function FecharChamadoModal({ chamado }) {
                                             value={apontamento.comeco}
                                             onChange={handleChange}
                                             min="2025-08-01T00:00"
-                                        // max={}
+                                            max={apontamento.fim}
+                                            required
                                         />
 
                                     </div>
@@ -110,8 +114,9 @@ export default function FecharChamadoModal({ chamado }) {
                                             name="fim"
                                             value={apontamento.fim}
                                             onChange={handleChange}
-                                            min="2025-08-01T00:00"
-                                        // max={}
+                                            min="2025-07-01T00:00"
+                                            max={apontamento.fim}
+                                            required
                                         />
                                     </div>
                                     <div id="dateTimeHelp" className="form-text">Insira a data e horário de início e término do serviço.</div>
@@ -126,7 +131,7 @@ export default function FecharChamadoModal({ chamado }) {
                             >
                                 Fechar
                             </button>
-                            <button type="button" className="btn btn-vermelho">
+                            <button  type="button" className="btn btn-vermelho" onClick={handleSubmit}>
                                 Concluir
                             </button>
                         </div>

@@ -125,7 +125,7 @@ export default function CriarChamado() {
       <div className="row position-relative" style={{ zIndex: 1 }}>
         {/* Formulário */}
         <div className="col-12 col-lg-6">
-          <form style={{ padding: "40px", marginTop: "60px" }} onSubmit={handleSubmit}>
+          <form style={{ padding: "40px", marginTop: "4px" }} onSubmit={handleSubmit}>
             <h5 className="chamado">CHAMADOS</h5>
             <h1 className="titulo">Solicitar chamado</h1>
             <p className="subtitulo text-white">Crie um chamado para sua necessidade</p>
@@ -155,9 +155,9 @@ export default function CriarChamado() {
           </form>
         </div>
         {/* Patrimônio */}
-        <div className="col-12 col-lg-6">
+        <div className="col-12 col-lg-6 patrimonioPai">
           {usarPatrimonio && (
-            <div className="d-flex flex-column input-group py-5 mt-5">
+            <div className="d-flex flex-column input-group patrimonioMae">
               <h5 className="tituloInput">Busque o Patrimônio</h5>
               <p className="tituloInput text-break d-flex flex-wrap">
                 Insira as informações do patrimônio que deseja associar ao chamado. Caso não encontre, desmarque a checkbox e envie sem patrimônio.

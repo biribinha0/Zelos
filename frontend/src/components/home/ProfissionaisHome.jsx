@@ -6,52 +6,58 @@ import axios from "axios";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import CardProfissional from "./CardProfissionalHome";
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
+import styles from "./ProfissionaisHome.module.css";
+
 export default function ProfissionaisHome() {
     const swiperRef = useRef(null);
 
     const profissionaisHome = [
         {
-            imagemProfissional: './nomeProfissionalUm',
-            imagemNome: './nomeProfissionalUm',
-            descricao: 'Home'
+            imagemProfissional: '/img/profissionalUm.png',
+            imagemNome: '/img/nomeProfissionalUm.png',
+            descricao: 'Assistência técnica.'
         },
         {
-            imagemProfissional: './nomeProfissionalDois',
-            imagemNome: './nomeProfissionalUm',
-            descricao: 'Sobre nós'
+            imagemProfissional: '/img/profissionalDois.png',
+            imagemNome: '/img/nomeProfissionalDois.png',
+            descricao: 'Limpeza'
         },
         {
-            imagemProfissional: './nomeProfissionalTres',
-            imagemNome: './nomeProfissionalUm',
-            descricao: 'Serviços'
+            imagemProfissional: '/img/profissionalTres.png',
+            imagemNome: '/img/nomeProfissionalTres.png',
+            descricao: 'Reparo físico'
         },
         {
-            imagemProfissional: './nomeProfissionalQuatro',
-            imagemNome: './nomeProfissionalUm',
-            descricao: 'Chamados'
+            imagemProfissional: '/img/profissionalQuatro.png',
+            imagemNome: '/img/nomeProfissionalQuatro.png',
+            descricao: 'Serviço externo'
         },
     ];
 
     return (
-        <div className="principaisDiv">
+        <div className={`${styles.principaisDiv}`}>
+            <div className="col-12 d-flex flex-column justify-content-center align-items-center p-5 pb-0">
+                <h1 className={`${styles.tituloProfissionaisHome}`}>Nossa equipe</h1>
+                <img src="/img/logoOficial.png" className={`img-fluid ${styles.equipeZelosImg}`} alt="..." />
+            </div>
             {/* Carrossel */}
-            <div className="carrosselDiv">
+            <div className={`${styles.carrosselDiv}`}>
                 <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
                     navigation
                     speed={1200}
-                    scrollbar={{ draggable: true }}
                     loop={true}
                     spaceBetween={20}
-                    centeredSlides={true}
                     observer={true}
                     observeParents={true}
+                    scrollbar={{ draggable: true }}
                     onSwiper={(swiper) => {
                         swiperRef.current = swiper;
                     }}
@@ -62,11 +68,11 @@ export default function ProfissionaisHome() {
                     }}
                     className="p-5"
                 >
-                    {/* {profissionaisHome.map((item) => (
-                        <SwiperSlide key={item.id} className="d-flex justify-content-center">
-                            <Card item={item} />
+                    {profissionaisHome.map((item, index) => (
+                        <SwiperSlide key={index} className="d-flex justify-content-center">
+                            <CardProfissional item={item} />
                         </SwiperSlide>
-                    ))} */}
+                    ))}
                 </Swiper>
             </div>
         </div>

@@ -24,22 +24,19 @@ export default function ChamadosList() {
         })
             .then(function (response) {
                 setChamados(response.data)
+                console.log(chamados)
             })
             .catch(function (error) {
                 setChamados({ error: error.data })
+                console.log(error)
             })
             .finally(function () {
                 setLoading(false)
             });
     }, [])
 
-    if (loading) return (
-        <div className="spinner-border text-danger" role="status">
-            <span className="visually-hidden">Carregando...</span>
-        </div>
-    )
     return (
-        <div className="row my-5">
+        <div className="row my-5 w-100">
             <h3 className="text-center mb-5">Lista de chamados</h3>
             <div className="col-12">
 
@@ -73,10 +70,10 @@ export default function ChamadosList() {
                                     <td className="textTabela text-black-75">{chamado.usuario ?? "--"}</td>
                                     <td className="textTabela text-black-75">{format(chamado.criado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
                                     <td className="textTabela text-black-75">{format(chamado.atualizado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
-                                    <td className="textTabela ">
-                                        <Link className='text-decoration-underline text-primary' key={chamado.id} href={`/tecnico/chamados/${chamado.id}`}>Ver Detalhes</Link>
+                                    <td className="textTabela text-center">
+                                        <Link className='text-decoration-underline text-center w-100 text-primary' key={chamado.id} href={`/tecnico/chamados/${chamado.id}`}>Ver Detalhes</Link>
 
-                                        <FecharChamadoModal chamado={chamado}/>
+                                        {chamado.status === 'concluído' ? <p><i className="bi bi-check-all text-success me-1"></i>Concluído</p> : <FecharChamadoModal chamado={chamado} />}
                                     </td>
                                 </tr>
                             ))}

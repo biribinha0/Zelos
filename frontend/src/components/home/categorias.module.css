@@ -1,5 +1,5 @@
 .categoriasHome {
-    background-image: url('/img/bGUmHome.png');
+    background-image: url('/img/bgUmHome.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover !important;
@@ -77,15 +77,18 @@
 
 @media (max-width: 768px) {
   .categoriasHome {
-    background-image: url('/img/bGUmTabletHome.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover !important;
+    background-image: url('/img/bgUmTabletHome.png');
   }
 }
 
 @media (max-width: 576px) {
   .categoriasHome {
-    background-image: url('/img/bGUmTabletHome.png');
+    background-image: url('/img/bgUmMobileHome.png');
+  }
+
+  .tituloCategoriasHome {
+    padding: 10% !important;
+    padding-bottom: 0% !important;
+    text-align: center !important;
   }
 }

@@ -52,8 +52,20 @@ export default function Usuario() {
             </div>
 
             {/* banner */}
-            <div className={styles.bannerUsuario}>
-                <img src="/img/imgBannerUsuario.png" className={`img-fluid px-10 ${styles.bannerRelate}`} alt="" />
+            <div className={`position-relative ${styles.bannerUsuario}`}>
+                {/* Imagem para desktop (aparece só em md+) */}
+                <img
+                    src="/img/imgBannerUsuario.png"
+                    className={`img-fluid px-20 d-none d-md-block ${styles.bannerRelate}`}
+                    alt="Banner Desktop"
+                />
+
+                {/* Imagem para mobile (aparece só em sm/md-) */}
+                <img
+                    src="/img/imgBannerUsuarioMobile.png"
+                    className={`img-fluid d-block d-md-none w-100 px-20 ${styles.bannerUsuarioMobile}`}
+                    alt="Banner Mobile"
+                />
             </div>
 
             {/* título últimos chamados */}

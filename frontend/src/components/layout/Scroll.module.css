@@ -1,9 +1,9 @@
-.btn-voltar-topo {
+.btnVoltarTopo {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #c95400;
-  color: #DDBF91;
+  background-color: #878787;
+  color: #dcdad6;
   border: none;
   border-radius: 50%;
   padding: 12px;
@@ -11,8 +11,9 @@
   z-index: 999;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: 0.3s ease;
+  line-height: 0% !important;
 }
 
-.btn-voltar-topo:hover {
-  background-color: #a94600;
+.btnVoltarTopo:hover {
+  background-color: #DDBF91;
 }

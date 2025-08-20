@@ -11,16 +11,19 @@ const SideBarTecnico = dynamic(() => import("@/components/sideBarTecnico/SideBar
 import AlertModal from "@/components/common/AlertModal";
 
 export default function TecnicoLayout({ children }) {
-    const [authChecked, setAuthChecked] = useState(false);
-    const [isAuth, setIsAuth] = useState(false);
+    const [authChecked, setAuthChecked] = useState(null);
+    const [isAuth, setIsAuth] = useState(null);
     const [isExp, setIsExp] = useState(false);
     const [decoded, setDecoded] = useState(null);
 
     useEffect(() => {
+
         setIsExp(isExpired());
         if (isExp) {
-            setAuthChecked(true)
+            setAuthChecked(true);
+            setIsExp(true)
         }
+
         const auth = isAuthenticated();
         setIsAuth(auth);
 
@@ -29,8 +32,6 @@ export default function TecnicoLayout({ children }) {
         }
 
         setAuthChecked(true);
-
-
     }, []);
 
 
@@ -84,7 +85,7 @@ export default function TecnicoLayout({ children }) {
     return (
         <div>
             <SideBarTecnico decoded={decoded} />
-            <div className="ms-5">{children}</div>
+            <div className="ms-60px">{children}</div>
         </div>
     );
 }

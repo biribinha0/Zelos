@@ -113,18 +113,18 @@ export default function MeusChamados() {
         <h4 className="resultados-title mt-4">Resultados:</h4>
 
         {chamadosFiltrados.length > 0 ? (
-          <table className="table  mt-3">
+          <table className="table mt-3">
             <thead className="thead-custom">
               <tr>
                 <th>ID</th>
                 <th>Tipo de chamado</th>
                 <th>Título</th>
-                <th>Descrição</th>
                 <th>Patrimônio</th>
                 <th>Status</th>
                 <th>Técnico</th>
                 <th>Data de Abertura</th>
                 <th>Última Atualização</th>
+                <th>Ações</th>
               </tr>
             </thead>
 
@@ -134,19 +134,17 @@ export default function MeusChamados() {
 
                   <td className="textTabela text-black-75">{chamado.id}</td>
                   <td className="textTabela text-black-75">{chamado.pool}</td>
-                  <td className="textTabela text-black-75 ">
-                    <Link className='link-titulo' key={chamado.id} href={`/usuario/chamados/${chamado.id}`}>
-                      {chamado.titulo}
-                    </Link>
-                  </td>
-                  <td className="textTabela text-black-75">{chamado.descricao}</td>
-                  <td className="textTabela text-black-75">{JSON.stringify(chamado.patrimonio) ?? "--"}</td>
+                  <td className="textTabela text-black-75 ">{chamado.titulo}</td>
+                  <td className="textTabela text-black-75">{chamado?.patrimonio?.EQUIPAMENTO ?? "--"}</td>
                   <td className={`fw-bold text-${chamado.status === 'concluído' ? 'success' : chamado.status === 'pendente' ? 'danger' : 'warning'}`}>
                     {chamado.status}
                   </td>
                   <td className="textTabela text-black-75">{chamado.tecnico ?? "--"}</td>
                   <td className="textTabela text-black-75">{format(chamado.criado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
                   <td className="textTabela text-black-75">{format(chamado.atualizado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
+                  <td>
+                    <Link className='link-titulo' key={chamado.id} href={`/usuario/chamados/${chamado.id}`}>Ver Detalhes</Link>
+                  </td>
                 </tr>
               ))}
             </tbody>

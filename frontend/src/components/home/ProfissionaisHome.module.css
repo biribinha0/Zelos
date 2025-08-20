@@ -5,6 +5,7 @@
 .bordaDiv img {
   object-fit: cover;
 }
+
 .carrosselDiv {
   padding-bottom: 2rem;
   padding: 0 4% 4% 4% !important;
@@ -47,6 +48,7 @@
   transform: scale(1.2);
   transition: transform 0.5s ease;
 }
+
 .swiper-slide {
   transition: transform 0.5s ease;
 }
@@ -59,9 +61,11 @@
   background: #a40000 !important;
 }
 
-
 .principaisDiv {
-  background-image: url("/imagensProjeto/bg2.png");
+  background-image: url("/img/bgDoisHome.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover !important;
 }
 
 .imgMargem2 {
@@ -70,4 +74,13 @@
 
 p.card-titulo {
   margin-bottom: 0 !important;
+}
+
+.tituloProfissionaisHome {
+  text-transform: uppercase;
+  color: #b4b4b4;
+}
+
+.equipeZelosImg {
+  padding: 0% 30%;
 }

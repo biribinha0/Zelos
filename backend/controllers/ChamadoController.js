@@ -45,7 +45,7 @@ const listarChamadosPorUsuarioController = async (req, res) => {
                 }
                 let patrimonio = null;
                 if (chamado.patrimonio !== null) {
-                    patrimonio = await obterEquipamentoPorPatrimonio(patrimonio)
+                    patrimonio = await obterEquipamentoPorPatrimonio(chamado.patrimonio)
                 }
                 return {
                     ...chamado,
@@ -67,7 +67,7 @@ const listarChamadosPorTecnicoController = async (req, res) => {
     try {
         const chamados = await listarChamadosPorTecnico(tecnicoId);
 
-        if (chamados.length === 0) return res.status(204)
+        if (chamados.length === 0) return res.status(200).json({mensagem: 'Nenhum Chamado Registrado'})
 
         const chamadosComPool = await Promise.all(
             chamados.map(async (chamado) => {
