@@ -49,9 +49,10 @@ router.post('/login', (req, res, next) => {
           const usuarioData = {
             id: user.sAMAccountName,
             email: user.userPrincipalName,
-            nome: user.displayName,
+            nome: formatarNome(user.givenName),
+            nomeCompleto: formatarNome(user.displayName),
             senha: senhaHasheada,
-            funcao: 'usuario'
+            funcao: 'usuario',
           }
           console.log(usuarioData)
           await criarUsuario(usuarioData);
@@ -64,7 +65,7 @@ router.post('/login', (req, res, next) => {
         const token = jwt.sign({
           id: usuario.id,
           funcao: usuario.funcao,
-          nomeCompleto: formatarNome(user.givenName),
+          nomeCompleto: formatarNome(user.displayName),
           nome: primeiroNome(user.givenName),
           email: user.userPrincipalName,
         }, JWT_SECRET, {

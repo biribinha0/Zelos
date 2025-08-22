@@ -1,0 +1,49 @@
+/* cardDepoimentos.module.css */
+
+/* Apenas ajustes extras, sem quebrar o estilo Bootstrap */
+.cardDepoimentos {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 0.75rem; /* arredonda mais que o padrão */
+    overflow: hidden;
+  }
+  
+  .cardDepoimentos:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .cardDepoimentosBody {
+    padding: 1.25rem; /* um pouco mais espaçado */
+  }
+  
+  .cardDepoimentosTitle {
+    font-weight: 600;
+    color: #212529; /* cor padrão Bootstrap */
+  }
+  
+  .cardDepoimentosSubtitle {
+    font-size: 0.9rem;
+    color: #6c757d; /* cor de texto secundário do Bootstrap */
+  }
+  
+  .cardDepoimentosText {
+    color: #495057;
+    line-height: 1.5;
+  }
+  
+  .cardDepoimentosLink {
+    color: #0d6efd; /* link padrão do Bootstrap */
+    transition: color 0.2s ease;
+  }
+  
+  .cardDepoimentosLink:hover {
+    color: #0a58ca;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .cardDepoimentos {
+      width: 100% !important;
+    }
+  }
+  

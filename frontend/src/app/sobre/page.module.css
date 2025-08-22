@@ -1,9 +1,22 @@
+.fundoSobre{
+  background-image: url('/img/imgFundoChamados.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+}
+
 .titulo {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
   font-weight: bold;
-  font-size: 24px;
-  font-family: Arial, sans-serif;
-  margin: 50px;
-  padding: 0;
+  margin: 1rem 0;
+  padding-top: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap; 
 }
 
 .preto {
@@ -14,5 +27,27 @@
   color: red;
 }
 
+.titulo i {
+  font-size: clamp(1.2rem, 2vw, 1.6rem); 
+}
 
+.containersobre{
+max-width: 100%;
+display: flex;
+justify-content: center;
+}
+
+.senaizelos{
+   max-width: 35%;
+   height:auto;
+   margin-top: 5%;
+
+}
+
+.sobretexto{
+  font-size: 
+  clamp(1.2rem, 0em, 1.6rem);
+  margin: 5%;
+  
+}
   

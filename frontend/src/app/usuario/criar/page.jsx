@@ -118,7 +118,6 @@ export default function CriarChamado() {
   const indexUltimo = paginaAtual * itensPorPagina;
   const indexPrimeiro = indexUltimo - itensPorPagina;
   const listaAtual = listaPatrimonio.slice(indexPrimeiro, indexUltimo);
-  const totalPaginas = Math.ceil(listaPatrimonio.length / itensPorPagina);
 
   return (
     <div className="container-fluid position-relative criar-background">

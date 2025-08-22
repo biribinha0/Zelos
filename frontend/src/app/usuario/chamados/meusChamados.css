@@ -14,8 +14,8 @@ body {
   font-weight: bold;
   color: #4a4a4a7b;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-
 }
+
 
 .resultados-title {
   text-align: left;
@@ -39,10 +39,59 @@ body {
   transition: 0.8s;
 }
 
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* scroll suave no mobile */
+}
+
+.table {
+  min-width: 900px; /* garante que não fique "apertada" demais */
+}
+
+.titulosTabela {
+  text-align: center;
+  align-items: center;
+}
+
 .textTabela {
   font-size: 15px;
   font-weight: 500;
 }
+
+/* 🔹 Bordas verticais e horizontais */
+.table-bordered-custom {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-bordered-custom th,
+.table-bordered-custom td {
+  padding: 8px;
+  vertical-align: middle;
+}
+
+.table-bordered-custom th:last-child,
+.table-bordered-custom td:last-child {
+  border-right: none; /* remove borda da última coluna */
+}
+
+/* Melhor ajuste em telas muito pequenas */
+@media (max-width: 768px) {
+  .table {
+    font-size: 13px;
+    min-width: 700px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table {
+    font-size: 12px;
+    min-width: 600px;
+  }
+}
+
+
 
 .tr-cinza {
   background-color: rgba(210, 210, 210, 0.534);

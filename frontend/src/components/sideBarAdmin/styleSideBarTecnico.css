@@ -1,0 +1,172 @@
+:root {
+    --sb-collapsed: 60px;
+    --sb-expanded: 230px;
+    --logo1-w: 40px;
+    --logo2-w: 100%;
+    --icon-size: 1.10rem;
+}
+
+/* ----- LAYOUT ----- */
+.sidebar {
+    width: 60px;
+    height: 100%;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    white-space: nowrap;
+    position: fixed; /* fixa na tela */
+    top: 0;
+    left: 0;
+    bottom: 100px; /* deixa espaço para o footer */
+    z-index: 999; /* acima do conteúdo, mas abaixo de elementos importantes se precisar */
+    box-sizing: border-box;
+}
+
+.sidebar:hover {
+    width: var(--sb-expanded);
+}
+
+/* ----- LOGO (centralizada + crossfade) ----- */
+.logo-container {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-swap {
+    position: relative;
+    width: var(--logo1-w);
+    height: 40px;
+    transition: width .3s ease;
+}
+
+.sidebar:hover .logo-swap {
+    width: var(--logo2-w);
+}
+
+.logo-img {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: block;
+    width: 100%;
+    border-bottom: 50%;
+    max-height: 40px;
+    object-fit: contain;
+    transition: opacity .32s ease, transform .32s ease, filter .32s ease;
+    backface-visibility: hidden;
+}
+
+/* estado inicial: img-1 visível */
+.logo-img.img-1 {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.logo-img.img-2 {
+    opacity: 0;
+    transform: translateY(4px) scale(.98);
+}
+
+/* hover: troca suave 1->2 */
+.sidebar:hover .logo-img.img-1 {
+    opacity: 0;
+    transform: translateY(-2px) scale(.98);
+    filter: blur(.2px);
+}
+
+.sidebar:hover .logo-img.img-2 {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+/* ----- LINKS / ÍCONES ----- */
+.sidebar-link {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    transition: background-color .2s ease, padding .2s ease, justify-content .2s ease;
+}
+
+/* Centraliza tudo quando fechado */
+.sidebar:not(:hover) .sidebar-link {
+    justify-content: center;
+}
+
+/* Ícone consistente (evita corte) */
+.sidebar-icon {
+    font-size: var(--icon-size);
+    line-height: 1;
+    flex: 0 0 auto;
+    /* não encolhe */
+}
+
+/* Remove margem do ícone quando fechado (evita deslocamento) */
+.sidebar:not(:hover) .sidebar-icon {
+    margin-right: 0 !important;
+}
+
+/* Efeito hover do item */
+.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, .1);
+}
+
+/* ----- TEXTO (esconde fechado, mostra aberto) ----- */
+.link-text {
+    font-size: 13px;
+    opacity: 0;
+    visibility: hidden;
+    max-width: 0;
+    overflow: hidden;
+    transition: opacity .22s ease, max-width .22s ease;
+    margin-left: 0 !important;
+    /* ignora ms-2 do Bootstrap quando fechado */
+}
+
+/* no expandido, libera o texto */
+.sidebar:hover .sidebar-link {
+    justify-content: flex-start;
+}
+
+.sidebar:hover .link-text {
+    opacity: 1;
+    visibility: visible;
+    max-width: 180px;
+}
+
+/* ----- BLOCO DO USUÁRIO ----- */
+.user-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-block .sidebar-icon {
+    margin-right: 5%; /* remove o espaço lateral */
+    font-size: 1.5rem; /* opcional para aumentar o tamanho */
+}
+
+.nomeUsuario{
+    font-size: 9px;
+}
+
+.emailUsuario{
+    font-size: 10px;
+}
+
+/* ----- MOBILE ----- */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        z-index: 1000;
+        height: 100%;
+    }
+}
+
+#icones {
+    margin-top: 25%;
+}

@@ -1,11 +1,12 @@
 "use client";
 import "./globals.css"
+
 import { useEffect, useState } from "react";
 import { getDecodedToken, isAuthenticated, isExpired } from "@/utils/auth";
 import dynamic from "next/dynamic";
 import AlertModal from "@/components/common/AlertModal";
 
-const SideBarTecnico = dynamic(() => import("@/components/sideBarTecnico/SideBarTecnico"), { ssr: false });
+const SideBarAdmin = dynamic(() => import("@/components/sideBarAdmin/SideBarAdmin"), { ssr: false });
 
 export default function TecnicoLayout({ children }) {
     const [authChecked, setAuthChecked] = useState(false);
@@ -74,7 +75,7 @@ export default function TecnicoLayout({ children }) {
         );
     }
 
-    if (decoded?.funcao !== 'tecnico') {
+    if (decoded?.funcao !== 'admin') {
         return (
             <div className="bgModal">
                 <AlertModal
@@ -89,7 +90,7 @@ export default function TecnicoLayout({ children }) {
 
     return (
         <div>
-            <SideBarTecnico decoded={decoded} />
+            <SideBarAdmin decoded={decoded} />
             <div className="ms-60px">{children}</div>
         </div>
     );

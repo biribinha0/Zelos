@@ -1,0 +1,69 @@
+.categoriasBg {
+    background-image: url('/img/bgUmServicos.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover !important;
+}
+
+.cardCategoriasServicos {
+    background-color: #0000;
+    border: none;
+    display: flex;
+    text-align: center;
+    padding: 1%;
+    transition: 0.4s;
+}
+
+.cardCategoriasServicos:hover {
+    transform: scale(1.05);
+}
+
+.cardCategoriasServicos:hover h6.card-title {
+    color: blue !important;
+}
+
+.cardCategoriasServicos h6 {
+    color: #494949;
+    font-weight: bolder;
+    font-size: clamp(1.2em, 0.3em + 0.8vw, 2.5em);
+}
+
+.categoriasUm {
+    display: flex;
+    flex-direction: row;
+}
+
+.categoriasDois {
+    display: flex;
+    flex-direction: row;
+}
+
+.alinhamento {
+    padding-left: 10% !important;
+}
+
+@media (max-width: 400px) {
+    .alinhamento {
+        padding: 15% !important;
+    }
+
+    .categoriasUm {
+        flex-direction: column;
+        gap: 0 !important
+    }
+
+    .categoriasDois {
+        display: flex;
+        flex-direction: column;
+        gap: 0 !important
+    }
+
+    .cardCategoriasServicos {
+        padding: 10%;
+        margin: revert-layer;
+    }
+
+    .cardCategoriasServicos h6 {
+        white-space: nowrap;
+    }
+}

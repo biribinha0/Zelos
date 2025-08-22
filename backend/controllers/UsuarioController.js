@@ -1,6 +1,6 @@
 import { listarUsuarios, obterUsuarioPorId, criarUsuario, editarUsuario } from "../models/Usuarios.js";
 
-import { carregarPoolsParaTecnico } from "../utils.js";
+import { carregarPoolsParaTecnico, primeiroNomeInicial } from "../utils.js";
 import { buscarEquipamentos, obterEquipamentoPorPatrimonio } from "../models/Equipamentos.js";
 import e from "express";
 
@@ -38,6 +38,7 @@ const listarUsuariosController = async (req, res) => {
             await Promise.all(usuarios.map(async (usuario) => {
                 if (usuario.funcao === 'tecnico') {
                     usuario.pools = await carregarPoolsParaTecnico(usuario.id);
+                    usuario.nomeFormatado = primeiroNomeInicial(usuario.nome)
                 }
             }))
         }

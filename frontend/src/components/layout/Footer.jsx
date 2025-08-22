@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import "./styleFooter.css";
+import Link from "next/link";
 
 export default function Footer() {
   const [rating, setRating] = useState(0);
@@ -25,13 +26,13 @@ export default function Footer() {
       <footer className="footer">
         <div className="footer-top fst-italic d-flex flex-wrap">
           <ul className="footer-menu d-flex flex-wrap">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Sobre nós</a></li>
-            <li><a href="#">Serviços</a></li>
-            <li><a href="#">Chamados</a></li>
-            <li><a href="#">Contato</a></li>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Cadastro</a></li>
+            <li className="text-break"><Link href={'/'} >Home</Link></li>
+            <li className="text-break"><Link href={'/sobre'} >Sobre nós</Link></li>
+            <li className="text-break"><Link href={'/servicos'} >Serviços</Link></li>
+            <li className="text-break"><Link href={'/chamados'} >Chamados</Link></li>
+            <li className="text-break"><Link href={'/contato'} >Contato</Link></li>
+            <li className="text-break"><Link href={'/login/profissional'} className="loginCor">Login Profissional</Link></li>
+            <li className="text-break"><Link href={'/login/usuario'} className="loginCor">Login Usuário</Link></li>
           </ul>
           <div className="footer-logo py-2 ">
             <img className="logo-footer img-fluid" src="/img/logoZelosSenai.png" alt="SENAI" />
@@ -40,17 +41,17 @@ export default function Footer() {
 
         <div className="footer-middle">
           <div className="contact-info">
-            <p><i className="bi bi-telephone-fill"></i> (11) 4227-7450</p>
-            <p><i className="bi bi-envelope-fill"></i> senai@sp.senai.br</p>
-            <p><i className="bi bi-whatsapp"></i> (11) 9876-5432</p>
-            <p><i className="bi bi-geo-alt-fill"></i> R. Boa Vista, 825 - Boa Vista, São Caetano do Sul</p>
+            <p className="text-break"><i className="bi bi-telephone-fill"></i> (11) 4227-7450</p>
+            <p className="text-break"><i className="bi bi-envelope-fill"></i> senai@sp.senai.br</p>
+            <p className="text-break"><i className="bi bi-whatsapp"></i> (11) 9876-5432</p>
+            <p className="text-break"><i className="bi bi-geo-alt-fill"></i> R. Boa Vista, 825 - Boa Vista, São Caetano do Sul</p>
           </div>
 
           <div className="footer-actions">
-            <button className="chamado-btn">Solicite um chamado de manutenção</button>
+            <button className="chamado-btn text-break">Solicite um chamado de manutenção</button>
 
             <div className="avaliacao">
-              <span>Avalie-nos no Google:</span>
+              <span className="text-break">Avalie-nos no Google:</span>
               {[1, 2, 3, 4, 5].map(star => (
                 <a
                   key={star}
@@ -71,8 +72,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="footer-bottom">
-          Sistema desenvolvido em 2024, ZELOS. Todos os direitos reservados.
+        <div className="footer-bottom text-break">
+          Sistema desenvolvido em 2025, ZELOS. Todos os direitos reservados.
         </div>
       </footer>
     </>

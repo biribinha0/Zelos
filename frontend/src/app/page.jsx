@@ -9,19 +9,37 @@ export default function Home() {
     <>
       <div className="container-fluid p-0">
         <div className="row">
-          <div className="col-12">
+          <div className={`d-md-none ${styles.xs}`}>
             <Link href={'/login/usuario'}>
               <img
-                className={`img-fluid w-100`}
+                className="img-fluid w-100"
+                src="/img/bannerUmMobileHome.png"
+                alt="bannerUmMobile"
+              />
+            </Link>
+          </div>
+          <div className={`d-md-none ${styles.smPersonalizado}`}>
+            <Link href={'/login/usuario'}>
+              <img
+                className="img-fluid w-100"
+                src="/img/bannerUmTabletHome.png"
+                alt="bannerUmMobile"
+              />
+            </Link>
+          </div>
+          <div className="d-none d-md-block">
+            <Link href={'/login/usuario'}>
+              <img
+                className="img-fluid w-100"
                 src="/img/bannerUmHome.png"
-                alt="logo"
+                alt="bannerUm"
               />
             </Link>
           </div>
         </div>
-        <CategoriasHome/>
-        <ProfissionaisHome/>
-        <SobreHome/>
+        <CategoriasHome />
+        <ProfissionaisHome />
+        <SobreHome />
       </div>
     </>
   );

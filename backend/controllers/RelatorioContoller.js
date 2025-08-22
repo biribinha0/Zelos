@@ -12,7 +12,7 @@ export const gerarRelatorio = async (req, res) => {
         if (!tipoRelatorio || !dataInicio || !dataFim) {
             return res.status(400).json({ error: 'Parâmetros obrigatórios ausentes.' });
         }
-
+        
         let dados;
 
         switch (tipoRelatorio) {

@@ -13,6 +13,7 @@
     margin-left: 38px;
     margin-right: 38px;
     padding: 10px 20px;
+    margin-bottom: 1%;
 }
 
 .footer-menu {
@@ -32,6 +33,14 @@
 .footer-menu a:nth-last-child(2),
 .footer-menu a:last-child {
     color:#000;
+}
+
+.cadastroCor{
+    color: #9a1915 !important;
+}
+
+.loginCor{
+    color: #9a1915 !important
 }
 
 .footer-logo {
@@ -55,19 +64,20 @@
     gap: 20px;
     color: #656565;
     font-weight: bold;
+    margin-bottom: 2%;
 }
 .footer-middle .contact-info {
     display: grid;
     grid-template-columns: 1fr 1fr; 
-    gap: 15px 0px; 
-    max-width: 550px;
+    gap: 13px 0px; 
+    max-width: 450px;
    margin-left: 20px;
   }
   
   .footer-middle .contact-info p {
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: 14px;
   }
   
   .footer-middle .contact-info i {
@@ -91,6 +101,11 @@
     .footer-middle .contact-info i {
       font-size: 16px;
     }
+
+    .chamado-btn{
+        display: block;
+        margin: auto;
+    }
   }
 .contact-info p {
     margin: 5px 0;
@@ -111,7 +126,6 @@
     align-items: flex-start;
   
 }
-
 
 
 .chamado-btn {
@@ -137,10 +151,10 @@
 
 /* Parte de baixo */
 .footer-bottom {
-    background-color: #7f211e;
+    background-color: #892722;
     text-align: center;
-    padding: 8px;
-    font-size: 17px;
+    padding: 0.7%;
+    font-size: 13px;
     color: white;
 }
 
@@ -182,3 +196,31 @@
     width: 250px;
     height: auto; 
   }
+
+
+  @media screen and (min-width: 768px) and (max-width: 959px) {
+    /* Estilos específicos para tablets */
+    .chamado-btn {
+        background-color: #555;
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        margin-right: 6%;
+    }
+  }
+
+  /* Tablets (iPad Mini, Air 4, Pro 11, Galaxy Tab S7, Surface Duo aberto) */
+@media (min-width: 768px) and (max-width: 834px) {
+    .chamado-btn {
+        background-color: #555;
+        color: white;
+        padding: 4px 10px !important;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        margin-right: 6%;
+    }
+  }
+  

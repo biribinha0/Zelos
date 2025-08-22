@@ -53,3 +53,10 @@ export function primeiroNome(nomeCompleto) {
   return nomeCompleto.split(" ")[0].charAt(0).toUpperCase() + 
          nomeCompleto.split(" ")[0].slice(1).toLowerCase();
 }
+
+export function primeiroNomeInicial(nomeCompleto){
+  if (!nomeCompleto) return "";
+  const nomeFormatado = formatarNome(nomeCompleto);
+  return nomeFormatado.split(' ')[0] + " " +
+        nomeFormatado.split(' ')[1].charAt(0).toUpperCase() + '.'
+}

@@ -60,7 +60,7 @@ export default function Header() {
         <nav className={`navbar navbar-expand-lg ${styles.Header}`}>
             <div className={`container-fluid ${styles.espacamentoNav}`}>
                 <div className="row">
-                    <div className="col-md-2 d-flex align-items-center">
+                    <div className="col-6 col-sm-4 col-md-2 d-flex align-items-center">
                         <Link className="navbar-brand d-flex align-items-center justify-content-end m-0" href={'/'}>
                             <img
                                 className={`img-fluid w-75 ${styles.logo}`}
@@ -69,8 +69,7 @@ export default function Header() {
                             />
                         </Link>
                     </div>
-                    <div className="col-md-10 d-flex justify-content-end align-items-center">
-
+                    <div className="col-6 col-sm-8 col-md-10 d-flex justify-content-end align-items-center">
 
                         <div className="collapse navbar-collapse" id="navbarNavDropdown">
 
@@ -129,7 +128,7 @@ export default function Header() {
                                 )
                             }
 
-                            { (!isAuth || decoded.funcao === 'usuario') && <a className="d-flex align-items-center justify-content-center text-decoration-none flex-column"
+                            {(!isAuth || decoded.funcao === 'usuario') && <a className="d-flex align-items-center justify-content-center text-decoration-none flex-column"
                                 href="#"
                                 role="button">
 
@@ -139,7 +138,7 @@ export default function Header() {
                             </a>}
                         </div>
                         <button
-                            className="navbar-toggler"
+                            className={`navbar-toggler me-sm-4 bg-light border-none ${styles.hamburguer}`}
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#navbarNavDropdown"
