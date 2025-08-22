@@ -114,7 +114,7 @@ const obterChamadoPorIdController = async (req, res) => {
             ...chamado,
             pool: pool ? formatarTituloPool(pool.titulo) : null,
             patrimonio: patrimonio ? patrimonio : null,
-            usuario,
+            usuario: formatarNome(usuario.nome),
             tecnico,
             apontamentos
         }

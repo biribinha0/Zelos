@@ -15,5 +15,6 @@
 }
 
 .btnVoltarTopo:hover {
-  background-color: #DDBF91;
+  background-color: #acacac;
+  color: rgb(61, 61, 61);
 }

@@ -54,9 +54,8 @@ export function isExpired() {
 }
 
 export function isAuthenticated() {
-  if (typeof window !== "undefined") {
-    const token = getToken();
-    return !!token && !isExpired();
-  }
-  return false
+  if (typeof window === "undefined") return false;
+  const token = localStorage.getItem("token");
+  if (token && !isExpired()) return true;
+  return false;
 }

@@ -43,19 +43,19 @@ export default function FecharChamadoModal({ chamado , buttonStyle}) {
     };
 
     const handleSubmit = async (e) => {
-        if (e) e.preventDefault();
+        e.preventDefault();
         setLoading(true);
         const token = getToken();
 
         try {
             const response = await axios.post(
-                `${API_URL}/tecnico/chamados/${chamado.id}/fechar`,
+                `${API_URL}/tecnico/chamados/${chamado.id}/apontamento`,
                 apontamento,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setMensagem(response.data.mensagem);
         } catch (error) {
-            setMensagem(error.response?.data?.error || "Erro ao fechar chamado");
+            setMensagem(error.response?.data?.error || "Erro ao criar apontamento");
         } finally {
             setLoading(false);
         }
@@ -67,45 +67,42 @@ export default function FecharChamadoModal({ chamado , buttonStyle}) {
                 type="button"
                 className={buttonStyle}
                 data-bs-toggle="modal"
-                data-bs-target="#FecharModal"
+                data-bs-target="#ApontamentoModal"
             >
-                <i className="bi bi-clipboard-check me-2"></i>
-                <span className="small">Concluir</span>
+                <i className="bi bi-plus-circle me-2"></i>
+                <span className="small">Apontamento</span>
             </button>
 
             <div
                 className="modal fade p-0"
-                id="FecharModal"
+                id="ApontamentoModal"
                 tabIndex={-1}
-                aria-labelledby="FecharModalLabel"
+                aria-labelledby="ApontamentoModalLabel"
                 aria-hidden="true"
-                data-bs-backdrop={mensagem ? "static" : "true"}
-                data-bs-keyboard={mensagem ? "false" : "true"}
             >
                 <div className="modal-dialog">
                     <div className="modal-content">
                         {/* HEADER */}
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="FecharModalLabel">
-                                Fechar Chamado
+                            <h1 className="modal-title fs-5" id="ApontamentoModalLabel">
+                                Criar Apontamento
                             </h1>
-                            {!mensagem && (
-                                <button
-                                    type="button"
-                                    className="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                />
-                            )}
+                            {/* Sempre permite fechar */}
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            />
                         </div>
 
                         {/* BODY */}
                         <div className="modal-body">
-                            {!mensagem && (
-                                <form id="fecharChamadoForm" onSubmit={handleSubmit}>
+                            {!mensagem ? (
+                                <form id="criarChamadoForm" onSubmit={handleSubmit}>
                                     <div className="mb-3">
                                         <label htmlFor="message-text" className="col-form-label">
-                                            Último apontamento:
+                                            Apontamento:
                                         </label>
                                         <textarea
                                             className="form-control input-vermelho"
@@ -154,15 +151,14 @@ export default function FecharChamadoModal({ chamado , buttonStyle}) {
                                         </div>
                                     </div>
                                 </form>
-                            )}
-
-                            {mensagem && (
+                            ) : (
                                 <div className="text-center">
                                     <p className="mt-3 fw-bold">{mensagem}</p>
                                     <Link
                                         href={`/tecnico/chamados/${chamado.id}`}
                                         className="btn btn-vermelho mt-3"
                                         onClick={() => {
+                                            // Remove backdrop e desbloqueia scroll
                                             document.body.classList.remove("modal-open");
                                             document.body.style.removeProperty("overflow");
                                             document.querySelectorAll(".modal-backdrop")
@@ -176,20 +172,20 @@ export default function FecharChamadoModal({ chamado , buttonStyle}) {
                         </div>
 
                         {/* FOOTER */}
-                        {!mensagem && (
-                            <div className="modal-footer">
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    data-bs-dismiss="modal"
-                                    disabled={loading}
-                                >
-                                    Fechar
-                                </button>
+                        <div className="modal-footer">
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                                disabled={loading}
+                            >
+                                Fechar
+                            </button>
+                            {!mensagem && (
                                 <button
                                     type="submit"
                                     className="btn btn-vermelho"
-                                    form="fecharChamadoForm"
+                                    form="criarChamadoForm"
                                     disabled={loading}
                                 >
                                     {loading ? (
@@ -199,14 +195,23 @@ export default function FecharChamadoModal({ chamado , buttonStyle}) {
                                                 role="status"
                                                 aria-hidden="true"
                                             ></span>
-                                            Fechando...
+                                            Enviando...
                                         </>
                                     ) : (
-                                        "Concluir"
+                                        "Criar"
                                     )}
                                 </button>
-                            </div>
-                        )}
+                            )}
+                            {mensagem && (
+                                <button
+                                    type="button"
+                                    className="btn btn-vermelho"
+                                    disabled
+                                >
+                                    Criado
+                                </button>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -6,11 +6,11 @@
 
 .bg-detalhes {
     background-image: url('/img/fundoDetalhes.png');
-    width: 100%; 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    color: #fff; 
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* color: #fff; */
     margin: 0;
 }
 
@@ -52,29 +52,48 @@
 }
 
 .dc-image-container {
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
 .dc-image {
-    max-width: 100%; 
-    height: auto; 
+    max-width: 100%;
+    height: auto;
 }
 
-.dc-input:focus{
+.dc-input:focus {
     background-color: #d3d3d3a7;
     box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.249);
     color: rgba(24, 24, 24, 0.801);
     transition: 0.8s;
     font-weight: 600;
 }
-
-.form-control:focus{
-    background-color: #d3d3d3a7;
-    box-shadow: 0 0 5px 2px rgba(104, 104, 104, 0.169);
-    color: rgba(24, 24, 24, 0.801);
-    transition: 0.8s;
+.dc-info {
+    color: #4a4a4a;
 }
 
-.dc-info{
-    color: #4a4a4a;
+.status {
+    position: relative;
+    padding-left: 20px;
+    text-transform: capitalize;
+}
+
+.status::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;   
+  height: 10px;
+  border-radius: 50%;
+  
+}
+.status-sucesso::before{
+    background-color: #008000; /* cor do status */
+}
+.status-perigo::before{
+    background-color: #ff0000; /* cor do status */
+}
+.status-andamento::before{
+    background-color: #ffff00; /* cor do status */
 }

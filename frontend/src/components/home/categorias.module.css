@@ -69,12 +69,6 @@
   font-weight: 600;
 }
 
-@media (max-width: 576px) {
-  .cardCategoriasHome h4 {
-    font-size: clamp(0.8em, 1.2em + 0.8vw, 2.5em);
-}
-}
-
 @media (max-width: 768px) {
   .categoriasHome {
     background-image: url('/img/bgUmTabletHome.png');
@@ -85,6 +79,10 @@
   .categoriasHome {
     background-image: url('/img/bgUmMobileHome.png');
   }
+
+  .cardCategoriasHome h4 {
+    font-size: clamp(0.8em, 1.2em + 0.8vw, 2.5em);
+    }
 
   .tituloCategoriasHome {
     padding: 10% !important;

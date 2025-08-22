@@ -100,3 +100,10 @@
     border-radius: 50%;
     background: rgb(211, 211, 211);
 }
+
+@media (max-width: 768px) {
+  .imgSobreHome {
+    padding: 5% !important;
+    padding-bottom: 1.5% !important;
+  }
+}

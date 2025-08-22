@@ -8,7 +8,8 @@
 
 .carrosselDiv {
   padding-bottom: 2rem;
-  padding: 0 4% 4% 4% !important;
+  padding: 0% 0% !important;
+  padding-bottom: 1.5% !important;
   width: 100%;
   opacity: 1;
   transition: opacity 0.3s ease;
@@ -83,4 +84,28 @@ p.card-titulo {
 
 .equipeZelosImg {
   padding: 0% 30%;
+}
+
+:global(.swiper-button-next),
+:global(.swiper-button-prev) {
+  color: #b9b9b9 !important;
+  padding: 0% 5%;
+}
+
+@media (max-width: 768px) {
+  .carrosselDiv {
+    margin: revert-layer;
+    padding-bottom: 3% !important;
+  }
+}
+
+@media (max-width: 310px) {
+  .tituloProfissionaisHome {
+    text-align: center !important;
+    font-size: small;
+  }
+
+  .espacoProfissionaisHome {
+    padding-top: 5% !important;
+  }
 }

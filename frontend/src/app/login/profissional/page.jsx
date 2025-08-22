@@ -16,14 +16,11 @@ export default function LoginProfissional() {
     });
     const [mensagem, setMensagem] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [primeiroCarregamento, setPrimeiroCarregamento] = useState(true);
+    const [justLoggedIn, setJustLoggedIn] = useState(false);
+
 
     const isAuth = isAuthenticated();
     const decoded = getDecodedToken();
-
-    useEffect(() => {
-        setPrimeiroCarregamento(false);
-    }, []);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -37,10 +34,11 @@ export default function LoginProfissional() {
             });
 
             setToken(response.data.token);
+            setJustLoggedIn(true)
             const decoded = getDecodedToken();
             setLoginParams({ username: '', password: '' });
-            setLoading(false);
             router.push(`/${decoded.funcao}`);
+            setLoading(false);
         } catch (error) {
             console.error(error);
             setMensagem(error.response?.data?.mensagem || "Erro ao fazer login");
@@ -48,7 +46,7 @@ export default function LoginProfissional() {
         }
     };
 
-    if (isAuth && !loading && !primeiroCarregamento) {
+    if (isAuth && !justLoggedIn) {
         return (
             <div className={styles.bgModal}>
                 <AlertModal

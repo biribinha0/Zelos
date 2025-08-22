@@ -5,7 +5,7 @@ export default function SobreHome() {
         <>
             <div className={`container-fluid ${styles.sobreHome}`}>
                 <div className="row">
-                    <div className="col-md-6 d-flex justify-center align-items-center">
+                    <div className={`col-md-6 d-flex justify-center align-items-center ${styles.imgSobreHome}`}>
                         <img src="/img/logoSobreHome.png" className={`img-fluid`} alt="..." />
                     </div>
                     <div className="col-md-6 p-5">
@@ -39,7 +39,7 @@ export default function SobreHome() {
                             <div className={`accordion-item ${styles.accordionItemBorderHome} ${styles.backgroundAccordionHome}`}>
                                 <h2 className="accordion-header">
                                     <button
-                                        className={`accordion-button collapsed ${styles.backgroundAccordionHome}`}
+                                        className={`accordion-button collapsed ${styles.backgroundAccordionHome} ${styles.paddingSetaAccordion}`}
                                         type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#flush-collapseTwo"

@@ -57,7 +57,7 @@ export default function ProfissionaisHome() {
                     spaceBetween={20}
                     observer={true}
                     observeParents={true}
-                    scrollbar={{ draggable: true }}
+                   
                     onSwiper={(swiper) => {
                         swiperRef.current = swiper;
                     }}
@@ -66,7 +66,7 @@ export default function ProfissionaisHome() {
                         768: { slidesPerView: 3 },
                         1024: { slidesPerView: 3 }
                     }}
-                    className="p-5"
+                    className={`p-5 pb-0 ${styles.espacoProfissionaisHome}`}
                 >
                     {profissionaisHome.map((item, index) => (
                         <SwiperSlide key={index} className="d-flex justify-content-center">

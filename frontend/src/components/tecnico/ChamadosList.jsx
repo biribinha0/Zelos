@@ -24,7 +24,7 @@ export default function ChamadosList() {
         })
             .then(function (response) {
                 setChamados(response.data)
-                console.log(chamados)
+                console.log(response)
             })
             .catch(function (error) {
                 setChamados({ error: error.data })
@@ -52,7 +52,7 @@ export default function ChamadosList() {
                                 <th>Usuário</th>
                                 <th>Data de Abertura</th>
                                 <th>Última Atualização</th>
-                                <th>Ações</th>
+                                <th className="text-center">Ações</th>
                             </tr>
                         </thead>
 
@@ -73,7 +73,12 @@ export default function ChamadosList() {
                                     <td className="textTabela text-center">
                                         <Link className='text-decoration-underline text-center w-100 text-primary' key={chamado.id} href={`/tecnico/chamados/${chamado.id}`}>Ver Detalhes</Link>
 
-                                        {chamado.status === 'concluído' ? <p><i className="bi bi-check-all text-success me-1"></i>Concluído</p> : <FecharChamadoModal chamado={chamado} />}
+                                        {chamado.status === 'concluído' ?
+                                            <p className="py-1 m-0">
+                                                <i className="bi bi-check-all text-success me-1"></i>
+                                                Concluído
+                                            </p> :
+                                            <FecharChamadoModal chamado={chamado} buttonStyle={"btn btn-vermelho py-0 px-2 small w-100"}/>}
                                     </td>
                                 </tr>
                             ))}
