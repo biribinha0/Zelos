@@ -7,6 +7,7 @@ import { getToken } from "@/utils/auth";
 import { DuvidasChamadosModal, EditarChamadoModal } from "@/components/admin";
 import Link from "next/link";
 import { AdminFecharChamadoModal } from "@/components/admin";
+import { AtribuirFuncionario } from "@/components/admin";
 
 export default function ChamadosPage() {
     const [statusList, setStatusList] = useState([]);
@@ -196,7 +197,7 @@ export default function ChamadosPage() {
             <div className="container mt-4">
                 <div className="d-flex justify-content-between align-items-center">
                     <h4 className="resultados-title">Resultados:</h4>
-                    <DuvidasChamadosModal />
+                    <DuvidasChamadosModal/>
                 </div>
 
 
@@ -233,8 +234,8 @@ export default function ChamadosPage() {
                                         <td>
                                             <div className="d-flex justify-content-center gap-2">
                                                 <Link href={`/admin/chamados/${c.id}`}><i className="bi bi-eye-fill" style={{ transition: '0.2s' }}></i></Link>
-
-                                                <i className="bi bi-tools text-danger"></i>
+                                                <AtribuirFuncionario/>
+                                                
                                                 <EditarChamadoModal
                                                     chamado={c}
                                                     tipos={tiposList}

@@ -6,6 +6,9 @@ import axios from "axios";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { CardLM } from "."
+import { getDecodedToken, isAuthenticated } from "@/utils/auth";
+import Link from "next/link";
+
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -16,6 +19,9 @@ import styles from "./ServicosQuatro.module.css";
 
 export default function ServicosQuatro() {
     const swiperRef = useRef(null);
+    const decoded = getDecodedToken()
+    const isUserAuth = isAuthenticated() && decoded.funcao === 'usuario';
+
 
     const categoriasLM = [
         {
@@ -60,9 +66,9 @@ export default function ServicosQuatro() {
                             <p className="card-text fst-italic fw-bolder">
                                 Manutenção de ambientes por meio da higienização
                             </p>
-                            <a href="#" className={`btn ${styles.btnAcionarChamadoUm}`}>
+                            <Link href={isUserAuth ? '/usuario/criar?tipo_id=3' : 'login/usuario'} className={`btn ${styles.btnAcionarChamadoUm}`}>
                                 Acionar um chamado
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -83,7 +89,7 @@ export default function ServicosQuatro() {
             <div className={`col-12 d-flex flex-column justify-content-center align-items-center pt-2 ${styles.tituloServicosUmTablet}`}>
                 <h3 className={`${styles.tituloServicosQuatro}`}>Explore alguns itens dessa categoria:</h3>
             </div>
-            
+
             <div className={`${styles.carrosselDivServicos}`}>
                 <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -93,7 +99,7 @@ export default function ServicosQuatro() {
                     spaceBetween={20}
                     observer={true}
                     observeParents={true}
-                   
+
                     onSwiper={(swiper) => {
                         swiperRef.current = swiper;
                     }}

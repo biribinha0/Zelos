@@ -44,11 +44,6 @@ export default function DuvidasChamadosModal() {
                             </button>
                         </div>
 
-                        {/* Corpo */}
-                        <p className="mb-4 text-secondary">
-                            Se você tiver dúvidas de como funciona cada botão integrado na tabela, veja abaixo suas funcionalidades.
-                        </p>
-
                         <div className="mt-2">
                             {/* Item 1 */}
                             <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
@@ -57,18 +52,19 @@ export default function DuvidasChamadosModal() {
                             </div>
                             {/* Item 2 */}
                             <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
-                                <i className="bi bi-tools text-danger"></i>
+                                <i className="bi bi-person-down text-danger"></i>
                                 <span className="ms-3 fw-semibold">Atribui o chamado a um técnico.</span>
                             </div>
 
                             {/* Item 3 */}
                             <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
+                                <i className="bi bi-pencil-square text-secondary"></i>
                                 <span className="ms-3 fw-semibold">Edita o chamado desejado.</span>
                             </div>
 
                             {/* Item 4 */}
                             <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
-                                <i className="bi bi-check-square-fill text-success"></i>
+                                <i className="bi bi-check-square-fill text-secondary"></i>
                                 <span className="ms-3 fw-semibold">Marca o chamado como concluído, quando tem uma resolução.</span>
                             </div>
                         </div>

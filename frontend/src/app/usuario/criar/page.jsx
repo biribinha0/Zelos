@@ -7,6 +7,7 @@ import axios from "axios";
 import { API_URL } from "@/utils/api";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
+import { useSearchParams } from "next/navigation";
 
 
 export default function CriarChamado() {
@@ -19,6 +20,8 @@ export default function CriarChamado() {
     sala: "",
     equipamento: ""
   });
+
+
   const [pools, setPools] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
@@ -29,6 +32,12 @@ export default function CriarChamado() {
 
   const [paginaAtual, setPaginaAtual] = useState(1);
   const itensPorPagina = 3;
+
+  const params = useSearchParams();
+  const tipoId = params.get('tipo_id');
+  useEffect(() => {
+    if (tipoId) setChamadoData((prev) => ({ ...prev, tipo_id: tipoId }))
+  }, [tipoId])
 
   useEffect(() => {
     setLoading(true);

@@ -18,9 +18,9 @@ export default function SideBarAdmin({ decoded }) {
                 <div className="logo-container">
                     <div className="logo-swap">
                         {/* imagem 1 (fechado) */}
-                        <img src="/img/logoSimples.png" alt="Logo" className="logo-img img-1" />
+                        <img src="/img/logoZ.png" alt="Logo" className="logo-img img-1 p-2" />
                         {/* imagem 2 (expandido) */}
-                        <img src="/img/logoComprida.png" alt="Logo expandida" className="logo-img img-2" />
+                        <img src="/img/logoOficial.png" alt="Logo expandida" className="logo-img img-2 p-2" />
                     </div>
                 </div>
 
@@ -48,6 +48,12 @@ export default function SideBarAdmin({ decoded }) {
                         <Link className="nav-link sidebar-link text-light" href={'/admin/usuarios'}>
                             <i className="bi bi-person"></i>
                             <span className="link-text">Usuários</span>
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link sidebar-link text-light" href={'/admin/atribuicoes'}>
+                            <i className="bi bi-check2-circle"></i>
+                            <span className="link-text">Atribuição</span>
                         </Link>
                     </li>
                     <li className="nav-item">

@@ -1,0 +1,64 @@
+/* ////////////////////////////// BANNER 1 ////////////////////////////// */
+.bannerTecnico { /* Container principal */
+    width: 100%;
+    position: relative;
+    top: 0;
+    overflow: hidden;
+    margin-bottom: 5%;
+    margin-top: 3%;
+}
+
+.bannerTecnicoDesktop { /* Imagem desktop */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bannerTecnicoMobile { /* Imagem mobile */
+    width: 100%;
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+/* ////////////////////////////// BANNER 2 /////////////////////////////// */
+.banner2Tecnico { /* Container principal */
+    width: 100%;
+    position: relative;
+    top: 0;
+    overflow: hidden;
+}
+
+.banner2TecnicoDesktop { /* Imagem desktop */
+    width: 100%;
+    display: block;
+    margin: auto;
+    margin-bottom: 2%;
+}
+
+.banner2TecnicoMobile { /* Imagem mobile */ 
+    width: 100%;
+    position: relative;
+    display: block;
+    margin: auto;
+}
+
+/* ////////////////////////////// PARTE DOS STATUS DOS CHAMADOS ////////////////////////////// */
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30% !important;
+}
+
+
+
+
+.tituloStatus{
+    font-size:30px;
+    font-weight: bold;
+}
+
+.iconeChamados{
+    width: 10%;
+}

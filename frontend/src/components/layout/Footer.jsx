@@ -2,10 +2,11 @@
 import { useState } from "react";
 import "./styleFooter.css";
 import Link from "next/link";
+import { getDecodedToken, getToken, isAuthenticated } from "@/utils/auth";
 
 export default function Footer() {
   const [rating, setRating] = useState(0);
-  const senaiUrl = "https://share.google/V4dHjbqxeBWD8p8wO"; // link que você passou
+  const senaiUrl = "https://share.google/V4dHjbqxeBWD8p8wO";
 
   const handleStarClick = (star) => {
     if (rating === star) {
@@ -14,6 +15,10 @@ export default function Footer() {
       setRating(star);
     }
   };
+
+  const isAuth = isAuthenticated();
+  const decoded = getDecodedToken() || null;
+
 
   return (
     <>
@@ -48,9 +53,13 @@ export default function Footer() {
           </div>
 
           <div className="footer-actions">
-            <Link href={'/login/usuario'}>
-            <button className="chamado-btn text-break">Solicite um chamado de manutenção</button>
+            {(!isAuth || decoded.funcao === 'usuario') && <Link href={isAuth ? '/usuario/criar' : '/login/usuario'}>
+              <button className="chamado-btn text-break">Solicite um chamado de manutenção</button>
             </Link>
+            }
+            {(isAuth && decoded.funcao !== 'usuario') && <Link href={`/${decoded.funcao}`}>
+              <button className="chamado-btn text-break">Acessar {decoded.funcao === 'admin' ?'painel de administração' : 'página de técnico'}</button>
+            </Link>}
 
             <div className="avaliacao">
               <span className="text-break">Avalie-nos no Google:</span>

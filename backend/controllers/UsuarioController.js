@@ -113,7 +113,7 @@ const criarUsuarioController = async (req, res) => {
 }
 
 const editarUsuarioController = async (req, res) => {
-    const { nome, senha, email, funcao } = req.body;
+    const { nome, senha, email, funcao, status } = req.body;
     const usuarioId = req.params.id;
 
     if (!nome || !senha || !email || !funcao) {
@@ -128,7 +128,7 @@ const editarUsuarioController = async (req, res) => {
     }
 
     try {
-        const response = await editarUsuario(usuarioData)
+        const response = await editarUsuario(usuarioData, usuarioId)
         return res.status(200).json({
             mensagem: 'Usuario editado com sucesso.',
             response
@@ -164,4 +164,23 @@ const buscarEquipamentosController = async (req, res) => {
         return res.status(500).json({ error: 'Ocorreu um erro ao buscar equipamentos.' });
     }
 }
-export { listarUsuariosController, obterUsuarioPorIdController, criarUsuarioController, editarUsuarioController, buscarEquipamentosController }
+
+const mudarStatusController = async (req, res) => {
+    const id = req.params.id;
+    const { status } = req.body;
+    try {
+        if (!status || !id) return res.status(400).json({ error: 'Parâmetros obrigatórios ausentes' });
+
+        if (status !== 'ativo' && status !== 'inativo') return res.status(400).json({ error: 'Status inválido' });
+        const user = await obterUsuarioPorId(id);
+        if (!user) return res.status(404).json({ error: 'Usuário não encontrado' });
+
+        const response = await editarUsuario({ status }, id);
+        return res.status(200).json({ mensagem: 'Usuário editado com sucesso', response })
+    } catch (error) {
+        console.error('Erro ao mudar status: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro ao mudar status.' });
+    }
+}
+
+export { listarUsuariosController, obterUsuarioPorIdController, criarUsuarioController, editarUsuarioController, buscarEquipamentosController, mudarStatusController }

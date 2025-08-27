@@ -4,13 +4,14 @@ import "../adm.css";
 import axios from "axios";
 import { API_URL } from "@/utils/api";
 import { getToken } from "@/utils/auth";
-import { DuvidasUsuariosModal, DeleteUsuarioModal } from "@/components/admin";
+import { DuvidasUsuariosModal, DeleteUsuarioModal, ChamadosAtribuidosModal, DetalhesUsuarioModal, DesativarUsuarioModal, AtivarUsuarioModal } from "@/components/admin";
 
 export default function UsuariosPage() {
     const [usuarios, setUsuarios] = useState([]);
     const [nome, setNome] = useState("");
     const [registro, setRegistro] = useState("");
-    const [usuarioSelecionado, setUsuarioSelecionado] = useState(null);
+
+    
 
     const token = getToken();
 
@@ -101,16 +102,25 @@ export default function UsuariosPage() {
                                     <td>{u.status === "ativo" ? "Ativo" : "Inativo"}</td>
                                     <td>
                                         <div className="d-flex justify-content-center gap-2">
-                                            <i className="bi bi-clipboard2-data text-secondary" title="Chamados"></i>
-                                            <i className="bi bi-eye text-secondary" title="Detalhes"></i>
-                                            <i
-                                                className="bi bi-x-lg text-danger"
-                                                title="Excluir"
-                                                style={{ cursor: "pointer" }}
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#deleteUsuarioModal"
-                                                onClick={() => setUsuarioSelecionado(u)}
-                                            ></i>
+                                            {u.status === 'ativo' ? (
+                                                <>
+                                                    <ChamadosAtribuidosModal
+                                                        usuario={u} modalId=
+                                                        {`chamadosUsuarioModal${u.id}`}
+                                                    />
+                                                    <DetalhesUsuarioModal
+                                                        usuario={u}
+                                                        modalId={`detalhesUsuarioModal${u.id}`}
+                                                    />
+                                                    <DesativarUsuarioModal
+                                                        usuario={u}
+                                                        modalId={`desativarUsuario${u.id}`}
+                                                    />
+                                                </>
+                                            ) : <AtivarUsuarioModal
+                                                usuario={u}
+                                                modalId={`ativarUsuario${u.id}`}
+                                            />}
                                         </div>
                                     </td>
                                 </tr>
@@ -118,10 +128,10 @@ export default function UsuariosPage() {
                         </tbody>
                     </table>
                 </div>
-            </div>
+                
+            </div >
 
-            {/* Modais */}
-            <DeleteUsuarioModal usuario={usuarioSelecionado} />
+
         </>
     );
 }

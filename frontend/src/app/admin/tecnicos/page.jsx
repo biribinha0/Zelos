@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import "../adm.css";
-import { ChamadosAtribuidosModal, DuvidasTecnicosModal } from '@/components/admin';
+import { ChamadosAtribuidosModal, DetalhesUsuarioModal, DuvidasTecnicosModal, DesativarUsuarioModal, AtivarUsuarioModal } from '@/components/admin';
 import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import { getToken } from '@/utils/auth';
@@ -134,14 +134,29 @@ export default function TecnicosPage() {
                                     </td>
                                     <td>
                                         <div className="d-flex justify-content-center gap-2">
-                                            <i className="bi bi-eye text-secondary"></i>
-                                            <ChamadosAtribuidosModal usuario={tec}/>
-                                            <i
-                                                className="bi bi-x-lg text-danger"
-                                                style={{ cursor: "pointer" }}
-                                                onClick={() => console.log("Deletar", tec.id)}
-                                            ></i>
+                                            {tec.status === "ativo" ? (
+                                                <>
+                                                    <DetalhesUsuarioModal
+                                                        usuario={tec}
+                                                        modalId={`detalhesUsuarioModal${tec.id}`}
+                                                    />
+                                                    <ChamadosAtribuidosModal
+                                                        usuario={tec}
+                                                        modalId={`chamadosUsuarioModal${tec.id}`}
+                                                    />
+                                                    <DesativarUsuarioModal
+                                                        usuario={tec}
+                                                        modalId={`desativarUsuario${tec.id}`}
+                                                    />
+                                                </>
+                                            ) : (
+                                                <AtivarUsuarioModal
+                                                    usuario={tec}
+                                                    modalId={`ativarUsuario${tec.id}`}
+                                                />
+                                            )}
                                         </div>
+
                                     </td>
                                 </tr>
                             ))}

@@ -2,56 +2,94 @@ import styles from "./Funcionalidades.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { useState, useEffect, useRef } from "react";
+import CardFuncionalidade from "./CardFuncionalidade";
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
 export default function Funcionalidades() {
+
+    const swiperRef = useRef(null);
+
+    const funcoesAdm = [
+        {
+            imagemItem: '/img/funcaoAdmUm.png',
+            descricao: 'Estatísticas',
+            link: '#AdmEstatistica'
+        },
+        {
+            imagemItem: '/img/funcaoAdmDois.png',
+            descricao: 'Chamados',
+            link: '/admin/chamados'
+        },
+        {
+            imagemItem: '/img/funcaoAdmTres.png',
+            descricao: 'Funcionários',
+            link: '/admin/tecnicos'
+        },
+        {
+            imagemItem: '/img/funcaoAdmSete.png',
+            descricao: 'Usuários',
+            link: '/admin/usuarios'
+        },
+        {
+            imagemItem: '/img/funcaoAdmQuatro.png',
+            descricao: 'Atribuições',
+            link: '/admin/atribuicoes'
+        },
+        {
+            imagemItem: '/img/funcaoAdmCinco.png',
+            descricao: 'Relatórios',
+            link: '/admin/relatorios'
+        },
+        {
+            imagemItem: '/img/funcaoAdmSeis.png',
+            descricao: 'Categorias',
+            link: '/admin/pools'
+        },
+    ];
+
     return (
         <>
-            <div className={`container-fluid ${styles.categoriasHome}`}>
+            <div className={`container-fluid ${styles.FuncoesAdm}`}>
                 <div className="row">
-                    <div className="col-12 divTituloCategoriasHome">
-                        <h1 className={`${styles.tituloCategoriasHome}`}>Qual manutenção você precisa hoje?</h1>
+                    <div className="col-12">
+                        <h1 className={`${styles.tituloFuncoesAdm}`}>Ferramentas de administração:</h1>
                     </div>
                 </div>
-                <div className={`row d-flex ${styles.itensCategoriasHome}`}>
-                    <div className="col-sm-4 col-md-2">
-                        <div className={`card ${styles.cardCategoriasHome}`}>
-                            <img src="/img/equipamentoUm.png" className={`img-fluid ${styles.cardCategoriasHome}`} alt="..." />
-                            <div className="card-body">
-                                <h4 className="card-title">Rede</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-4 col-md-2">
-                        <div className={`card ${styles.cardCategoriasHome}`}>
-                            <img src="/img/equipamentoDois.png" className={`img-fluid ${styles.cardCategoriasHome}`} alt="..." />
-                            <div className="card-body">
-                                <h4 className="card-title">Eletrônicos</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-4 col-md-2">
-                        <div className={`card ${styles.cardCategoriasHome}`}>
-                            <img src="/img/equipamentoTres.png" className={`img-fluid ${styles.cardCategoriasHome}`} alt="..." />
-                            <div className="card-body">
-                                <h4 className="card-title">Máquinas</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-4 col-md-2">
-                        <div className={`card ${styles.cardCategoriasHome}`}>
-                            <img src="/img/equipamentoQuatro.png" className={`img-fluid ${styles.cardCategoriasHome}`} alt="..." />
-                            <div className="card-body">
-                                <h4 className="card-title">Equipamentos</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-4 col-md-2">
-                        <div className={`card ${styles.cardCategoriasHome}`}>
-                            <img src="/img/equipamentoCinco.png" className={`img-fluid ${styles.cardCategoriasHome}`} alt="..." />
-                            <div className="card-body">
-                                <h4 className="card-title">Elétrica</h4>
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                    <Swiper
+                        modules={[Navigation, Pagination, Scrollbar, A11y]}
+                        navigation
+                        speed={1200}
+                        loop={true}
+                        spaceBetween={20}
+                        observer={true}
+                        observeParents={true}
+
+                        onSwiper={(swiper) => {
+                            swiperRef.current = swiper;
+                        }}
+                        breakpoints={{
+                            0: { slidesPerView: 1 },
+                            450: { slidesPerView: 2 },
+                            576: { slidesPerView: 3 },
+                            768: { slidesPerView: 5 },
+                            1085: { slidesPerView: 6 }
+                        }}
+                        className={`p-5 ${styles.carrosselAdm}`}
+                    >
+                        {funcoesAdm.map((item, index) => (
+                            <SwiperSlide key={index} className="d-flex justify-content-center">
+                                <CardFuncionalidade item={item} />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
                 </div>
             </div>
         </>

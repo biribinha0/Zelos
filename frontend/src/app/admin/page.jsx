@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { getToken } from "@/utils/auth";
 import { API_URL } from "@/utils/api";
@@ -62,7 +62,7 @@ export default function HomePage() {
             <Link href="#">
               <img
                 className="img-fluid w-100"
-                src="/img/bannerUmMobileHome.png"
+                src="/img/bannerUmMobileAdm.png"
                 alt="bannerUmMobile"
               />
             </Link>
@@ -71,7 +71,7 @@ export default function HomePage() {
             <Link href="#">
               <img
                 className="img-fluid w-100"
-                src="/img/bannerUmTabletHome.png"
+                src="/img/bannerUmTabletAdm.png"
                 alt="bannerUmMobile"
               />
             </Link>
@@ -91,9 +91,9 @@ export default function HomePage() {
       <Funcionalidades/>
 
       {/* Estatísticas */}
-      <div className="dc-outer d-flex container my-5">
+      <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
         <h4 className="fw-bold">
-          Estatísticas <span className="text-danger">de chamados:</span>
+          <i class="bi bi-activity"></i> <span className="text-danger">Estatísticas </span> de chamados:
         </h4>
       </div>
 

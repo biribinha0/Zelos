@@ -23,7 +23,7 @@ export default function DuvidasUsuariosModal() {
                                 Visualiza chamados atribuídos ao usuário.
                             </li>
                             <li className="mb-3">
-                                <i className="bi bi-eye me-2 text-primary"></i>
+                                <i className="bi bi-eye me-2 text-secondary"></i>
                                 Visualiza os dados detalhados do usuário.
                             </li>
                             <li className="mb-3">

@@ -1,0 +1,38 @@
+.cardFuncionalidadesAdm {
+    background-color: #ffffff00 !important;
+    border: none !important;
+    transition: 0.4s;
+}
+
+.cardFuncionalidadesAdm:hover {
+    transform: scale(1.05);
+}
+
+.textClamp {
+    font-size: clamp(0.85em, 0.1em + 0.1vw, 2.0em);
+    color: #e4dfdf;
+}
+
+@media (max-width: 865px) {
+    .textClamp {
+        font-size: clamp(0.7em, 0.1em + 0.1vw, 2.0em);
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .textClamp {
+        white-space: nowrap;
+        font-size: clamp(0.5em, 1em + 0.1vw, 2.0em);
+    }
+
+    .paddingZero {
+        padding-top: 0% !important;
+    }
+}
+
+@media (max-width: 310px) {
+    .textClamp {
+        font-size: clamp(0.7em, 1.0em + 0.4vw, 2.0em) !important;
+    }
+}

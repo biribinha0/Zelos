@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -11,11 +12,15 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { getDecodedToken, isAuthenticated } from "@/utils/auth";
 
 import styles from "./ServicosDois.module.css";
 
 export default function ServicosDois() {
     const swiperRef = useRef(null);
+
+    const decoded = getDecodedToken()
+    const isUserAuth = isAuthenticated() && decoded.funcao === 'usuario';
 
     const categoriasAT = [
         {
@@ -59,9 +64,9 @@ export default function ServicosDois() {
                             <p className="card-text fst-italic fw-bolder">
                                 Suporte para manutenção e vistoria de equipamentos
                             </p>
-                            <a href="#" className={`btn ${styles.btnAcionarChamadoUm}`}>
+                            <Link href={isUserAuth ? '/usuario/criar?tipo_id=1' : 'login/usuario'} className={`btn ${styles.btnAcionarChamadoUm}`}>
                                 Acionar um chamado
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -82,7 +87,7 @@ export default function ServicosDois() {
             <div className={`col-12 d-flex flex-column justify-content-center align-items-center pt-2 ${styles.tituloServicosUmTablet}`}>
                 <h3 className={`${styles.tituloServicosUm}`}>Explore alguns itens dessa categoria:</h3>
             </div>
-            
+
             <div className={`${styles.carrosselDivServicos}`}>
                 <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -92,7 +97,7 @@ export default function ServicosDois() {
                     spaceBetween={20}
                     observer={true}
                     observeParents={true}
-                   
+
                     onSwiper={(swiper) => {
                         swiperRef.current = swiper;
                     }}

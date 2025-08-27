@@ -13,8 +13,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import styles from "./ServicosUm.module.css";
+import Link from "next/link";
+import { getDecodedToken, isAuthenticated } from "@/utils/auth";
 
 export default function ServicosUm() {
+    const decoded = getDecodedToken()
+    const isUserAuth = isAuthenticated() && decoded.funcao === 'usuario';
+
     const swiperRef = useRef(null);
 
     const categoriasRF = [
@@ -33,14 +38,14 @@ export default function ServicosUm() {
         {
             imagemItem: '/img/itemQuatroRF.png',
             descricao: 'Interruptor'
-        },{
+        }, {
             imagemItem: '/img/itemCincoRF.png',
             descricao: 'Maçaneta eletrônica'
         },
         {
             imagemItem: '/img/itemSeisRF.png',
             descricao: 'Catraca'
-        },{
+        }, {
             imagemItem: '/img/itemSeteRF.png',
             descricao: 'Bebedouro'
         },
@@ -61,9 +66,9 @@ export default function ServicosUm() {
                             <p className="card-text fst-italic fw-bolder">
                                 Suporte para manutenção e vistoria de equipamentos
                             </p>
-                            <a href="#" className={`btn ${styles.btnAcionarChamadoUm}`}>
+                            <Link href={isUserAuth ? '/usuario/criar?tipo_id=2' : 'login/usuario'} className={`btn ${styles.btnAcionarChamadoUm}`}>
                                 Acionar um chamado
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -84,7 +89,7 @@ export default function ServicosUm() {
             <div className={`col-12 d-flex flex-column justify-content-center align-items-center pt-2 ${styles.tituloServicosUmTablet}`}>
                 <h3 className={`${styles.tituloServicosUm}`}>Explore alguns itens dessa categoria:</h3>
             </div>
-            
+
             <div className={`${styles.carrosselDivServicos}`}>
                 <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -94,7 +99,7 @@ export default function ServicosUm() {
                     spaceBetween={20}
                     observer={true}
                     observeParents={true}
-                   
+
                     onSwiper={(swiper) => {
                         swiperRef.current = swiper;
                     }}

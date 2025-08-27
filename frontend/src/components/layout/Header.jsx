@@ -128,14 +128,14 @@ export default function Header() {
                                 )
                             }
 
-                            {(!isAuth || decoded.funcao === 'usuario') && <a className="d-flex align-items-center justify-content-center text-decoration-none flex-column"
-                                href="#"
+                            {(!isAuth || decoded.funcao === 'usuario') && <Link className="d-flex align-items-center justify-content-center text-decoration-none flex-column"
+                                href={isAuth ? '/usuario/criar' : '/login/usuario'}
                                 role="button">
 
                                 <button className={`${styles.botaoChamadoNav}`}>
                                     Solicite um <span className="text-decoration-underline text-center">chamado de manutenção</span>
                                 </button>
-                            </a>}
+                            </Link>}
                         </div>
                         <button
                             className={`navbar-toggler me-sm-4 bg-light border-none ${styles.hamburguer}`}

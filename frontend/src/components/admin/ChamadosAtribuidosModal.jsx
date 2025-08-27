@@ -1,99 +1,164 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { API_URL } from "@/utils/api";
 import axios from "axios";
 import { getToken } from "@/utils/auth";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-export default function ChamadosAtribuidosModal({ usuario, modalId = "chamadosUsuarioModal" }) {
-    const [chamados, setChamados] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [erro, setErro] = useState("");
-    const token = getToken();
+export default function ChamadosAtribuidosModal({
+  usuario,
+  modalId = "chamadosUsuarioModal",
+}) {
+  const [chamados, setChamados] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [erro, setErro] = useState("");
+  const token = getToken();
+  const router = useRouter();
 
-    const carregarChamados = () => {
-        if (!usuario) return;
-        setLoading(true);
-        setErro("");
+  const carregarChamados = () => {
+    if (!usuario) return;
+    setLoading(true);
+    setErro("");
 
-        axios.get(`${API_URL}/admin/chamados/usuario/${usuario.id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                setChamados(res.data || []);
-            })
-            .catch((error) => {
-                console.error("Erro ao buscar chamados:", error.response?.data || error);
-                setErro("Erro ao carregar chamados.");
-            })
-            .finally(() => {
-                setLoading(false);
-            });
-    };
+    axios
+      .get(`${API_URL}/admin/chamados/usuario/${usuario.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => setChamados(res.data))
+      .catch((error) => {
+        console.error("Erro ao buscar chamados:", error.response?.data || error);
+        setErro("Erro ao carregar chamados.");
+      })
+      .finally(() => setLoading(false));
+  };
 
-    return (
-        <>
-            {/* Botão que abre o modal */}
-            <button
-                type="button"
-                style={{ all: 'unset', cursor: 'pointer' }}
-                data-bs-toggle="modal"
-                data-bs-target={`#${modalId}`}
-                onClick={carregarChamados}
+  return (
+    <>
+      {/* Botão que abre o modal */}
+      <button
+        type="button"
+        style={{ all: "unset", cursor: "pointer" }}
+        data-bs-toggle="modal"
+        data-bs-target={`#${modalId}`}
+        onClick={carregarChamados}
+      >
+        <i className="bi bi-clipboard2-data text-secondary" title="Chamados"></i>
+      </button>
+
+      {/* Modal */}
+      <div
+        className="modal fade"
+        id={modalId}
+        tabIndex="-1"
+        aria-labelledby={`${modalId}Label`}
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered modal-lg">
+          <div className="modal-content rounded-4 shadow-lg border-0">
+            {/* Header */}
+            <div
+              className="modal-header text-white"
+              style={{ backgroundColor: "#9A1915" }}
             >
-                <i className="bi bi-clipboard2-data text-secondary"></i>
-
-            </button>
-
-            {/* Modal */}
-            <div className="modal fade" id={modalId} tabIndex="-1" aria-labelledby={`${modalId}Label`} aria-hidden="true">
-                <div className="modal-dialog modal-lg">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id={`${modalId}Label`}>
-                                Chamados atribuídos a {usuario?.nomeFormatado}
-                            </h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                        </div>
-                        {JSON.stringify(chamados)}
-                        <div className="modal-body">
-                            {loading && <p>Carregando chamados...</p>}
-                            {erro && <div className="alert alert-danger">{erro}</div>}
-                            {!loading && !erro && (
-                                chamados.length > 0 ? (
-                                    <div className="d-flex flex-column gap-3">
-                                        {chamados.map((c) => (
-                                            <div key={c.id} className="card shadow-sm">
-                                                <div className="card-body">
-                                                    <div className="d-flex justify-content-between align-items-center">
-                                                        <h5 className="card-title mb-0">{c.titulo}</h5>
-                                                        <span className={`badge bg-${c.status === "Fechado" ? "secondary" : "success"}`}>
-                                                            {c.status}
-                                                        </span>
-                                                    </div>
-                                                    <p className="card-text text-muted mt-2">
-                                                        {c.descricao?.length > 100 ? c.descricao.slice(0, 100) + "..." : c.descricao}
-                                                    </p>
-                                                    <Link href={`/chamados/${c.id}`} className="btn btn-sm btn-primary">
-                                                        Ver detalhes
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <p className="text-muted">Nenhum chamado atribuído a este usuário.</p>
-                                )
-                            )}
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        </div>
-                    </div>
-                </div>
+              <h5 className="modal-title fw-bold" id={`${modalId}Label`}>
+                <i className="bi bi-clipboard2-check me-2"></i>
+                Chamados atribuídos a {usuario?.nomeFormatado}
+              </h5>
+              <button
+                type="button"
+                className="btn-close btn-close-white"
+                data-bs-dismiss="modal"
+                aria-label="Fechar"
+              ></button>
             </div>
-        </>
-    );
+
+            {/* Body */}
+            <div className="modal-body p-4">
+              {loading && (
+                <div className="text-center py-4">
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Carregando...</span>
+                  </div>
+                  <p className="mt-2 text-muted">Carregando chamados...</p>
+                </div>
+              )}
+
+              {erro && <div className="alert alert-danger">{erro}</div>}
+
+              {!loading && !erro && (
+                <>
+                  {chamados.length > 0 ? (
+                    <div className="d-flex flex-column gap-3">
+                      {chamados.map((c) => (
+                        <div
+                          key={c.id}
+                          className="card border-0 shadow-sm rounded-3"
+                        >
+                          <div className="card-body d-flex flex-column">
+                         
+                            <div className="d-flex justify-content-between align-items-center mb-2">
+                              <h5 className="card-title mb-0 text-start">
+                                <i className="bi bi-journal-text text-secondary me-2"></i>
+                                {c.titulo}
+                              </h5>
+                              <span
+                                className={`badge px-3 py-2 rounded-pill ${
+                                  c.status === "concluído"
+                                    ? "bg-success"
+                                    : "bg-warning text-dark"
+                                }`}
+                              >
+                                {c.status}
+                              </span>
+                            </div>
+
+                            
+                            <p className="card-text text-start text-muted mb-3">
+                              {c.descricao?.length > 100
+                                ? c.descricao.slice(0, 100) + "..."
+                                : c.descricao}
+                            </p>
+
+
+                         
+                            <button
+                              role="link"
+                              onClick={() =>
+                                router.push(`/admin/chamados/${c.id}`)
+                              }
+                              className="btn text-white rounded-pill w-100 mt-2"
+                              style={{ backgroundColor: "#9A1915" }}
+                              data-bs-dismiss="modal"
+                            >
+                              <i className="bi bi-box-arrow-up-right me-1"></i>
+                              Ver detalhes
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-muted text-center">
+                      Nenhum chamado atribuído a este usuário.
+                    </p>
+                  )}
+                </>
+              )}
+            </div>
+
+            
+            <div className="modal-footer border-0">
+              <button
+                type="button"
+                className="btn btn-dark rounded-pill px-5"
+                data-bs-dismiss="modal"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }

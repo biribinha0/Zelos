@@ -1,139 +1,139 @@
    body {
-    background-color: #efefef;
-}
+     background-color: #efefef;
+   }
 
-.inputParte1{
-    background-color: #a0a0a057;
-    font-weight: 600;
-    color: #3a3a3a85;
-    height: 50px;
-}
+   .inputParte1 {
+     background-color: #a0a0a057;
+     font-weight: 600;
+     color: #3a3a3a85;
+     height: 50px;
+   }
 
-.inputParte1:focus {
-    border: none;
-    background-color: rgba(125, 125, 125, 0.443);
-    box-shadow: 0 0 5px 2px rgba(74, 74, 74, 0.18);
-    color: rgba(23, 23, 23, 0.831);
-    transition: 0.8s;
-  }
+   .inputParte1:focus {
+     border: none;
+     background-color: rgba(125, 125, 125, 0.443);
+     box-shadow: 0 0 5px 2px rgba(74, 74, 74, 0.18);
+     color: rgba(23, 23, 23, 0.831);
+     transition: 0.8s;
+   }
 
-  .buttonC {
-    padding: 3% 8%;
-    border: unset;
-    z-index: 1;
-background: #D10914;
-background: linear-gradient(184deg, rgba(209, 9, 20, 1) 46%, rgba(140, 4, 12, 1) 85%);
-    position: relative;
-    font-weight: bold;
-    font-size: 16px;
-    color: #ffffff;
-    transition: all 1000ms;
-    overflow: hidden;
-    width: 100%;
-    height: 50px;
-    max-width: 530px;
-  }
-  
-  .buttonC::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 0;
-    background-color: #212121;
-    z-index: -1;
-    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-    transition: all 1000ms;
-  }
-  
-  .buttonC:hover {
-    color: #e8e8e8;
-  }
-  
-  .buttonC:hover::before {
-    width: 100%;
-  }
+   .buttonC {
+     padding: 3% 8%;
+     border: unset;
+     z-index: 1;
+     background: #D10914;
+     background: linear-gradient(184deg, rgba(209, 9, 20, 1) 46%, rgba(140, 4, 12, 1) 85%);
+     position: relative;
+     font-weight: bold;
+     font-size: 16px;
+     color: #ffffff;
+     transition: all 1000ms;
+     overflow: hidden;
+     width: 100%;
+     height: 50px;
+     max-width: 530px;
+   }
 
-  .numeroParte1{
-    color: #d10914;
-    font-weight: bold;
-  }
+   .buttonC::before {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 100%;
+     width: 0;
+     background-color: #212121;
+     z-index: -1;
+     box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+     transition: all 1000ms;
+   }
 
-  .textoParte1{
-    color: #9a1915;
-    font-weight: bolder;
-    font-size: 22px;
-  }
+   .buttonC:hover {
+     color: #e8e8e8;
+   }
 
-  .seçãoChamados{
-    margin-top: 150px;
-  }
+   .buttonC:hover::before {
+     width: 100%;
+   }
 
-  .button2 {
-    padding: 3% 8%;
-    border: unset;
-    z-index: 1;
-background: #D10914;
-background: linear-gradient(184deg, rgba(209, 9, 20, 1) 46%, rgba(140, 4, 12, 1) 85%);
-    position: relative;
-    font-weight: bold;
-    font-size: 16px;
-    color: #ffffff;
-    transition: all 1000ms;
-    overflow: hidden;
-    width: 50%;
-    height: 50px;
-    max-width: 530px;
-  }
-  
-  .button2::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 0;
-    background-color: #212121;
-    z-index: -1;
-    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-    transition: all 1000ms;
-  }
-  
-  .button2:hover {
-    color: #e8e8e8;
-  }
-  
-  .button2:hover::before {
-    width: 100%;
+   .numeroParte1 {
+     color: #d10914;
+     font-weight: bold;
+   }
 
-  }
+   .textoParte1 {
+     color: #9a1915;
+     font-weight: bolder;
+     font-size: 22px;
+   }
 
-  .ResultadosEspaço{
-    justify-content: space-between;
-    margin: 75px;
-    display: flex;
-  }
+   .seçãoChamados {
+     margin-top: 150px;
+   }
 
-  .table1{
-    background-color: #212121;
-  }
+   .button2 {
+     padding: 3% 8%;
+     border: unset;
+     z-index: 1;
+     background: #D10914;
+     background: linear-gradient(184deg, rgba(209, 9, 20, 1) 46%, rgba(140, 4, 12, 1) 85%);
+     position: relative;
+     font-weight: bold;
+     font-size: 16px;
+     color: #ffffff;
+     transition: all 1000ms;
+     overflow: hidden;
+     width: 50%;
+     height: 50px;
+     max-width: 530px;
+   }
 
-  .TextTabela{
-    color:#0f0f0f;
-    font-size: 15px;
-    font-weight: 500;
-  }
+   .button2::before {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: 0;
+     height: 100%;
+     width: 0;
+     background-color: #212121;
+     z-index: -1;
+     box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+     transition: all 1000ms;
+   }
 
-  .resultados-title {
-    text-align: left; 
-    border-bottom: 2px solid red;
-    padding-bottom: 1px; 
-    width: 128px;
-    font-weight: bold;
-  }
+   .button2:hover {
+     color: #e8e8e8;
+   }
 
-  /* .modal {
+   .button2:hover::before {
+     width: 100%;
+
+   }
+
+   .ResultadosEspaço {
+     justify-content: space-between;
+     margin: 75px;
+     display: flex;
+   }
+
+   .table1 {
+     background-color: #212121;
+   }
+
+   .TextTabela {
+     color: #0f0f0f;
+     font-size: 15px;
+     font-weight: 500;
+   }
+
+   .resultados-title {
+     text-align: left;
+     border-bottom: 2px solid red;
+     padding-bottom: 1px;
+     width: 128px;
+     font-weight: bold;
+   }
+
+   /* .modal {
     position: fixed;
     z-index: 1050;
     left: 0;
@@ -148,19 +148,18 @@ background: linear-gradient(184deg, rgba(209, 9, 20, 1) 46%, rgba(140, 4, 12, 1)
 
 
 
-  
-  .Brelatorio{
-    width: 100%;
-    background-color: #9a1915;
-    color: white;
-    font-weight: 200;
-    align-items: center;
-    justify-content: center;
 
-  }
+   .Brelatorio {
+     width: 100%;
+     background-color: #9a1915;
+     color: white;
+     font-weight: 200;
+     align-items: center;
+     justify-content: center;
 
-  .Brelatorio:before{
-    background-color: #000000;
-transition: 1s;
-  }
-  
+   }
+
+   .Brelatorio:before {
+     background-color: #000000;
+     transition: 1s;
+   }

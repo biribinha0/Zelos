@@ -1,0 +1,68 @@
+.carrosselAtribuicoesAdm {
+    padding-bottom: 3% !important;
+}
+
+.swiper {
+  padding: 2rem 1rem;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease;
+}
+
+.swiper-slide-active {
+  transform: scale(1.2);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #6b4a19;
+}
+
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after,
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after {
+  color: #a40000;
+}
+
+.swiper-scrollbar-drag {
+  background: #a40000 !important;
+}
+
+.carrosselAdm :global(.swiper-button-next),
+.carrosselAdm :global(.swiper-button-prev) {
+  padding: 0% 0%;
+  color: #f2ebeb;
+}
+
+/* media queries */
+
+@media (min-width: 1670px) {
+    .FuncoesAdm {
+        background-image: url('/img/bgUmTabletAdm.png');
+    }
+}
+
+@media (min-width: 1100px) {
+    .tituloFuncoesAdm {
+        padding-top: 4% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .carrosselAdm {
+        padding-top: 4% !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .tituloFuncoesAdm {
+        padding: 10% !important;
+        padding-bottom: 0% !important;
+        text-align: center !important;
+    }
+}

@@ -38,7 +38,7 @@ export default function AdminFecharChamadoModal({ chamado, modalId = "fecharCham
                 data-bs-toggle="modal"
                 data-bs-target={`#${modalId}`}
             >
-                <i className="bi bi-check-square text-success"></i> 
+                <i className="bi bi-check-square-fill  text-secondary"></i> 
             </button>
 
             {/* Modal */}

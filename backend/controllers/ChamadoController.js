@@ -34,7 +34,13 @@ const listarChamadosPublicosController = async (req, res) => {
 const listarChamadosPorUsuarioController = async (req, res) => {
     const usuarioId = req.params.id
     try {
-        const chamados = await listarChamadosPorUsuario(usuarioId);
+        const user = await obterUsuarioPorId(usuarioId);
+        let chamados = null;
+        if (user.funcao === 'tecnico'){
+            chamados = await listarChamadosPorTecnico(usuarioId);
+        } else if (user.funcao === 'usuario') {
+            chamados = await listarChamadosPorUsuario(usuarioId);
+        }
 
         const chamadosComPool = await Promise.all(
             chamados.map(async (chamado) => {
@@ -44,7 +50,7 @@ const listarChamadosPorUsuarioController = async (req, res) => {
                     tecnico = await obterUsuarioPorId(chamado.tecnico_id, 'tecnico');
                 }
                 let patrimonio = null;
-                if (chamado.patrimonio !== null) {
+                if (chamado.patrimonio) {
                     patrimonio = await obterEquipamentoPorPatrimonio(chamado.patrimonio)
                 }
                 return {
@@ -165,7 +171,7 @@ const criarChamadoController = async (req, res) => {
     if (!titulo || !descricao || !tipo_id || !usuario_id) {
         return res.status(400).json({ error: 'Todos os campos obrigatórios devem ser preenchidos.' });
     }
-
+    
     try {
         const chamadoData = {
             titulo,

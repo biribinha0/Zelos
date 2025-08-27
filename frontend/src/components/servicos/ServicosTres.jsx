@@ -13,9 +13,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import styles from "./ServicosTres.module.css";
+import { getDecodedToken, isAuthenticated } from "@/utils/auth";
+import Link from "next/link";
 
 export default function ServicosTres() {
     const swiperRef = useRef(null);
+    const decoded = getDecodedToken()
+    const isUserAuth = isAuthenticated() && decoded.funcao === 'usuario';
 
     const categoriasSE = [
         {
@@ -59,9 +63,9 @@ export default function ServicosTres() {
                             <p className={`card-text fst-italic fw-bolder text-body-tertiary ${styles.color}`}>
                                 Suporte para manutenção e vistoria de equipamentos
                             </p>
-                            <a href="#" className={`btn ${styles.btnAcionarChamadoUm}`}>
+                            <Link href={isUserAuth ? '/usuario/criar?tipo_id=4' : 'login/usuario'} className={`btn ${styles.btnAcionarChamadoUm}`}>
                                 Acionar um chamado
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -82,7 +86,7 @@ export default function ServicosTres() {
             <div className={`col-12 d-flex flex-column justify-content-center align-items-center pt-2 ${styles.tituloServicosUmTablet}`}>
                 <h3 className={`${styles.tituloServicosUm}`}>Explore alguns itens dessa categoria:</h3>
             </div>
-            
+
             <div className={`${styles.carrosselDivServicos}`}>
                 <Swiper
                     modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -92,7 +96,7 @@ export default function ServicosTres() {
                     spaceBetween={20}
                     observer={true}
                     observeParents={true}
-                   
+
                     onSwiper={(swiper) => {
                         swiperRef.current = swiper;
                     }}

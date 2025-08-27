@@ -8,12 +8,19 @@ import axios from 'axios';
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import Link from 'next/link';
+import Pagination from "rc-pagination";
+import "rc-pagination/assets/index.css"
+
 
 export default function MeusChamados() {
   const [chamados, setChamados] = useState({});
   const [loading, setLoading] = useState(false);
   const token = getToken();
   const decoded = getDecodedToken();
+  const [current, setCurrent] = useState(1);
+  const pageSize = 5;
+
+
 
   useEffect(() => {
     setLoading(true)
@@ -63,7 +70,9 @@ export default function MeusChamados() {
     })
     : [];
 
-
+  const startIndex = (current - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const chamadosPaginados = chamadosFiltrados.slice(startIndex, endIndex)
   return (
     <>
       <div className="dc-outer d-flex container my-5 chamados-background">
@@ -130,7 +139,7 @@ export default function MeusChamados() {
               </thead>
 
               <tbody>
-                {chamadosFiltrados.map((chamado, index) => (
+                {chamadosPaginados.map((chamado, index) => (
                   <tr key={chamado.id} className={index % 2 !== 0 ? 'tr-cinza' : ''} >
                     <td className="textTabela text-black-75">{chamado.id}</td>
                     <td className="textTabela text-black-75">{chamado.pool}</td>
@@ -153,6 +162,14 @@ export default function MeusChamados() {
                 ))}
               </tbody>
             </table>
+
+            <Pagination
+              current={current}
+              pageSize={pageSize}
+              total={chamadosFiltrados.length}
+              onChange={setCurrent}
+              showSizeChanger={true}
+            />
           </div>
 
 

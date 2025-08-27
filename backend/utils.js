@@ -1,6 +1,8 @@
 import { listarPoolsPorTecnico } from "./models/Pools.js";
 import { obterPoolPorId } from "./models/Pools.js";
 
+const particulas = ["de", "da", "do", "dos", "das"];
+
 export function formatarTituloPool(titulo) {
     switch (titulo) {
         case 'externo':
@@ -34,29 +36,54 @@ export async function carregarPoolsParaTecnico(idTecnico) {
     return poolsCompletos
 }
 
+export function formatarFuncao(funcao) {
+    switch (funcao) {
+        case 'usuario':
+            return 'Usuário';
+
+        case 'tecnico':
+            return 'Técnico';
+
+        case 'admin':
+            return 'Administrador';
+        default:
+            return null
+    }
+}
+
 export function formatarNome(nomeCompleto) {
-  if (!nomeCompleto) return "";
+    if (!nomeCompleto) return "";
 
-  // Coloca tudo em minúsculo e depois capitaliza cada palavra
-  const nomeFormatado = nomeCompleto
-    .toLowerCase()
-    .split(" ")
-    .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
-    .join(" ");
+    // Coloca tudo em minúsculo e depois capitaliza cada palavra
+    const nomeFormatado = nomeCompleto
+        .toLowerCase()
+        .split(" ")
+        .filter(p => p.trim() !== "")
+        .map((palavra) => {
+            if (particulas.includes(palavra)) return palavra
+            return palavra.charAt(0).toUpperCase() + palavra.slice(1);
+        })
+        .join(" ");
 
-  return nomeFormatado;
+    return nomeFormatado;
 }
 
 export function primeiroNome(nomeCompleto) {
-  if (!nomeCompleto) return "";
+    if (!nomeCompleto) return "";
+    const nomeFormatado = formatarNome(nomeCompleto);
+    const partes = nomeFormatado.split(" ");
 
-  return nomeCompleto.split(" ")[0].charAt(0).toUpperCase() + 
-         nomeCompleto.split(" ")[0].slice(1).toLowerCase();
+    return partes[0];
 }
 
-export function primeiroNomeInicial(nomeCompleto){
-  if (!nomeCompleto) return "";
-  const nomeFormatado = formatarNome(nomeCompleto);
-  return nomeFormatado.split(' ')[0] + " " +
-        nomeFormatado.split(' ')[1].charAt(0).toUpperCase() + '.'
+export function primeiroNomeInicial(nomeCompleto) {
+    if (!nomeCompleto) return "";
+    const nomeFormatado = formatarNome(nomeCompleto);
+    const partes = nomeFormatado.split(" ");
+
+    const primeiroNome = partes[0];
+    const sobrenomeValido = partes.find((p, i) => i > 0 && !particulas.includes(p))
+
+    if (!sobrenomeValido) return primeiroNome;
+    return `${primeiroNome} ${sobrenomeValido.charAt(0)}.`;
 }

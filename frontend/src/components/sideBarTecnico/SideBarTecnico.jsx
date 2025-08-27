@@ -18,9 +18,9 @@ export default function SideBarTecnico({ decoded }) {
                 <div className="logo-container">
                     <div className="logo-swap">
                         {/* imagem 1 (fechado) */}
-                        <img src="/img/logoSimples.png" alt="Logo" className="logo-img img-1" />
+                        <img src="/img/logoZ.png" alt="Logo" className="logo-img img-1 p-2" />
                         {/* imagem 2 (expandido) */}
-                        <img src="/img/logoComprida.png" alt="Logo expandida" className="logo-img img-2" />
+                        <img src="/img/logoOficial.png" alt="Logo expandida" className="logo-img img-2 p-2" />
                     </div>
                 </div>
 

@@ -6,8 +6,16 @@ import CardDepoimentos from "@/components/cardDepoimentos/cardDepoimentos";
 export default function Sobre() {
   return (
     <>
+ <div className={styles.bannerSobre}>
+      <img  className={styles.bannersobrenos} src="/img/bannersobrecerto.png" alt="" />
+      <h1 className={styles.textoBanner}>SOBRE NÓS</h1>
 
-
+      <img
+                    src="/img/bannersobrecerto.png"
+                    className={styles.bannersobremobile}
+                    alt="Banner Mobile"
+                />
+    </div>
       <div className={styles.fundoSobre}>
         <div className={styles.containersobre}>
           <img className={styles.senaizelos} src="/img/sobre-senai-zelos.png" alt="" />
@@ -36,8 +44,8 @@ export default function Sobre() {
         </div>
 
         <div className={styles.statsEstatisticas}>
-          <div className={styles.statItem}>
-            <i className="bi bi-hand-thumbs-up"></i>
+          <div className={styles.statItemEstatisticas}>
+            <i className="bi-plus-slash-minus"></i>
             <h3>1.735+</h3>
             <p>registros de chamadas</p>
           </div>

@@ -42,9 +42,9 @@
     padding-left: 10% !important;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 576px) {
     .categoriasBg {
-        background-image: url('/img/bgUmServicos.png');
+        background-image: url('/img/bgUmTabletServicos.png');
     }
 }
 

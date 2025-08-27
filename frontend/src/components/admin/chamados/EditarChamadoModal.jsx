@@ -67,77 +67,92 @@ export default function EditarChamadoModal({
                 data-bs-toggle="modal"
                 data-bs-target={`#${modalId}`}
             >
-                <i className="bi bi-pencil-square text-primary"></i>
+                <i className="bi bi-pencil-square text-secondary"></i>
             </button>
 
             {/* Modal */}
-            <div className="modal fade" id={modalId} tabIndex="-1" aria-labelledby={`${modalId}Label`} aria-hidden="true">
+            <div
+                className="modal fade"
+                id={modalId}
+                tabIndex="-1"
+                aria-labelledby={`${modalId}Label`}
+                aria-hidden="true"
+            >
                 <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id={`${modalId}Label`}>Editar Chamado</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    <div className="modal-content rounded-2 shadow-lg border-0">
+                        <div className="modal-header d-flex align-items-center">
+                            {/* Ícone */}
+                            <i className="bi bi-gear-fill text-danger me-2 fs-4"></i>
+                            <div>
+                                <h5 className="modal-title fw-bold text-dark m-0">
+                                    Editar Chamado
+                                </h5>
+                            
+                            </div>
+                            <button
+                                type="button"
+                                className="btn-close ms-auto"
+                                data-bs-dismiss="modal"
+                                aria-label="Fechar"
+                            ></button>
                         </div>
                         <div className="modal-body">
-                            {/* Mensagem de feedback */}
-                            {mensagem && (
-                                <div className="alert alert-info text-center py-2">
-                                    {mensagem}
-                                </div>
-                            )}
-
-                            <div className="mb-3">
-                                <label className="form-label">Título</label>
+                            <div className="mb-3 text-start">
+                                <label className="form-label fw-semibold">Título</label>
                                 <input
                                     type="text"
-                                    className="form-control input-vermelho"
+                                    className="form-control bg-light text-secondary border-0"
                                     name="titulo"
                                     value={form.titulo}
                                     onChange={handleChange}
                                 />
                             </div>
-                            <div className="mb-3">
-                                <label className="form-label">Descrição</label>
+                            <div className="mb-3 text-start">
+                                <label className="form-label fw-semibold">Descrição</label>
                                 <textarea
-                                    className="form-control input-vermelho"
+                                    className="form-control bg-light text-secondary border-0"
                                     name="descricao"
                                     value={form.descricao}
                                     onChange={handleChange}
                                     rows={3}
                                 />
                             </div>
-                            <div className="mb-3">
-                                <label className="form-label">Tipo de Chamado</label>
+                            <div className="mb-3 text-start">
+                                <label className="form-label fw-semibold">Tipo de Chamado</label>
                                 <select
-                                    className="form-select input-vermelho"
+                                    className="form-select bg-light text-secondary border-0"
                                     name="tipo_id"
                                     value={form.tipo_id}
                                     onChange={handleChange}
                                 >
                                     <option value="">Selecione</option>
                                     {tipos.map((t, i) => (
-                                        <option key={i} value={t.id}>{t.titulo}</option>
+                                        <option key={i} value={t.id}>
+                                            {t.titulo}
+                                        </option>
                                     ))}
                                 </select>
                             </div>
-                            <div className="mb-3">
-                                <label className="form-label">Status</label>
+                            <div className="mb-3 text-start">
+                                <label className="form-label fw-semibold">Status</label>
                                 <select
-                                    className="form-select input-vermelho"
+                                    className="form-select bg-light text-secondary border-0"
                                     name="status"
                                     value={form.status}
                                     onChange={handleChange}
                                 >
                                     <option value="">Selecione</option>
                                     {statusList.map((s, i) => (
-                                        <option key={i} value={s}>{s}</option>
+                                        <option key={i} value={s}>
+                                            {s}
+                                        </option>
                                     ))}
                                 </select>
                             </div>
-                            <div className="mb-3">
-                                <label className="form-label">Técnico</label>
+                            <div className="mb-3 text-start">
+                                <label className="form-label fw-semibold">Técnico</label>
                                 <select
-                                    className="form-select input-vermelho"
+                                    className="form-select bg-light text-secondary border-0"
                                     name="tecnico_id"
                                     value={form.tecnico_id}
                                     onChange={handleChange}
@@ -150,16 +165,36 @@ export default function EditarChamadoModal({
                                     ))}
                                 </select>
                             </div>
+                            {/* Mensagem de feedback */}
+                            {mensagem && (
+                                <div className="alert alert-info text-center py-2">
+                                    {mensagem}
+                                </div>
+                            )}
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" className="btn btn-vermelho" onClick={handleSubmit}>
+                            <button
+                                type="button"
+                                className="btn btn-dark"
+                                data-bs-dismiss="modal"
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                type="button"
+                                className="btn fw-bold text-light"
+                                onClick={handleSubmit}
+                                style={{
+                                    background: "linear-gradient(90deg, #9b2929ff, #ff0000)",
+                                }}
+                            >
                                 Salvar
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+
         </>
     );
 }
