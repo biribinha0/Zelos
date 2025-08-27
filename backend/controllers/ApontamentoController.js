@@ -1,5 +1,5 @@
 import { criarApontamento } from "../models/Apontamentos.js";
-import { obterChamadoPorId } from "../models/Chamados.js";
+import { editarChamado, obterChamadoPorId } from "../models/Chamados.js";
 import { obterUsuarioPorId } from "../models/Usuarios.js";
 
 
@@ -31,7 +31,7 @@ const criarApontamentoController = async (req, res) => {
             comeco,
             fim
         }
-
+        await editarChamado(chamado_id, {atualizado_em: Date.now()})
         // Cria o usuário no banco
         const apontamentoId = await criarApontamento(apontamentoData);
 

@@ -1,12 +1,11 @@
 import express from "express";
 import { pool } from '../config/database.js';
 import { listarPoolsController } from "../controllers/PoolControler.js";
+import { listarUsuarios } from "../models/Usuarios.js";
 
 const router = express.Router();
-
 //Lista de status
 router.get('/pools', listarPoolsController);
-
 
 router.get('/status', async (req, res) => {
     try {

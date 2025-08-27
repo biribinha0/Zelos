@@ -1,1 +1,9 @@
 export { default as CategoriasServicos } from "./CategoriasServicos";
+export { default as ServicosUm } from "./ServicosUm";
+export { default as ServicosDois } from "./ServicosDois";
+export { default as ServicosTres } from "./ServicosTres";
+export { default as ServicosQuatro } from "./ServicosQuatro";
+export { default as CardRF } from "./CardRF";
+export { default as CardSE } from "./CardSE";
+export { default as CardAT } from "./CardAT";
+export { default as CardLM } from "./CardLM";

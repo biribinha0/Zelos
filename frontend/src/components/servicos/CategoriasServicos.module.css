@@ -43,6 +43,12 @@
 }
 
 @media (max-width: 400px) {
+    .categoriasBg {
+        background-image: url('/img/bgUmServicos.png');
+    }
+}
+
+@media (max-width: 400px) {
     .alinhamento {
         padding: 15% !important;
     }

@@ -27,17 +27,46 @@ export default function Sobre() {
             empreendedorismo, o SENAI-SP promove programas de aceleração de
             startups, inovação aberta, intraempreendedorismo.
           </p>
+           <section>
+      <div className={styles.containerEstatisticas}>
+      
+        <div className={styles.textoEstatisticas}>
+          <h4>SOBRE NÓS</h4>
+          <h2>Estatísticas de uso de chamadas</h2>
+        </div>
+
+        <div className={styles.statsEstatisticas}>
+          <div className={styles.statItem}>
+            <i className="bi bi-hand-thumbs-up"></i>
+            <h3>1.735+</h3>
+            <p>registros de chamadas</p>
+          </div>
+
+          <div className={styles.statItemEstatisticas}>
+            <i className="bi bi-gear"></i>
+            <h3>364+</h3>
+            <p>chamados de manutenção</p>
+          </div>
+
+          <div className={styles.statItemEstatisticas}>
+            <i className="bi bi-bell"></i>
+            <h3>2.264+</h3>
+            <p>de contas criadas</p>
+          </div>
+        </div>
+      </div>
+    </section>
+          <div className={styles.NossosDepoimentos}>
           <h2 className={styles.titulo}>
             <i className="bi bi-people-fill"></i>
             <span className={styles.preto}>Nossos</span>{" "}
             <span className={styles.vermelho}>Depoimentos</span>
           </h2>
-       
-        <CardDepoimentos />
-        <CardDepoimentos />
+       </div>
         <CardDepoimentos />
       </div >
-
+      
+         
     </>
   );
 }

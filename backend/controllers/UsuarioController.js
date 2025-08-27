@@ -3,51 +3,74 @@ import { listarUsuarios, obterUsuarioPorId, criarUsuario, editarUsuario } from "
 import { carregarPoolsParaTecnico, primeiroNomeInicial } from "../utils.js";
 import { buscarEquipamentos, obterEquipamentoPorPatrimonio } from "../models/Equipamentos.js";
 import e from "express";
+import { contarChamadosPorUsuario, relatorioAtividadesTecnicos } from "../models/Relatorios.js";
+import { gerarRelatorio } from "./RelatorioContoller.js";
+
+function decimalHorasParaTempo(decimal) {
+    const horas = Math.floor(decimal); // parte inteira
+    const minutos = Math.round((decimal - horas) * 60); // converte parte decimal em minutos
+    return `${horas}h ${minutos}min`;
+}
 
 const listarUsuariosController = async (req, res) => {
     const { funcao, status, email, nome } = req.query;
-
-    // Armazenar individualmente
     const conditions = [];
 
-    if (funcao) {
-        conditions.push(`funcao = '${funcao}'`);
-    }
-    if (status) {
-        conditions.push(`status = '${status}'`);
-    }
-    if (email) {
-        conditions.push(`email LIKE '%${email}%'`);
-    }
-    if (nome) {
-        conditions.push(`nome LIKE '%${nome}%'`);
-    }
+    if (funcao) conditions.push(`funcao = '${funcao}'`);
+    if (status) conditions.push(`status = '${status}'`);
+    if (email) conditions.push(`email LIKE '%${email}%'`);
+    if (nome) conditions.push(`nome LIKE '%${nome}%'`);
 
-    // Se tiver condições, coloca AND entre as condições, se não, retorna tudo
-    const whereClause = conditions.length > 0 ? `${conditions.join(' AND ')}` : '';
-
+    const whereClause = conditions.length > 0 ? conditions.join(" AND ") : "";
 
     try {
         const usuarios = await listarUsuarios(whereClause);
 
-        // Verifica se tem algum técnico na lista
-        const temTecnico = funcao === 'tecnico' || usuarios.some(u => u.funcao === 'tecnico');
-
-        // Se tiver técnico, colocar as pools no retorno
-        if (temTecnico) {
-            await Promise.all(usuarios.map(async (usuario) => {
-                if (usuario.funcao === 'tecnico') {
-                    usuario.pools = await carregarPoolsParaTecnico(usuario.id);
-                    usuario.nomeFormatado = primeiroNomeInicial(usuario.nome)
+        await Promise.all(
+            usuarios.map(async (usuario) => {
+                // Garante que o id existe antes de usar
+                if (!usuario.id) {
+                    usuario.chamadosEmAndamento = 0;
+                    usuario.chamadosConcluidos = 0;
+                    usuario.tempoMedio = 0;
+                    usuario.pools = [];
+                    usuario.nomeFormatado = primeiroNomeInicial(usuario.nome || "");
+                    return;
                 }
-            }))
-        }
+
+                if (usuario.funcao === "tecnico") {
+                    usuario.pools = await carregarPoolsParaTecnico(usuario.id);
+                    function formatDate(date) {
+                        return date.toISOString().slice(0, 19).replace('T', ' ');
+                    }
+
+                    const init = formatDate(new Date('2025-07-01 00:00:00'));
+                    const end = formatDate(new Date());
+
+                    const relatorio = await relatorioAtividadesTecnicos({
+                        dataInicio: init,
+                        dataFim: end,
+                        tecnicoId: usuario.id
+                    });
+                    const timeFormatted = relatorio[0]?.tempo_medio_horas || 0;
+                    usuario.tempoMedio = timeFormatted === 0 ? timeFormatted : decimalHorasParaTempo(timeFormatted);
+                }
+
+                usuario.nomeFormatado = primeiroNomeInicial(usuario.nome);
+
+                // contar chamados para ambos
+                const counts = await contarChamadosPorUsuario(usuario.id);
+                usuario.chamadosEmAndamento = counts?.em_andamento ?? 0;
+                usuario.chamadosConcluidos = counts?.concluido ?? 0;
+            })
+        );
+
         res.status(200).json(usuarios);
     } catch (error) {
-        console.error('Erro ao buscar usuário: ', error);
-        res.status(500).json({ error: 'Erro ao buscar usuários' })
+        console.error("Erro ao buscar usuário: ", error);
+        res.status(500).json({ error: "Erro ao buscar usuários" });
     }
-}
+};
 
 const obterUsuarioPorIdController = async (req, res) => {
     const usuarioId = req.params.id

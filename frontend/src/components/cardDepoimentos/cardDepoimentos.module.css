@@ -1,29 +1,37 @@
-/* cardDepoimentos.module.css */
+.containerCardDepoimentos{
+  display: flex;
+  justify-content: center; 
+  align-items: flex-start;
+  gap: 20px; 
+  flex-wrap: wrap; 
+  padding: 20px;
+}
 
-/* Apenas ajustes extras, sem quebrar o estilo Bootstrap */
 .cardDepoimentos {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border-radius: 0.75rem; /* arredonda mais que o padrão */
-    overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 0.75rem; 
+  overflow: hidden;
+  width: 280px; 
+  max-width: 100%;
   }
-  
+
   .cardDepoimentos:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   }
   
   .cardDepoimentosBody {
-    padding: 1.25rem; /* um pouco mais espaçado */
+    padding: 1.25rem; 
   }
   
   .cardDepoimentosTitle {
     font-weight: 600;
-    color: #212529; /* cor padrão Bootstrap */
+    color: #212529; 
   }
   
   .cardDepoimentosSubtitle {
     font-size: 0.9rem;
-    color: #6c757d; /* cor de texto secundário do Bootstrap */
+    color: #6c757d; 
   }
   
   .cardDepoimentosText {
@@ -32,7 +40,7 @@
   }
   
   .cardDepoimentosLink {
-    color: #0d6efd; /* link padrão do Bootstrap */
+    color: #0d6efd; 
     transition: color 0.2s ease;
   }
   
@@ -40,7 +48,7 @@
     color: #0a58ca;
   }
   
-  /* Responsividade */
+
   @media (max-width: 768px) {
     .cardDepoimentos {
       width: 100% !important;

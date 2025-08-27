@@ -67,7 +67,7 @@ const listarChamadosPorTecnicoController = async (req, res) => {
     try {
         const chamados = await listarChamadosPorTecnico(tecnicoId);
 
-        if (chamados.length === 0) return res.status(200).json({mensagem: 'Nenhum Chamado Registrado'})
+        if (chamados.length === 0) return res.status(200).json({ mensagem: 'Nenhum Chamado Registrado' })
 
         const chamadosComPool = await Promise.all(
             chamados.map(async (chamado) => {
@@ -135,7 +135,7 @@ const listarChamadosController = async (req, res) => {
             chamados.map(async (chamado) => {
                 const pool = await obterPoolPorId(chamado.tipo_id);
                 const usuario = await obterUsuarioPorId(chamado.usuario_id, 'usuario');
-                const tecnico = chamado.tecnico_id ? await obterUsuarioPorId(chamado.tecnico_id, 'usuario') : null;
+                const tecnico = chamado.tecnico_id ? await obterUsuarioPorId(chamado.tecnico_id, 'tecnico') : null;
                 const apontamentos = await listarApontamentosPorChamado(chamado.id);
                 let patrimonio = null;
                 if (chamado.patrimonio !== null) {
@@ -190,9 +190,9 @@ const criarChamadoController = async (req, res) => {
 
 const editarChamadoController = async (req, res) => {
     const chamadoId = req.params.id;
-    const { titulo, descricao, tipo_id, usuario_id, tecnico_id, status, patrimonio } = req.params
+    const { titulo, descricao, tipo_id, tecnico_id, status, patrimonio, atualizado_em } = req.body
 
-    if (!titulo || !descricao || !tipo_id || !usuario_id || !tecnico_id || !status) {
+    if (!titulo || !descricao || !tipo_id || !tecnico_id || !status) {
         return res.status(400).json({ error: 'Todos os campos obrigatórios devem ser preenchidos.' });
     }
 
@@ -201,10 +201,10 @@ const editarChamadoController = async (req, res) => {
             titulo,
             descricao,
             tipo_id,
-            usuario_id,
             tecnico_id,
             status,
-            patrimonio: patrimonio ? patrimonio : null
+            patrimonio: patrimonio ? patrimonio : null,
+            atualizado_em: atualizado_em ? atualizado_em : null
         }
 
         const idChamado = await editarChamado(chamadoId, chamadoData);
@@ -310,6 +310,24 @@ const fecharChamadoController = async (req, res) => {
         return res.status(500).json({ error: 'Ocorreu um erro ao fechar o chamado.' });
     }
 }
+const fecharChamadoSemApontamento = async (req, res) => {
+    const chamadoId = req.params.id;
+    try {
+        const idChamado = await editarChamado(chamadoId, { status: 'concluído' });
+
+        if (!idChamado) {
+            return res.status(404).json({ error: 'Chamado não encontrado.' });
+        }
+
+        return res.status(200).json({
+            mensagem: 'Chamado fechado com sucesso.',
+            idChamado
+        });
+    } catch (error) {
+        console.error('Erro ao fechar o chamado: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro ao fechar o chamado.' });
+    }
+}
 
 
 
@@ -324,5 +342,6 @@ export {
     listarChamadosPorTecnicoController,
     chamadosSemTecnicoController,
     autoAtribuirAoChamadoController,
-    fecharChamadoController
+    fecharChamadoController,
+    fecharChamadoSemApontamento
 }

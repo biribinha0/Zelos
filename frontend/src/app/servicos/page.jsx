@@ -1,4 +1,4 @@
-import { CategoriasServicos } from "@/components/servicos";
+import { CategoriasServicos, ServicosUm, ServicosDois, ServicosTres, ServicosQuatro } from "@/components/servicos";
 import styles from "./servicos.module.css";
 
 export default function Servicos() {
@@ -6,6 +6,10 @@ export default function Servicos() {
         <>
             <div className="container-fluid m-0 p-0">
                     <CategoriasServicos />
+                    <ServicosUm/>
+                    <ServicosDois/>
+                    <ServicosTres/>
+                    <ServicosQuatro/>
             </div>
         </>
     )

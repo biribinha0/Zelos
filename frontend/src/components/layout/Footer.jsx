@@ -26,16 +26,16 @@ export default function Footer() {
       <footer className="footer">
         <div className="footer-top fst-italic d-flex flex-wrap">
           <ul className="footer-menu d-flex flex-wrap">
-            <li className="text-break"><Link href={'/'} >Home</Link></li>
-            <li className="text-break"><Link href={'/sobre'} >Sobre nós</Link></li>
-            <li className="text-break"><Link href={'/servicos'} >Serviços</Link></li>
-            <li className="text-break"><Link href={'/chamados'} >Chamados</Link></li>
-            <li className="text-break"><Link href={'/contato'} >Contato</Link></li>
-            <li className="text-break"><Link href={'/login/profissional'} className="loginCor">Login Profissional</Link></li>
-            <li className="text-break"><Link href={'/login/usuario'} className="loginCor">Login Usuário</Link></li>
+            <li className="text-break Link"><Link href={'/'} >Home</Link></li>
+            <li className="text-break Link"><Link href={'/sobre'} >Sobre nós</Link></li>
+            <li className="text-break Link"><Link href={'/servicos'} >Serviços</Link></li>
+            <li className="text-break Link"><Link href={'/chamados'} >Chamados</Link></li>
+            <li className="text-break Link"><Link href={'/contato'} >Contato</Link></li>
+            <li className="text-break Link"><Link href={'/login/profissional'} className="loginCor">Login Profissional</Link></li>
+            <li className="text-break Link"><Link href={'/login/usuario'} className="loginCor">Login Usuário</Link></li>
           </ul>
           <div className="footer-logo py-2 ">
-            <img className="logo-footer img-fluid" src="/img/logoZelosSenai.png" alt="SENAI" />
+            <Link href={'/'}><img className="logo-footer img-fluid" src="/img/logoZelosSenai.png" alt="SENAI" /></Link>
           </div>
         </div>
 
@@ -48,7 +48,9 @@ export default function Footer() {
           </div>
 
           <div className="footer-actions">
+            <Link href={'/login/usuario'}>
             <button className="chamado-btn text-break">Solicite um chamado de manutenção</button>
+            </Link>
 
             <div className="avaliacao">
               <span className="text-break">Avalie-nos no Google:</span>

@@ -1,0 +1,19 @@
+.xs {
+    display: none;
+}
+
+.smPersonalizado {
+    display: none;
+}
+
+@media (min-width: 0px) and (max-width: 576px) {
+  .xs {
+    display: block;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  .smPersonalizado {
+    display: block;
+  }
+}

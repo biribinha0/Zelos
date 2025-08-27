@@ -1,7 +1,8 @@
 import {
     relatorioChamadosPorStatus,
     relatorioChamadosPorTipo,
-    relatorioAtividadesTecnicos
+    relatorioAtividadesTecnicos,
+    relatorioChamadosPorTipoEStatus
 } from '../models/Relatorios.js';
 
 export const gerarRelatorio = async (req, res) => {
@@ -12,7 +13,7 @@ export const gerarRelatorio = async (req, res) => {
         if (!tipoRelatorio || !dataInicio || !dataFim) {
             return res.status(400).json({ error: 'Parâmetros obrigatórios ausentes.' });
         }
-        
+
         let dados;
 
         switch (tipoRelatorio) {
@@ -24,6 +25,16 @@ export const gerarRelatorio = async (req, res) => {
                 break;
             case 'atividades-tecnicos':
                 dados = await relatorioAtividadesTecnicos({ dataInicio, dataFim, tecnicoId });
+                break;
+            case 'tipo-por-status':
+                if (!req.query.status) {
+                    return res.status(400).json({ error: 'O parâmetro status é obrigatório para este relatório.' });
+                }
+                dados = await relatorioChamadosPorTipoEStatus({
+                    status: req.query.status,
+                    dataInicio,
+                    dataFim
+                });
                 break;
             default:
                 return res.status(400).json({ error: 'Tipo de relatório inválido.' });

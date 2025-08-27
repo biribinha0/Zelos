@@ -24,7 +24,7 @@ const criarChamado = async (chamadoData) => {
 // Lista de chamadas feitas por um usuários específico
 const listarChamadosPorUsuario = async (id) => {
     try {
-        return await readAll('chamados', `usuario_id = ${id}`)
+        return await readAll('chamados', `usuario_id = ${id} ORDER BY atualizado_em DESC`)
     } catch (error) {
         console.error('Erro ao listar chamados por usuário: ', error);
         throw error;
@@ -34,7 +34,7 @@ const listarChamadosPorUsuario = async (id) => {
 // Lista de chamadas feitas por um usuários específico
 const listarChamadosPorTecnico = async (id) => {
     try {
-        return await readAll('chamados', `tecnico_id = ${id}`)
+        return await readAll('chamados', `tecnico_id = ${id} ORDER BY atualizado_em DESC`)
     } catch (error) {
         console.error('Erro ao listar chamados por técnico: ', error);
         throw error;
@@ -56,7 +56,7 @@ const obterChamadoPorId = async (id) => {
 // Ler todos os chamados 
 const listarChamados = async () => {
     try {
-        return await readAll('chamados');
+        return await readAll('chamados', 'id > 0 ORDER BY atualizado_em DESC');
     } catch (error) {
         console.error('Erro ao listar chamados: ', error);
         throw error;

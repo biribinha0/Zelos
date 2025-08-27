@@ -22,37 +22,52 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    transition: color 0.3s ease !important; /* suaviza a mudança */
 }
 
-.footer-menu a {
+.footer-menu Link {
     text-decoration: none;
     color: #000;
-   
 }
 
-.footer-menu a:nth-last-child(2),
-.footer-menu a:last-child {
-    color:#000;
+ .footer-menu :hover {
+  color: #00000093 !important;
 }
 
-.cadastroCor{
+
+.cadastroCor Link{
     color: #9a1915 !important;
+    transition: color 0.3s ease !important;
+}
+.cadastroCor Link:hover{
+    color: #00000093 !important;
 }
 
 .loginCor{
-    color: #9a1915 !important
+    color: #9a1915 !important;
+    transition: color 0.3s ease !important;
+}
+.loginCor:hover{
+    color: #00000093 !important;
 }
 
+
+/* LOGO NO CANTO */
 .footer-logo {
     display: flex;
     align-items: center;
     gap: 5px;
+    transition: transform 0.4s ease;
 }
 
 .footer-logo .zelos {
     font-weight: bold;
     color: red;
     font-size: 18px;
+}
+
+.footer-logo:hover {
+  transform: scale(1.1);
 }
 
 /* Meio do footer */
@@ -88,6 +103,11 @@
   
   /* Responsivo: em telas menores fica só 1 coluna */
   @media (max-width: 600px) {
+    .footer-middle{
+        display: block;
+        margin: auto;
+    }
+
     .footer-middle .contact-info {
       grid-template-columns: 1fr;
       text-align: center;
@@ -136,7 +156,15 @@
     cursor: pointer;
     font-weight: bold;
     margin-right: 6%;
+      transition: all 0.3s ease;
+
 }
+
+.chamado-btn:hover {
+  background: #9a1915;
+  transform: scale(1.05); /* aumenta um pouquinho */
+}
+
 
 .avaliacao {
     display: flex;
@@ -198,29 +226,97 @@
   }
 
 
-  @media screen and (min-width: 768px) and (max-width: 959px) {
-    /* Estilos específicos para tablets */
-    .chamado-btn {
-        background-color: #555;
-        color: white;
-        padding: 8px 15px;
-        border: none;
-        cursor: pointer;
-        font-weight: bold;
-        margin-right: 6%;
-    }
+  /* Tablets (iPad Mini, Air 4, Pro 11, Galaxy Tab S7, Surface Duo) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .footer-middle {
+    display: flex;
+    justify-content: space-evenly; /* mantém lado a lado mas mais equilibrado */
+    align-items: center;
+    gap: 25px; /* aproxima os blocos */
+    margin: 0 auto;
   }
 
-  /* Tablets (iPad Mini, Air 4, Pro 11, Galaxy Tab S7, Surface Duo aberto) */
-@media (min-width: 768px) and (max-width: 834px) {
-    .chamado-btn {
-        background-color: #555;
-        color: white;
-        padding: 4px 10px !important;
-        border: none;
-        cursor: pointer;
-        font-weight: bold;
-        margin-right: 6%;
-    }
+  .footer-middle .contact-info {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 10px; /* reduz espaço entre itens */
+    max-width: 420px; /* deixa mais compacto */
+    margin: 0;
   }
-  
+
+  .footer-middle .contact-info p {
+    font-size: 14px;
+  }
+
+  .chamado-btn {
+    margin: 0 auto;
+    padding: 6px 14px;
+  }
+
+  .avaliacao {
+    justify-content: center;
+  }
+
+  .footer-top {
+    flex-direction: column;   /* coloca itens em coluna */
+    justify-content: center;
+    align-items: center;      /* centraliza horizontalmente */
+    text-align: center;
+    gap: 10px; /* um espacinho entre menu e logo */
+  }
+
+  .footer-logo {
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .footer-menu {
+    justify-content: center;
+  }
+}
+
+/* Mobile (celulares) → aí sim centraliza */
+@media (max-width: 767px) {
+  .footer-middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+    margin: auto;
+  }
+
+  .footer-middle .contact-info {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-middle .contact-info p {
+    justify-content: center;
+  }
+
+  .chamado-btn {
+    margin: 10px auto;
+  }
+
+  .avaliacao {
+    justify-content: center;
+  }
+
+  .footer-top {
+    flex-direction: column;   /* coloca itens em coluna */
+    justify-content: center;
+    align-items: center;      /* centraliza horizontalmente */
+    text-align: center;
+    gap: 10px; /* um espacinho entre menu e logo */
+  }
+
+  .footer-logo {
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .footer-menu {
+    justify-content: center;
+  }
+}

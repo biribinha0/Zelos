@@ -1,9 +1,16 @@
 import { create, readAll, read, update } from '../config/database.js';
+import { formatarNome } from '../utils.js';
 
 // Listar Usuarios por tipo
 const listarUsuarios = async (where) => {
     try {
-        return await readAll('usuarios', `${where}`);
+        const usuarios = await readAll('usuarios', where ? `${where}` : "");
+        const usuariosFormatados = usuarios.map(u => ({
+            ...u,
+            nome: formatarNome(u.nome)
+        }));
+
+        return usuariosFormatados;
     } catch (error) {
         console.error('Erro ao listar usuarios: ', error);
         throw error;
@@ -13,7 +20,11 @@ const listarUsuarios = async (where) => {
 // Obtém usuario pelo id e função
 const obterUsuarioPorId = async (id, funcao) => {
     try {
-        return await read('usuarios', `id = ${id} AND funcao = '${funcao}'`)
+        const usuario = await read('usuarios', `id = ${id} AND funcao = '${funcao}'`);
+        return {
+            ...usuario,
+            nome: formatarNome(usuario.nome)
+        }
     } catch (error) {
         console.error('Erro ao obter usuario por id: ', error);
         throw error;

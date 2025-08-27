@@ -1,0 +1,150 @@
+.servicosUmDiv {
+    overflow: hidden;
+}
+
+.servicosUmDiv {
+    background-image: url("/img/bgDoisServicos.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover !important;
+}
+
+.tituloServicosUm {
+    text-transform: uppercase;
+    color: #862922;
+}
+
+.servicosCliqueImg {
+    padding: 0% 30%;
+}
+
+.servicosCategoriaImg {
+    padding: 0% 35%;
+}
+
+.cardCategoriasServicos {
+    border: none !important;
+    background-color: #cbc6c6 !important;
+    border-radius: 0px !important;
+}
+
+.btnAcionarChamadoUm {
+    background-color: #e30613;
+    border-radius: 0px !important;
+    width: 80%;
+    color: #ffffff;
+    font-weight: bolder;
+    font-style: italic;
+    transition: 0.4s;
+}
+
+.carrosselUm :global(.swiper-button-next),
+.carrosselUm :global(.swiper-button-prev) {
+  padding: 0% 2%;
+  color: #231f20;
+}
+
+.btnAcionarChamadoUm:hover {
+    transform: scale(1.05);
+    background-color: #ab0611;
+    color: #d6d6d6;
+}
+
+.cardTitleServicosUm {
+    color: #862922;
+    text-transform: uppercase;
+}
+
+.hoverTransition {
+    transition: 0.4s;
+}
+
+.hoverTransition:hover {
+    transform: scale(1.05);
+}
+
+.carrosselDivServicos {
+  padding-bottom: 2rem;
+  padding: 0% 0% !important;
+  padding-bottom: 1.5% !important;
+  width: 100%;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.swiper {
+  padding: 2rem 1rem;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #6b4a19;
+}
+
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after {
+  color: #a40000;
+}
+
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after {
+  color: #a40000;
+}
+
+.swiper-slide-active {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
+
+.swiper-slide {
+  transition: transform 0.5s ease;
+}
+
+.swiper-scrollbar-drag {
+  background: #a40000 !important;
+}
+
+.clampText h5 {
+  font-size: clamp(1em, 0.1em + 1.2vw, 2.0em);
+}
+
+@media (max-width: 768px) {
+  .textosServicosDiv {
+    padding: 5% 0% !important;
+    padding-bottom: 0% !important;
+  }
+
+  .tituloServicosUmTablet {
+    text-align: center;
+    margin: revert-layer;
+    font-size: clamp(1em, 0.1em + 1.2vw, 2.0em);
+    padding: 3%;
+  }
+
+  .tituloServicosUm {
+    text-align: center;
+    margin: revert-layer;
+    margin-bottom: 2% !important;
+    font-size: clamp(1.2em, 0.1em + 1.2vw, 2.0em);
+  }
+
+  .divPrincipalServicos {
+    padding-bottom: 0% !important;
+  }
+
+  .funcaoDiv {
+    padding-left: 3% !important;
+    text-align: center;
+  }
+
+  .prazoEstimadoDiv {
+    padding-left: 3% !important;
+    text-align: center;
+  }
+}

@@ -28,3 +28,7 @@
 body.modal-open{
     padding: 0 !important;
 }
+
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,26 @@
+.cardCategoriasServicos {
+    background-color: #ffffff00 !important;
+    border: none !important;
+}
+
+.textClamp {
+    font-size: clamp(1em, 0.1em + 0.1.vw, 2.0em);
+    color: #d5d5d5;
+}
+
+@media (max-width: 768px) {
+    .textClamp {
+        font-size: clamp(0.7em, 1.4em + 0.4vw, 2.0em) !important;
+        white-space: nowrap;
+    }
+
+    .paddingZero {
+        padding-top: 0% !important;
+    }
+}
+
+@media (max-width: 310px) {
+    .textClamp {
+        font-size: clamp(0.7em, 1.0em + 0.4vw, 2.0em) !important;
+    }
+}

@@ -1,6 +1,31 @@
-.banner{
+
+/* BANNER */
+.bannerChamados {
+  /* Container principal */
   width: 100%;
+  position: relative;
+  top: 0;
+
+  overflow: hidden;
+
 }
+
+.bannerDesktop {
+  /* Imagem desktop */
+  width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.bannerChamadosMobile {
+  /* Imagem mobile */
+  width: 100%;
+  position: relative;
+  display: block;
+  margin: auto;
+}
+
+
 
 .fundo{
   background-image: url('/img/imgFundoChamados.png');
