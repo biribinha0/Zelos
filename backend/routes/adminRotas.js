@@ -1,6 +1,6 @@
 import express from "express";
 
-import { listarChamadosController, editarChamadoController, fecharChamadoController, obterChamadoPorIdController, fecharChamadoSemApontamento, listarChamadosPorUsuarioController } from "../controllers/ChamadoController.js";
+import { listarChamadosController, editarChamadoController, fecharChamadoController, obterChamadoPorIdController, fecharChamadoSemApontamento, listarChamadosPorUsuarioController, listarChamadosDisponiveis } from "../controllers/ChamadoController.js";
 import { listarUsuariosController, mudarStatusController } from "../controllers/UsuarioController.js";
 import { gerarRelatorio } from '../controllers/RelatorioContoller.js';
 
@@ -8,6 +8,8 @@ const router = express.Router();
 
 // /admin/chamados	Retorna todos os chamados com filtros e dados estendidos
 router.get('/chamados', listarChamadosController);
+
+router.get('/chamados/disponiveis', listarChamadosDisponiveis);
 
 // obtem usuario por id para exibição de informações
 router.get('/chamados/:id', obterChamadoPorIdController);

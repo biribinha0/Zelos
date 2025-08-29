@@ -45,11 +45,7 @@
 }
 
 /* ////////////////////////////// PARTE DOS STATUS DOS CHAMADOS ////////////////////////////// */
-.container{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30% !important;
-}
+
 
 
 
@@ -59,6 +55,155 @@
     font-weight: bold;
 }
 
-.iconeChamados{
-    width: 10%;
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10rem; /* aumentei o espaçamento entre os itens */
+  margin: 2rem auto;
+  text-align: center;
 }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.iconeChamados {
+  width: 100px !important;
+  height: 90px !important;
+  object-fit: contain;
+  margin-bottom: 1.2rem; /* espaço abaixo da imagem */
+}
+
+.numero {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #b30000; /* vermelho escuro */
+  margin: 0.8rem 0; /* espaço em cima e embaixo do número */
+}
+
+.texto {
+  font-size: 0.95rem;
+  color: #a73128;
+  margin-top: 0.8rem; /* espaço acima do texto */
+}
+
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .container {
+    column-gap: 6rem;  /* mantém afastado na horizontal */
+    row-gap: 2rem;     /* diminui espaço vertical */
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    gap: 2rem; /* tablets: menos espaço */
+    row-gap: 1.5rem;
+  }
+
+  .iconeChamados {
+    width: 55px;
+    height: 55px;
+  }
+
+  .numero {
+    font-size: 1.5rem;
+  }
+
+  .texto {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    gap: 2rem; /* mobile: ainda menor para caber bem */
+    row-gap: 1rem;
+  }
+
+  .iconeChamados {
+    width: 50px;
+    height: 50px;
+  }
+
+  .numero {
+    font-size: 1.3rem;
+  }
+
+  .texto {
+    font-size: 0.8rem;
+  }
+}
+
+/* TABELA */
+.containerTabela {
+  width: 90%;
+  overflow-x: auto;
+  margin: 2rem auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.tabela th {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 2px solid #ddd;
+  font-weight: bold;
+}
+
+.tabela td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.btnConcluir {
+  background-color: #8b0000;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.btnConcluir:hover {
+  background-color: #a30000;
+}
+
+.concluido {
+  color: green;
+  font-weight: bold;
+}
+
+.andamento {
+  color: orange;
+  font-weight: bold;
+}
+
+.check {
+  color: green;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+

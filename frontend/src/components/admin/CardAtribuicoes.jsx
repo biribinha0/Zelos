@@ -1,6 +1,6 @@
 import styles from "./CardAtribuicoes.module.css";
 
-export default function CardAtribuicoes({ item }) {
+export default function CardAtribuicoes({ chamado }) {
     return (
         <>
             <div className="card" style={{ width: "40rem" }}>
@@ -8,16 +8,17 @@ export default function CardAtribuicoes({ item }) {
                     <div className="row">
                         <div className="col-7">
                             <h6 className="card-text">
-                                {item?.title}
+                                {chamado?.titulo}
                             </h6>
                             <p className="card-text">
-                                {item?.user}
+                                {chamado?.usuario?.nome}
                             </p>
                         </div>
                         <div className="col">
-                            <img src={item?.icon} className="card-img-top" alt="..." />
+                            <img src={chamado?.icon} className="card-img-top" alt="..." />
                         </div>
                     </div>
+                    {JSON.stringify(chamado.tecnicos)}
                     <div className="row">
                         <div className="col">
                             <label className="fw-bold">Selecione um técnico:</label>

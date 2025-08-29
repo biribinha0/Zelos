@@ -1,7 +1,7 @@
 import { listarChamadosPublicos, criarChamado, listarChamadosPorUsuario, listarChamadosPorTecnico, obterChamadoPorId, listarChamados, editarChamado, chamadosSemTecnico } from "../models/Chamados.js";
 import { criarApontamento, listarApontamentosPorChamado } from "../models/Apontamentos.js";
-import { obterPoolPorId, listarPoolsPorTecnico } from "../models/Pools.js";
-import { formatarTituloPool } from "../utils.js";
+import { obterPoolPorId, listarPoolsPorTecnico, listarTecnicosPorPool } from "../models/Pools.js";
+import { formatarTituloPool, primeiroNomeInicial } from "../utils.js";
 import { obterUsuarioPorId } from "../models/Usuarios.js";
 import { obterEquipamentoPorPatrimonio } from "../models/Equipamentos.js";
 import { formatarNome } from '../utils.js';
@@ -36,7 +36,7 @@ const listarChamadosPorUsuarioController = async (req, res) => {
     try {
         const user = await obterUsuarioPorId(usuarioId);
         let chamados = null;
-        if (user.funcao === 'tecnico'){
+        if (user.funcao === 'tecnico') {
             chamados = await listarChamadosPorTecnico(usuarioId);
         } else if (user.funcao === 'usuario') {
             chamados = await listarChamadosPorUsuario(usuarioId);
@@ -171,7 +171,7 @@ const criarChamadoController = async (req, res) => {
     if (!titulo || !descricao || !tipo_id || !usuario_id) {
         return res.status(400).json({ error: 'Todos os campos obrigatórios devem ser preenchidos.' });
     }
-    
+
     try {
         const chamadoData = {
             titulo,
@@ -243,6 +243,44 @@ const chamadosSemTecnicoController = async (req, res) => {
         return res.status(500).json({ error: 'Ocorreu um erro ao buscar chamados para autoatribuição.' });
     }
 };
+const listarChamadosDisponiveis = async (req, res) => {
+    try {
+        const chamados = await chamadosSemTecnico();
+        if (chamados.length === 0) {
+            return res.status(404).json({ error: 'Nenhum chamado encontrado' });
+        }
+
+        const chamadosFormatados = await Promise.all(
+            chamados.map(async (chamado) => {
+                const usuario = await obterUsuarioPorId(chamado.usuario_id);
+                const pool = await obterPoolPorId(chamado.tipo_id);
+                const pool_tecnicos = await listarTecnicosPorPool(chamado.tipo_id);
+
+                const tecnicos = await Promise.all(
+                    pool_tecnicos.map(async (pool_tecnico) => {
+                        const tecnico = await obterUsuarioPorId(pool_tecnico.id_tecnico, 'tecnico');
+                        return {
+                            tecnico: primeiroNomeInicial(tecnico.nome)
+                        };
+                    })
+                );
+
+                return {
+                    ...chamado,
+                    usuario: primeiroNomeInicial(usuario.nome),
+                    pool: formatarTituloPool(pool),
+                    tecnicos
+                };
+            })
+        );
+
+        return res.status(200).json(chamadosFormatados);
+    } catch (error) {
+        console.error('Erro ao buscar chamados disponíveis: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro ao buscar chamados disponíveis.' });
+    }
+};
+
 
 
 const autoAtribuirAoChamadoController = async (req, res) => {
@@ -349,5 +387,6 @@ export {
     chamadosSemTecnicoController,
     autoAtribuirAoChamadoController,
     fecharChamadoController,
-    fecharChamadoSemApontamento
+    fecharChamadoSemApontamento,
+    listarChamadosDisponiveis
 }

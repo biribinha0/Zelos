@@ -1,0 +1,242 @@
+/* Layout base */
+.wrapper {
+  max-width: 980px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #222;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  letter-spacing: 0.2px;
+  color: #b30000;
+  font-style: italic;
+}
+
+.navBtn {
+  border: none;
+  background: #eee;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.navBtn:hover { background: #e2e2e2; }
+
+/* Cabeçalho da semana */
+.weekRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin: 8px 0;
+}
+.weekday {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #cc0000;
+}
+
+/* Grade de dias */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.cell {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  min-height: 92px;
+  padding: 8px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.06s ease, box-shadow 0.1s ease, border-color 0.1s ease;
+}
+.cell:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  border-color: #e6e6e6;
+}
+.outside {
+  opacity: 0.45;
+}
+.today {
+  outline: 2px solid #b30000;
+  outline-offset: -2px;
+}
+
+.cellHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+}
+.badge {
+  font-size: 0.72rem;
+  background: #b30000;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+.preview {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #444;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Modal */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+.modal {
+  width: 100%;
+  max-width: 720px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  max-height: 90vh;
+  overflow: auto;
+}
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 8px;
+}
+.close {
+  border: none;
+  background: #eee;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+.close:hover { background: #e2e2e2; }
+
+/* Lista de notas */
+.notesList {
+  display: grid;
+  gap: 10px;
+  margin-top: 6px;
+}
+.empty {
+  color: #666;
+  font-size: 0.95rem;
+}
+.noteItem {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 10px;
+  background: #fafafa;
+}
+.noteText {
+  margin: 0 0 8px 0;
+  white-space: pre-wrap;
+}
+
+/* Adição/Edição */
+.addBox {
+  margin-top: 14px;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.input {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  resize: vertical;
+  background: #fff;
+}
+.input:focus {
+  outline: 2px solid #b30000;
+  outline-offset: 1px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.btnPrimary {
+  margin-top: 8px;
+  background: #b30000;
+  border: none;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btnPrimary:hover { background: #cc0000; }
+
+.btnGhost {
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #333;
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.btnGhost:hover { background: #f6f6f6; }
+
+.btnDanger {
+  background: #8b0000;
+  border: none;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.btnDanger:hover { background: #a00000; }
+
+/* Responsivo */
+@media (max-width: 720px) {
+  .grid,
+  .weekRow {
+    gap: 4px;
+  }
+  .cell {
+    min-height: 78px;
+    padding: 6px;
+  }
+}
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: repeat(7, minmax(40px, 1fr));
+  }
+}

@@ -7,7 +7,7 @@ import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import Link from "next/link";
 
-export default function FecharChamadoModal({ chamado , buttonStyle}) {
+export default function FecharChamadoModal({ chamado, buttonStyle }) {
     const [apontamento, setApontamento] = useState({
         descricao: "",
         comeco: '',
@@ -54,10 +54,19 @@ export default function FecharChamadoModal({ chamado , buttonStyle}) {
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setMensagem(response.data.mensagem);
+            setTimeout(() => {
+                window.location.reload()
+            }, 2000)
         } catch (error) {
             setMensagem(error.response?.data?.error || "Erro ao criar apontamento");
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleClose = () => {
+        if (mensagem) {
+            window.location.reload();
         }
     };
 
@@ -154,19 +163,6 @@ export default function FecharChamadoModal({ chamado , buttonStyle}) {
                             ) : (
                                 <div className="text-center">
                                     <p className="mt-3 fw-bold">{mensagem}</p>
-                                    <Link
-                                        href={`/tecnico/chamados/${chamado.id}`}
-                                        className="btn btn-vermelho mt-3"
-                                        onClick={() => {
-                                            // Remove backdrop e desbloqueia scroll
-                                            document.body.classList.remove("modal-open");
-                                            document.body.style.removeProperty("overflow");
-                                            document.querySelectorAll(".modal-backdrop")
-                                                .forEach(el => el.remove());
-                                        }}
-                                    >
-                                        Ver Detalhes do Chamado
-                                    </Link>
                                 </div>
                             )}
                         </div>
@@ -178,6 +174,7 @@ export default function FecharChamadoModal({ chamado , buttonStyle}) {
                                 className="btn btn-secondary"
                                 data-bs-dismiss="modal"
                                 disabled={loading}
+                                onClick={handleClose}
                             >
                                 Fechar
                             </button>
@@ -214,7 +211,7 @@ export default function FecharChamadoModal({ chamado , buttonStyle}) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     );
 }

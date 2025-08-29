@@ -78,7 +78,7 @@ export default function ChamadosList() {
                                                 <i className="bi bi-check-all text-success me-1"></i>
                                                 Concluído
                                             </p> :
-                                            <FecharChamadoModal chamado={chamado} buttonStyle={"btn btn-vermelho py-0 px-2 small w-100"}/>}
+                                            <FecharChamadoModal chamado={chamado} buttonStyle={"btn btn-vermelho py-0 px-2 small w-100"} modalId={`FecharModal${chamado.id}`}/>}
                                     </td>
                                 </tr>
                             ))}

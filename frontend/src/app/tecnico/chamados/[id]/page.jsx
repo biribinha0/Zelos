@@ -74,7 +74,6 @@ export default function DetalhesChamadoTecnico() {
                                 Concluído
                             </p> :
                             <>
-                                <button type='button' className='btn btn-vermelho rounded-circle' onClick={()=> window.location.reload()}><i className="bi bi-arrow-clockwise"></i></button>
                                 <CriarApontamentoModal chamado={chamado} buttonStyle={"btn btn-vermelho py-2 px-3 small w-100"} />
                                 <FecharChamadoModal chamado={chamado} buttonStyle={"btn btn-vermelho py-2 px-3 small w-100"} />
                             </>}

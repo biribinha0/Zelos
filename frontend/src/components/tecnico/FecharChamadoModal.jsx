@@ -7,7 +7,7 @@ import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import Link from "next/link";
 
-export default function FecharChamadoModal({ chamado , buttonStyle}) {
+export default function FecharChamadoModal({ chamado , buttonStyle, modalId = 'FecharModal'}) {
     const [apontamento, setApontamento] = useState({
         descricao: "",
         comeco: '',
@@ -67,7 +67,7 @@ export default function FecharChamadoModal({ chamado , buttonStyle}) {
                 type="button"
                 className={buttonStyle}
                 data-bs-toggle="modal"
-                data-bs-target="#FecharModal"
+                data-bs-target={`#${modalId}`}
             >
                 <i className="bi bi-clipboard-check me-2"></i>
                 <span className="small">Concluir</span>
@@ -75,9 +75,9 @@ export default function FecharChamadoModal({ chamado , buttonStyle}) {
 
             <div
                 className="modal fade p-0"
-                id="FecharModal"
+                id={modalId}
                 tabIndex={-1}
-                aria-labelledby="FecharModalLabel"
+                aria-labelledby={`${modalId}Label`}
                 aria-hidden="true"
                 data-bs-backdrop={mensagem ? "static" : "true"}
                 data-bs-keyboard={mensagem ? "false" : "true"}
@@ -86,7 +86,7 @@ export default function FecharChamadoModal({ chamado , buttonStyle}) {
                     <div className="modal-content">
                         {/* HEADER */}
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="FecharModalLabel">
+                            <h1 className="modal-title fs-5" id={`${modalId}Label`}>
                                 Fechar Chamado
                             </h1>
                             {!mensagem && (

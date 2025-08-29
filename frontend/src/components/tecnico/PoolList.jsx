@@ -37,7 +37,6 @@ export default function PoolList() {
     )
     return (
         <div className="row my-5">
-            <h3 className="text-center mb-5">Chamados Disponíveis para o Técnico se Atribuir</h3>
             {chamados?.length > 0 ? (
                 chamados.map((chamado) => {
                     return (
