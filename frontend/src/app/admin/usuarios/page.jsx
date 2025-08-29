@@ -40,7 +40,7 @@ export default function UsuariosPage() {
         <>
             {/* Cabeçalho */}
             <div className="dc-outer d-flex container my-5 align-items-center">
-                <i className="bi bi-person-square fs-3"></i>
+                <i className="bi bi-person-fill fs-2"></i>
                 <div className="fs-4 fw-bold ms-2">Gerenciamento</div>
                 <div className="fs-4 fw-bold ms-2 text-danger">de usuários:</div>
             </div>

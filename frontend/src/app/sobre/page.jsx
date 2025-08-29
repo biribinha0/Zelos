@@ -7,14 +7,13 @@ export default function Sobre() {
   return (
     <>
  <div className={styles.bannerSobre}>
-      <img  className={styles.bannersobrenos} src="/img/bannersobrecerto.png" alt="" />
-      <h1 className={styles.textoBanner}>SOBRE NÓS</h1>
-
-      <img
-                    src="/img/bannersobrecerto.png"
-                    className={styles.bannersobremobile}
-                    alt="Banner Mobile"
-                />
+      <img  className={styles.bannersobrenos} src="/img/bannersobredefinitivo.png" alt="" />
+      
+ 
+      <img className={styles.bannersobremobile}
+      src="/img/bannersobremobile.png" className={styles.bannersobremobile}alt="Banner Mobile"
+               />
+        <h1 className={styles.textoBanner}>SOBRE NÓS</h1>
     </div>
       <div className={styles.fundoSobre}>
         <div className={styles.containersobre}>
@@ -71,10 +70,8 @@ export default function Sobre() {
             <span className={styles.vermelho}>Depoimentos</span>
           </h2>
        </div>
-        <CardDepoimentos />
+       
       </div >
-      
-         
     </>
   );
 }

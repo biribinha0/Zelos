@@ -24,13 +24,10 @@ export default function Tecnico() {
                 />
             </div>
 
-            
-
-
             {/* título para mostrar os status dos chamados */}
             <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
-                    <i class="bi bi-card-checklist mx-2 my-2"></i>
+                    <i className="bi bi-card-checklist mx-2 my-2"></i>
                     <span className="text-danger">
                         Status <span className="text-dark">dos chamados:</span>
                     </span>
@@ -67,7 +64,7 @@ export default function Tecnico() {
             {/* título para mostrar os chamados recentes */}
             <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
-                    <i class="bi bi-card-checklist mx-2 my-2"></i>
+                    <i className="bi bi-card-checklist mx-2 my-2"></i>
                     <span className="text-dark">
                         Chamados <span className="text-danger">recentes:</span>
                     </span>
@@ -139,16 +136,16 @@ export default function Tecnico() {
             {/* título para mostrar os chamados recentes */}
             <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
-                    <i class="bi bi-card-checklist mx-2 my-2"></i>
+                    <i className="bi bi-card-checklist mx-2 my-2"></i>
                     <span className="text-dark">
                         Confira seu <span className="text-danger">calendário:</span>
                     </span>
                 </h4>
             </div>
 
-            <Calendario/>
-            
-{/* banner 2 */}
+            <Calendario />
+
+            {/* banner 2 */}
             <div className={`position-relative ${styles.banner2Tecnico}`}>
                 {/* Imagem para desktop (aparece só em md+) */}
                 <img

@@ -1,16 +1,23 @@
 "use client";
 import React from "react";
 
-export default function AtribuirFuncionarioModal() {
+export default function AtribuirFuncionarioModal({ ativo }) {
     return (
         <div>
             {/* Botão/ícone que abre o modal */}
-            <i
-                className="bi bi-person-down text-danger"
-                style={{ cursor: "pointer", fontSize: "19px" }}
+            <button
+                type="button"
+                className={`btn p-0 border-0 bg-transparent`}
                 data-bs-toggle="modal"
                 data-bs-target="#atribuirFuncionarioModal"
-            ></i>
+                disabled={!ativo} 
+            >
+                <i
+                    className={`bi bi-person-down ${ativo ? "text-black" : "text-secondary"}`}
+                    style={{ fontSize: "19px" }}
+                ></i>
+            </button>
+
 
             {/* Modal */}
             <div
@@ -34,7 +41,7 @@ export default function AtribuirFuncionarioModal() {
                                 width={70}
                                 height={70}
                                 className="ms-auto"
-                                
+
                             />
                         </div>
 

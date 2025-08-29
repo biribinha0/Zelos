@@ -9,7 +9,8 @@ export default function EditarChamadoModal({
     tipos,
     statusList,
     tecnicos,
-    modalId = "editChamadoModal"
+    modalId = "editChamadoModal",
+    ativo
 }) {
     const [form, setForm] = useState({
         titulo: "",
@@ -63,11 +64,13 @@ export default function EditarChamadoModal({
             {/* Botão que abre o modal */}
             <button
                 type="button"
-                style={{ all: 'unset', cursor: 'pointer' }}
+
+                className={`btn p-0 border-0 bg-transparent`}
                 data-bs-toggle="modal"
                 data-bs-target={`#${modalId}`}
+                disabled={!ativo}
             >
-                <i className="bi bi-pencil-square text-secondary"></i>
+                <i className={`bi bi-pencil-square ${ativo ? "text-black" : "text-secondary"}`}></i>
             </button>
 
             {/* Modal */}
@@ -87,7 +90,7 @@ export default function EditarChamadoModal({
                                 <h5 className="modal-title fw-bold text-dark m-0">
                                     Editar Chamado
                                 </h5>
-                            
+
                             </div>
                             <button
                                 type="button"
@@ -98,19 +101,19 @@ export default function EditarChamadoModal({
                         </div>
                         <div className="modal-body">
                             <div className="mb-3 text-start">
-                                <label className="form-label fw-semibold">Título</label>
+                                <label className="form-label input-vermelho fw-semibold">Título</label>
                                 <input
                                     type="text"
-                                    className="form-control bg-light text-secondary border-0"
+                                    className="form-control input-vermelho bg-light text-secondary border-0"
                                     name="titulo"
                                     value={form.titulo}
                                     onChange={handleChange}
                                 />
                             </div>
                             <div className="mb-3 text-start">
-                                <label className="form-label fw-semibold">Descrição</label>
+                                <label className="form-label input-vermelho fw-semibold">Descrição</label>
                                 <textarea
-                                    className="form-control bg-light text-secondary border-0"
+                                    className="form-control input-vermelho bg-light text-secondary border-0"
                                     name="descricao"
                                     value={form.descricao}
                                     onChange={handleChange}
@@ -118,9 +121,9 @@ export default function EditarChamadoModal({
                                 />
                             </div>
                             <div className="mb-3 text-start">
-                                <label className="form-label fw-semibold">Tipo de Chamado</label>
+                                <label className="form-label input-vermelho fw-semibold">Tipo de Chamado</label>
                                 <select
-                                    className="form-select bg-light text-secondary border-0"
+                                    className="form-select input-vermelho bg-light text-secondary border-0"
                                     name="tipo_id"
                                     value={form.tipo_id}
                                     onChange={handleChange}
@@ -134,9 +137,9 @@ export default function EditarChamadoModal({
                                 </select>
                             </div>
                             <div className="mb-3 text-start">
-                                <label className="form-label fw-semibold">Status</label>
+                                <label className="form-label input-vermelho fw-semibold">Status</label>
                                 <select
-                                    className="form-select bg-light text-secondary border-0"
+                                    className="form-select input-vermelho bg-light text-secondary border-0"
                                     name="status"
                                     value={form.status}
                                     onChange={handleChange}
@@ -150,19 +153,25 @@ export default function EditarChamadoModal({
                                 </select>
                             </div>
                             <div className="mb-3 text-start">
-                                <label className="form-label fw-semibold">Técnico</label>
+                                <label className="form-label input-vermelho fw-semibold">Técnico</label>
+                                
                                 <select
-                                    className="form-select bg-light text-secondary border-0"
+                                    className="form-select input-vermelho bg-light text-secondary border-0"
                                     name="tecnico_id"
                                     value={form.tecnico_id}
                                     onChange={handleChange}
                                 >
                                     <option value="">Selecione</option>
-                                    {tecnicos.map((t, i) => (
-                                        <option key={i} value={t.id}>
-                                            {t.nomeFormatado} - {t.pools[0]?.nome_formatado || ""}
-                                        </option>
-                                    ))}
+                                    {tecnicos.map((t, i) => {
+                                        const temPoolComum = t.pool_tecnico.some(pool => pool.id_pool === chamado.tipo_id);
+                                        if (!temPoolComum) return null; 
+
+                                        return (
+                                            <option key={i} value={t.id}>
+                                                {t.nomeFormatado} - {t.pools[0]?.nome_formatado || ""}
+                                            </option>
+                                        );
+                                    })}
                                 </select>
                             </div>
                             {/* Mensagem de feedback */}
@@ -193,7 +202,7 @@ export default function EditarChamadoModal({
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
 
         </>
     );

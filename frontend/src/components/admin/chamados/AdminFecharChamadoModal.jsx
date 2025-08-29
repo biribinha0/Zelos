@@ -4,29 +4,29 @@ import { API_URL } from "@/utils/api";
 import axios from "axios";
 import { getToken } from "@/utils/auth";
 
-export default function AdminFecharChamadoModal({ chamado, modalId = "fecharChamadoModal" }) {
+export default function AdminFecharChamadoModal({ chamado, modalId = "fecharChamadoModal", ativo }) {
     const [mensagem, setMensagem] = useState("");
     const token = getToken();
 
     const handleFechar = () => {
-        axios.post(`${API_URL}/admin/chamados/${chamado?.id}/fechar`, 
-            { status: "concluído" }, 
+        axios.post(`${API_URL}/admin/chamados/${chamado?.id}/fechar`,
+            { status: "concluído" },
             {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             }
         )
-        .then(() => {
-            setMensagem("✅ Chamado fechado com sucesso!");
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000);
-        })
-        .catch((error) => {
-            console.error("Erro ao fechar chamado:", error.response?.data || error);
-            setMensagem("❌ Erro ao fechar chamado.");
-        });
+            .then(() => {
+                setMensagem("✅ Chamado fechado com sucesso!");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
+            })
+            .catch((error) => {
+                console.error("Erro ao fechar chamado:", error.response?.data || error);
+                setMensagem("❌ Erro ao fechar chamado.");
+            });
     };
 
     return (
@@ -34,11 +34,12 @@ export default function AdminFecharChamadoModal({ chamado, modalId = "fecharCham
             {/* Botão que abre o modal */}
             <button
                 type="button"
-                style={{ all: 'unset', cursor: 'pointer' }}
+                className={`btn p-0 border-0 bg-transparent`}
                 data-bs-toggle="modal"
                 data-bs-target={`#${modalId}`}
+                disabled={!ativo}
             >
-                <i className="bi bi-check-square-fill  text-secondary"></i> 
+                <i className={`bi bi-check-square-fill ${ativo ? "text-black" : "text-secondary"}`}></i>
             </button>
 
             {/* Modal */}

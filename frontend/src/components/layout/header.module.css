@@ -109,7 +109,6 @@ li.itens a::after {
     background: var(--hovered-color);
     transition: width 0.9s ease-out;
     margin-left: 20%;
-
 }
 
 /* Bolinha */
@@ -140,3 +139,62 @@ li.itens a:hover::before {
     left: 60%;
     transform: translateX(-60%);
 }
+
+/* --------- RESPONSIVIDADE PARA TABLETS --------- */
+@media (max-width: 768px) {
+    #navbarNavDropdown {
+      text-align: center;
+    }
+  
+    #navbarNavDropdown .navbar-nav {
+      flex-direction: column !important;
+      align-items: center !important;
+      margin-top: 15px;
+    }
+  
+    #navbarNavDropdown .nav-item {
+      width: 100%;
+      text-align: center;
+    }
+  
+    /* Profissionais / Usuário */
+    .iconsHeader {
+      flex-direction: column !important;
+      align-items: center !important;
+      margin-top: 20px;
+    }
+  
+    /* Botão chamado */
+    .botaoChamadoNav {
+      width: 90%;
+      max-width: 320px;
+      margin: 15px auto;
+      display: block;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 991px) {
+    #navbarNavDropdown .navbar-nav { 
+        flex-direction: column !important; 
+        align-items: center; 
+    }
+
+    .iconsHeader { 
+        flex-direction: column; 
+        align-items: center; 
+        margin-top: 20px; 
+    }
+    
+    .botaoChamadoNav { 
+        width: 90%; 
+        max-width: 320px; 
+        margin: 15px auto; 
+        display: block; 
+        text-align: center; 
+    }
+  }
+  
+  
+  
+  

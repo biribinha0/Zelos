@@ -1,15 +1,24 @@
 import { create, readAll, read, update } from '../config/database.js';
 import { formatarFuncao, formatarNome } from '../utils.js';
+import { listarPoolsPorTecnico } from './Pools.js';
 
 // Listar Usuarios por tipo
 const listarUsuarios = async (where) => {
     try {
         const usuarios = await readAll('usuarios', where ? `${where}` : "");
-        const usuariosFormatados = usuarios.map(u => ({
-            ...u,
-            nome: formatarNome(u.nome),
-            funcaoFormatada: formatarFuncao(u.funcao)
-        }));
+        const usuariosFormatados = await Promise.all(
+            usuarios.map(async u => {
+                let pool_tecnico = null;
+                if (u.funcao === 'tecnico') {
+                    pool_tecnico = await listarPoolsPorTecnico(u.id);
+                }
+                return {
+                    ...u,
+                    nome: formatarNome(u.nome),
+                    funcaoFormatada: formatarFuncao(u.funcao),
+                    pool_tecnico
+                }
+            }));
 
         return usuariosFormatados;
     } catch (error) {
@@ -25,10 +34,16 @@ const obterUsuarioPorId = async (id, funcao = null) => {
             'usuarios',
             `id = ${id} ${funcao ? ` AND funcao = '${funcao}' ` : ""} `
         );
+        let pool_tecnico = null;
+        if (usuario.funcao === 'tecnico') {
+            pool_tecnico = await listarPoolsPorTecnico(id);
+
+        }
         return {
             ...usuario,
             nome: formatarNome(usuario.nome),
-            funcaoFormatada: formatarFuncao(funcao)
+            funcaoFormatada: formatarFuncao(funcao),
+            pool_tecnico: pool_tecnico
         }
     } catch (error) {
         console.error('Erro ao obter usuario por id: ', error);

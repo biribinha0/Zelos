@@ -35,6 +35,15 @@ export default function atribuicoes() {
     }, [])
     return (
         <>
+
+<div className="dc-outer d-flex container my-5 align-items-center">
+                <i className="bi bi-check2-circle fs-2"></i>
+                <div className="fs-4 fw-bold ms-2">Atribuir</div>
+                <div className="fs-4 fw-bold ms-2 text-danger">chamado</div>
+                <div className="fs-4 fw-bold ms-2">ao tecnico:</div>
+                <div className="ms-auto">
+                </div>
+            </div>
             <div className={`container-fluid ${styles.atribuicoesAdm}`}>
                 <div>
                     {loading && <h3>Carregando chamados...</h3>}

@@ -10,6 +10,8 @@ import { ptBR } from "date-fns/locale";
 import Link from 'next/link';
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css"
+import useWindowWidth from '@/hooks/useWindowWidth';
+import { CardChamadosResponsivo } from '@/components/usuarios';
 
 
 export default function MeusChamados() {
@@ -19,8 +21,6 @@ export default function MeusChamados() {
   const decoded = getDecodedToken();
   const [current, setCurrent] = useState(1);
   const pageSize = 5;
-
-
 
   useEffect(() => {
     setLoading(true)
@@ -72,7 +72,9 @@ export default function MeusChamados() {
 
   const startIndex = (current - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const chamadosPaginados = chamadosFiltrados.slice(startIndex, endIndex)
+  const chamadosPaginados = chamadosFiltrados.slice(startIndex, endIndex);
+
+  const width = useWindowWidth();
   return (
     <>
       <div className="dc-outer d-flex container my-5 chamados-background">
@@ -85,7 +87,7 @@ export default function MeusChamados() {
       <div className="container my-5 ">
 
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-4">
             <div className="form-group">
               <label className="tipo-chamado fw-bold">Tipo de chamado:</label>
               <select
@@ -102,7 +104,8 @@ export default function MeusChamados() {
               </select>
             </div>
           </div>
-          <div className="col-md-6">
+
+          <div className="col-md-4">
             <div className="form-group">
               <label className="status fw-bold">Status:</label>
               <select
@@ -118,59 +121,71 @@ export default function MeusChamados() {
               </select>
             </div>
           </div>
+
+          <div className="col-md-4">
+            <div className="form-group">
+              <label className="tipo-chamado fw-bold">Palavra-chave:</label>
+              <input className="form-control input-custom" type="text" placeholder='Escreva aqui!'/>
+            </div>
+          </div>
         </div>
         <h4 className="resultados-title mt-4">Resultados:</h4>
 
-        {chamadosFiltrados.length > 0 ? (
-          <div className="table-responsive mt-3">
-            <table className="table table-bordered-custom">
-              <thead className="thead-custom">
-                <tr className="titulosTabela">
-                  <th>ID</th>
-                  <th>Tipo de chamado</th>
-                  <th>Título</th>
-                  <th>Patrimônio</th>
-                  <th>Status</th>
-                  <th>Técnico</th>
-                  <th>Data de Abertura</th>
-                  <th>Última Atualização</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {chamadosPaginados.map((chamado, index) => (
-                  <tr key={chamado.id} className={index % 2 !== 0 ? 'tr-cinza' : ''} >
-                    <td className="textTabela text-black-75">{chamado.id}</td>
-                    <td className="textTabela text-black-75">{chamado.pool}</td>
-                    <td className="textTabela text-black-75">{chamado.titulo}</td>
-                    <td className="textTabela text-black-75">{chamado?.patrimonio?.EQUIPAMENTO ?? "--"}</td>
-                    <td className={`fw-bold text-${chamado.status === 'concluído' ? 'success' : chamado.status === 'pendente' ? 'danger' : 'warning'}`}>
-                      {chamado.status}
-                    </td>
-                    <td className="textTabela text-black-75">{chamado.tecnico ?? "--"}</td>
-                    <td className="textTabela text-black-75">
-                      {format(chamado.criado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}
-                    </td>
-                    <td className="textTabela text-black-75">
-                      {format(chamado.atualizado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}
-                    </td>
-                    <td>
-                      <Link className='link-titulo' key={chamado.id} href={`/usuario/chamados/${chamado.id}`}>Ver Detalhes</Link>
-                    </td>
+        {(chamadosFiltrados.length > 0) ? (
+          width >= 992 ? (
+            <div className="table-responsive mt-3">
+              <table className="table table-bordered-custom">
+                <thead className="thead-custom">
+                  <tr className="titulosTabela">
+                    <th>ID</th>
+                    <th>Tipo de chamado</th>
+                    <th>Título</th>
+                    <th>Patrimônio</th>
+                    <th>Status</th>
+                    <th>Técnico</th>
+                    <th>Data de Abertura</th>
+                    <th>Última Atualização</th>
+                    <th>Ações</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
 
-            <Pagination
-              current={current}
-              pageSize={pageSize}
-              total={chamadosFiltrados.length}
-              onChange={setCurrent}
-              showSizeChanger={true}
-            />
-          </div>
+                <tbody>
+                  {chamadosPaginados.map((chamado, index) => (
+                    <tr key={chamado.id} className={index % 2 !== 0 ? 'tr-cinza' : ''} >
+                      <td className="textTabela text-black-75">{chamado.id}</td>
+                      <td className="textTabela text-black-75">{chamado.pool}</td>
+                      <td className="textTabela text-black-75">{chamado.titulo}</td>
+                      <td className="textTabela text-black-75">{chamado?.patrimonio?.EQUIPAMENTO ?? "--"}</td>
+                      <td className={`fw-bold text-${chamado.status === 'concluído' ? 'success' : chamado.status === 'pendente' ? 'danger' : 'warning'}`}>
+                        {chamado.status}
+                      </td>
+                      <td className="textTabela text-black-75">{chamado.tecnico ?? "--"}</td>
+                      <td className="textTabela text-black-75">
+                        {format(chamado.criado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}
+                      </td>
+                      <td className="textTabela text-black-75">
+                        {format(chamado.atualizado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}
+                      </td>
+                      <td>
+                        <Link className='link-titulo' key={chamado.id} href={`/usuario/chamados/${chamado.id}`}>Ver Detalhes</Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <Pagination
+                current={current}
+                pageSize={pageSize}
+                total={chamadosFiltrados.length}
+                onChange={setCurrent}
+                showSizeChanger={true}
+              />
+            </div>) : chamadosFiltrados.map((chamado) => {
+              return (
+                <CardChamadosResponsivo key={chamado.id} chamado={chamado}/>
+              )
+            })
 
 
         ) : (

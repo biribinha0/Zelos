@@ -85,7 +85,7 @@ export default function Funcionalidades() {
                         className={`p-5 ${styles.carrosselAdm}`}
                     >
                         {funcoesAdm.map((item, index) => (
-                            <SwiperSlide key={index} className="d-flex justify-content-center">
+                            <SwiperSlide key={index} className="d-flex justify-content-center col-12 col-md-4 col-lg-4">
                                 <CardFuncionalidade item={item} />
                             </SwiperSlide>
                         ))}

@@ -34,7 +34,7 @@ export default function SideBarTecnico({ decoded }) {
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link sidebar-link text-light" href={'/tecnico/pool'}>
-                            <i className="bi bi-inbox sidebar-icon"></i>
+                            <i className="bi bi-megaphone"></i>
                             <span className="link-text">Chamados Diponíveis</span>
                         </Link>
                     </li>

@@ -75,7 +75,7 @@ export default function ChamadosPage() {
         }
 
         if (filtros.tipo) {
-            filtrados = filtrados.filter(c => c.pool === filtros.tipo);
+            filtrados = filtrados.filter(c => c.tipo_id == filtros.tipo);
         }
 
         if (filtros.tecnico) {
@@ -100,9 +100,7 @@ export default function ChamadosPage() {
             {/* Chamados e categorização */}
             <div className="seçãoChamados"></div>
             <div className="dc-outer d-flex container my-5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" className="bi bi-megaphone-fill mt-2" viewBox="0 0 16 16">
-                    <path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25 25 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009l.496.008a64 64 0 0 1 1.51.048m1.39 1.081q.428.032.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a66 66 0 0 1 1.692.064q.491.026.966.06" />
-                </svg>
+            <i className="bi bi-card-list fs-2"></i>
                 <div className="fs-4 fw-bold ms-2">Chamados e</div>
                 <div className="fs-4 fw-bold ms-2 text-danger">categorização:</div>
             </div>
@@ -127,7 +125,7 @@ export default function ChamadosPage() {
                         </select>
                     </div>
                     <div className="col-md-2">
-                        <label className="form-label fw-bold">Tipo:</label>
+                        <label className="form-label fw-bold">Tipo: </label>
 
                         {/* Tipo de chamado */}
                         <select
@@ -138,7 +136,7 @@ export default function ChamadosPage() {
                         >
                             <option value="">Todos</option>
                             {tiposList.map((t) => (
-                                <option key={t.id} value={t.id}>{t.titulo}</option>
+                                <option key={t.id} value={t.id}>{t.titulo} </option>
                             ))}
                         </select>
                     </div>
@@ -197,7 +195,7 @@ export default function ChamadosPage() {
             <div className="container mt-4">
                 <div className="d-flex justify-content-between align-items-center">
                     <h4 className="resultados-title">Resultados:</h4>
-                    <DuvidasChamadosModal/>
+                    <DuvidasChamadosModal />
                 </div>
 
 
@@ -233,17 +231,27 @@ export default function ChamadosPage() {
                                         <td>{new Date(c.atualizado_em).toLocaleDateString()}</td>
                                         <td>
                                             <div className="d-flex justify-content-center gap-2">
-                                                <Link href={`/admin/chamados/${c.id}`}><i className="bi bi-eye-fill" style={{ transition: '0.2s' }}></i></Link>
-                                                <AtribuirFuncionario/>
+                                                <Link className="d-flex align-items-center red-link" href={`/admin/chamados/${c.id}`}><i className="bi bi-eye-fill" style={{ transition: '0.2s' }}></i></Link>
                                                 
+                                                <AtribuirFuncionario
+                                                    ativo={c.status !== 'concluído'&& c.tecnico == null}
+                                                />
+
                                                 <EditarChamadoModal
                                                     chamado={c}
                                                     tipos={tiposList}
                                                     statusList={statusList}
                                                     tecnicos={tecnicosList}
+                                                    ativo={c.status !== 'concluído'}
+                                                    modalId={`editChamadoModal${c.id}`}
 
                                                 />
-                                                <AdminFecharChamadoModal chamado={c} />
+                                                
+
+                                                <AdminFecharChamadoModal
+                                                    chamado={c}
+                                                    modalId={`fecharChamadoModal${c.id}`}
+                                                    ativo={c.status !== 'concluído'} />
                                             </div>
                                         </td>
                                     </tr>

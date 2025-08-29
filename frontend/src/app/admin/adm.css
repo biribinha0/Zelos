@@ -163,3 +163,15 @@
      background-color: #000000;
      transition: 1s;
    }
+
+
+   .red-link{
+    color: #E30613;
+    transition: .2s;
+   }
+   
+   .red-link:hover,
+   .red-link:focus,
+   .red-link:active {
+     color: #9a1915;
+   }

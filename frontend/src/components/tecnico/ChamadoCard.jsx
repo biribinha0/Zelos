@@ -8,7 +8,7 @@ export default function ChamadoCard({ chamado }) {
                 <h5 className={styles.title}>{chamado.titulo}</h5>
                 <p className={styles.text}>{chamado.descricao}</p>
                 <div className="d-flex justify-content-end">
-                    <AtribuirModal chamado={chamado} className={styles.button} />
+                    <AtribuirModal chamado={chamado} modalId={`AtribuirModal${chamado.id}`} className={styles.button} />
                 </div>
             </div>
         </div>

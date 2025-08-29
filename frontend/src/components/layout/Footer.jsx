@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./styleFooter.css";
 import Link from "next/link";
-import { getDecodedToken, getToken, isAuthenticated } from "@/utils/auth";
+import { getDecodedToken, isAuthenticated } from "@/utils/auth";
 
 export default function Footer() {
   const [rating, setRating] = useState(0);
@@ -16,8 +16,25 @@ export default function Footer() {
     }
   };
 
-  const isAuth = isAuthenticated();
-  const decoded = getDecodedToken() || null;
+  const [isAuth, setIsAuth] = useState(false);
+  const [decoded, setDecoded] = useState(null);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      setIsAuth(isAuthenticated());
+      setDecoded(getDecodedToken());
+    };
+
+    // Chama já na primeira renderização
+    checkAuth();
+
+    // Escuta mudanças no localStorage (inclusive de outros tabs)
+    window.addEventListener("storage", checkAuth);
+
+    return () => {
+      window.removeEventListener("storage", checkAuth);
+    };
+  }, []);
 
 
   return (
@@ -58,7 +75,7 @@ export default function Footer() {
             </Link>
             }
             {(isAuth && decoded.funcao !== 'usuario') && <Link href={`/${decoded.funcao}`}>
-              <button className="chamado-btn text-break">Acessar {decoded.funcao === 'admin' ?'painel de administração' : 'página de técnico'}</button>
+              <button className="chamado-btn text-break">Acessar {decoded.funcao === 'admin' ? 'painel de administração' : 'página de técnico'}</button>
             </Link>}
 
             <div className="avaliacao">

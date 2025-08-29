@@ -5,7 +5,7 @@ import axios from "axios"
 import { useState } from "react";
 import Link from "next/link";
 
-export default function AtribuirModal({ chamado }) {
+export default function AtribuirModal({ chamado, modalId = 'AtribuirModal' }) {
     const [loading, setLoading] = useState(false);
     const [mensagem, setMensagem] = useState(null)
     const decoded = getDecodedToken();
@@ -34,25 +34,28 @@ export default function AtribuirModal({ chamado }) {
                 type="button"
                 className="btn btn-vermelho"
                 data-bs-toggle="modal"
-                data-bs-target="#atribuirModal"
+                data-bs-target={`#${modalId}`}
+
             >
                 Me Atribuir
+                <i className="bi bi-check2-all"></i>
             </button>
             {/* Modal */}
             <div
                 className="modal fade"
-                id="atribuirModal"
+                id={modalId}
                 tabIndex={-1}
-                aria-labelledby="atribuirModalLabel"
+                aria-labelledby={`${modalId}Label`}
                 aria-hidden="true"
-                data-bs-backdrop={mensagem ? "static" : 'true'}
-                data-bs-keyboard={mensagem ? "false" : 'true'}
+                data-bs-backdrop={mensagem ? "static" : true}
+                data-bs-keyboard={mensagem ? false : true}
+
             >
                 <div className="modal-dialog">
                     <div className="modal-content">
                         {/* HEADER */}
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="atribuirModalLabel">
+                            <h1 className="modal-title fs-5" id={`${modalId}Label`}>
                                 Auto Atribuição
                             </h1>
                             {!mensagem && (
