@@ -7,6 +7,7 @@ export { default as DuvidasChamadosModal } from "./chamados/DuvidasChamadosModal
 export { default as EditarChamadoModal } from "./chamados/EditarChamadoModal"
 export { default as AdminFecharChamadoModal } from "./chamados/AdminFecharChamadoModal"
 export { default as AtribuirFuncionario } from "./chamados/AtribuirFuncionario"
+export { default as AtribuirChamadoModal } from "./chamados/AtribuirChamadoModal"
 
 export { default as DuvidasTecnicosModal } from "./tecnicos/DuvidasTecnicosModal"
 

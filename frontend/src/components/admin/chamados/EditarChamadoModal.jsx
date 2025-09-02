@@ -41,7 +41,6 @@ export default function EditarChamadoModal({
     };
     const token = getToken()
     const handleSubmit = () => {
-        console.log("Salvar chamado:", form);
         axios.put(`${API_URL}/admin/chamados/${chamado.id}`, form, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -108,6 +107,7 @@ export default function EditarChamadoModal({
                                     name="titulo"
                                     value={form.titulo}
                                     onChange={handleChange}
+                                    required
                                 />
                             </div>
                             <div className="mb-3 text-start">
@@ -118,6 +118,7 @@ export default function EditarChamadoModal({
                                     value={form.descricao}
                                     onChange={handleChange}
                                     rows={3}
+                                    required
                                 />
                             </div>
                             <div className="mb-3 text-start">
@@ -127,6 +128,7 @@ export default function EditarChamadoModal({
                                     name="tipo_id"
                                     value={form.tipo_id}
                                     onChange={handleChange}
+                                    required
                                 >
                                     <option value="">Selecione</option>
                                     {tipos.map((t, i) => (
@@ -143,6 +145,7 @@ export default function EditarChamadoModal({
                                     name="status"
                                     value={form.status}
                                     onChange={handleChange}
+                                    required
                                 >
                                     <option value="">Selecione</option>
                                     {statusList.map((s, i) => (
@@ -160,6 +163,7 @@ export default function EditarChamadoModal({
                                     name="tecnico_id"
                                     value={form.tecnico_id}
                                     onChange={handleChange}
+                                    required
                                 >
                                     <option value="">Selecione</option>
                                     {tecnicos.map((t, i) => {

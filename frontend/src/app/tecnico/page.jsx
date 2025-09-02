@@ -64,7 +64,7 @@ export default function Tecnico() {
             {/* título para mostrar os chamados recentes */}
             <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
-                    <i className="bi bi-card-checklist mx-2 my-2"></i>
+                    <i class="bi bi-stopwatch mx-2 my-2"></i>
                     <span className="text-dark">
                         Chamados <span className="text-danger">recentes:</span>
                     </span>
@@ -136,7 +136,7 @@ export default function Tecnico() {
             {/* título para mostrar os chamados recentes */}
             <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
-                    <i className="bi bi-card-checklist mx-2 my-2"></i>
+                    <i className="bi bi-calendar-check mx-2 my-2"></i>
                     <span className="text-dark">
                         Confira seu <span className="text-danger">calendário:</span>
                     </span>

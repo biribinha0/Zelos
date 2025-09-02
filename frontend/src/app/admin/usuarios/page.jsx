@@ -11,7 +11,7 @@ export default function UsuariosPage() {
     const [nome, setNome] = useState("");
     const [registro, setRegistro] = useState("");
 
-    
+
 
     const token = getToken();
 
@@ -104,13 +104,13 @@ export default function UsuariosPage() {
                                         <div className="d-flex justify-content-center gap-2">
                                             {u.status === 'ativo' ? (
                                                 <>
-                                                    <ChamadosAtribuidosModal
-                                                        usuario={u} modalId=
-                                                        {`chamadosUsuarioModal${u.id}`}
-                                                    />
                                                     <DetalhesUsuarioModal
                                                         usuario={u}
                                                         modalId={`detalhesUsuarioModal${u.id}`}
+                                                    />
+                                                    <ChamadosAtribuidosModal
+                                                        usuario={u} modalId=
+                                                        {`chamadosUsuarioModal${u.id}`}
                                                     />
                                                     <DesativarUsuarioModal
                                                         usuario={u}
@@ -128,7 +128,7 @@ export default function UsuariosPage() {
                         </tbody>
                     </table>
                 </div>
-                
+
             </div >
 
 

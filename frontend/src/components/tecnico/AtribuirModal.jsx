@@ -34,11 +34,11 @@ export default function AtribuirModal({ chamado, modalId = 'AtribuirModal' }) {
                 type="button"
                 className="btn btn-vermelho"
                 data-bs-toggle="modal"
-                data-bs-target={`#${modalId}`}
+                data-bs-target={` ${modalId}`}
 
             >
                 Me Atribuir
-                <i className="bi bi-check2-all"></i>
+                <i className="bi bi-check2-all ms-1"></i>
             </button>
             {/* Modal */}
             <div

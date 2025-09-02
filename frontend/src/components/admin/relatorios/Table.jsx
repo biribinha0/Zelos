@@ -12,7 +12,7 @@ export default function Table({ data, columns, title }) {
         </thead>
         <tbody>
           {data.map((row, i) => (
-            <tr key={i}>
+            <tr className="text-capitalize" key={i}>
               {columns.map(col => <td key={col.key}>{row[col.key]}</td>)}
             </tr>
           ))}

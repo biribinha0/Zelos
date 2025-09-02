@@ -89,7 +89,7 @@ export default function DetalhesChamadoTecnico() {
 
                     <div className="col-12 col-md-6">
                         <label className="dc-label">Status atual:</label>
-                        <p className={`dc-info status status-${chamado.status === 'concluído' ? 'sucesso' : chamado.status === 'pedente' ? 'perigo' : 'andamento'}`}>
+                        <p className={`dc-info status status-${chamado.status === 'concluído' ? 'sucesso' : chamado.status === 'pendente' ? 'perigo' : 'andamento'}`}>
                             {(chamado.status)}
                         </p>
                     </div>

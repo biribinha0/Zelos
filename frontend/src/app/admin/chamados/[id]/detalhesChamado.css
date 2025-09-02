@@ -10,7 +10,7 @@
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
-    color: #fff; 
+    /* color: #fff;  */
     margin: 0;
 }
 
@@ -77,4 +77,31 @@
 
 .dc-info{
     color: #4a4a4a;
+}
+
+.status {
+    position: relative;
+    padding-left: 20px;
+    text-transform: capitalize;
+}
+
+.status::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;   
+  height: 10px;
+  border-radius: 50%;
+  
+}
+.status-sucesso::before{
+    background-color: #008000; /* cor do status */
+}
+.status-perigo::before{
+    background-color: #ff0000; /* cor do status */
+}
+.status-andamento::before{
+    background-color: #ffff00; /* cor do status */
 }

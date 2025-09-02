@@ -4,6 +4,26 @@ background-color: #862922;
 color: white;
 }
 
+/* Seleciona todos os inputs e textareas dentro do seu formulário */
+.formContato input:focus,
+.formContato textarea:focus {
+    border-color: #fff !important; /* opcional: deixa a borda branca */
+    color: #fff; /* deixa o texto dentro do input branco */
+    background-color: rgba(255, 255, 255, 0.25); /* mantém fundo sem alteração */
+}
+
+/* Para mudar a cor da label quando o input está focado */
+.formContato input:focus + label,
+.formContato textarea:focus + label {
+    color: #fff !important;
+}
+
+.formContato .form-label {
+    color: #fff !important; /* sempre branca */
+}
+
+
+
 .texto1Contato{
     color: #862922;
 }

@@ -8,14 +8,48 @@ import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import { intervalToDuration } from 'date-fns';
 
+import { EditarChamadoModal, AdminFecharChamadoModal, AtribuirFuncionario } from "@/components/admin";
+
+
 export default function DetalhesChamadoAdmin() {
     const params = useParams();
     const [chamado, setChamado] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const [statusList, setStatusList] = useState([]);
+    const [tiposList, setTiposList] = useState([]);
+    const [tecnicosList, setTecnicosList] = useState([]);
+
     const token = getToken();
     const decoded = getDecodedToken();
     const chamadoId = params.id;
+
+    useEffect(() => {
+        axios.get(`${API_URL}/meta/pools`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((res) => setTiposList(res.data))
+            .catch(() => setTiposList([]))
+            .finally(() => setLoading(false));
+
+        axios.get(`${API_URL}/meta/status`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((res) => setStatusList(res.data.status))
+            .catch(() => setStatusList([]))
+            .finally(() => setLoading(false));
+
+        axios.get(`${API_URL}/admin/usuarios?funcao=tecnico`, {
+            headers: { Authorization: `Bearer ${token}` },
+        })
+            .then((res) => setTecnicosList(res.data))
+            .catch(() => setTecnicosList([]))
+            .finally(() => setLoading(false));
+    }, [])
 
     useEffect(() => {
 
@@ -56,12 +90,41 @@ export default function DetalhesChamadoAdmin() {
         <div className="dc-outer d-flex justify-content-center bg-detalhes">
             <div className="dc-inner p-4 shadow rounded bg-white" style={{ width: cardWidth }}>
                 {/* Cabeçalho */}
-                <div className="dc-header d-flex align-items-center mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="35" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16" color="#4a4a4a">
-                        <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-                    </svg>
-                    <div className="dc-title fs-4 fw-bold ms-2">Detalhes do</div>
-                    <p className="m-2 dc-title2">chamado</p>
+                <div className="dc-header d-flex align-items-center justify-content-between mb-4">
+                    <div className="d-flex align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="35" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16" color="#4a4a4a">
+                            <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                        </svg>
+                        <div className="dc-title fs-4 fw-bold ms-2">Detalhes do</div>
+                        <p className="m-2 dc-title2">chamado</p>
+                    </div>
+
+                    <div className="d-flex justify-content-center gap-2">
+
+                        <AtribuirFuncionario
+                            ativo={chamado.status !== 'concluído' && chamado.tecnico == null}
+
+                            tecnicos={tecnicosList}
+                            modalId={`atribuirFuncionarioModal${chamado.id}`}
+                            chamado={chamado}
+                        />
+
+                        <EditarChamadoModal
+                            chamado={chamado}
+                            tipos={tiposList}
+                            statusList={statusList}
+                            tecnicos={tecnicosList}
+                            ativo={chamado.status !== 'concluído'}
+                            modalId={`editChamadoModal${chamado.id}`}
+
+                        />
+
+
+                        <AdminFecharChamadoModal
+                            chamado={chamado}
+                            modalId={`fecharChamadoModal${chamado.id}`}
+                            ativo={chamado.status !== 'concluído'} />
+                    </div>
                 </div>
 
                 {/* Informações */}
@@ -73,7 +136,7 @@ export default function DetalhesChamadoAdmin() {
 
                     <div className="col-12 col-md-6">
                         <label className="dc-label">Status atual:</label>
-                        <p className={`dc-info status status-${chamado.status === 'concluído' ? 'sucesso' : chamado.status === 'pedente' ? 'perigo' : 'andamento'}`}>
+                        <p className={`dc-info status status-${chamado.status === 'concluído' ? 'sucesso' : chamado.status === 'pendente' ? 'perigo' : 'andamento'}`}>
                             {(chamado.status)}
                         </p>
                     </div>

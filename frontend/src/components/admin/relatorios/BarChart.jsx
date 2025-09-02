@@ -1,5 +1,6 @@
 "use client";
 
+import { forwardRef } from "react";
 import { Bar } from "react-chartjs-2";
 import {
     Chart as ChartJS,
@@ -9,11 +10,11 @@ import {
     Title,
     Tooltip,
     Legend
-} from "chart.js"
+} from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export default function BarChart({ labels, values, title }) {
+const BarChart = forwardRef(({ labels, values, title }, ref) => {
     const data = {
         labels,
         datasets: [
@@ -26,6 +27,10 @@ export default function BarChart({ labels, values, title }) {
     };
     const options = {
         responsive: true,
+        animation: {
+            duration: 1000,
+            easing: "easeOutQuart"
+        },
         plugins: {
             legend: {
                 position: "bottom"
@@ -36,5 +41,7 @@ export default function BarChart({ labels, values, title }) {
             }
         }
     };
-    return <Bar data={data} options={options} />;
-}
+    return <Bar ref={ref} data={data} options={options} redraw />;
+});
+
+export default BarChart;

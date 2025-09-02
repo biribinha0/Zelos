@@ -1,5 +1,6 @@
 "use client";
 import "./globals.css"
+import "./adm.css"
 
 import { useEffect, useState } from "react";
 import { getDecodedToken, isAuthenticated, isExpired } from "@/utils/auth";

@@ -8,7 +8,7 @@ export default function CategoriasHome() {
             <div className={`container-fluid ${styles.categoriasHome}`}>
                 <div className="row">
                     <div className="col-12 divTituloCategoriasHome">
-                        <h1 className={`${styles.tituloCategoriasHome}`}>Qual manutenção você precisa hoje?</h1>
+                        <h1 className={`${styles.tituloCategoriasHome}`}>TOP 05 Manutenções mais requisitadas</h1>
                     </div>
                 </div>
                 <div className={`row d-flex ${styles.itensCategoriasHome}`}>

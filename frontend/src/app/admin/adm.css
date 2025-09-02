@@ -82,9 +82,9 @@
      color: #ffffff;
      transition: all 1000ms;
      overflow: hidden;
-     width: 50%;
+     width: 150%;
      height: 50px;
-     max-width: 530px;
+     /* max-width: 530px; */
    }
 
    .button2::before {

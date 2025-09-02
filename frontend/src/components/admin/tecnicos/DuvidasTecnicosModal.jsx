@@ -29,23 +29,29 @@ export default function DuvidasTecnicosModal() {
           </p>
           <div className="mt-2">
             <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
-             <i className="bi bi-clipboard2-data text-secondary"></i>
-              <span className="ms-3 fw-semibold">
-                Visualiza os chamados atribuídos ao registro selecionado.
-              </span>
-            </div>
-
-            <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
               <i className="bi bi-eye text-secondary"></i>
               <span className="ms-3 fw-semibold">
-                Permite a visualização dos dados relacionados ao registro.
+                Permite a visualização dos dados detalhados do técnico.
+              </span>
+            </div>
+            <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
+              <i className="bi bi-clipboard2-data text-secondary"></i>
+              <span className="ms-3 fw-semibold">
+                Visualiza todos os chamados atribuídos ao técnico selecionado.
               </span>
             </div>
 
+
             <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
-              <i className="bi bi-x-lg text-danger" ></i>
+              <i className="bi bi-person-x fs-5 text-danger" ></i>
               <span className="ms-3 fw-semibold">
-                Remove o registro da tabela, garantindo informações atualizadas.
+                Marca o perfil do técnico como inativo, podendo reativar posteriormente.
+              </span>
+            </div>
+            <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
+              <i className="bi bi-person-check fs-5 text-success" ></i>
+              <span className="ms-3 fw-semibold">
+                Ativa o perfil o técnico, concedendo acesso ao sistema novamente.
               </span>
             </div>
           </div>

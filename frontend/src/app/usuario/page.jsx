@@ -10,14 +10,33 @@ export default function Usuario() {
     const [decoded, setDecoded] = useState(null);
     const [loading, setLoading] = useState(false);
     const [chamados, setChamados] = useState([]);
+    const [mensagem, setMensagem] = useState(null)
+
+    const [formData, setFormData] = useState({
+        tipo: 'feedback',
+        nome: '',
+        email: '',
+        mensagem: ''
+    })
+
 
     useEffect(() => {
         setDecoded(getDecodedToken());
+
     }, [])
+
 
     useEffect(() => {
         if (!decoded) return;
         setLoading(true);
+        if (decoded) {
+            console.log(decoded)
+            setFormData({
+                ...formData,
+                nome: decoded.nomeCompleto,
+                email: decoded.email
+            })
+        }
 
         const token = getToken();
         axios.get(`${API_URL}/usuario/${decoded.id}/chamados`, {
@@ -38,6 +57,28 @@ export default function Usuario() {
     const chamadosOrdenados = chamados.sort((a, b) => {
         return new Date(b.criado_em) - new Date(a.criado_em);
     });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+
+    const handleFeedback = (e) => {
+        e.preventDefault();
+        axios.post(`${API_URL}/publico/mensagem`, formData)
+            .then((res) => {
+                setMensagem('Feedback enviado com sucesso');
+                setFormData({
+                    ...formData,
+                    mensagem: ''
+                })
+            })
+            .catch((err) => setMensagem('Erro ao enviar feedback'))
+    }
 
     return (
         <>
@@ -93,6 +134,11 @@ export default function Usuario() {
                             </div>
                         </Link>
                     ))}
+                    <Link href={'/usuario/chamados'}>
+                        <button className={`text-center ${styles.botaoAcessarChamados}`} type="submit">
+                            Acessar todos os chamados <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </Link>
                 </div>
             ) : (
                 loading ? (
@@ -104,6 +150,7 @@ export default function Usuario() {
                 ) :
                     <h3 colSpan="4" className="text-center">Nenhum chamado encontrado</h3>
             )}
+
 
             {/* formulário "nos ajude a melhorar!" */}
             <div className={styles.page}>
@@ -122,17 +169,38 @@ export default function Usuario() {
                             diga como está sendo o nosso serviço!
                         </p>
 
-                        <form className={styles.form}>
+                        <form className={styles.form} onSubmit={handleFeedback}>
                             <label>Nome:</label>
-                            <input type="text" placeholder="Digite seu nome" />
+                            <input
+                                type="text"
+                                placeholder="Digite seu nome"
+                                name="nome"
+                                value={formData.nome}
+                                onChange={handleChange}
+                                required
+                            />
 
                             <label>Email:</label>
-                            <input type="email" placeholder="Digite seu email" />
+                            <input
+                                type="email"
+                                placeholder="Digite seu email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                            />
 
                             <label>Mensagem:</label>
-                            <textarea placeholder="Digite a mensagem"></textarea>
+                            <textarea
+                                placeholder="Digite a mensagem"
+                                name="mensagem"
+                                value={formData.mensagem}
+                                onChange={handleChange}
+                                required
+                            ></textarea>
 
                             <button type="submit">ENVIAR</button>
+                            {mensagem}
                         </form>
                     </div>
                 </div>

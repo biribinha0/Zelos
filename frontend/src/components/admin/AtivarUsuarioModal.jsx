@@ -34,7 +34,7 @@ export default function AtivarUsuarioModal({ usuario, modalId = `ativarUsuario` 
                 data-bs-toggle="modal"
                 data-bs-target={`#${modalId}`}
             >
-                <i className="bi bi-person-check text-success" title="ativar"></i>
+                <i className="bi bi-person-check fs-5 text-success" title="ativar"></i>
             </button>
 
             <div

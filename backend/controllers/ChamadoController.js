@@ -260,7 +260,8 @@ const listarChamadosDisponiveis = async (req, res) => {
                     pool_tecnicos.map(async (pool_tecnico) => {
                         const tecnico = await obterUsuarioPorId(pool_tecnico.id_tecnico, 'tecnico');
                         return {
-                            tecnico: primeiroNomeInicial(tecnico.nome)
+                            id: tecnico.id,
+                            nome: primeiroNomeInicial(tecnico.nome)
                         };
                     })
                 );
@@ -268,7 +269,7 @@ const listarChamadosDisponiveis = async (req, res) => {
                 return {
                     ...chamado,
                     usuario: primeiroNomeInicial(usuario.nome),
-                    pool: formatarTituloPool(pool),
+                    pool: formatarTituloPool(pool.titulo),
                     tecnicos
                 };
             })
@@ -373,7 +374,30 @@ const fecharChamadoSemApontamento = async (req, res) => {
     }
 }
 
+const atribuirTecnicoController = async (req, res) => {
+    const chamadoId = req.params.id;
+    const { tecnicoId } = req.body;
+    try {
+        if (!tecnicoId) return res.status(400).json({ error: 'Parâmetro obrigatório ausente (ID do técnico)' })
 
+        const tecnico = await obterUsuarioPorId(tecnicoId, 'tecnico');
+        if (!tecnico) return res.status(404).json({ error: 'Técnico com ID especificado não encontrado' })
+
+        const idChamado = await editarChamado(chamadoId, { tecnico_id: tecnicoId, status: 'em andamento' });
+
+        if (!idChamado) {
+            return res.status(404).json({ error: 'Chamado não encontrado.' });
+        }
+
+        return res.status(200).json({
+            mensagem: 'Técnico atribuído com sucesso.',
+            idChamado
+        });
+    } catch (error) {
+        console.error('Erro ao atribuir técnico: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro ao atribuir técnico.' });
+    }
+}
 
 
 export {
@@ -388,5 +412,6 @@ export {
     autoAtribuirAoChamadoController,
     fecharChamadoController,
     fecharChamadoSemApontamento,
-    listarChamadosDisponiveis
+    listarChamadosDisponiveis,
+    atribuirTecnicoController
 }

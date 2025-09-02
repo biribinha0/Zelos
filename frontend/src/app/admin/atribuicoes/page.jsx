@@ -1,7 +1,7 @@
 "use client"
 
 import styles from "./atribuicoes.module.css";
-import Link from "next/link";
+import "../adm.css"
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
@@ -25,7 +25,7 @@ export default function atribuicoes() {
         setLoading(true)
         const token = getToken()
         axios.get(`${API_URL}/admin/chamados/disponiveis`, {
-            headers:{
+            headers: {
                 Authorization: `Bearer ${token}`
             }
         })
@@ -36,14 +36,20 @@ export default function atribuicoes() {
     return (
         <>
 
-<div className="dc-outer d-flex container my-5 align-items-center">
+            <div className="dc-outer d-flex container-fluid mx-5 my-5 align-items-center">
                 <i className="bi bi-check2-circle fs-2"></i>
                 <div className="fs-4 fw-bold ms-2">Atribuir</div>
                 <div className="fs-4 fw-bold ms-2 text-danger">chamado</div>
-                <div className="fs-4 fw-bold ms-2">ao tecnico:</div>
+                <div className="fs-4 fw-bold ms-2">a um técnico:</div>
                 <div className="ms-auto">
                 </div>
             </div>
+
+            <span className="text-secondary ms-5 ps-2">
+                <i className="bi bi-lightbulb"></i>
+                Dica: Veja os detalhes do chamado antes de atribuir a um técnico
+            </span>
+
             <div className={`container-fluid ${styles.atribuicoesAdm}`}>
                 <div>
                     {loading && <h3>Carregando chamados...</h3>}
@@ -71,6 +77,7 @@ export default function atribuicoes() {
                                 <SwiperSlide key={chamado.id} className="d-flex justify-content-center">
                                     <CardAtribuicoes chamado={chamado} />
                                 </SwiperSlide>
+                                
                             ))}
                         </Swiper>
                     }

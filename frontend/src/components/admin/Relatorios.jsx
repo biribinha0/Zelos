@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { getToken } from "@/utils/auth";
 import { format, subDays } from "date-fns";
@@ -20,7 +20,25 @@ export default function Relatorios() {
     const [loading, setLoading] = useState(false);
     const [showModalB, setShowModalB] = useState(false);
     const [historicoModal, setHistoricoModal] = useState(false);
+    const [historico, setHistorico] = useState([]);
+
+    // carregar histórico do localStorage
+    useEffect(() => {
+        const saved = localStorage.getItem("historicoRelatorios");
+        if (saved) {
+            setHistorico(JSON.parse(saved));
+        }
+    }, []);
+    // salvar histórico no localStorage
+    useEffect(() => {
+        localStorage.setItem("historicoRelatorios", JSON.stringify(historico));
+    }, [historico]);
+
     const token = getToken();
+
+    // refs para gráficos
+    const barChartRef = useRef();
+    const pieChartRef = useRef();
 
     useEffect(() => {
         setLoading(true);
@@ -73,15 +91,85 @@ export default function Relatorios() {
         a.href = url;
         a.download = filename;
         a.click();
+
+        // salva no histórico
+        const novoItem = {
+            id: historico.length + 1,
+            data: format(new Date(), "dd/MM/yyyy HH:mm"),
+            usuario: "Você",
+            status: "Ativo",
+            tipo: "CSV",
+            filename,
+        };
+        setHistorico((prev) => [...prev, novoItem]);
     };
 
-    const exportToPDF = (data, filename = "relatorio.pdf") => {
+    const addChartImage = (doc, base64, x, y, maxWidth = 180, maxHeight = 100) => {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.src = base64;
+            img.onload = () => {
+                let { width, height } = img;
+
+                // escala proporcional
+                const ratio = Math.min(maxWidth / width, maxHeight / height);
+                width *= ratio;
+                height *= ratio;
+
+                doc.addImage(base64, "PNG", x, y, width, height);
+                resolve(height); // retorna a altura ocupada pra poder somar no currentY
+            };
+        });
+    };
+
+    const exportToPDF = async (data, tipo = "relatorio") => {
         if (!data || !data.length) return;
+
         const doc = new jsPDF();
-        const headers = [Object.keys(data[0])];
-        const rows = data.map((obj) => Object.values(obj));
-        autoTable(doc, { head: headers, body: rows });
+        let currentY = 20;
+
+        doc.setFontSize(16);
+        doc.text(`Relatório: ${tipo}`, 14, currentY);
+        currentY += 10;
+
+        // Captura gráficos
+        const barImage = barChartRef.current?.toBase64Image();
+        const pieImage = pieChartRef.current?.toBase64Image();
+
+        if (barImage) {
+            const barHeight = await addChartImage(doc, barImage, 14, currentY, 180, 90);
+            currentY += barHeight + 10;
+        }
+
+        if (pieImage) {
+            const pieHeight = await addChartImage(doc, pieImage, 14, currentY, 180, 90);
+            currentY += pieHeight + 10;
+        }
+
+        // Tabela
+        currentY += 5;
+        autoTable(doc, {
+            startY: currentY,
+            head: [Object.keys(data[0]).map((k) => k.replace(/_/g, " ").toUpperCase())],
+            body: data.map((obj) => Object.values(obj)),
+            theme: "grid",
+            headStyles: { fillColor: [33, 37, 41] },
+        });
+
+        const dateStr = format(new Date(), "dd-MM-yyyy-HH'h'mm");
+        const filename = `relatorio_${tipo}_${dateStr}.pdf`;
         doc.save(filename);
+
+        // salva no histórico
+        const novoItem = {
+            id: historico.length + 1,
+            data: format(new Date(), "dd/MM/yyyy HH:mm"),
+            usuario: "Você",
+            status: "Ativo",
+            tipo: "PDF",
+            filename,
+        };
+        setHistorico((prev) => [...prev, novoItem]);
     };
 
     const openModalB = () => setShowModalB(true);
@@ -93,8 +181,7 @@ export default function Relatorios() {
         <div className="container my-5">
             {/* Cabeçalho */}
             <div className="dc-outer d-flex mb-4">
-            <i className="bi bi-file-earmark-bar-graph-fill fs-2 "></i>
-                
+                <i className="bi bi-file-earmark-bar-graph-fill fs-2 "></i>
                 <div className="fs-4 fw-bold ms-2">Emissão de</div>
                 <div className="fs-4 fw-bold ms-2 text-danger">relatórios:</div>
             </div>
@@ -104,7 +191,7 @@ export default function Relatorios() {
                 <div className="col-md-3">
                     <label className="form-label fw-bold">Tipo de relatório</label>
                     <select
-                        className="form-select"
+                        className="form-select input-vermelho"
                         name="tipoRelatorio"
                         value={filtros.tipoRelatorio}
                         onChange={handleChange}
@@ -118,7 +205,7 @@ export default function Relatorios() {
                     <label className="form-label fw-bold">Data de início</label>
                     <input
                         type="date"
-                        className="form-control"
+                        className="form-control input-vermelho"
                         name="dataInicio"
                         value={filtros.dataInicio}
                         onChange={handleChange}
@@ -128,7 +215,7 @@ export default function Relatorios() {
                     <label className="form-label fw-bold">Data de fim</label>
                     <input
                         type="date"
-                        className="form-control"
+                        className="form-control input-vermelho"
                         name="dataFim"
                         min={filtros.dataInicio}
                         value={filtros.dataFim}
@@ -139,7 +226,7 @@ export default function Relatorios() {
                     <div className="col-md-3">
                         <label className="form-label fw-bold">Técnico</label>
                         <select
-                            className="form-select"
+                            className="form-select input-vermelho"
                             name="tecnicoId"
                             value={filtros.tecnicoId}
                             onChange={handleChange}
@@ -180,149 +267,101 @@ export default function Relatorios() {
 
             {/* Renderização de gráficos e tabelas */}
             {relatorio?.length === 0 && <h5>Nenhum dado encontrado.</h5>}
-            {relatorio?.length > 0 && filtros.tipoRelatorio === "status" && (
+            {relatorio?.length > 0 && (
                 <>
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-6 mb-3">
                             <BarChart
-                                labels={relatorio.map((r) => r.status)}
-                                values={relatorio.map((r) => r.total)}
-                                title="Status"
+                                ref={barChartRef}
+                                labels={relatorio.map((r) => r.status || r.tipo_chamado || r.usuario)}
+                                values={relatorio.map((r) => r.total || r.total_chamados)}
+                                title={`Gráfico de Barras - ${filtros.tipoRelatorio}`}
                             />
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-6 mb-3">
                             <PieChart
-                                labels={relatorio.map((r) => r.status)}
-                                values={relatorio.map((r) => r.total)}
-                                title="Status"
+                                ref={pieChartRef}
+                                labels={relatorio.map((r) => r.status || r.tipo_chamado || r.usuario)}
+                                values={relatorio.map((r) => r.total || r.total_chamados)}
+                                title={`Gráfico de Pizza - ${filtros.tipoRelatorio}`}
                             />
                         </div>
                     </div>
                     <Table
                         data={relatorio}
-                        columns={[
-                            { key: "status", label: "Status" },
-                            { key: "total", label: "Total" },
-                        ]}
-                        title="Tabela de Status"
+                        columns={Object.keys(relatorio[0]).map((key) => ({
+                            key,
+                            label: key.replace(/_/g, " ").toUpperCase(),
+                        }))}
+                        title={`Tabela - ${filtros.tipoRelatorio}`}
                     />
                 </>
             )}
-            {filtros.tipoRelatorio === "tipo" && relatorio?.length > 0 && (
-                <>
-                    <h2 className="mb-3">Tipo de Chamado</h2>
-                    <div className="row mb-3">
-                        <div className="col-md-6 mb-3">
-                            <BarChart
-                                labels={relatorio.map((r) => r.tipo_chamado)}
-                                values={relatorio.map((r) => r.total)}
-                                title="Gráfico de Barras - Tipo"
-                            />
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <PieChart
-                                labels={relatorio.map((r) => r.tipo_chamado)}
-                                values={relatorio.map((r) => r.total)}
-                                title="Gráfico de Pizza - Tipo"
-                            />
-                        </div>
-                    </div>
-                    <Table
-                        data={relatorio}
-                        columns={[
-                            { key: "tipo_chamado", label: "Tipo" },
-                            { key: "total", label: "Total" },
-                        ]}
-                        title="Tabela de Tipo de Chamado"
-                    />
-                </>
-            )}
-            {filtros.tipoRelatorio === "atividades-tecnicos" && relatorio?.length > 0 && (
-                <>
-                    <h2 className="mb-3">Atividades dos Técnicos</h2>
-                    <div className="row mb-3">
-                        <div className="col-md-6 mb-3">
-                            <BarChart
-                                labels={relatorio.map((r) => r.usuario)}
-                                values={relatorio.map((r) => r.total_chamados)}
-                                title="Gráfico de Barras - Usuários"
-                            />
-                        </div>
-                        <div className="col-md-6 mb-3">
-                            <PieChart
-                                labels={relatorio.map((r) => r.usuario)}
-                                values={relatorio.map((r) => r.total_chamados)}
-                                title="Gráfico de Pizza - Usuários"
-                            />
-                        </div>
-                    </div>
-                    <Table
-                        data={relatorio}
-                        columns={[
-                            { key: "usuario", label: "Usuário" },
-                            { key: "total_chamados", label: "Total Chamados" },
-                            { key: "tempo_medio_horas", label: "Tempo Médio (h)" },
-                        ]}
-                        title="Tabela de Usuários"
-                    />
-                </>
-            )}
-            {relatorio?.error ? <h3>{relatorio.error.error}</h3> : ""}
 
             {/* Botões de download */}
-            <div className="d-flex gap-2 mt-3">
-                <button className="btn btn-success" onClick={() => exportToCSV(relatorio)}>
-                    Baixar CSV
-                </button>
-                <button className="btn btn-danger" onClick={openModalB}>
-                    Baixar PDF
-                </button>
-            </div>
+            <div className="col-md-3 mt-4 d-flex align-items-end">
+                <button className="btn w-100 button2 d-flex align-items-center justify-content-center" onClick={openModalB}> <i className="bi bi-download me-3 fs-5"></i> Baixar Relatório </button>
+                {showModalB && (
+                    <>
+                        {/* Backdrop */}
+                        <div
+                            className={`modal-backdrop fade ${showModalB ? "show" : ""}`}
+                            onClick={closeModalB}
+                            style={{ zIndex: 1040 }}
+                        ></div>
 
-            {/* Modal PDF */}
-            {showModalB && (
-                <>
-                    <div
-                        className="modal-backdrop fade show"
-                        style={{ zIndex: 1040 }}
-                        onClick={closeModalB}
-                    ></div>
-                    <div
-                        className="modal fade show d-block"
-                        tabIndex="-1"
-                        style={{ zIndex: 1050 }}
-                    >
-                        <div className="modal-dialog modal-dialog-centered">
-                            <div className="modal-content p-4 rounded-2 shadow-lg border-0">
-                                <div className="d-flex justify-content-between align-items-start border-bottom pb-3 mb-3">
-                                    <h5 className="fw-bold mb-1">Escolha o formato do relatório</h5>
-                                    <button type="button" className="btn-close" onClick={closeModalB}></button>
-                                </div>
-                                <div className="d-flex flex-column gap-2">
-                                    <button
-                                        className="btn btn-dark"
-                                        onClick={() => {
-                                            exportToPDF(relatorio);
-                                            closeModalB();
-                                        }}
-                                    >
-                                        PDF
-                                    </button>
-                                    <button
-                                        className="btn btn-dark"
-                                        onClick={() => {
-                                            exportToCSV(relatorio);
-                                            closeModalB();
-                                        }}
-                                    >
-                                        CSV
-                                    </button>
+                        {/* Modal */}
+                        <div
+                            className={`modal fade ${showModalB ? "show" : ""} d-block`}
+                            tabIndex="-1"
+                            style={{ zIndex: 1050 }}
+                        >
+                            <div className="modal-dialog modal-dialog-centered">
+                                <div className="modal-content p-4 rounded-2 shadow-lg border-0">
+                                    <div className="d-flex justify-content-between align-items-start border-bottom pb-3 mb-3">
+                                        <h5 className="fw-bold mb-1">Escolha o formato do relatório</h5>
+                                        <button
+                                            type="button"
+                                            className="btn-close"
+                                            aria-label="Close"
+                                            onClick={closeModalB}
+                                        ></button>
+                                    </div>
+                                    <p className="text-secondary mb-2">
+                                        Selecione o formato desejado para baixar o relatório:
+                                    </p>
+                                    <div className="m-2 mb-4 p-3">
+                                        <button
+                                            className="btn btn-vermelho rounded-2 px-5 d-flex align-items-center Brelatorio"
+                                            onClick={() =>
+                                                exportToPDF(relatorio, filtros.tipoRelatorio)
+                                            }
+                                        >
+                                            <i className="bi bi-filetype-pdf me-2 fs-4"></i>
+                                            Baixar relatório em PDF
+                                        </button>
+                                        <button
+                                            className="btn btn-vermelho rounded-2 px-5 d-flex align-items-center Brelatorio mt-3"
+                                            onClick={() =>
+                                                exportToCSV(
+                                                    relatorio,
+                                                    `relatorio_${filtros.tipoRelatorio}_${format(
+                                                        new Date(),
+                                                        "dd-MM-yyyy-HH'h'mm"
+                                                    )}.csv`
+                                                )
+                                            }
+                                        >
+                                            <i className="bi bi-filetype-csv me-2 fs-4"></i>
+                                            Baixar relatório em CSV
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </>
-            )}
+                    </>
+                )}
+            </div>
 
             {/* Modal histórico */}
             {historicoModal && (
@@ -352,27 +391,29 @@ export default function Relatorios() {
                                                 <th>Usuário</th>
                                                 <th>Status</th>
                                                 <th>Tipo</th>
+                                                <th>Arquivo</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>01</td>
-                                                <td>20/08/2025</td>
-                                                <td>Yasmin</td>
-                                                <td>
-                                                    <span className="badge bg-danger">Expirado</span>
-                                                </td>
-                                                <td>PDF</td>
-                                            </tr>
-                                            <tr>
-                                                <td>02</td>
-                                                <td>10/08/2025</td>
-                                                <td>Carlos</td>
-                                                <td>
-                                                    <span className="badge bg-success">Ativo</span>
-                                                </td>
-                                                <td>PDF</td>
-                                            </tr>
+                                            {historico.length === 0 && (
+                                                <tr>
+                                                    <td colSpan="6">Nenhum relatório baixado ainda.</td>
+                                                </tr>
+                                            )}
+                                            {historico.map((h) => (
+                                                <tr key={h.id}>
+                                                    <td>{h.id}</td>
+                                                    <td>{h.data}</td>
+                                                    <td>{h.usuario}</td>
+                                                    <td>
+                                                        <span className={`badge ${h.status === "Ativo" ? "bg-success" : "bg-danger"}`}>
+                                                            {h.status}
+                                                        </span>
+                                                    </td>
+                                                    <td>{h.tipo}</td>
+                                                    <td>{h.filename}</td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </div>

@@ -1,4 +1,27 @@
 .estilizacaoPastinha {
     background-color: #333333;
     color: aliceblue !important;
+    margin-bottom: 5%;
+}
+
+.tituloLinha {
+    --primary-color: #111;
+    --hovered-color: rgb(190, 30, 45);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.tituloLinha::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--hovered-color);
+}
+
+.hoverBotao {
+
 }

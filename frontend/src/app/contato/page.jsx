@@ -1,8 +1,56 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import styles from "./moderador.module.css";
 import Link from "next/link";
+import { getDecodedToken } from "@/utils/auth";
+import axios from "axios";
+import { API_URL } from "@/utils/api";
 
 const Contato = () => {
+    const [mensagem, setMensagem] = useState(null)
+
+    const [formData, setFormData] = useState({
+        tipo: 'feedback',
+        nome: '',
+        email: '',
+        titulo: '',
+        mensagem: ''
+    })
+
+    useEffect(() => {
+        const decoded = getDecodedToken()
+        if (decoded) {
+            console.log(decoded)
+            setFormData({
+                ...formData,
+                nome: decoded.nomeCompleto,
+                email: decoded.email
+            })
+        }
+    }, [])
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleContato = (e) => {
+        e.preventDefault();
+        axios.post(`${API_URL}/publico/mensagem`, formData)
+            .then((res) => {
+                setMensagem('Mensagem de contato enviada com sucesso');
+                setFormData({
+                    ...formData,
+                    titulo: '',
+                    mensagem: ''
+                })
+            })
+            .catch((err) => setMensagem('Erro ao enviar mensagem de contato'))
+    }
+
+
     return (
         <>
             <div className="container-fluid p-0">
@@ -33,27 +81,62 @@ const Contato = () => {
                             <div className={`p-3  text-white text-break ${styles.formContato}`}>
                                 <h6>Contate-nos</h6>
                                 <h2 className="fw-bold fst-italic text-break">Entre em contato</h2>
-                                <form>
+                                <form onSubmit={handleContato}>
                                     <div className="mb-2">
                                         <label htmlFor="name" className="form-label fw-semibold text-break">Nome:</label>
-                                        <input type="text" className="form-control bg-white bg-opacity-25 border-0 text-white" id="name" />
+                                        <input
+                                            type="text"
+                                            className="form-control bg-white bg-opacity-25 border-0 text-white"
+                                            id="name"
+                                            name="nome"
+                                            value={formData.nome}
+                                            onChange={handleChange}
+                                            required
+                                        />
                                     </div>
                                     <div className="mb-2">
                                         <label htmlFor="email" className="form-label fw-semibold text-break">Email:</label>
-                                        <input type="email" className="form-control bg-white bg-opacity-25 border-0 text-white" id="email" />
+                                        <input
+                                            type="email"
+                                            className="form-control bg-white bg-opacity-25 border-0 text-white"
+                                            id="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            required
+                                        />
                                     </div>
                                     <div className="mb-2">
                                         <label htmlFor="title" className="form-label fw-semibold text-break">Título:</label>
-                                        <input type="text" className="form-control bg-white bg-opacity-25 border-0 text-white" id="title" />
+                                        <input
+                                            type="text"
+                                            className="form-control bg-white bg-opacity-25 border-0 text-white"
+                                            id="titulo"
+                                            name="titulo"
+                                            value={formData.titulo}
+                                            onChange={handleChange}
+                                            required
+                                        />
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="message" className="form-label fw-semibold text-break">Mensagem:</label>
-                                        <textarea className="form-control bg-white bg-opacity-25 border-0 text-white" id="message" rows="3" ></textarea>
+                                        <textarea
+                                            className="form-control bg-white bg-opacity-25 border-0 text-white"
+                                            id="mensagem"
+                                            rows="3"
+                                            name="mensagem"
+                                            value={formData.mensagem}
+                                            onChange={handleChange}
+                                            required
+                                        ></textarea>
                                     </div>
                                     <button type="submit" className="btn btn-outline-light w-100 fw-bold text-break" >ENVIAR</button>
+                                    {mensagem}
                                 </form>
                             </div>
                         </div>
+
+
                         <div className="col-md-6 d-flex flex-column justify-content-center gap-1">
                             <p className={`text-break ${styles.texto1Contato}`}>
                                 Em caso de dúvidas ou suporte, entre em contato com nossa equipe para podemos te ajudar.
@@ -106,7 +189,7 @@ const Contato = () => {
                 {/* banner 2 */}
                 <div className={`position-relative ${styles.banner2Contato}`}>
                     {/* Imagem para desktop */}
-                    <img src="/img/banner2Contato.png" alt="Banner Desktop" className={`img-fluid px-20 d-none d-md-block ${styles.bannerContato2Desktop}`}  />
+                    <img src="/img/banner2Contato.png" alt="Banner Desktop" className={`img-fluid px-20 d-none d-md-block ${styles.bannerContato2Desktop}`} />
 
                     {/* Imagem para mobile */}
                     <img src="/img/bannerContato2Mobile.png" alt="Banner Mobile" className={`img-fluid d-block d-md-none w-100 px-20 ${styles.bannerContato2Mobile}`} />

@@ -156,7 +156,7 @@ export default function Header() {
                           className="dropdown-item"
                           href={`/${decoded?.funcao}`}
                         >
-                          Painel de Controle
+                          Meu perfil 
                         </Link>
                       </li>
                       <li>
