@@ -412,15 +412,15 @@ const reabrirChamadoController = async (req, res) => {
         const agora = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
 
         // Nova descrição com histórico
-        const novaDescricao = `${chamado.descricao}\n\n${agora} - O usuário reabriu o chamado.\nMotivo informado: ${motivo}`;
+        const novaDescricao = `${chamado.descricao}<br><br>${agora} - O usuário reabriu o chamado.<br>Motivo informado: ${motivo}`;
 
         // Atualiza chamado
         const response = await editarChamado(
+            chamadoId,
             {
                 status: 'em andamento',
                 descricao: novaDescricao
             },
-            chamadoId
         );
 
         return res.status(200).json({ mensagem: 'Chamado reaberto com sucesso.', response })

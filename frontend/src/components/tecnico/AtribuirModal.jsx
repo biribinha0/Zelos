@@ -48,7 +48,7 @@ export default function AtribuirModal({ chamado, modalId = 'AtribuirModal' }) {
                 data-bs-target={`#${modalId}`}
 
             >
-                Me Atribuir
+                Atribuir tarefa
                 <i className="bi bi-check2-all ms-1"></i>
             </button>
             {/* Modal */}

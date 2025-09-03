@@ -6,7 +6,7 @@ export default function ChamadoCard({ chamado }) {
         <div className={`card ${styles.card}`}>
             <div className="card-body">
                 <h5 className={styles.title}>{chamado.titulo}</h5>
-                <p className={styles.text}>{chamado.descricao}</p>
+                <p className={styles.text} dangerouslySetInnerHTML={{ __html: chamado.descricao }} />
                 <div className="d-flex justify-content-end">
                     <AtribuirModal chamado={chamado} modalId={`AtribuirModal${chamado.id}`} className={styles.button} />
                 </div>

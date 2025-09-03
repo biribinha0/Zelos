@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
-import styles from "./CardChamadosResponsivo.module.css";
+import styles from "./CardChamadosResponsivoTec.module.css";
 import Link from 'next/link';
 
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
-export default function CardChamadosResponsivo({ chamado }) {
+export default function CardChamadosResponsivoTec({ chamado }) {
+
     const [secao, setSecao] = useState(1)
 
     const statusColors = {
@@ -69,6 +70,23 @@ export default function CardChamadosResponsivo({ chamado }) {
                     <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
                     <p className="pb-2"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
+
+                        <div className="row align-items-center justify-content-evenly">
+                            <div className="col-sm-11 col-md-11">
+                                <div className={`justify-content-evenly ${styles.alinhamentoPatrimonio}`}>
+                                    {/* Item 1 titulo */}
+                                    <div className="d-flex align-items-center">
+                                        <p>Nome do solicitante:</p>
+                                    </div>
+
+                                    {/* Item 1 */}
+                                    <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
+                                        <i className="bi bi-person-add text-danger"></i>
+                                        <span className="text-dark ms-3 fw-semibold">{chamado.usuario ?? "--"}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div className="row align-items-center justify-content-evenly">
                             <div className="col-sm-11 col-md-5">
@@ -138,7 +156,7 @@ export default function CardChamadosResponsivo({ chamado }) {
                                 <div className="justify-content-evenly">
                                     {/* Item 1 titulo */}
                                     <div className="d-flex align-items-center">
-                                        <p>Solicitado em:</p>
+                                        <p>Data de abertura:</p>
                                     </div>
 
                                     {/* Item 1 */}
@@ -176,21 +194,20 @@ export default function CardChamadosResponsivo({ chamado }) {
                         <div className="row d-flex align-items-center justify-content-center p-3 gap-3 row-gap-3">
 
                             <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao}`}>
-                                <Link key={chamado.id} href={`/usuario/chamados/${chamado.id}`}>
+                                <Link
+                                    key={chamado.id}
+                                    href={`/tecnico/chamados/${chamado.id}`}
+                                    className="d-flex flex-column align-items-center text-decoration-none"
+                                >
                                     <i className={`bi bi-file-earmark-text-fill text-danger p-2 ${styles.decorationNone}`}></i>
                                     <p className={`card-text pb-0 mb-0 ${styles.decorationNone}`}>Ver Detalhes</p>
                                 </Link>
                             </a>
 
-                            <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "urgencia" ? styles.ativo : ""}`} onClick={() => handleClick("urgencia")}>
-                                <i className="bi bi-exclamation-triangle-fill text-danger p-2"></i>
-                                <p className="card-text pb-0 mb-0">Urgência</p>
-                            </a>
 
-                            <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "reabertura" ? styles.ativo : ""}`} onClick={() => handleClick("reabertura")}>
-                                <i className="bi bi-bell-fill text-danger p-2"></i>
-                                <p className="card-text pb-0 mb-0">Reabertura</p>
-                            </a>
+                            
+
+
                         </div>
 
                     </div>

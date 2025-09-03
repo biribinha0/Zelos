@@ -46,11 +46,11 @@ body {
 .table-responsive {
   width: 100%;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* scroll suave no mobile */
+  -webkit-overflow-scrolling: touch; 
 }
 
 .table {
-  min-width: 900px; /* garante que não fique "apertada" demais */
+  min-width: 900px; 
 }
 
 .titulosTabela {
@@ -77,7 +77,7 @@ body {
 
 .table-bordered-custom th:last-child,
 .table-bordered-custom td:last-child {
-  border-right: none; /* remove borda da última coluna */
+  border-right: none; 
 }
 
 /* Melhor ajuste em telas muito pequenas */
@@ -111,3 +111,38 @@ body {
   color: #6b120f;
   text-decoration: underline;
 }
+
+
+.rc-pagination-item-active a {
+  color: rgb(107, 3, 13) !important;
+  font-weight: 700;
+  border-bottom: 2px solid #9b0413; 
+  outline: none;
+}
+
+
+.rc-pagination-item:hover a {
+  color: #702323;
+}
+
+
+.rc-pagination-item:focus a,
+.rc-pagination-item a:focus {
+  outline: none;  
+  border: none;          
+  color: rgb(130, 16, 28) !important;  
+  border-bottom: 2px solid #67040e;
+}
+
+
+.rc-pagination {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 6px; 
+  padding: 10px 0;
+}
+
+
+
+

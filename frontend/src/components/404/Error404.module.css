@@ -1,4 +1,4 @@
-.container {
+.containerError {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,12 +12,12 @@
   text-align: center;
 }
 
-.content {
+.contentError {
   position: relative;
   z-index: 2;
 }
 
-.code {
+.codeError {
   font-size: 8rem;
   font-weight: bold;
   display: flex;
@@ -27,7 +27,7 @@
 }
 
 /* Hexágono simulando o zero */
-.hexagon {
+.hexagonError {
   width: 80px;
   height: 70px;
   background: transparent;
@@ -36,8 +36,8 @@
   box-sizing: border-box;
 }
 
-.hexagon::before,
-.hexagon::after {
+.hexagonError::before,
+.hexagonError::after {
   content: "";
   position: absolute;
   width: 0;
@@ -45,28 +45,28 @@
   border-right: 40px solid transparent;
 }
 
-.hexagon::before {
+.hexagonError::before {
   bottom: 100%;
   border-bottom: 23px solid white;
 }
 
-.hexagon::after {
+.hexagonError::after {
   top: 100%;
   border-top: 23px solid white;
 }
 
-.hexagon {
+.hexagonError {
   background: transparent;
   border-top: 23px solid white;
   border-bottom: 23px solid white;
 }
 
-.message {
+.messageError {
   font-size: 1.2rem;
   margin-top: 1rem;
 }
 
-.button {
+.buttonError {
   margin-top: 1.5rem;
   padding: 0.8rem 1.5rem;
   background: #c5c5c5;
@@ -77,6 +77,15 @@
   transition: 0.3s;
 }
 
-.button:hover {
+.buttonError:hover {
   background: #ffffff;
+}
+.fundoError{
+  /* background-image: url('fundoBinario.jpeg'); */
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+
 }

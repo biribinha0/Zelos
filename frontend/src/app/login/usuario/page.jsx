@@ -57,12 +57,12 @@ export default function LoginUsuario() {
             <div className={styles.loginContainer}>
                 <h2>Login Usuário</h2>
                 <form onSubmit={handleLogin}>
-                    <label htmlFor="matricula" className={styles.label}>Número de Matrícula:</label>
+                    <label htmlFor="matricula" className={styles.label}>Número de matrícula:</label>
                     <div className={styles.inputWrapper}>
                         <input
                             type="text"
                             id="matricula"
-                            placeholder="Digite seu Número de Matrícula"
+                            placeholder="Digite seu número de matrícula"
                             value={loginParams.username}
                             onChange={(e) => setLoginParams({ ...loginParams, username: e.target.value })}
                             required />

@@ -74,6 +74,7 @@ export default function MeusChamados() {
   const chamadosPaginados = chamadosFiltrados.slice(startIndex, endIndex);
 
   const width = useWindowWidth();
+
   return (
     <>
       <div className="dc-outer d-flex container my-5 chamados-background">
@@ -187,6 +188,7 @@ export default function MeusChamados() {
                 onChange={setCurrent}
                 showSizeChanger={true}
               />
+              
             </div>) : chamadosFiltrados.map((chamado) => {
               return (
                 <CardChamadosResponsivo key={chamado.id} chamado={chamado} />

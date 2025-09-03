@@ -8,6 +8,7 @@ import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import { intervalToDuration } from 'date-fns';
 import { ReabrirChamadoModal } from '@/components/usuarios';
+import Link from 'next/link';
 
 export default function DetalhesChamadoUsuario() {
     const params = useParams();
@@ -54,7 +55,9 @@ export default function DetalhesChamadoUsuario() {
     if (loading) return <p className="text-center mt-4">Carregando...</p>;
     if (!chamado) return <p className="text-center mt-4">Chamado não encontrado.</p>;
     if (chamado.usuario_id !== decoded.id) return <p className="text-center mt-4">403</p>
+
     return (
+
         <div className="dc-outer d-flex justify-content-center bg-detalhes">
             <div className="dc-inner p-4 shadow rounded bg-white" style={{ width: cardWidth }}>
                 {/* Cabeçalho */}
@@ -116,7 +119,7 @@ export default function DetalhesChamadoUsuario() {
 
                     <div className="col-12">
                         <label className="dc-label">Descrição:</label>
-                        <p className="dc-info">{chamado.descricao}</p>
+                        <p className='dc-info' dangerouslySetInnerHTML={{ __html: chamado.descricao }} />
                     </div>
 
                     <div className="col-12 col-md-6">
@@ -172,6 +175,12 @@ export default function DetalhesChamadoUsuario() {
                         ) : (
                             <p className="dc-info text-muted">Sem apontamentos ainda</p>
                         )}
+
+                        <Link href={'/usuario/chamados'}>
+                            <button className="text-center botaoAcessarChamados" type="submit">
+                                <i className="bi bi-arrow-left"></i>  Voltar
+                            </button>
+                        </Link>
                     </div>
 
                 </div>

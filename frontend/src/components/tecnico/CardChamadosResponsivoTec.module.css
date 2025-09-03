@@ -1,0 +1,107 @@
+.estilizacaoPastinha {
+    background-color: #333333;
+    color: aliceblue !important;
+    margin-bottom: 5%;
+}
+
+.infosPastinha {
+    margin-left: auto;
+}
+
+.tituloLinha {
+    --primary-color: #111;
+    --hovered-color: rgb(190, 30, 45);
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.tituloLinha::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--hovered-color);
+}
+
+.hoverBotao {
+    z-index: 1;
+    position: relative;
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 300ms ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.hoverBotao::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: #e8e8e8;
+    z-index: -1;
+    transition: all 300ms ease;
+}
+
+.hoverBotao:hover {
+    color: #212121 !important;
+    text-decoration: none !important;
+}
+
+.hoverBotao:hover::before {
+    width: 100%;
+}
+
+.ativo {
+    background-color: #e8e8e8;
+    color: #212121 !important;
+}
+
+.decorationNone:hover {
+    text-decoration: none !important;
+    color: #212121;
+}
+
+.alinhamentoPatrimonio {
+    padding: 0% 1.7%;
+}
+
+@media (max-width: 767px) {
+    .alinhamentoPatrimonio {
+        padding: 0% 0% !important;
+    }
+}
+
+@media (max-width: 472px) {
+    .infosPastinha {
+        margin-left: 0%;
+    }
+
+    .navItemPastinha {
+        display: flex !important;
+        justify-content: center !important;
+        flex-direction: column !important;
+        align-items: center;
+        text-align: center;
+    }
+
+    .navItemPastinha {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+
+    .navItemPastinhaLi {
+        display: block !important;
+        width: 100% !important;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .navItemPastinhaLi.active {
+        width: 100% !important;
+    }
+}

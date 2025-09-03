@@ -161,7 +161,8 @@ export default function DetalhesChamadoAdmin() {
 
                     <div className="col-12">
                         <label className="dc-label">Descrição:</label>
-                        <p className="dc-info">{chamado.descricao}</p>
+                        <p className='dc-info' dangerouslySetInnerHTML={{ __html: chamado.descricao }} />
+
                     </div>
 
                     <div className="col-12 col-md-6">

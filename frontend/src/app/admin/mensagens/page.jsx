@@ -5,7 +5,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
-import styles from "./mensagem.module.css"
+import styles from "./AdminMensagens.module.css"
 
 export default function AdminMensagens() {
     const [feedbacks, setFeedbacks] = useState([])
@@ -31,13 +31,16 @@ export default function AdminMensagens() {
                 <div className="ms-auto">
                 </div>
             </div>
-            <h2>Contatos</h2>
+           
+      <div className="d-flex align-items-center">
+    <h4 className={`${styles.line}`}>Contato:</h4>
+</div>
             <div className="row d-flex gap-3 py-3 mb-5">
 
                 {contatos.length === 0 ? (
                     <h5>Nenhuma mensagem de contato encontrada</h5>
                 ) : contatos.map(c => (
-                    <div key={c.id} className="col-12 col-md-4 col-lg-3 d-flex fade-in">
+                    <div key={c.id} className={`col-12 col-md-4 col-lg-3 d-flex fade-in ${styles.animar}`}>
   <div className="w-100 rounded-3 shadow-sm p-3 bg-white">
     
     <div className="d-flex align-items-center mb-2">
@@ -78,7 +81,11 @@ export default function AdminMensagens() {
             </div>
 
 
-            <h2>Feedbacks</h2>
+      <div className="d-flex align-items-center">
+    <h4 className={`${styles.line}`}>Feedbacks:</h4>
+</div>
+
+
            <div className="row d-flex g-4 py-3">
   {feedbacks.length === 0 ? (
     <h5>Nenhuma mensagem de feedback encontrada</h5>

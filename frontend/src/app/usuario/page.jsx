@@ -123,9 +123,7 @@ export default function Usuario() {
 
                                     <i className={`bi bi-tools ${styles.statusIcon} ${styles.andamento} ${styles.iconRed}`}></i>
                                 </div>
-                                <p className={styles.descricao}>
-                                    {chamado.descricao}
-                                </p>
+                                <p className={styles.descricao} dangerouslySetInnerHTML={{ __html: chamado.descricao }} />
                             </div>
                         </Link>
                     ))}

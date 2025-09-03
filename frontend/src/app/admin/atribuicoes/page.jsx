@@ -33,6 +33,7 @@ export default function atribuicoes() {
             .catch((error) => setChamados(error))
             .finally(() => setLoading(false))
     }, [])
+
     return (
         <>
 

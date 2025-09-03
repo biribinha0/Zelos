@@ -7,7 +7,7 @@ import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import Link from "next/link";
 
-export default function FecharChamadoModal({ chamado, buttonStyle }) {
+export default function CriarApontamentoModal({ chamado, buttonStyle }) {
     const [apontamento, setApontamento] = useState({
         descricao: "",
         comeco: '',

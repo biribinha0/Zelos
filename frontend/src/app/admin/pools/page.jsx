@@ -68,7 +68,7 @@ export default function AdminPools() {
             <div className="row mt-3">
                 <div className="col-md-12">
                     <label className="form-label fw-bold">Explicação sobre o prazo estimado:</label>
-                    <textarea className="form-control inputParte1 mt-1" ></textarea>
+                    <input className="form-control inputParte1" placeholder="Escreva aqui o prazo estimado" ></input>
                 </div>
             </div>
 

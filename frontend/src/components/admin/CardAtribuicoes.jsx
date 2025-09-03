@@ -12,7 +12,7 @@ export default function CardAtribuicoes({ chamado }) {
     return (
         <div
             className="card rounded-2 border-0 p-3"
-            style={{ width: "100%", maxWidth: "700px", height: "19rem", background: "rgba(220, 220, 220, 1)", justifyContent: "center" }} // Aumentando a largura máxima
+            style={{ width: "100%", maxWidth: "750px", height: "19rem", background: "rgba(220, 220, 220, 1)", justifyContent: "center" }} // Aumentando a largura máxima
         >
             <div className="d-flex justify-content-between align-items-center mb-3">
                 <p

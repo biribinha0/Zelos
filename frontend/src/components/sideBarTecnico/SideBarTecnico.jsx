@@ -35,13 +35,13 @@ export default function SideBarTecnico({ decoded }) {
                     <li className="nav-item">
                         <Link className="nav-link sidebar-link text-light" href={'/tecnico/pool'}>
                             <i className="bi bi-megaphone"></i>
-                            <span className="link-text">Chamados Diponíveis</span>
+                            <span className="link-text">Chamados diponíveis</span>
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link sidebar-link text-light" href={'/tecnico/chamados'}>
                             <i className="bi bi-card-list sidebar-icon"></i>
-                            <span className="link-text">Meus Chamados</span>
+                            <span className="link-text">Meus chamados</span>
                         </Link>
                     </li>
                 </ul>

@@ -7,7 +7,7 @@ import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import Link from "next/link";
 
-export default function FecharChamadoModal({ chamado , buttonStyle, modalId = 'FecharModal'}) {
+export default function FecharChamadoModal({ chamado, buttonStyle, modalId = 'FecharModal' }) {
     const [apontamento, setApontamento] = useState({
         descricao: "",
         comeco: '',
@@ -54,6 +54,9 @@ export default function FecharChamadoModal({ chamado , buttonStyle, modalId = 'F
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setMensagem(response.data.mensagem);
+            setTimeout(() => {
+                window.location.reload()
+            }, 3000)
         } catch (error) {
             setMensagem(error.response?.data?.error || "Erro ao fechar chamado");
         } finally {
@@ -159,6 +162,7 @@ export default function FecharChamadoModal({ chamado , buttonStyle, modalId = 'F
                             {mensagem && (
                                 <div className="text-center">
                                     <p className="mt-3 fw-bold">{mensagem}</p>
+                                    <p className="small">Essa página será recarregada em instantes...</p>
                                     <Link
                                         href={`/tecnico/chamados/${chamado.id}`}
                                         className="btn btn-vermelho mt-3"

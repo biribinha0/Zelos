@@ -1,10 +1,20 @@
+"use client"
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
 import { CategoriasHome, ProfissionaisHome, SobreHome } from "@/components/home";
+import { isAuthenticated, getDecodedToken } from "@/utils/auth";
+import { useEffect, useState } from "react";
 
 
 export default function Home() {
+  const [bannerHref, setBannerHref] = useState('/login/usuario')
+  useEffect(() => {
+    const isAuth = isAuthenticated();
+    const decoded = getDecodedToken();
+    setBannerHref(isAuth ? decoded.funcao === 'usuario'
+      ? '/usuario/criar' : `/${decoded.funcao}/chamados` : 'login/usuario');
+  }, [])
   return (
     <>
       <div className="container-fluid p-0">
@@ -19,7 +29,7 @@ export default function Home() {
             </Link>
           </div>
           <div className={`d-md-none ${styles.smPersonalizado}`}>
-            <Link href={'/login/usuario'}>
+            <Link href={bannerHref}>
               <img
                 className="img-fluid w-100"
                 src="/img/bannerUmTabletHome.png"
@@ -28,7 +38,7 @@ export default function Home() {
             </Link>
           </div>
           <div className="d-none d-md-block">
-            <Link href={'/login/usuario'}>
+            <Link href={bannerHref}>
               <img
                 className="img-fluid w-100"
                 src="/img/bannerUmHome.png"

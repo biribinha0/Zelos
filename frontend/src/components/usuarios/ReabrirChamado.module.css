@@ -1,0 +1,27 @@
+/* From Uiverse.io by felipesntr */ 
+.buttonStyle {
+    border: 2px solid #9a1915;
+    background-color: #9a1915;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0.2em 1.2em 0.2em 1em;
+    transition: all ease-in-out 0.2s;
+    font-size: 14px;
+  }
+  
+.buttonStyle span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .buttonStyle:hover {
+    background-color: #730704;
+  }
+
+  .iconeBotao{
+    background-color: #ffff;
+  }
+  

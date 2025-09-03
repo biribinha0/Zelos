@@ -4,6 +4,7 @@ import { useState } from "react";
 import { getDecodedToken, getToken } from '@/utils/auth';
 import axios from 'axios';
 import { API_URL } from '@/utils/api';
+import styles from "./ReabrirChamado.module.css";
 
 export default function ReabrirChamadoModal({ chamado, buttonStyle, modalId = 'ReabrirChamado' }) {
     const [motivo, setMotivo] = useState('');
@@ -41,14 +42,19 @@ export default function ReabrirChamadoModal({ chamado, buttonStyle, modalId = 'R
     return (
         <>
             {/* BOTÃO QUE ABRE O MODAL */}
+
             <button
-                type="button"
-                className={buttonStyle}
+                className={`me-2 ${styles.buttonStyle}`}
                 data-bs-toggle="modal"
                 data-bs-target={`#${modalId}`}
             >
-                <i className="bi bi-arrow-clockwise me-1"></i>
-                <span className="small">Reabrir</span>
+                <span>
+                    <i className="bi bi-arrow-clockwise me-2">
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
+                    </i>
+                    Reabrir
+                </span>
             </button>
 
             {/* MODAL */}
@@ -61,7 +67,7 @@ export default function ReabrirChamadoModal({ chamado, buttonStyle, modalId = 'R
             >
                 <div className="modal-dialog">
                     <div className="modal-content">
-                        
+
                         {/* HEADER */}
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id={`${modalId}Label`}>
@@ -81,7 +87,8 @@ export default function ReabrirChamadoModal({ chamado, buttonStyle, modalId = 'R
                                 <form id="criarChamadoForm" onSubmit={handleSubmit}>
                                     <div className="mb-3">
                                         <h5>{chamado.titulo}</h5>
-                                        <p>{chamado.descricao}</p>
+                                        <p dangerouslySetInnerHTML={{ __html: chamado.descricao }} />
+
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="message-text" className="col-form-label">

@@ -181,9 +181,9 @@ export default function Relatorios() {
         <div className="container my-5">
             {/* Cabeçalho */}
             <div className="dc-outer d-flex mb-4">
-                <i className="bi bi-file-earmark-bar-graph-fill fs-2 "></i>
-                <div className="fs-4 fw-bold ms-2">Emissão de</div>
-                <div className="fs-4 fw-bold ms-2 text-danger">relatórios:</div>
+                <i className="bi bi-file-earmark-bar-graph-fill fs-2"></i>
+                <div className="fs-4 fw-bold ms-2 mt-2">Emissão de</div>
+                <div className="fs-4 fw-bold ms-2 text-danger mt-2">relatórios:</div>
             </div>
 
             {/* Filtros */}
