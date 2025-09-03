@@ -1,13 +1,14 @@
-import { listarContatos, listarFeedbacks, criarMensagem } from "../models/Mensagens.js";
+import { listarContatos, listarFeedbacks, criarMensagem, listarErrosTipo } from "../models/Mensagens.js";
 
 const listarMensagensController = async (req, res) => {
     try {
         const contatos = await listarContatos()
         const feedbacks = await listarFeedbacks();
+        const errosTipo = await listarErrosTipo();
 
         if (!contatos.length == 0 && feedbacks.length == 0) return res.status(404).json({ error: 'Nenhuma mensagem encontrada' })
 
-        res.status(200).json({ contatos, feedbacks })
+        res.status(200).json({ contatos, feedbacks, errosTipo })
     } catch (error) {
         console.error('Erro ao ler mensagens: ', error);
         return res.status(500).json({ error: 'Ocorreu um erro interno ao ler mensagens.' });

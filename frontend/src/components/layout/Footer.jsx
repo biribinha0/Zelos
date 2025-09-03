@@ -75,7 +75,7 @@ export default function Footer() {
             </Link>
             }
             {(isAuth && decoded.funcao !== 'usuario') && <Link href={`/${decoded.funcao}`}>
-              <button className="chamado-btn text-break">Acessar {decoded.funcao === 'admin' ? 'painel de administração' : 'página de técnico'}</button>
+              <button className="chamado-btn text-break chamado-btnTec">Acessar {decoded.funcao === 'admin' ? 'painel de administração' : 'página de técnico'}</button>
             </Link>}
 
             <div className="avaliacao">

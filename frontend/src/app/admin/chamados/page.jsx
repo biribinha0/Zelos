@@ -92,11 +92,14 @@ export default function AdminChamadosPage() {
 
     return (
         <>
-            <div className="seçãoChamados"></div>
-            <div className="dc-outer d-flex container my-5">
-                <i className="bi bi-card-list fs-2"></i>
-                <div className="fs-4 fw-bold ms-2">Chamados e</div>
-                <div className="fs-4 fw-bold ms-2 text-danger">categorização:</div>
+
+            <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
+                <h4 className="fw-bold text-break">
+                    <i className="bi bi-card-list mx-2 my-2"></i>
+                    <span className="text-dark">
+                        Chamado e <span className="text-danger">categorização:</span>
+                    </span>
+                </h4>
             </div>
 
             {/* Filtros de chamados */}

@@ -19,8 +19,8 @@ export default function Funcionalidades() {
     const funcoesAdm = [
         {
             imagemItem: '/img/funcaoAdmUm.png',
-            descricao: 'Estatísticas',
-            link: '#AdmEstatistica'
+            descricao: 'Retornos',
+            link: '/admin/mensagens'
         },
         {
             imagemItem: '/img/funcaoAdmDois.png',

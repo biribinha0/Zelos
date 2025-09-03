@@ -11,6 +11,8 @@ import Loading from "../loading";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { FecharChamadoModal } from "@/components/tecnico";
+import useWindowWidth from '@/hooks/useWindowWidth';
+import { CardChamadosResponsivoTec } from "@/components/tecnico";
 
 export default function Tecnico() {
     const [chamados, setChamados] = useState([]);
@@ -18,6 +20,7 @@ export default function Tecnico() {
     const decoded = getDecodedToken();
     const [loading, setLoading] = useState(false);
 
+    const width = useWindowWidth();
 
     useEffect(() => {
         setLoading(true);
@@ -100,72 +103,83 @@ export default function Tecnico() {
                     </span>
                 </h4>
             </div>
-            {(chamados.length === 0 && loading) ? <Loading /> : (
-                <div className={styles.containerTabela}>
-                    <table className={styles.tabela}>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Tipo de chamado</th>
-                                <th>Título</th>
-                                <th>Patrimônio</th>
-                                <th>Status</th>
-                                <th>Usuário</th>
-                                <th>Data de Abertura</th>
-                                <th>Última Atualização</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {chamados.slice(0, 3).map((chamado) => (
-                                <tr key={chamado.id}>
-                                    <td className="text-center">{chamado.id}</td>
-                                    <td>{chamado.pool}</td>
-                                    <td>{chamado.titulo}</td>
-                                    <td className="text-center">{chamado.patrimonio ?? "--"}</td>
-                                    <td
-                                        className={`fw-bold text-${chamado.status === "concluído"
-                                            ? "success"
-                                            : chamado.status === "pendente"
-                                                ? "danger"
-                                                : "warning"
-                                            } text-center`}
-                                    >
-                                        {chamado.status}
-                                    </td>
-                                    <td>{chamado.usuario ?? "--"}</td>
-                                    <td>{format(chamado.criado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
-                                    <td>{format(chamado.atualizado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
-                                    <td className="text-center">
-                                        <Link
-                                            href={`/tecnico/chamados/${chamado.id}`}
-                                            className="text-dark text-decoration-none fw-bold"
-                                        >
-                                            Ver Detalhes
-                                        </Link>
-                                        {chamado.status === "concluído" ? (
-                                            <p className="py-1 m-0">
-                                                <i className="bi bi-check-all text-success me-1"></i>
-                                                Concluído
-                                            </p>
-                                        ) : (
-                                            <FecharChamadoModal
-                                                chamado={chamado}
-                                                buttonStyle="btn btn-danger py-1 px-2 small w-100"
-                                                modalId={`FecharModal${chamado.id}`}
-                                            />
-                                        )}
-                                    </td>
-                                </tr>
-                            ))}
-
-                        </tbody>
-                    </table>
+            <div className="m-3 mt-0">
+                {(chamados.length === 0 && loading) ? (
+                <Loading />
+            ) : (
+                <div>
+                    {width >= 992 ? (
+                        <div className={styles.containerTabela}>
+                            <table className={styles.tabela}>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tipo de chamado</th>
+                                        <th>Título</th>
+                                        <th>Patrimônio</th>
+                                        <th>Status</th>
+                                        <th>Usuário</th>
+                                        <th>Data de Abertura</th>
+                                        <th>Última Atualização</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {chamados.slice(0, 3).map((chamado) => (
+                                        <tr key={chamado.id}>
+                                            <td className="text-center">{chamado.id}</td>
+                                            <td>{chamado.pool}</td>
+                                            <td>{chamado.titulo}</td>
+                                            <td className="text-center">{chamado.patrimonio ?? "--"}</td>
+                                            <td
+                                                className={`fw-bold text-${chamado.status === "concluído"
+                                                    ? "success"
+                                                    : chamado.status === "pendente"
+                                                        ? "danger"
+                                                        : "warning"
+                                                    } text-center`}
+                                            >
+                                                {chamado.status}
+                                            </td>
+                                            <td>{chamado.usuario ?? "--"}</td>
+                                            <td>{format(chamado.criado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
+                                            <td>{format(chamado.atualizado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
+                                            <td className="text-center">
+                                                <Link
+                                                    href={`/tecnico/chamados/${chamado.id}`}
+                                                    className="text-dark text-decoration-none fw-bold"
+                                                >
+                                                    Ver Detalhes
+                                                </Link>
+                                                {chamado.status === "concluído" ? (
+                                                    <p className="py-1 m-0">
+                                                        <i className="bi bi-check-all text-success me-1"></i>
+                                                        Concluído
+                                                    </p>
+                                                ) : (
+                                                    <FecharChamadoModal
+                                                        chamado={chamado}
+                                                        buttonStyle="btn btn-danger py-1 px-2 small w-100"
+                                                        modalId={`FecharModal${chamado.id}`}
+                                                    />
+                                                )}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (
+                        // versão responsiva em cards
+                        chamados.slice(0, 3).map((chamado) => (
+                            <CardChamadosResponsivoTec key={chamado.id} chamado={chamado} />
+                        ))
+                    )}
                 </div>
-
             )}
+            </div>
 
-            {/* título para mostrar os chamados recentes */}
+            {/* título para mostrar o calendário */}
             <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
                     <i className="bi bi-calendar-check mx-2 my-2"></i>
@@ -175,7 +189,7 @@ export default function Tecnico() {
                 </h4>
             </div>
 
-            <Calendario />
+            {/* <Calendario /> // Posteriormente, usar calendario para organizar prazos.  */} 
 
             {/* banner 2 */}
             <div className={`position-relative ${styles.banner2Tecnico}`}>

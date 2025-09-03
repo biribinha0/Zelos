@@ -37,13 +37,13 @@ export default function atribuicoes() {
     return (
         <>
 
-            <div className="dc-outer d-flex container-fluid mx-5 my-5 align-items-center">
-                <i className="bi bi-check2-circle fs-2"></i>
-                <div className="fs-4 fw-bold ms-2">Atribuir</div>
-                <div className="fs-4 fw-bold ms-2 text-danger">chamado</div>
-                <div className="fs-4 fw-bold ms-2">a um técnico:</div>
-                <div className="ms-auto">
-                </div>
+            <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
+                <h4 className="fw-bold text-break">
+                    <i className="bi bi-check2-circle mx-2 my-2"></i>
+                    <span className="text-dark">
+                        Atribuir <span className="text-danger">chamado</span> a um técnico:
+                    </span>
+                </h4>
             </div>
 
             <span className="text-secondary ms-5 ps-2">
@@ -52,7 +52,7 @@ export default function atribuicoes() {
             </span>
 
             <div className={`container-fluid ${styles.atribuicoesAdm}`}>
-                <div>
+                <div className={styles.carrosselAdm}>
                     {loading && <h3>Carregando chamados...</h3>}
                     {chamados.length > 0 &&
                         <Swiper
@@ -63,14 +63,15 @@ export default function atribuicoes() {
                             spaceBetween={20}
                             observer={true}
                             observeParents={true}
-
+                            className="d-flex"
                             onSwiper={(swiper) => {
                                 swiperRef.current = swiper;
                             }}
                             breakpoints={{
                                 0: { slidesPerView: 1 },
-                                576: { slidesPerView: 3 },
-                                768: { slidesPerView: 4 },
+                                576: { slidesPerView: 2 },
+                                768: { slidesPerView: 3 },
+                                992: { slidesPerView: 4 }
                             }}
                             className={`p-5 ${styles.carrosselAtribuicoesAdm}`}
                         >
@@ -78,7 +79,7 @@ export default function atribuicoes() {
                                 <SwiperSlide key={chamado.id} className="d-flex justify-content-center">
                                     <CardAtribuicoes chamado={chamado} />
                                 </SwiperSlide>
-                                
+
                             ))}
                         </Swiper>
                     }

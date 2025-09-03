@@ -27,7 +27,6 @@ const Contato = () => {
             ? '/usuario/criar' : `/${decoded.funcao}/chamados` : 'login/usuario');
 
         if (decoded) {
-            console.log(decoded)
             setFormData({
                 ...formData,
                 nome: decoded.nomeCompleto,
@@ -186,14 +185,15 @@ const Contato = () => {
                                     <p className={`text-break ${styles.subtituloContato}`}>R. Boa Vista, 825 - SCS</p>
                                 </div>
                             </div>
-                            <iframe
+<iframe
   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.7171624700615!2d-46.55207368541615!3d-23.62467498466467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5c7d2f0d2d2d%3A0xb7a8a4c90d4f5b1d!2sR.%20Boa%20Vista%2C%20825%20-%20Boa%20Vista%2C%20S%C3%A3o%20Caetano%20do%20Sul%20-%20SP%2C%2009572-300!5e0!3m2!1spt-BR!2sbr!4v1628270400000!5m2!1spt-BR!2sbr"
   width="100%"
   height="190"
-  style={{ border: 0, pointerEvents: "auto" }}
+  style={{ border: 0 }}
   allowFullScreen
   loading="lazy"
-></iframe>
+/>
+
 
                         </div>
                     </div>

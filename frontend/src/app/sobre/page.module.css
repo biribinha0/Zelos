@@ -306,3 +306,123 @@ margin: 0;
    flex: 1 1 100%;
   }
 }
+
+/* Área do carrossel */
+.depoimentos {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Container dos cards */
+.cardsContainer {
+  overflow-x: auto;
+  flex: 1;
+  padding: 10px 0;
+
+  scroll-behavior: smooth;
+
+  /* Esconde barra */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+.cardsContainer::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+/* Linha de cards */
+.cards {
+  display: flex;
+  gap: 16px;
+}
+
+/* Card individual */
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+
+  /* Responsividade: ajusta de acordo com a tela */
+  flex: 0 0 clamp(240px, 70vw, 300px);
+
+  text-align: left;
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Perfil dentro do card */
+.perfil {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.perfilIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+.perfilInfo {
+  font-size: 14px;
+}
+.perfilInfo strong {
+  display: block;
+  font-size: 16px;
+}
+
+/* Texto do depoimento */
+.texto {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+/* Rodapé do card */
+.footerCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.data {
+  color: #e50914;
+  font-size: 13px;
+  font-weight: bold;
+}
+.estrelas {
+  color: #e50914;
+  font-size: 18px;
+}
+
+/* Setas do carrossel */
+.seta {
+  background: transparent;
+  border: none;
+  font-size: 40px;
+  color: #a00;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease;
+  padding: 5px;
+  flex-shrink: 0;
+}
+.seta:hover {
+  transform: scale(1.2);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .depoimentos {
+    gap: 5px;
+  }
+  .seta {
+    font-size: 30px;
+  }
+  .card {
+    padding: 15px;
+  }
+}

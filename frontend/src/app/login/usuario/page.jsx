@@ -38,8 +38,7 @@ export default function LoginUsuario() {
                 setLoading(false);
             })
             .catch(function (error) {
-                console.log(error);
-                setMensagem(error.response.data.mensagem);
+                 setMensagem(error.response?.data?.error || error.response?.data?.error|| "Erro ao fazer login");
                 setLoading(false);
             });
     }

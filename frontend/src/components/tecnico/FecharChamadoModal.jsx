@@ -89,7 +89,7 @@ export default function FecharChamadoModal({ chamado, buttonStyle, modalId = 'Fe
                     <div className="modal-content">
                         {/* HEADER */}
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id={`${modalId}Label`}>
+                            <h1 className="modal-title fs-5 text-black" id={`${modalId}Label`}>
                                 Fechar Chamado
                             </h1>
                             {!mensagem && (
@@ -105,8 +105,8 @@ export default function FecharChamadoModal({ chamado, buttonStyle, modalId = 'Fe
                         {/* BODY */}
                         <div className="modal-body">
                             {!mensagem && (
-                                <form id="fecharChamadoForm" onSubmit={handleSubmit}>
-                                    <div className="mb-3">
+                                <form id="fecharChamadoForm " onSubmit={handleSubmit}>
+                                    <div className="mb-3 text-black">
                                         <label htmlFor="message-text" className="col-form-label">
                                             Último apontamento:
                                         </label>
@@ -119,7 +119,7 @@ export default function FecharChamadoModal({ chamado, buttonStyle, modalId = 'Fe
                                             required
                                         />
                                     </div>
-                                    <div className="mb-3 row">
+                                    <div className="mb-3 row text-black">
                                         <div className="col-12 col-md-6">
                                             <label htmlFor="inicio-datetime" className="col-form-label">
                                                 Início:

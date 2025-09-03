@@ -9,6 +9,7 @@ import { API_URL } from '@/utils/api';
 import { intervalToDuration } from 'date-fns';
 import { ReabrirChamadoModal } from '@/components/usuarios';
 import Link from 'next/link';
+import Error403 from '@/components/403/Error403';
 
 export default function DetalhesChamadoUsuario() {
     const params = useParams();

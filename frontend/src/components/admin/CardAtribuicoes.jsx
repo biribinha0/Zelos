@@ -2,21 +2,42 @@
 import { AtribuirChamadoModal } from ".";
 import styles from "./CardAtribuicoes.module.css";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function CardAtribuicoes({ chamado }) {
-    const [tecnico, setTecnico] = useState({
+    const [tecnico, setTecnico ] = useState({
         nome: "",
         id: ""
-    })
+    });
+
+    const [chamadoImg, setChamadoImg] = useState("");
+
+    useEffect(() => {
+        switch (chamado?.tipo_id) {
+            case 1:
+                setChamadoImg("/img/categoriaDois.png");
+                break;
+            case 2:
+                setChamadoImg("/img/categoriaUm.png");
+                break;
+            case 3:
+                setChamadoImg("/img/categoriaQuatro.png");
+                break;
+            case 4:
+                setChamadoImg("/imgs/categoriaTres.png");
+        }
+    }, [chamado?.tipo_id]);
+
+
     return (
+
         <div
             className="card rounded-2 border-0 p-3"
-            style={{ width: "100%", maxWidth: "750px", height: "19rem", background: "rgba(220, 220, 220, 1)", justifyContent: "center" }} // Aumentando a largura máxima
+            style={{ width: "100%", maxWidth: "750px", height: "auto", background: "rgba(220, 220, 220, 1)", justifyContent: "center" }} // Aumentando a largura máxima
         >
             <div className="d-flex justify-content-between align-items-center mb-3">
                 <p
-                    className="fw-bold mb-0 d-flex flex-column"
+                    className="fw-bold mb-0 d-flex flex-column fs-6"
                     style={{ color: "#b42727bd" }}
                 >
                     {chamado?.titulo}
@@ -32,10 +53,11 @@ export default function CardAtribuicoes({ chamado }) {
                 </p>
 
                 <img
-                    src={chamado?.icon}
+                    src={chamadoImg}
                     width={42}
                     height={42}
                     className="img-fluid"
+                    alt="Ícone do chamado"
                 />
             </div>
 
@@ -84,5 +106,6 @@ export default function CardAtribuicoes({ chamado }) {
 
             </div>
         </div>
+
     );
 }

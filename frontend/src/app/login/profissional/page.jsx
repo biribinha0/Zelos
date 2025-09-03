@@ -40,8 +40,7 @@ export default function LoginProfissional() {
             router.push(`/${decoded.funcao}`);
             setLoading(false);
         } catch (error) {
-            console.error(error);
-            setMensagem(error.response?.data?.mensagem || "Erro ao fazer login");
+            setMensagem(error.response?.data?.error || error.response?.data?.error|| "Erro ao fazer login");
             setLoading(false);
         }
     };

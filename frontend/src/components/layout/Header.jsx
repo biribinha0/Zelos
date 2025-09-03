@@ -17,20 +17,6 @@ export default function Header() {
     { href: '/contato', label: 'Contato' }
   ];
 
-  // {
-  //     itensNav.map((item) => (
-  //         <li className={`nav-item fst-italic ${styles.itens}`} key={item.href}>
-  //             <Link
-  //                 className={`nav-link ${pathName === item.href ? styles.ativo : ''}`}
-  //                 aria-current="page"
-  //                 href={item.href}
-  //             >
-  //                 {item.label}
-  //             </Link>
-  //         </li>
-  //     ))
-  // }
-
   const [isAuth, setIsAuth] = useState(false);
   const [decoded, setDecoded] = useState(null);
 
@@ -63,7 +49,7 @@ export default function Header() {
           <div className="col-12 col-lg-2 d-flex align-items-center">
             <div className="d-flex justify-content-between row">
 
-              <Link className="col-4 col-lg-12 navbar-brand d-flex align-items-center justify-content-end m-0" href={'/'}>
+              <Link className="col-4 col-lg-12 navbar-brand d-flex align-items-center justify-content-center ps-4 m-0" href={'/'}>
                 <img
                   className={`img-fluid w-75 ${styles.logo}`}
                   src="/img/logoBranco.png"
@@ -103,21 +89,21 @@ export default function Header() {
                   </li>
                 ))}
               </ul>
-              <div className="row d-flex">
+              <div className="row d-flex flex-column flex-sm-row">
                 {!isAuth ?
                   (
-                    <div className={`col-7 row d-flex flex-row px-4 ${styles.iconsHeader}`}>
-                      <Link href={'/login/profissional'} className={`col-6 col-lg-12 ${styles.iconTecnicoNav}`}>
+                    <div className={`col-12 col-sm-6 d-flex flex-row m-0 justify-content-center align-items-center px-0 px-md-4 py-3 px-1 py-lg-0 row ${styles.iconsHeader}`}>
+                      <Link href={'/login/profissional'} className={`col-6 p-0 ${styles.iconTecnicoNav}`}>
                         <i className={`bi bi-person-fill-gear ${styles.iconNav}`}></i>
-                        <p className={`${styles.noMargin} ${styles.pLoginNav}`}>Profissionais</p>
+                        <p className={`text-center ${styles.noMargin} ${styles.pLoginNav}`}>Profissionais</p>
                       </Link>
-                      <Link href={'/login/usuario'} className={` col-6 col-lg-12 ${styles.iconUsuarioNav}`}>
+                      <Link href={'/login/usuario'} className={`col-6 p-0 ${styles.iconUsuarioNav}`}>
                         <i className={`bi bi-person-fill ${styles.iconNav}`}></i>
-                        <p className={`${styles.noMargin} ${styles.pLoginNav}`}>Usuário</p>
+                        <p className={`text-center ${styles.noMargin} ${styles.pLoginNav}`}>Usuário</p>
                       </Link>
                     </div>
                   ) : (
-                    <div className="d-flex justify-content-center px-3 pt-2">
+                    <div className="d-flex justify-content-center px-3 col-12 col-sm-6 align-items-center">
 
                       <div className="dropdown">
                         <button
@@ -128,10 +114,10 @@ export default function Header() {
                         >
                           <i className="bi bi-person-circle"></i> {decoded?.nome}
                         </button>
-                        <ul className="dropdown-menu shadow">
+                        <ul className={`dropdown-menu shadow ${styles.activeTransicao}`}>
                           <li>
-                            <Link className="dropdown-item" href={`/${decoded?.funcao}`}>
-                              Painel de Controle
+                            <Link className={`dropdown-item`} href={`/${decoded?.funcao}`}>
+                              Painel de controle
                             </Link>
                           </li>
                           <li>
@@ -145,7 +131,7 @@ export default function Header() {
                   )
                 }
 
-                {(!isAuth || decoded.funcao === 'usuario') && <Link className="col-5 d-flex align-items-center justify-content-center text-decoration-none flex-column"
+                {(!isAuth || decoded.funcao === 'usuario') && <Link className="col-12 col-sm-6 d-flex align-items-center justify-content-center text-decoration-none flex-column"
                   href={isAuth ? '/usuario/criar' : '/login/usuario'}
                   role="button">
 

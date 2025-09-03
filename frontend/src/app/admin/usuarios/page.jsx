@@ -38,11 +38,14 @@ export default function UsuariosPage() {
 
     return (
         <>
-            {/* Cabeçalho */}
-            <div className="dc-outer d-flex container my-5 align-items-center">
-                <i className="bi bi-person-fill fs-2"></i>
-                <div className="fs-4 fw-bold ms-2">Gerenciamento</div>
-                <div className="fs-4 fw-bold ms-2 text-danger">de usuários:</div>
+
+            <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
+                <h4 className="fw-bold text-break">
+                    <i className="bi bi-person-fill mx-2 my-2"></i>
+                    <span className="text-dark">
+                        Gerenciamento de <span className="text-danger">usuários:</span>
+                    </span>
+                </h4>
             </div>
 
             {/* Filtros */}

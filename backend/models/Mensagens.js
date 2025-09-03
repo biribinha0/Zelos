@@ -3,7 +3,7 @@ import { create, readAll } from '../config/database.js';
 
 const listarContatos = async () => {
   try {
-    return await readAll('mensagens',  `tipo = 'contato' ORDER BY criado_em DESC`);
+    return await readAll('mensagens', `tipo = 'contato' ORDER BY criado_em DESC`);
   } catch (error) {
     console.error('Erro ao listar contatos:', error);
     throw error;
@@ -11,11 +11,20 @@ const listarContatos = async () => {
 };
 
 
-const listarFeedbacks= async () => {
+const listarFeedbacks = async () => {
   try {
-    return await readAll('mensagens',  `tipo = 'feedback'  ORDER BY criado_em DESC`);
+    return await readAll('mensagens', `tipo = 'feedback'  ORDER BY criado_em DESC`);
   } catch (error) {
     console.error('Erro ao listar feedbacks:', error);
+    throw error;
+  }
+};
+
+const listarErrosTipo = async () => {
+  try {
+    return await readAll('mensagens',  `tipo = 'erro_tipo'  ORDER BY criado_em DESC`);
+  } catch (error) {
+    console.error('Erro ao listar erros de tipo:', error);
     throw error;
   }
 };
@@ -30,4 +39,4 @@ const criarMensagem = async (mensagemData) => {
   }
 };
 
-export { listarContatos, listarFeedbacks, criarMensagem };
+export { listarContatos, listarFeedbacks,listarErrosTipo, criarMensagem };

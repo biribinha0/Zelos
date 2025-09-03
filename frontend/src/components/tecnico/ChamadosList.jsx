@@ -82,7 +82,7 @@ export default function ChamadosList() {
     const width = useWindowWidth();
 
     return (
-        <div className="row my-5 w-100">
+        <div className="row my-2 w-100">
             <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
                     <i className="bi bi-card-list mx-2 my-2"></i>
@@ -137,7 +137,7 @@ export default function ChamadosList() {
                     </div>
 
                     <div className="col-md-2">
-                        <button className="btn w-100 fw-bold" onClick={buscarChamados} style={{ backgroundColor: "#70232371" }}>
+                        <button className="btn w-100 fw-bold text-white py-2" onClick={buscarChamados} style={{ background: "#820505be", background: "linear-gradient(172deg,rgba(209, 9, 20, 1) 46%, rgba(107, 2, 9, 1) 83%)" }}>
                             Pesquisar
                         </button>
                     </div>

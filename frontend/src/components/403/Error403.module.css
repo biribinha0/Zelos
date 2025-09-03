@@ -1,13 +1,10 @@
 
-
-/* Fundo */
-.containerError {
+.containerError403 {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 85vh;
+  min-height: 100vh; /* muda para min-height pra caber em telas menores */
   padding: 20px;
-  padding-bottom: 2px;
   background-image: url("/img/fundoBinario.jpeg");
   background-size: cover;
   background-position: center;
@@ -17,27 +14,28 @@
 }
 
 /* Conteúdo */
-.contentError {
+.contentError403 {
   position: relative;
   z-index: 2;
   max-width: 600px;
 }
 
 /* Imagem */
-.imgError {
+.imgError403 {
   max-width: 100%;
   height: auto;
 }
 
 /* Mensagem */
-.messageError {
+.messageError403 {
   font-size: 1.5rem;
   margin-top: 1rem;
   line-height: 1.4;
 }
 
 /* Botão */
-.buttonError {
+.buttonError403 {
+  margin-top: 1.5rem;
   padding: 0.8rem 1.5rem;
   background: #c5c5c5;
   border: none;
@@ -47,33 +45,8 @@
   cursor: pointer;
   transition: 0.3s;
 }
-
-.botaoVoltarHome { 
-  transform: translateY(15%); 
-  border: none;
-  font-weight: bold;
-  color: #a73128;
-  text-transform: uppercase;
+.buttonError403:hover {
   background: #ffffff;
-  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-  transition: all 0.4s ease;
-  width: 70%;
-  max-width: 530px;
-  z-index: 10;
-  border-radius: 6px;
-}
-
-.botaoVoltarHome::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  background-color: #212121;
-  z-index: -1;
-  transition: all 0.4s ease;
-  border-radius: 6px;
 }
 
 .botaoVoltarHome:hover {
@@ -86,20 +59,20 @@
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .messageError {
+  .messageError403 {
     font-size: 1.2rem;
   }
-  .buttonError {
+  .buttonError403 {
     padding: 0.7rem 1.2rem;
     font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
-  .messageError {
+  .messageError403 {
     font-size: 1rem;
   }
-  .buttonError {
+  .buttonError403 {
     padding: 0.6rem 1rem;
     font-size: 0.85rem;
   }

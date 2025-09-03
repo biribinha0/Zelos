@@ -157,12 +157,16 @@
     font-weight: bold;
     margin-right: 6%;
       transition: all 0.3s ease;
+}
 
+.chamado-btnTec{
+  width: 270px;
+  height: 60px;
 }
 
 .chamado-btn:hover {
   background: #9a1915;
-  transform: scale(1.05); /* aumenta um pouquinho */
+  transform: scale(1.05); 
 }
 
 
@@ -177,7 +181,6 @@
     cursor: pointer;
 }
 
-/* Parte de baixo */
 .footer-bottom {
     background-color: #892722;
     text-align: center;
@@ -230,16 +233,16 @@
 @media (min-width: 768px) and (max-width: 1024px) {
   .footer-middle {
     display: flex;
-    justify-content: space-evenly; /* mantém lado a lado mas mais equilibrado */
+    justify-content: space-evenly; 
     align-items: center;
-    gap: 25px; /* aproxima os blocos */
+    gap: 25px; 
     margin: 0 auto;
   }
 
   .footer-middle .contact-info {
     grid-template-columns: 1fr 1fr;
-    gap: 8px 10px; /* reduz espaço entre itens */
-    max-width: 420px; /* deixa mais compacto */
+    gap: 8px 10px; 
+    max-width: 420px; 
     margin: 0;
   }
 
@@ -257,11 +260,11 @@
   }
 
   .footer-top {
-    flex-direction: column;   /* coloca itens em coluna */
+    flex-direction: column;   
     justify-content: center;
-    align-items: center;      /* centraliza horizontalmente */
+    align-items: center;     
     text-align: center;
-    gap: 10px; /* um espacinho entre menu e logo */
+    gap: 10px; 
   }
 
   .footer-logo {

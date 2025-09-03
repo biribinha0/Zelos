@@ -2,9 +2,9 @@
 import { useState } from "react";
 import styles from "./CardChamadosResponsivoTec.module.css";
 import Link from 'next/link';
-
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { FecharChamadoModal } from ".";
 
 export default function CardChamadosResponsivoTec({ chamado }) {
 
@@ -193,18 +193,30 @@ export default function CardChamadosResponsivoTec({ chamado }) {
 
                         <div className="row d-flex align-items-center justify-content-center p-3 gap-3 row-gap-3">
 
-                            <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao}`}>
+                            <a className={`col-9 col-sm-7 col-md-9 p-2 border border-white rounded ${styles.hoverBotao} ${styles.decorationNone}`}>
                                 <Link
                                     key={chamado.id}
                                     href={`/tecnico/chamados/${chamado.id}`}
-                                    className="d-flex flex-column align-items-center text-decoration-none"
+                                    className={`d-flex flex-column align-items-center text-decoration-none text-white ${styles.decorationNone}`}
                                 >
                                     <i className={`bi bi-file-earmark-text-fill text-danger p-2 ${styles.decorationNone}`}></i>
                                     <p className={`card-text pb-0 mb-0 ${styles.decorationNone}`}>Ver Detalhes</p>
                                 </Link>
                             </a>
 
-
+                            
+                                {chamado.status === "concluído" ? (
+                                    <p className="py-1 m-0">
+                                        <i className="bi bi-check-all text-success me-1"></i>
+                                        Concluído
+                                    </p>
+                                ) : (
+                                    <FecharChamadoModal
+                                        chamado={chamado}
+                                        buttonStyle="col-9 col-sm-7 col-md-9 p-2 border border-white rounded"
+                                        modalId={`FecharModal${chamado.id}`}
+                                    />
+                                )}
                             
 
 

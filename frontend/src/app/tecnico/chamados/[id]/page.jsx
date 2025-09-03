@@ -8,6 +8,8 @@ import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import { intervalToDuration } from 'date-fns';
 import { CriarApontamentoModal, FecharChamadoModal } from '@/components/tecnico';
+import TipoErradoModal from '@/components/tecnico/TipoErradoModal';
+import Error403 from '@/components/403/Error403';
 
 export default function DetalhesChamadoTecnico() {
     const params = useParams();
@@ -110,6 +112,7 @@ export default function DetalhesChamadoTecnico() {
                     <div className="col-12 col-md-6">
                         <label className="dc-label">Tipo de chamado:</label>
                         <p className="dc-info">{chamado.pool}</p>
+                        <TipoErradoModal chamado={chamado}/>
                     </div>
 
                     <div className="col-12">

@@ -175,17 +175,17 @@ export default function CardChamadosResponsivo({ chamado }) {
 
                         <div className="row d-flex align-items-center justify-content-center p-3 gap-3 row-gap-3">
 
-                            <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao}`}>
+                            <div className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao}`}>
                                 <Link key={chamado.id} href={`/usuario/chamados/${chamado.id}`}>
                                     <i className={`bi bi-file-earmark-text-fill text-danger p-2 ${styles.decorationNone}`}></i>
                                     <p className={`card-text pb-0 mb-0 ${styles.decorationNone}`}>Ver Detalhes</p>
                                 </Link>
-                            </a>
+                            </div>
 
-                            <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "urgencia" ? styles.ativo : ""}`} onClick={() => handleClick("urgencia")}>
+                            {/* <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "urgencia" ? styles.ativo : ""}`} onClick={() => handleClick("urgencia")}>
                                 <i className="bi bi-exclamation-triangle-fill text-danger p-2"></i>
                                 <p className="card-text pb-0 mb-0">Urgência</p>
-                            </a>
+                            </a> Adicionar funcionalidade de urgência */}
 
                             <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "reabertura" ? styles.ativo : ""}`} onClick={() => handleClick("reabertura")}>
                                 <i className="bi bi-bell-fill text-danger p-2"></i>

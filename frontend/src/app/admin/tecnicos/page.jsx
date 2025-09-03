@@ -43,12 +43,14 @@ export default function TecnicosPage() {
 
     return (
         <>
-            {/* Cabeçalho */}
-            <div className="dc-outer d-flex container my-5">
-            <i className="bi bi-wrench-adjustable-circle-fill fs-2"></i>
-                <div className="fs-4 fw-bold ms-2">Gerenciamento</div>
-                <div className="fs-4 fw-bold ms-2 text-danger">de funcionários:</div>
-                {/* Modal de ajuda */}
+
+            <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
+                <h4 className="fw-bold text-break">
+                    <i className="bi bi-wrench-adjustable-circle-fill mx-2 my-2"></i>
+                    <span className="text-dark">
+                        Gerenciamento de <span className="text-danger">funcionários:</span>
+                    </span>
+                </h4>
                 <DuvidasTecnicosModal />
             </div>
 

@@ -1,6 +1,7 @@
 import express from "express";
 import { chamadosSemTecnicoController, autoAtribuirAoChamadoController, obterChamadoPorIdController, listarChamadosPorTecnicoController, fecharChamadoController } from "../controllers/ChamadoController.js";
 import { criarApontamentoController } from "../controllers/ApontamentoController.js";
+import { criarMensagemController } from "../controllers/MensagemController.js";
 
 const router = express.Router();
 
@@ -9,6 +10,8 @@ router.post('/:id/pool-chamadas', chamadosSemTecnicoController)
 
 //Atribui chamado ao técnico logado
 router.post('/chamados/:id/atribuir/', autoAtribuirAoChamadoController)
+
+router.post('/chamados/:id/tipo-errado/', criarMensagemController)
 
 // Lista de Chamados do Técnico
 router.get('/:id/chamados', listarChamadosPorTecnicoController)
