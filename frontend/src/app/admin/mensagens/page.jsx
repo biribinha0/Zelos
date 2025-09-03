@@ -1,0 +1,112 @@
+"use client"
+import { API_URL } from "@/utils/api"
+import { getToken } from "@/utils/auth"
+import axios from "axios"
+import { useState, useEffect } from "react"
+import { format } from "date-fns"
+import { ptBR } from "date-fns/locale"
+import styles from "./mensagem.module.css"
+
+export default function AdminMensagens() {
+    const [feedbacks, setFeedbacks] = useState([])
+    const [contatos, setContatos] = useState([])
+    useEffect(() => {
+        axios.get(`${API_URL}/admin/mensagens`, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            }
+        }).then((res) => {
+            console.log(res)
+            setFeedbacks(res.data.feedbacks)
+            setContatos(res.data.contatos)
+        })
+    }, [])
+    return (
+        <div className="container my-5">
+            <div className="dc-outer d-flex align-items-center mb-4">
+                <i className="bi bi-chat-dots fs-2"></i>
+                <div className="fs-4 fw-bold ms-2">Mensagens de contato e</div>
+                <div className="fs-4 fw-bold ms-2 text-danger">feedback</div>
+                <div className="fs-4 fw-bold ms-2">dos usuários</div>
+                <div className="ms-auto">
+                </div>
+            </div>
+            <h2>Contatos</h2>
+            <div className="row d-flex gap-3 py-3 mb-5">
+
+                {contatos.length === 0 ? (
+                    <h5>Nenhuma mensagem de contato encontrada</h5>
+                ) : contatos.map(c => (
+                    <div key={c.id} className="col-12 col-md-4 col-lg-3 d-flex fade-in">
+  <div className="w-100 rounded-3 shadow-sm p-3 bg-white">
+    
+    <div className="d-flex align-items-center mb-2">
+      <div className="rounded-circle bg-light d-flex align-items-center justify-content-center" style={{ width: "50px", height: "50px" }}>
+        <i className="bi bi-person fs-3 text-secondary"></i>
+      </div>
+      <div className="ms-2">
+        <p className="m-0 text-uppercase small text-muted fw-bold">{c.titulo}</p>
+        <h6 className="m-0 fw-bold text-danger">{c.nome}</h6>
+      </div>
+    </div>
+
+   
+    <p className="text-muted small mb-3 ">{c.mensagem}</p>
+
+    
+    <p className="d-flex align-items-center gap-2 m-0">
+      <i className="bi bi-envelope text-danger"></i>
+      <a
+        href={`https://mail.google.com/mail/?view=cm&fs=1&to=${c.email}&su=Contato%20Zelos:%20${c.titulo}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-dark fw-semibold small text-decoration-none text-break"
+      >
+        {c.email}
+      </a>
+    </p>
+
+    
+    <p className="d-flex align-items-center gap-2 m-0 mt-1 small text-muted">
+      <i className="bi bi-calendar text-danger"></i>
+      {format(c.criado_em, "dd/MM/yyyy", { locale: ptBR })}
+    </p>
+  </div>
+</div>
+
+                ))}
+            </div>
+
+
+            <h2>Feedbacks</h2>
+           <div className="row d-flex g-4 py-3">
+  {feedbacks.length === 0 ? (
+    <h5>Nenhuma mensagem de feedback encontrada</h5>
+  ) : feedbacks.map(f => (
+    <div key={f.id} className="col-12 col-md-4 col-lg-3 d-flex fade-in">
+      <div className="w-100 rounded-3 shadow-sm p-3 bg-white">
+        <div className="d-flex align-items-center mb-2">
+          <div className="rounded-circle bg-light d-flex align-items-center justify-content-center" style={{ width: "50px", height: "50px" }}>
+            <i className="bi bi-person fs-3 text-secondary"></i>
+          </div>
+          <div className="ms-2">
+            <p className="m-0 text-uppercase small text-muted fw-bold">{f.titulo}</p>
+            <h6 className="m-0 fw-bold text-danger">{f.nome}</h6>
+            <p className="m-0 text-dark fw-semibold small">{f.email}</p>
+          </div>
+        </div>
+        <p className="text-muted small mb-3">{f.mensagem}</p>
+        <p className="d-flex align-items-center gap-2 m-0 mt-1 small fw-bold text-dark">
+          <i className="bi bi-calendar text-danger"></i>
+          {format(f.criado_em, "dd/MM/yyyy", { locale: ptBR })}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
+
+            </div>
+            
+     
+    )
+}

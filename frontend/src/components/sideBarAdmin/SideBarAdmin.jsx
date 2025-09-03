@@ -68,6 +68,12 @@ export default function SideBarAdmin({ decoded }) {
                             <span className="link-text">Relatórios</span>
                         </Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className="nav-link sidebar-link text-light" href={'/admin/mensagens'}>
+                            <i className="bi bi-chat-dots"></i>
+                            <span className="link-text">Mensagens</span>
+                        </Link>
+                    </li>
                 </ul>
 
                 {/* SAIR */}

@@ -53,11 +53,6 @@ export default function Usuario() {
             .finally(() => setLoading(false));
     }, [decoded]);
 
-
-    const chamadosOrdenados = chamados.sort((a, b) => {
-        return new Date(b.criado_em) - new Date(a.criado_em);
-    });
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({
@@ -118,9 +113,9 @@ export default function Usuario() {
             </div>
 
             {/* últimos chamados */}
-            {chamadosOrdenados.length > 0 ? (
+            {chamados.length > 0 ? (
                 <div className={styles.listaChamados}>
-                    {chamadosOrdenados.slice(0, 3).map((chamado) => (
+                    {chamados.slice(0, 3).map((chamado) => (
                         <Link key={chamado.id} href={`/usuario/chamados/${chamado.id}`}>
                             <div className={styles.chamado}>
                                 <div className={styles.chamadoHeader}>
@@ -136,7 +131,7 @@ export default function Usuario() {
                     ))}
                     <Link href={'/usuario/chamados'}>
                         <button className={`text-center ${styles.botaoAcessarChamados}`} type="submit">
-                            Acessar todos os chamados <i class="bi bi-arrow-right"></i>
+                            Acessar todos os chamados <i className="bi bi-arrow-right"></i>
                         </button>
                     </Link>
                 </div>

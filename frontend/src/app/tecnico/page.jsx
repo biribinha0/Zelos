@@ -3,8 +3,38 @@
 import styles from "./tecnico.module.css";
 import Link from "next/link";
 import Calendario from "@/components/calendario/Calendario.jsx"
+import { useEffect, useState } from "react";
+import { getDecodedToken, getToken } from "@/utils/auth";
+import axios from "axios";
+import { API_URL } from "@/utils/api";
+import Loading from "../loading";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import { FecharChamadoModal } from "@/components/tecnico";
 
 export default function Tecnico() {
+    const [chamados, setChamados] = useState([]);
+    const token = getToken();
+    const decoded = getDecodedToken();
+    const [loading, setLoading] = useState(false);
+
+
+    useEffect(() => {
+        setLoading(true);
+        axios.get(`${API_URL}/tecnico/${decoded.id}/chamados`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then((res) => {
+                console.log("Chamados recebidos:", res.data); // 👈 debug
+                setChamados(res.data);
+            })
+            .catch((err) => {
+                console.error("Erro ao buscar chamados:", err);
+                setChamados([]);
+            })
+            .finally(() => setLoading(false));
+    }, []);
+
     return (
         <>
             {/* banner 1 */}
@@ -64,74 +94,76 @@ export default function Tecnico() {
             {/* título para mostrar os chamados recentes */}
             <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
-                    <i class="bi bi-stopwatch mx-2 my-2"></i>
+                    <i className="bi bi-stopwatch mx-2 my-2"></i>
                     <span className="text-dark">
                         Chamados <span className="text-danger">recentes:</span>
                     </span>
                 </h4>
             </div>
+            {(chamados.length === 0 && loading) ? <Loading /> : (
+                <div className={styles.containerTabela}>
+                    <table className={styles.tabela}>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo de chamado</th>
+                                <th>Título</th>
+                                <th>Patrimônio</th>
+                                <th>Status</th>
+                                <th>Usuário</th>
+                                <th>Data de Abertura</th>
+                                <th>Última Atualização</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {chamados.slice(0, 3).map((chamado) => (
+                                <tr key={chamado.id}>
+                                    <td className="text-center">{chamado.id}</td>
+                                    <td>{chamado.pool}</td>
+                                    <td>{chamado.titulo}</td>
+                                    <td className="text-center">{chamado.patrimonio ?? "--"}</td>
+                                    <td
+                                        className={`fw-bold text-${chamado.status === "concluído"
+                                            ? "success"
+                                            : chamado.status === "pendente"
+                                                ? "danger"
+                                                : "warning"
+                                            } text-center`}
+                                    >
+                                        {chamado.status}
+                                    </td>
+                                    <td>{chamado.usuario ?? "--"}</td>
+                                    <td>{format(chamado.criado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
+                                    <td>{format(chamado.atualizado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
+                                    <td className="text-center">
+                                        <Link
+                                            href={`/tecnico/chamados/${chamado.id}`}
+                                            className="text-dark text-decoration-none fw-bold"
+                                        >
+                                            Ver Detalhes
+                                        </Link>
+                                        {chamado.status === "concluído" ? (
+                                            <p className="py-1 m-0">
+                                                <i className="bi bi-check-all text-success me-1"></i>
+                                                Concluído
+                                            </p>
+                                        ) : (
+                                            <FecharChamadoModal
+                                                chamado={chamado}
+                                                buttonStyle="btn btn-danger py-1 px-2 small w-100"
+                                                modalId={`FecharModal${chamado.id}`}
+                                            />
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
 
-            <div className={styles.containerTabela}>
-                <table className={styles.tabela}>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Tipo de chamado</th>
-                            <th>Título</th>
-                            <th>Patrimônio</th>
-                            <th>Status</th>
-                            <th>Usuário</th>
-                            <th>Data de Abertura</th>
-                            <th>Última Atualização</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>26</td>
-                            <td>Apoio Técnico</td>
-                            <td>Computador não liga</td>
-                            <td>--</td>
-                            <td className={styles.concluido}>concluído</td>
-                            <td>Bernardo de Souza Madureira</td>
-                            <td>10/07/2025 09:15</td>
-                            <td>27/08/2025 01:26</td>
-                            <td>
-                                <a href="#" className={styles.link}>Ver Detalhes</a><br />
-                                <span className={styles.check}>✓ Concluído</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>36</td>
-                            <td>Apoio Técnico</td>
-                            <td>Impressora travada</td>
-                            <td>--</td>
-                            <td className={styles.andamento}>em andamento</td>
-                            <td>Bernardo de Souza Madureira</td>
-                            <td>26/07/2025 09:10</td>
-                            <td>26/08/2025 12:22</td>
-                            <td>
-                                <a href="#" className={styles.link}>Ver Detalhes</a><br />
-                                <button className={styles.btnConcluir}>Concluir</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>42</td>
-                            <td>Apoio Técnico</td>
-                            <td>Problema no monitor</td>
-                            <td>--</td>
-                            <td className={styles.andamento}>em andamento</td>
-                            <td>Bernardo de Souza Madureira</td>
-                            <td>01/08/2025 14:10</td>
-                            <td>26/08/2025 12:22</td>
-                            <td>
-                                <a href="#" className={styles.link}>Ver Detalhes</a><br />
-                                <button className={styles.btnConcluir}>Concluir</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                        </tbody>
+                    </table>
+                </div>
+
+            )}
 
             {/* título para mostrar os chamados recentes */}
             <div id="AdmEstatistica" className="dc-outer d-flex container my-5">

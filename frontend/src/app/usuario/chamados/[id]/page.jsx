@@ -7,6 +7,7 @@ import { getDecodedToken, getToken } from '@/utils/auth';
 import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import { intervalToDuration } from 'date-fns';
+import { ReabrirChamadoModal } from '@/components/usuarios';
 
 export default function DetalhesChamadoUsuario() {
     const params = useParams();
@@ -57,12 +58,28 @@ export default function DetalhesChamadoUsuario() {
         <div className="dc-outer d-flex justify-content-center bg-detalhes">
             <div className="dc-inner p-4 shadow rounded bg-white" style={{ width: cardWidth }}>
                 {/* Cabeçalho */}
-                <div className="dc-header d-flex align-items-center mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="35" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16" color="#4a4a4a">
-                        <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-                    </svg>
-                    <div className="dc-title fs-4 fw-bold ms-2">Detalhes do</div>
-                    <p className="m-2 dc-title2">chamado</p>
+                <div className="dc-header d-flex align-items-center justify-content-between mb-4 row">
+                    <div className="left d-flex col-12 col-md-6">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="35" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16" color="#4a4a4a">
+                            <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                        </svg>
+                        <div className="dc-title fs-4 fw-bold m-0 ms-2">Detalhes do</div>
+                        <p className="m-0 ms-2 dc-title2">chamado</p>
+                    </div>
+                    <div className="right col-12 col-md-6 d-flex justify-content-end gap-1">
+                        {chamado.status === 'concluído' ?
+                            <>
+                                <p className="py-1 m-0 text-black text-center">
+                                    <i className="bi bi-check-all text-success me-1"></i>
+                                    Concluído
+                                </p>
+                                <ReabrirChamadoModal chamado={chamado} buttonStyle={"btn btn-vermelho py-2 mt-2 px-3 small w-100"} modalId={`ReabrirChamado${chamado.id}`} />
+                            </>
+                            : ""
+
+                        }
+                    </div>
                 </div>
 
                 {/* Informações */}

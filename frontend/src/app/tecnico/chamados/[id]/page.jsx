@@ -114,7 +114,8 @@ export default function DetalhesChamadoTecnico() {
 
                     <div className="col-12">
                         <label className="dc-label">Descrição:</label>
-                        <p className="dc-info">{chamado.descricao}</p>
+                        <p dangerouslySetInnerHTML={{ __html: chamado.descricao }} />
+
                     </div>
 
                     <div className="col-12 col-md-6">

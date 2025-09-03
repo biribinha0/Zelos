@@ -36,6 +36,6 @@ router.post('/usuarios/:id/status', mudarStatusController)
 // Retorna dados para gráficos e exportações (com filtros por query params)
 router.get('/relatorios', gerarRelatorio);
 
-router.get('/mensagem', listarMensagensController)
+router.get('/mensagens', listarMensagensController)
 
 export default router;

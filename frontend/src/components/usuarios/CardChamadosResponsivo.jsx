@@ -17,14 +17,27 @@ export default function CardChamadosResponsivo({ chamado }) {
 
     const statusClass = statusColors[chamado?.status] || "btn-secondary";
 
+    ///BERNARDO OLHA ESSA PARTE AQUI/////
+    const [ativo, setAtivo] = useState(null);
+
+    const handleClick = (tipo) => {
+        setAtivo(tipo);
+
+        fetch("/api/selecao", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ opcao: tipo }),
+        });
+    };
+
     return (
         <>
             <div className={`card text-center ${styles.estilizacaoPastinha}`}>
                 <div className="card-header">
-                    <ul className="nav nav-tabs card-header-tabs">
-                        <li className="nav-item">
+                    <ul className={`nav nav-tabs card-header-tabs ${styles.navItemPastinha}`}>
+                        <li className={`nav-item`}>
                             <button
-                                className={`nav-link ${secao === 1 ? "active" : "text-white"}`}
+                                className={`nav-link ${secao === 1 ? "active" : "text-white"} ${styles.navItemPastinhaLi}`}
                                 aria-current="true"
                                 onClick={() => setSecao(1)}
                             >
@@ -33,7 +46,7 @@ export default function CardChamadosResponsivo({ chamado }) {
                         </li>
                         <li className="nav-item">
                             <button
-                                className={`nav-link ${secao === 2 ? "active" : "text-white"}`}
+                                className={`nav-link ${secao === 2 ? "active" : "text-white"} ${styles.navItemPastinhaLi}`}
                                 onClick={() => setSecao(2)}
                             >
                                 Andamento
@@ -41,17 +54,20 @@ export default function CardChamadosResponsivo({ chamado }) {
                         </li>
                         <li className="nav-item">
                             <button
-                                className={`nav-link ${secao === 3 ? "active" : "text-white"}`}
+                                className={`nav-link ${secao === 3 ? "active" : "text-white"} ${styles.navItemPastinhaLi}`}
                                 onClick={() => setSecao(3)}
                             >
                                 Edição
                             </button>
                         </li>
+                        {/* <div className={`d-flex align-items-center px-2 ${styles.infosPastinha}`}>
+                            <i className="bi bi-question-circle"></i>
+                        </div> */}
                     </ul>
                 </div>
-                {secao === 1 && <div className="card-body p-4">
+                {secao === 1 && <div className="card-body p-4 pb-3">
                     <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
-                    <p className="pb-3"><span>ID:</span> {chamado?.id}</p>
+                    <p className="pb-2"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
 
                         <div className="row align-items-center justify-content-evenly">
@@ -74,45 +90,30 @@ export default function CardChamadosResponsivo({ chamado }) {
                                 <div className="justify-content-evenly">
                                     {/* Item 2 titulo */}
                                     <div className="d-flex align-items-center">
-                                        <p>Número de patrimônio:</p>
-                                    </div>
-
-                                    {/* Item 2 */}
-                                    <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
-                                        <i className="bi bi-pencil-square text-secondary"></i>
-                                        <span className="text-dark ms-3 fw-semibold">{chamado?.patrimonio?.EQUIPAMENTO ?? "--"}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="row align-items-center justify-content-evenly">
-                            <div className="col-sm-11 col-md-5">
-                                <div className="justify-content-evenly">
-                                    {/* Item 3 titulo */}
-                                    <div className="d-flex align-items-center">
                                         <p>Técnico responsável:</p>
                                     </div>
 
-                                    {/* Item 3 */}
+                                    {/* Item 2 */}
                                     <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
                                         <i className="bi bi-person-down text-danger"></i>
                                         <span className="text-dark ms-3 fw-semibold">{chamado?.tecnico ?? "--"}</span>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div className="col-sm-11 col-md-5">
-                                <div className="justify-content-evenly">
-                                    {/* Item 4 titulo */}
+                        <div className="row align-items-center justify-content-evenly">
+                            <div className="col-sm-11 col-md-11">
+                                <div className={`justify-content-evenly ${styles.alinhamentoPatrimonio}`}>
+                                    {/* Item 2 titulo */}
                                     <div className="d-flex align-items-center">
-                                        <p>Abertura do chamado:</p>
+                                        <p>Número de patrimônio:</p>
                                     </div>
 
-                                    {/* Item 4 */}
+                                    {/* Item 2 */}
                                     <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
-                                        <i className="bi bi-calendar-plus-fill text-danger"></i>
-                                        <span className="text-dark ms-3 fw-semibold">{format(chamado?.criado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</span>
+                                        <i className="bi bi-pencil-square text-danger"></i>
+                                        <span className="text-dark ms-3 fw-semibold">{chamado?.patrimonio?.EQUIPAMENTO ?? "--"}</span>
                                     </div>
                                 </div>
                             </div>
@@ -125,34 +126,74 @@ export default function CardChamadosResponsivo({ chamado }) {
                             {chamado?.status}
                         </a>
                     </div>
+                </div>}
 
-                    <div className="row d-flex align-items-center justify-content-center p-3 gap-3 row-gap-3">
+                {secao === 2 && <div className="card-body p-4 pb-0">
+                    <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
+                    <p className="pb-2"><span>ID:</span> {chamado?.id}</p>
+                    <div className="mt-2">
 
-                        <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao}`}>
-                            <i className="bi bi-exclamation-triangle-fill text-danger p-2"></i>
-                            <p className="card-text pb-0 mb-0">
-                                Urgência
-                            </p>
-                        </a>
+                        <div className="row align-items-center justify-content-evenly pb-2">
+                            <div className="col-sm-11 col-md-5">
+                                <div className="justify-content-evenly">
+                                    {/* Item 1 titulo */}
+                                    <div className="d-flex align-items-center">
+                                        <p>Solicitado em:</p>
+                                    </div>
 
-                        <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao}`}>
-                            <i className="bi bi-bell-fill text-danger p-2"></i>
-                            <p className="card-text pb-0 mb-0">
-                                Reabertura
-                            </p>
-                        </a>
+                                    {/* Item 1 */}
+                                    <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
+                                        <i className="bi bi-calendar-event text-danger"></i>
+                                        <span className="text-dark ms-3 fw-semibold">{format(chamado.criado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-sm-11 col-md-5">
+                                <div className="justify-content-evenly">
+                                    {/* Item 2 titulo */}
+                                    <div className="d-flex align-items-center">
+                                        <p>Última atualização:</p>
+                                    </div>
+
+                                    {/* Item 2 */}
+                                    <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
+                                        <i className="bi bi-calendar-event text-danger"></i>
+                                        <span className="text-dark ms-3 fw-semibold">{format(chamado.atualizado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>}
 
 
-                {secao === 3 && <div className="card-body">
-                    <h5 className="card-title">{chamado?.titulo}</h5>
-                    <p className="card-text">
-                        <Link className='link-titulo' key={chamado?.id} href={`/usuario/chamados/${chamado.id}`}>Ver Detalhes</Link>
-                    </p>
-                    <a href="#" className="btn btn-primary">
-                        {chamado?.status}
-                    </a>
+                {secao === 3 && <div className="card-body p-4 pb-3">
+                    <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
+                    <p className="mb-0"><span>ID:</span> {chamado?.id}</p>
+                    <div className="mt-2">
+
+                        <div className="row d-flex align-items-center justify-content-center p-3 gap-3 row-gap-3">
+
+                            <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao}`}>
+                                <Link key={chamado.id} href={`/usuario/chamados/${chamado.id}`}>
+                                    <i className={`bi bi-file-earmark-text-fill text-danger p-2 ${styles.decorationNone}`}></i>
+                                    <p className={`card-text pb-0 mb-0 ${styles.decorationNone}`}>Ver Detalhes</p>
+                                </Link>
+                            </a>
+
+                            <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "urgencia" ? styles.ativo : ""}`} onClick={() => handleClick("urgencia")}>
+                                <i className="bi bi-exclamation-triangle-fill text-danger p-2"></i>
+                                <p className="card-text pb-0 mb-0">Urgência</p>
+                            </a>
+
+                            <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "reabertura" ? styles.ativo : ""}`} onClick={() => handleClick("reabertura")}>
+                                <i className="bi bi-bell-fill text-danger p-2"></i>
+                                <p className="card-text pb-0 mb-0">Reabertura</p>
+                            </a>
+                        </div>
+
+                    </div>
                 </div>}
             </div>
         </>

@@ -99,8 +99,92 @@ export default function AdminChamadosPage() {
                 <div className="fs-4 fw-bold ms-2 text-danger">categorização:</div>
             </div>
 
-            {/* Filtros */}
-            {/* ... seu código dos filtros continua igual ... */}
+            {/* Filtros de chamados */}
+            <div className="container my-5">
+                <div className="row align-items-end g-3">
+                    <div className="col-md-2">
+                        <label className="form-label fw-bold">Status:</label>
+                        {/* Status */}
+                        <select
+                            className="form-control inputParte1"
+                            value={filtros.status}
+                            name="status"
+                            onChange={handleChange}
+                        >
+                            <option value="">Todos</option>
+
+                            {statusList.length > 0 && statusList?.map((s) => (
+                                <option key={s} value={s}>{s}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="col-md-2">
+                        <label className="form-label fw-bold">Tipo: </label>
+                        {/* Tipo de chamado */}
+                        <select
+                            className="form-control inputParte1"
+                            value={filtros.tipo}
+                            name="tipo"
+                            onChange={handleChange}
+                        >
+                            <option value="">Todos</option>
+                            {tiposList.map((t) => (
+                                < option key={t.id} value={t.id} > {t.titulo} </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="col-md-2">
+                        <label className="form-label fw-bold">Técnico atribuído:</label>
+                        {filtros.tecnico}
+                        <select
+                            className="form-select form-control inputParte1"
+                            name="tecnico"
+                            value={filtros.tecnico}
+                            onChange={handleChange}
+
+                        >
+                            <option value="">Selecione</option>
+                            {loading ? (
+                                <option>Carregando...</option>
+                            ) : (
+                                tecnicosList.map((t) => (
+                                    <option key={t.id} value={t.id}>
+                                        {t.nomeFormatado} - {t.pools[0]?.nome_formatado || ""}
+                                    </option>
+                                ))
+                            )}
+                        </select>
+                    </div>
+                    <div className="col-md-2">
+                        <label className="form-label fw-bold">Data de criação:</label>
+
+                        {/* Data de criação */}
+                        <input
+                            type="date"
+                            className="form-control inputParte1"
+                            value={filtros.dataInicio}
+                            name="dataInicio"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="col-md-2">
+                        <label className="form-label fw-bold">Palavra-chave:</label>
+                        {/* Palavra-chave */}
+                        <input
+                            type="text"
+                            className="form-control inputParte1"
+                            placeholder="ex: defeito"
+                            value={filtros.palavra}
+                            name="palavra"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="col-md-2 d-flex align-items-end">
+                        <button className="btn w-100 button2" onClick={buscarChamados}>Pesquisar</button>
+                    </div>
+                </div>
+            </div>
+
 
             <div className="container mt-4">
                 <div className="d-flex justify-content-between align-items-center">
@@ -176,7 +260,7 @@ export default function AdminChamadosPage() {
                 </div>
 
                 {/* paginação */}
-                <div className="d-flex justify-content-center mt-3">
+                <div className="d-flex justify-content-center my-3">
                     <Pagination
                         current={current}
                         pageSize={pageSize}

@@ -22,12 +22,12 @@ export default function ProfissionaisHome() {
         {
             imagemProfissional: '/img/profissionalUm.png',
             imagemNome: '/img/nomeProfissionalUm.png',
-            descricao: 'Assistência técnica.'
+            descricao: 'Assistência técnica'
         },
         {
             imagemProfissional: '/img/profissionalDois.png',
             imagemNome: '/img/nomeProfissionalDois.png',
-            descricao: 'Limpeza'
+            descricao: 'Serviço externo'
         },
         {
             imagemProfissional: '/img/profissionalTres.png',

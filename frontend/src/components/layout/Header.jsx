@@ -56,7 +56,7 @@ export default function Header() {
     removeToken();
     router.push('/')
   }
-  
+
   return (
 
     <nav className={`navbar navbar-expand-lg ${styles.Header}`}>
@@ -156,7 +156,7 @@ export default function Header() {
                           className="dropdown-item"
                           href={`/${decoded?.funcao}`}
                         >
-                          Meu perfil 
+                          Meu perfil
                         </Link>
                       </li>
                       <li>

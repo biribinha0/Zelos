@@ -30,9 +30,7 @@ export default function MeusChamados() {
       }
     })
       .then(function (response) {
-        console.log(response.data); // The data returned by the server
         setChamados(response.data)
-        console.log(response.status); // HTTP status code (e.g., 200)
         setLoading(false)
       })
       .catch(function (error) {
@@ -40,18 +38,13 @@ export default function MeusChamados() {
       });
   }, []);
 
-
   const [tipoChamado, setTipoChamado] = useState('todos');
   const [status, setStatus] = useState('todos');
+  const [palavraChave, setPalavraChave] = useState('');
 
-
-  const handleTipoChange = (e) => {
-    setTipoChamado(e.target.value);
-  };
-
-  const handleStatusChange = (e) => {
-    setStatus(e.target.value);
-  };
+  const handleTipoChange = (e) => setTipoChamado(e.target.value);
+  const handleStatusChange = (e) => setStatus(e.target.value);
+  const handlePalavraChange = (e) => setPalavraChave(e.target.value);
 
   // gerar lista filtrada
   const chamadosFiltrados = Array.isArray(chamados)
@@ -66,7 +59,13 @@ export default function MeusChamados() {
         status === "todos" ||
         chamado.status.toLowerCase() === status.toLowerCase();
 
-      return tipoOk && statusOk;
+      // filtro por palavra-chave
+      const palavraOk =
+        palavraChave.trim() === "" ||
+        chamado.titulo.toLowerCase().includes(palavraChave.toLowerCase()) ||
+        chamado.descricao?.toLowerCase().includes(palavraChave.toLowerCase());
+
+      return tipoOk && statusOk && palavraOk;
     })
     : [];
 
@@ -125,10 +124,17 @@ export default function MeusChamados() {
           <div className="col-md-4">
             <div className="form-group">
               <label className="tipo-chamado fw-bold">Palavra-chave:</label>
-              <input className="form-control input-custom" type="text" placeholder='Escreva aqui!'/>
+              <input
+                className="form-control input-custom"
+                type="text"
+                placeholder='Escreva aqui!'
+                value={palavraChave}
+                onChange={handlePalavraChange}
+              />
             </div>
           </div>
         </div>
+
         <h4 className="resultados-title mt-4">Resultados:</h4>
 
         {(chamadosFiltrados.length > 0) ? (
@@ -183,7 +189,7 @@ export default function MeusChamados() {
               />
             </div>) : chamadosFiltrados.map((chamado) => {
               return (
-                <CardChamadosResponsivo key={chamado.id} chamado={chamado}/>
+                <CardChamadosResponsivo key={chamado.id} chamado={chamado} />
               )
             })
 

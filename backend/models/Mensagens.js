@@ -3,7 +3,7 @@ import { create, readAll } from '../config/database.js';
 
 const listarContatos = async () => {
   try {
-    return await readAll('mensagens',  `tipo = contato`);
+    return await readAll('mensagens',  `tipo = 'contato' ORDER BY criado_em DESC`);
   } catch (error) {
     console.error('Erro ao listar contatos:', error);
     throw error;
@@ -13,7 +13,7 @@ const listarContatos = async () => {
 
 const listarFeedbacks= async () => {
   try {
-    return await readAll('mensagens',  `tipo = feedback`);
+    return await readAll('mensagens',  `tipo = 'feedback'  ORDER BY criado_em DESC`);
   } catch (error) {
     console.error('Erro ao listar feedbacks:', error);
     throw error;

@@ -399,6 +399,38 @@ const atribuirTecnicoController = async (req, res) => {
     }
 }
 
+const reabrirChamadoController = async (req, res) => {
+    const chamadoId = req.params.id
+    const { motivo } = req.body
+    try {
+        const chamado = await obterChamadoPorId(chamadoId);
+        if (!chamado) return res.status(404).json({ error: 'Chamado com ID especificado não encontrado.' });
+
+        if (chamado.status !== 'concluído') return res.status(404).json({ error: 'O chamado especificado não foi marcado como concluído.' });
+
+        // Data/hora formatada
+        const agora = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+
+        // Nova descrição com histórico
+        const novaDescricao = `${chamado.descricao}\n\n${agora} - O usuário reabriu o chamado.\nMotivo informado: ${motivo}`;
+
+        // Atualiza chamado
+        const response = await editarChamado(
+            {
+                status: 'em andamento',
+                descricao: novaDescricao
+            },
+            chamadoId
+        );
+
+        return res.status(200).json({ mensagem: 'Chamado reaberto com sucesso.', response })
+
+    } catch (error) {
+        console.error('Erro ao reabrir chamado: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro ao reabrir o chamado.' });
+    }
+}
+
 
 export {
     listarChamadosPublicosController,
@@ -413,5 +445,6 @@ export {
     fecharChamadoController,
     fecharChamadoSemApontamento,
     listarChamadosDisponiveis,
-    atribuirTecnicoController
+    atribuirTecnicoController,
+    reabrirChamadoController
 }

@@ -1,0 +1,82 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("/img/seu-fundo.png"); /* coloque o caminho da sua imagem */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+  text-align: center;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+.code {
+  font-size: 8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Hexágono simulando o zero */
+.hexagon {
+  width: 80px;
+  height: 70px;
+  background: transparent;
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.hexagon::before,
+.hexagon::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+}
+
+.hexagon::before {
+  bottom: 100%;
+  border-bottom: 23px solid white;
+}
+
+.hexagon::after {
+  top: 100%;
+  border-top: 23px solid white;
+}
+
+.hexagon {
+  background: transparent;
+  border-top: 23px solid white;
+  border-bottom: 23px solid white;
+}
+
+.message {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.button {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  background: #c5c5c5;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background: #ffffff;
+}
