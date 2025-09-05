@@ -10,6 +10,7 @@ import usuarioRotas from "./routes/usuarioRotas.js";
 import metaRotas from "./routes/metaRotas.js"
 import passport from './config/ldap.js';
 import authMiddleware from './middlewares/authMiddleware.js';
+import horarioMiddleware from './middlewares/horarioMiddleware.js';
 
 // 1. Carrega variáveis de ambiente PRIMEIRO
 dotenv.config();
@@ -46,7 +47,7 @@ try {
 }
 
 // 5. Rotas
-app.use('/auth', authRotas);
+app.use('/auth', horarioMiddleware, authRotas);
 
 // app.get('/api/equipamentos/filtrar', (req, res) => {
 //   const { query } = req.query;
@@ -73,15 +74,15 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'online' });
 });
 
-app.use('/admin', authMiddleware(["admin"]), adminRotas);
+app.use('/admin', authMiddleware(["admin"]), horarioMiddleware, adminRotas);
 
 app.use('/publico', publicoRotas);
 
-app.use('/tecnico', authMiddleware(["tecnico"]), tecnicoRotas);
+app.use('/tecnico', authMiddleware(["tecnico"]), horarioMiddleware, tecnicoRotas);
 
-app.use('/usuario', authMiddleware(["usuario"]), usuarioRotas);
+app.use('/usuario', authMiddleware(["usuario"]), horarioMiddleware, usuarioRotas);
 
-app.use('/meta', authMiddleware(["admin", "usuario", "tecnico"]), metaRotas)
+app.use('/meta', authMiddleware(["admin", "usuario", "tecnico"]), horarioMiddleware, metaRotas)
 
 // 6. Tratamento de erros robusto
 process.on('unhandledRejection', (reason, promise) => {

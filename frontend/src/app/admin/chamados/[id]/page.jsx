@@ -7,6 +7,7 @@ import { getDecodedToken, getToken } from '@/utils/auth';
 import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import { intervalToDuration } from 'date-fns';
+import Link from 'next/link';
 
 import { EditarChamadoModal, AdminFecharChamadoModal, AtribuirFuncionario } from "@/components/admin";
 
@@ -218,6 +219,12 @@ export default function DetalhesChamadoAdmin() {
                         ) : (
                             <p className="dc-info text-muted">Sem apontamentos ainda</p>
                         )}
+
+                        <Link href={'/admin/chamados'}>
+                            <button className="text-center botaoAcessarChamados" type="submit">
+                                <i className="bi bi-arrow-left"></i>  Voltar
+                            </button>
+                        </Link>
                     </div>
 
                 </div>

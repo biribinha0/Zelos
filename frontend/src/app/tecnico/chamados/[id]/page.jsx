@@ -10,6 +10,7 @@ import { intervalToDuration } from 'date-fns';
 import { CriarApontamentoModal, FecharChamadoModal } from '@/components/tecnico';
 import TipoErradoModal from '@/components/tecnico/TipoErradoModal';
 import Error403 from '@/components/403/Error403';
+import Link from 'next/link';
 
 export default function DetalhesChamadoTecnico() {
     const params = useParams();
@@ -174,6 +175,13 @@ export default function DetalhesChamadoTecnico() {
                         ) : (
                             <p className="dc-info text-muted">Sem apontamentos ainda</p>
                         )}
+
+                        <Link href={'/tecnico/chamados'}>
+                            <button className="text-center botaoAcessarChamados" type="submit">
+                                <i className="bi bi-arrow-left"></i>  Voltar
+                            </button>
+                        </Link>
+
                     </div>
 
                 </div>

@@ -8,6 +8,8 @@ import { DuvidasChamadosModal, EditarChamadoModal, AdminFecharChamadoModal, Atri
 import Link from "next/link";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
+import useWindowWidth from '@/hooks/useWindowWidth';
+import { CardChamadosResponsivoAdm } from "@/components/admin";
 
 export default function AdminChamadosPage() {
     const [statusList, setStatusList] = useState([]);
@@ -89,6 +91,8 @@ export default function AdminChamadosPage() {
     const startIndex = (current - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     const chamadosPaginados = chamados.slice(startIndex, endIndex);
+
+    const width = useWindowWidth();
 
     return (
         <>
@@ -196,6 +200,16 @@ export default function AdminChamadosPage() {
                 </div>
 
                 <div className="table-responsive mt-3">
+                    {loading ? (
+                    <div className="text-center my-5">
+                        <div className="spinner-border text-danger" role="status">
+                            <span className="visually-hidden">Carregando...</span>
+                        </div>
+                    </div>
+                ) : chamadosPaginados.length > 0 ? (
+                    <>
+                        {width >= 992 ? (
+                            <>
                     <table className="table">
                         <thead className="table-dark text-center">
                             <tr>
@@ -260,6 +274,16 @@ export default function AdminChamadosPage() {
                             )}
                         </tbody>
                     </table>
+                    </>
+                        ) : (
+                            chamadosPaginados.map((chamado) => (
+                                <CardChamadosResponsivoAdm key={chamado.id} chamado={chamado} tecnicosList={tecnicosList} />
+                            ))
+                        )}
+                    </>
+                ) : (
+                    <h3 className="text-center">Nenhum chamado encontrado</h3>
+                )}
                 </div>
 
                 {/* paginação */}

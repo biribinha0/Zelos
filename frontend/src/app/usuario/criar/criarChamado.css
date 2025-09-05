@@ -1,111 +1,119 @@
 .criar-background {
-    background-image: url('/img/fundoCChamado1.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-    margin: 0;
-  }
+  background-image: url('/img/fundoCChamado1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  margin: 0;
+}
 
-  .chamado {
-    color: white;
-    font-weight: 100;
-  }
-  
-  .titulo {
-    color: white;
-  }
-  
-  .tituloInput {
-    color: white;
-  }
-  
-  .inputCriar {
-    background: #ffffff81;
-    color: #fffffff8;
-    font-weight: 600;
-    border: none;
-    height: 48px;
-    /* border-radius: 5px; */
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-  }
-  
-  .inputCriar::placeholder {
-    color: rgba(255, 255, 255, 0.441);
-    opacity: 1;
-  }
-  
-  .inputCriar:focus {
-    border-color: white;
-    background-color: rgba(253, 253, 253, 0.598);
-    box-shadow: 0 0 5px 2px rgba(127, 127, 127, 0.249);
-    color: rgba(84, 83, 83, 0.53);
-    transition: 1s;
-  }
-  
-  .buttonC {
-    padding: 3% 8%;
-    border: unset;
-    color: #212121;
-    z-index: 1;
-    background: #ffffff;
-    position: relative;
-    font-weight: bold;
-    font-size: 18px;
-    color: #a73128;
-    text-transform: uppercase;
-    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-    transition: all 1000ms;
-    overflow: hidden;
-    width: 100%;
-    max-width: 530px;
-  }
-  
-  .buttonC::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 0;
-    background-color: #212121;
-    z-index: -1;
-    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-    transition: all 1000ms;
-  }
-  
-  .buttonC:hover {
-    color: #e8e8e8;
-  }
-  
-  .buttonC:hover::before {
-    width: 100%;
-  }
-  
-*{
+.chamado {
+  color: white;
+  font-weight: 100;
+}
+
+.titulo {
+  color: white;
+}
+
+.tituloInput {
+  color: white;
+}
+
+.inputCriar {
+  background: #ffffff81;
+  color: #fffffff8;
+  font-weight: 600;
+  border: none;
+  min-height: 48px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+
+.inputCriar::placeholder {
+  color: rgba(255, 255, 255, 0.441);
+  opacity: 1;
+}
+
+.inputCriar:focus {
+  border-color: white;
+  background-color: rgba(255, 255, 255, 0.603);
+  box-shadow: 0 0 5px 2px rgba(127, 127, 127, 0.249);
+  color: rgba(34, 34, 34, 0.637);
+  transition: 0.5s;
+}
+
+
+
+
+
+.buttonC {
+  border: unset;
+  color: #212121;
+  z-index: 1;
+  background: #ffffff;
+  position: relative;
+  font-weight: bold;
+  font-size: 18px;
+  color: #a73128;
+  text-transform: uppercase;
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 1000ms;
+  overflow: hidden;
+  width: 100%;
+  max-width: 530px;
+}
+
+.buttonC::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: #212121;
+  z-index: -1;
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 1000ms;
+}
+
+.buttonC:hover {
+  color: #e8e8e8;
+}
+
+.buttonC:hover::before {
+  width: 100%;
+}
+
+* {
   max-width: 100%;
 }
 
 
 
-.patrimonioMae{
-  margin-top: 35%;
+.patrimonioMae {
   margin-bottom: 5%;
 }
 
 
 @media (max-width: 1024px) {
- .patrimonioPai{
-  margin-top: -5%;
-  display: block;
-  margin: auto;
-  margin-left: 5%;
+  .patrimonioPai {
+    margin-top: 5%;
+    display: block;
+    margin: auto;
+    /* margin-left: 5%; */
+  }
+
+  .patrimonioMae {
+    margin-bottom: 5%;
+    margin-top: 5%;
+  }
+
+
 }
 
-.patrimonioMae{
-  margin-bottom: 5%;
-  margin-top: -5%;
-}
 
-
+.disabled-bloco {
+  opacity: 0.5;
+  pointer-events: none;
+  /* evita interação */
 }

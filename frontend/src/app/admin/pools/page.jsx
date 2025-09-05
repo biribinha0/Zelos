@@ -25,15 +25,17 @@ export default function AdminPools() {
     return (
         <div className="container my-5">
             {/* Cabeçalho */}
-            <div className="dc-outer d-flex align-items-center mb-4">
-                <i className="bi bi-journal-medical fs-2"></i>
-                <div className="fs-4 fw-bold ms-2">Criação de</div>
-                <div className="fs-4 fw-bold ms-2 text-danger">nova categoria</div>
-                <div className="fs-4 fw-bold ms-2">de chamados:</div>
-                <div className="ms-auto">
+
+             <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
+                <h4 className="fw-bold text-break">
+                    <i className="bi bi-journal-medical mx-2 my-2"></i>
+                    <span className="text-dark">
+                        Criação de <span className="text-danger">nova categoria </span> de chamados:
+                    </span>
+                </h4>
+                <div className="ms-auto my-10">
                     {/* icone de duvida que abre modal explicando as categorias do formulário */}
                     <DuvidasCriacaoModal />
-
 
                 </div>
             </div>

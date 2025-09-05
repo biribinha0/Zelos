@@ -180,10 +180,13 @@ export default function Relatorios() {
     return (
         <div className="container my-5">
             {/* Cabeçalho */}
-            <div className="dc-outer d-flex mb-4">
-                <i className="bi bi-file-earmark-bar-graph-fill fs-2"></i>
-                <div className="fs-4 fw-bold ms-2 mt-2">Emissão de</div>
-                <div className="fs-4 fw-bold ms-2 text-danger mt-2">relatórios:</div>
+            <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
+                <h4 className="fw-bold text-break">
+                    <i className="bi bi-file-earmark-bar-graph-fill mx-2 my-2"></i>
+                    <span className="text-dark">
+                        Emissão de <span className="text-danger">relatórios:</span>
+                    </span>
+                </h4>
             </div>
 
             {/* Filtros */}

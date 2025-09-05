@@ -115,7 +115,8 @@ export default function CriarChamado() {
       setListaPatrimonio([]);
     } catch (error) {
       console.error(error);
-      setMessage({ type: "error", text: "Erro ao criar chamado, tente novamente." });
+      console.log(error)
+      setMessage({ type: "error", text: error.response.data.error || "Erro ao criar chamado, tente novamente." });
     } finally {
       setLoading(false);
     }
@@ -129,17 +130,17 @@ export default function CriarChamado() {
   const listaAtual = listaPatrimonio.slice(indexPrimeiro, indexUltimo);
 
   return (
-    <div className="container-fluid position-relative criar-background">
+    <div className="container-fluid position-relative py-5 px-5 criar-background">
       <div className="row position-relative" style={{ zIndex: 1 }}>
         {/* Formulário */}
-        <div className="col-12 col-lg-6">
-          <form style={{ padding: "40px", marginTop: "4px" }} onSubmit={handleSubmit}>
-            <h5 className="chamado">CHAMADOS</h5>
-            <h1 className="titulo">Solicitar chamado</h1>
-            <p className="subtitulo text-white">Crie um chamado para sua necessidade</p>
+        <div className="col-12">
+          <h5 className="chamado">CHAMADOS</h5>
+          <h1 className="titulo">Solicitar chamado</h1>
+          <p className="subtitulo text-white">Crie um chamado para sua necessidade</p>
+        </div>
+        <div className="col-12 col-md-6">
 
-            {message && <div className={`alert ${message.type === "success" ? "alert-success" : "alert-danger"}`}>{message.text}</div>}
-
+          <form id="chamadoForm" onSubmit={handleSubmit}>
             <h6 className="tituloInput">Tipo de chamado</h6>
             <select className="form-control mb-3 inputCriar" name="tipo_id" value={chamadoData.tipo_id} onChange={handleChange} required>
               <option value="">Selecione</option>
@@ -150,22 +151,20 @@ export default function CriarChamado() {
             <input className="form-control mb-3 inputCriar" name="titulo" value={chamadoData.titulo} onChange={handleChange} required />
 
             <h6 className="tituloInput">Descrição do problema:</h6>
-            <textarea className="form-control mb-3 inputCriar" name="descricao" value={chamadoData.descricao} onChange={handleChange} required />
-
-            <div className="form-check mb-3">
-              <input className="form-check-input" type="checkbox" id="usarPatrimonio" checked={usarPatrimonio} onChange={e => setUsarPatrimonio(e.target.checked)} />
-              <label className="form-check-label text-white" htmlFor="usarPatrimonio">Adicionar patrimônio</label>
-            </div>
-
-            <button type="submit" className="btn buttonC" disabled={loading}>
+            <textarea className="form-control mb-3 py-3 inputCriar" rows={3} name="descricao" value={chamadoData.descricao} onChange={handleChange} required />
+            {message && <div className={`my-3 d-none d-md-block alert ${message.type === "success" ? "alert-success" : "alert-danger"}`}>{message.text}</div>}
+            <button formTarget="chamadoForm" type="submit" className="btn buttonC py-4 d-none d-md-block mt-5" disabled={loading}>
               {loading ? "Enviando..." : "Solicitar"}
             </button>
+
           </form>
         </div>
         {/* Patrimônio */}
         <div className="col-12 col-lg-6 patrimonioPai">
-          {usarPatrimonio && (
-            <div className="d-flex flex-column input-group patrimonioMae">
+          {(
+            <div
+              className={`d-flex flex-column input-group patrimonioMae ${usarPatrimonio ? "" : "disabled-bloco"}`}
+            >
               <h5 className="tituloInput">Busque o Patrimônio</h5>
               <p className="tituloInput text-break d-flex flex-wrap">
                 Insira as informações do patrimônio que deseja associar ao chamado. Caso não encontre, desmarque a checkbox e envie sem patrimônio.
@@ -241,13 +240,37 @@ export default function CriarChamado() {
                 <div className="alert alert-warning mt-3">{listaPatrimonio[0].erro}</div>
               )}
 
-              {listaPatrimonio.length === 0 && !buscandoPatrimonio && (
+              {listaPatrimonio.length === 0 && message && (
                 <div className="alert alert-warning mt-3">Patrimônio não encontrado</div>
               )}
             </div>
           )}
+          <div className="form-check mb-3">
+            <input
+              className="form-check-input"
+              type="checkbox" id="usarPatrimonio"
+              checked={usarPatrimonio}
+              onChange={e => {
+                setUsarPatrimonio(e.target.checked);
+                if (!e.target.checked) {
+                  setChamadoData(prev => ({
+                    ...prev,
+                    patrimonio: "",
+                    sala: "",
+                    equipamento: ""
+                  }));
+                  setListaPatrimonio([]);
+                  setMessage('')
+                }
+              }} />
+            <label className="form-check-label text-white" htmlFor="usarPatrimonio">Adicionar patrimônio</label>
+          </div>
         </div>
       </div>
+      <button formTarget="chamadoForm" type="submit" className="btn buttonC py-4 d-block d-md-none" disabled={loading}>
+        {loading ? "Enviando..." : "Solicitar"}
+      </button>
+      {message && <div className={`d-block my-3 d-md-none alert ${message.type === "success" ? "alert-success" : "alert-danger"}`}>{message.text}</div>}
     </div>
   );
 }

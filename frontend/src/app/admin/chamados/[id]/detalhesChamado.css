@@ -105,3 +105,56 @@
 .status-andamento::before{
     background-color: #ffff00; /* cor do status */
 }
+
+/* BOTÃO PARA VOLTAR A PÁGINA INICIAL DE USUÁRIO */
+.botaoAcessarChamados {
+    padding: 1% 3%;
+    border: unset;
+    z-index: 1;
+    background: #d70101;
+    position: relative;
+    font-weight: bold;
+    font-size: 17px !important;
+    color: #eeeeee;
+    text-transform: uppercase;
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 1000ms;
+    overflow: hidden;
+    width: 100%;
+    max-width: 210px;
+    border-radius: 3px;
+    display: block;
+    margin: auto;
+    margin-top: 5%;
+  }
+  
+  .botaoAcessarChamados::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: #212121;
+    z-index: -1;
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    transition: all 1000ms;
+  }
+  
+  .botaoAcessarChamados:hover {
+    color: #e8e8e8 !important;
+  }
+  
+  .botaoAcessarChamados:hover::before {
+    width: 100%;
+  }
+  
+  @keyframes shine {
+    0% {
+      left: -75px;
+    }
+  
+    100% {
+      left: 120%;
+    }
+  }

@@ -3,7 +3,7 @@ import { criarApontamento, listarApontamentosPorChamado } from "../models/Aponta
 import { obterPoolPorId, listarPoolsPorTecnico, listarTecnicosPorPool } from "../models/Pools.js";
 import { formatarTituloPool, primeiroNomeInicial } from "../utils.js";
 import { obterUsuarioPorId } from "../models/Usuarios.js";
-import { obterEquipamentoPorPatrimonio } from "../models/Equipamentos.js";
+import { obterEquipamentoPorPatrimonio, verificarChamadoPatrimonio } from "../models/Equipamentos.js";
 import { formatarNome } from '../utils.js';
 
 
@@ -173,6 +173,17 @@ const criarChamadoController = async (req, res) => {
     }
 
     try {
+
+        if (patrimonio) {
+            const disponivel = await verificarChamadoPatrimonio(patrimonio, tipo_id);
+
+            if (!disponivel) {
+                return res.status(400).json({
+                    error: 'Já existe um chamado desse tipo aberto para este patrimônio.'
+                });
+            }
+        }
+
         const chamadoData = {
             titulo,
             descricao,

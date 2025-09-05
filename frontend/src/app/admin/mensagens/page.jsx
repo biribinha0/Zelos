@@ -25,167 +25,170 @@ export default function AdminMensagens() {
   }, [])
   return (
     <div className="container my-5">
-      <div className="dc-outer d-flex align-items-center mb-4">
-        <i className="bi bi-chat-dots fs-2"></i>
-        <div className="fs-4 fw-bold ms-2">Mensagens de contato e</div>
-        <div className="fs-4 fw-bold ms-2 text-danger">feedback</div>
-        <div className="fs-4 fw-bold ms-2">dos usuários</div>
-        <div className="ms-auto">
-        </div>
+
+
+      <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
+        <h4 className="fw-bold text-break">
+          <i className="bi bi-chat-dots mx-2 my-2"></i>
+          <span className="text-dark">
+            Mensagens de contato e <span className="text-danger">feedback</span> dos usuários:
+          </span>
+        </h4>
       </div>
 
-      <div className="d-flex align-items-center">
+      {/* Avisos de tipo errado */}
+      <div className="d-flex align-items-center mt-5">
+        <h4 className={`${styles.line}`}>Chamados com tipo errado:</h4>
+      </div>
+
+      <div className="row d-flex g-4 py-3">
+        {errosTipo.length === 0 ? (
+          <h5>Nenhuma mensagem de tipo errado encontrada</h5>
+        ) : (
+          errosTipo.map((et) => (
+            <div key={et.id} className="col-12 col-md-6 col-lg-4 d-flex fade-in">
+              <div className="card w-100 h-100 rounded-3 shadow-sm p-3 bg-white d-flex flex-column">
+                <div className="d-flex align-items-center mb-2">
+                  <div
+                    className="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                    style={{ width: "50px", height: "50px" }}
+                  >
+                    <i className="bi bi-person fs-3 text-secondary"></i>
+                  </div>
+                  <div className="ms-2 overflow-hidden">
+                    <h6
+                      className="m-0 fw-bold text-danger text-truncate"
+                      title={et.nome}
+                    >
+                      {et.nome}
+                    </h6>
+                    <p
+                      className="m-0 text-dark fw-semibold small text-truncate"
+                      title={et.email}
+                    >
+                      {et.email}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="m-0 text-uppercase small text-muted fw-bold mb-1">
+                  {et.titulo}
+                </p>
+
+                {/* Mensagem com limite de altura e scroll */}
+                <p
+                  className="text-muted small mb-3 flex-grow-1 overflow-auto"
+                  style={{
+                    maxHeight: "100px",
+                    whiteSpace: "pre-wrap",
+                    wordBreak: "break-word",
+                  }}
+                >
+                  {et.mensagem}
+                </p>
+
+                <p className="d-flex align-items-center gap-2 m-0 mt-auto small fw-bold text-dark">
+                  <i className="bi bi-calendar text-danger"></i>
+                  {format(et.criado_em, "dd/MM/yyyy", { locale: ptBR })}
+                </p>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      <div className="d-flex align-items-center mt-5">
         <h4 className={`${styles.line}`}>Contato:</h4>
       </div>
       <div className="row d-flex g-4 py-3 mb-5">
-  {contatos.length === 0 ? (
-    <h5>Nenhuma mensagem de contato encontrada</h5>
-  ) : (
-    contatos.map((c) => (
-      <div
-        key={c.id}
-        className="col-12 col-md-6 col-lg-4 d-flex fade-in"
-      >
-        <div className="card w-100 h-100 rounded-3 shadow-sm p-3 bg-white d-flex flex-column">
-          <div className="d-flex align-items-center mb-2">
+        {contatos.length === 0 ? (
+          <h5>Nenhuma mensagem de contato encontrada</h5>
+        ) : (
+          contatos.map((c) => (
             <div
-              className="rounded-circle bg-light d-flex align-items-center justify-content-center"
-              style={{ width: "50px", height: "50px" }}
+              key={c.id}
+              className="col-12 col-md-6 col-lg-4 d-flex fade-in"
             >
-              <i className="bi bi-person fs-3 text-secondary"></i>
-            </div>
-            <div className="ms-2">
-              <p className="m-0 text-uppercase small text-muted fw-bold">
-                {c.titulo}
-              </p>
-              <h6 className="m-0 fw-bold text-danger">{c.nome}</h6>
-            </div>
-          </div>
+              <div className="card w-100 h-100 rounded-3 shadow-sm p-3 bg-white d-flex flex-column">
+                <div className="d-flex align-items-center mb-2">
+                  <div
+                    className="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                    style={{ width: "50px", height: "50px" }}
+                  >
+                    <i className="bi bi-person fs-3 text-secondary"></i>
+                  </div>
+                  <div className="ms-2">
+                    <p className="m-0 text-uppercase small text-muted fw-bold">
+                      {c.titulo}
+                    </p>
+                    <h6 className="m-0 fw-bold text-danger">{c.nome}</h6>
+                  </div>
+                </div>
 
-          <p className="text-muted small mb-3 flex-grow-1">{c.mensagem}</p>
+                <p className="text-muted small mb-3 flex-grow-1">{c.mensagem}</p>
 
-          <p className="d-flex align-items-center gap-2 m-0">
-            <i className="bi bi-envelope text-danger"></i>
-            <a
-              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${c.email}&su=Contato%20Zelos:%20${c.titulo}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-dark fw-semibold small text-decoration-none text-break"
-            >
-              {c.email}
-            </a>
-          </p>
-          <p className="d-flex align-items-center gap-2 m-0 mt-1 small text-muted">
-            <i className="bi bi-calendar text-danger"></i>
-            {format(c.criado_em, "dd/MM/yyyy", { locale: ptBR })}
-          </p>
-        </div>
+                <p className="d-flex align-items-center gap-2 m-0">
+                  <i className="bi bi-envelope text-danger"></i>
+                  <a
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${c.email}&su=Contato%20Zelos:%20${c.titulo}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-dark fw-semibold small text-decoration-none text-break"
+                  >
+                    {c.email}
+                  </a>
+                </p>
+                <p className="d-flex align-items-center gap-2 m-0 mt-1 small text-muted">
+                  <i className="bi bi-calendar text-danger"></i>
+                  {format(c.criado_em, "dd/MM/yyyy", { locale: ptBR })}
+                </p>
+              </div>
+            </div>
+          ))
+        )}
       </div>
-    ))
-  )}
-</div>
 
-{/* Feedbacks */}
-<div className="d-flex align-items-center">
-  <h4 className={`${styles.line}`}>Feedbacks:</h4>
-</div>
-
-<div className="row d-flex g-4 py-3">
-  {feedbacks.length === 0 ? (
-    <h5>Nenhuma mensagem de feedback encontrada</h5>
-  ) : (
-    feedbacks.map((f) => (
-      <div key={f.id} className="col-12 col-md-6 col-lg-4 d-flex fade-in">
-        <div className="card w-100 h-100 rounded-3 shadow-sm p-3 bg-white d-flex flex-column">
-          <div className="d-flex align-items-center mb-2">
-            <div
-              className="rounded-circle bg-light d-flex align-items-center justify-content-center"
-              style={{ width: "50px", height: "50px" }}
-            >
-              <i className="bi bi-person fs-3 text-secondary"></i>
-            </div>
-            <div className="ms-2">
-              <p className="m-0 text-uppercase small text-muted fw-bold">
-                {f.titulo}
-              </p>
-              <h6 className="m-0 fw-bold text-danger">{f.nome}</h6>
-              <p className="m-0 text-dark fw-semibold small">{f.email}</p>
-            </div>
-          </div>
-
-          {/* Mensagem cresce para alinhar data no fim */}
-          <p className="text-muted small mb-3 flex-grow-1">{f.mensagem}</p>
-
-          <p className="d-flex align-items-center gap-2 m-0 mt-auto small fw-bold text-dark">
-            <i className="bi bi-calendar text-danger"></i>
-            {format(f.criado_em, "dd/MM/yyyy", { locale: ptBR })}
-          </p>
-        </div>
+      {/* Feedbacks */}
+      <div className="d-flex align-items-center">
+        <h4 className={`${styles.line}`}>Feedbacks:</h4>
       </div>
-    ))
-  )}
-</div>
 
-{/* Feedback técnico */}
-<div className="d-flex align-items-center mt-5">
-  <h4 className={`${styles.line}`}>Feedback técnico:</h4>
-</div>
+      <div className="row d-flex g-4 py-3">
+        {feedbacks.length === 0 ? (
+          <h5>Nenhuma mensagem de feedback encontrada</h5>
+        ) : (
+          feedbacks.map((f) => (
+            <div key={f.id} className="col-12 col-md-6 col-lg-4 d-flex fade-in">
+              <div className="card w-100 h-100 rounded-3 shadow-sm p-3 bg-white d-flex flex-column">
+                <div className="d-flex align-items-center mb-2">
+                  <div
+                    className="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                    style={{ width: "50px", height: "50px" }}
+                  >
+                    <i className="bi bi-person fs-3 text-secondary"></i>
+                  </div>
+                  <div className="ms-2">
+                    <p className="m-0 text-uppercase small text-muted fw-bold">
+                      {f.titulo}
+                    </p>
+                    <h6 className="m-0 fw-bold text-danger">{f.nome}</h6>
+                    <p className="m-0 text-dark fw-semibold small">{f.email}</p>
+                  </div>
+                </div>
 
-<div className="row d-flex g-4 py-3">
-  {errosTipo.length === 0 ? (
-    <h5>Nenhuma mensagem de feedback encontrada</h5>
-  ) : (
-    errosTipo.map((f) => (
-      <div key={f.id} className="col-12 col-md-6 col-lg-4 d-flex fade-in">
-        <div className="card w-100 h-100 rounded-3 shadow-sm p-3 bg-white d-flex flex-column">
-          <div className="d-flex align-items-center mb-2">
-            <div
-              className="rounded-circle bg-light d-flex align-items-center justify-content-center"
-              style={{ width: "50px", height: "50px" }}
-            >
-              <i className="bi bi-person fs-3 text-secondary"></i>
+                {/* Mensagem cresce para alinhar data no fim */}
+                <p className="text-muted small mb-3 flex-grow-1">{f.mensagem}</p>
+
+                <p className="d-flex align-items-center gap-2 m-0 mt-auto small fw-bold text-dark">
+                  <i className="bi bi-calendar text-danger"></i>
+                  {format(f.criado_em, "dd/MM/yyyy", { locale: ptBR })}
+                </p>
+              </div>
             </div>
-            <div className="ms-2 overflow-hidden">
-              <h6
-                className="m-0 fw-bold text-danger text-truncate"
-                title={f.nome}
-              >
-                {f.nome}
-              </h6>
-              <p
-                className="m-0 text-dark fw-semibold small text-truncate"
-                title={f.email}
-              >
-                {f.email}
-              </p>
-            </div>
-          </div>
-
-          <p className="m-0 text-uppercase small text-muted fw-bold text-truncate">
-            {f.titulo}
-          </p>
-
-          {/* Mensagem com limite de altura e scroll */}
-          <p
-            className="text-muted small mb-3 flex-grow-1 overflow-auto"
-            style={{
-              maxHeight: "100px",
-              whiteSpace: "pre-wrap",
-              wordBreak: "break-word",
-            }}
-          >
-            {f.mensagem}
-          </p>
-
-          <p className="d-flex align-items-center gap-2 m-0 mt-auto small fw-bold text-dark">
-            <i className="bi bi-calendar text-danger"></i>
-            {format(f.criado_em, "dd/MM/yyyy", { locale: ptBR })}
-          </p>
-        </div>
+          ))
+        )}
       </div>
-    ))
-  )}
-</div>
+
 
 
 

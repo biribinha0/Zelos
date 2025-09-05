@@ -1,13 +1,14 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import "../adm.css";
-import { ChamadosAtribuidosModal, DetalhesUsuarioModal, DuvidasTecnicosModal, DesativarUsuarioModal, AtivarUsuarioModal } from '@/components/admin';
 import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import { getToken } from '@/utils/auth';
+import { ChamadosAtribuidosModal, DetalhesUsuarioModal, DuvidasTecnicosModal, DesativarUsuarioModal, AtivarUsuarioModal } from '@/components/admin';
+import useWindowWidth from '@/hooks/useWindowWidth';
+import { CardResponsivoTecAdm } from "@/components/admin";
 
 export default function TecnicosPage() {
-    // 🔹 States
     const [tecnicos, setTecnicos] = useState([]);
     const [tecnicosOrigem, setTecnicosOrigem] = useState([]);
     const [nome, setNome] = useState("");
@@ -30,7 +31,7 @@ export default function TecnicosPage() {
     }, []);
 
 
-    // 🔹 Filtro
+    // Filtro
     const tecnicosFiltrados = tecnicos.filter((t) => {
         return (
             (nome ? t.nome.toLowerCase().includes(nome.toLowerCase()) : true) &&
@@ -40,6 +41,8 @@ export default function TecnicosPage() {
             )
         );
     });
+
+    const width = useWindowWidth();
 
     return (
         <>
@@ -102,59 +105,71 @@ export default function TecnicosPage() {
 
                 {/* Tabela */}
                 <div className="table-responsive mt-3">
-                    <table className="table">
-                        <thead className="table-dark text-center">
-                            <tr>
-                                <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>Chamados em andamento</th>
-                                <th>Chamados finalizados</th>
-                                <th>Tempo médio de atendimento</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-center align-middle">
-                            {tecnicosFiltrados.map((tec) => (
-                                <tr key={tec.id}>
-                                    <td className="TextTabela">{tec.nome}</td>
-                                    <td className="TextTabela">{tec.email}</td>
-                                    <td className="TextTabela">{tec.chamadosEmAndamento}</td>
-                                    <td className="TextTabela">{tec.chamadosConcluidos}</td>
-                                    <td className="TextTabela">{tec.tempoMedio || "-"}</td>
-                                    <td className="TextTabela">
-                                        {tec.status === "ativo" ? "Ativo" : "Inativo"}
-                                    </td>
-                                    <td>
-                                        <div className="d-flex justify-content-center gap-2">
-                                            {tec.status === "ativo" ? (
-                                                <>
-                                                    <DetalhesUsuarioModal
-                                                        usuario={tec}
-                                                        modalId={`detalhesUsuarioModal${tec.id}`}
-                                                    />
-                                                    <ChamadosAtribuidosModal
-                                                        usuario={tec}
-                                                        modalId={`chamadosUsuarioModal${tec.id}`}
-                                                    />
-                                                    <DesativarUsuarioModal
-                                                        usuario={tec}
-                                                        modalId={`desativarUsuario${tec.id}`}
-                                                    />
-                                                </>
-                                            ) : (
-                                                <AtivarUsuarioModal
-                                                    usuario={tec}
-                                                    modalId={`ativarUsuario${tec.id}`}
-                                                />
-                                            )}
-                                        </div>
+                    {tecnicosFiltrados.length > 0 ? (
+                        <>
+                            {width >= 992 ? (
+                                <table className="table">
+                                    <thead className="table-dark text-center">
+                                        <tr>
+                                            <th className="align-content-center">Nome</th>
+                                            <th className="align-content-center">E-mail</th>
+                                            <th className="align-content-center">Chamados em andamento</th>
+                                            <th className="align-content-center">Chamados finalizados</th>
+                                            <th className="align-content-center">Tempo médio de atendimento</th>
+                                            <th className="align-content-center">Status</th>
+                                            <th className="align-content-center">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="text-center align-middle">
+                                        {tecnicosFiltrados.map((tec) => (
+                                            <tr key={tec.id}>
+                                                <td className="TextTabela">{tec.nome}</td>
+                                                <td className="TextTabela">{tec.email}</td>
+                                                <td className="TextTabela">{tec.chamadosEmAndamento}</td>
+                                                <td className="TextTabela">{tec.chamadosConcluidos}</td>
+                                                <td className="TextTabela">{tec.tempoMedio || "-"}</td>
+                                                <td className="TextTabela">
+                                                    {tec.status === "ativo" ? "Ativo" : "Inativo"}
+                                                </td>
+                                                <td>
+                                                    <div className="d-flex justify-content-center gap-2">
+                                                        {tec.status === "ativo" ? (
+                                                            <>
+                                                                <DetalhesUsuarioModal
+                                                                    usuario={tec}
+                                                                    modalId={`detalhesUsuarioModal${tec.id}`}
+                                                                />
+                                                                <ChamadosAtribuidosModal
+                                                                    usuario={tec}
+                                                                    modalId={`chamadosUsuarioModal${tec.id}`}
+                                                                />
+                                                                <DesativarUsuarioModal
+                                                                    usuario={tec}
+                                                                    modalId={`desativarUsuario${tec.id}`}
+                                                                />
+                                                            </>
+                                                        ) : (
+                                                            <AtivarUsuarioModal
+                                                                usuario={tec}
+                                                                modalId={`ativarUsuario${tec.id}`}
+                                                            />
+                                                        )}
+                                                    </div>
 
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                tecnicosFiltrados.map((tec) => (
+                                    <CardResponsivoTecAdm key={tec.id} tec={tec} />
+                                ))
+                            )}
+                        </>
+                    ) : (
+                        <h3 className="text-center">Nenhum usuário encontrado</h3>
+                    )}
                 </div>
             </div>
 

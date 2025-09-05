@@ -90,9 +90,8 @@ justify-content: center;
   font-size: clamp(1.0rem, 1.5vw, 1.2rem);
   margin-right: 6%;
   margin-left: 6%;
-  margin-top: 2%;
   text-align: center;
-  
+  margin-top: 10%;
 }
           
 .NossosDepoimentos{
@@ -229,7 +228,7 @@ margin: 0;
   gap: 40px;
   flex-wrap: wrap;
   background-color:#a73128;
-  margin-top: 3%;
+  margin-top: 15%;
   padding: 2rem 1rem;
 }
 

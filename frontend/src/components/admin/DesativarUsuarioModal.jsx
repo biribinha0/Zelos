@@ -34,7 +34,7 @@ export default function DesativarUsuarioModal({ usuario, modalId = `desativarUsu
                 data-bs-toggle="modal"
                 data-bs-target={`#${modalId}`}
             >
-                <i className="bi bi-person-x text-danger fs-5" title="Desativar"></i>
+                <i className="bi bi-person-x text-danger" title="Desativar"></i>
             </button>
 
             {/* Modal */}

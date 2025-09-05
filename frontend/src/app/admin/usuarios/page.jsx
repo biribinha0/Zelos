@@ -5,13 +5,13 @@ import axios from "axios";
 import { API_URL } from "@/utils/api";
 import { getToken } from "@/utils/auth";
 import { DuvidasUsuariosModal, DeleteUsuarioModal, ChamadosAtribuidosModal, DetalhesUsuarioModal, DesativarUsuarioModal, AtivarUsuarioModal } from "@/components/admin";
+import useWindowWidth from '@/hooks/useWindowWidth';
+import { CardResponsivoUserAdm } from "@/components/admin";
 
 export default function UsuariosPage() {
     const [usuarios, setUsuarios] = useState([]);
     const [nome, setNome] = useState("");
     const [registro, setRegistro] = useState("");
-
-
 
     const token = getToken();
 
@@ -24,7 +24,7 @@ export default function UsuariosPage() {
             .catch(() => setUsuarios([]));
     }, []);
 
-    // 🔹 Filtros
+    // Filtros
     const usuariosFiltrados = usuarios.filter((u) => {
         return (
             (nome ? u.nome.toLowerCase().includes(nome.toLowerCase()) : true) &&
@@ -35,6 +35,8 @@ export default function UsuariosPage() {
             )
         );
     });
+
+    const width = useWindowWidth();
 
     return (
         <>
@@ -84,54 +86,67 @@ export default function UsuariosPage() {
 
                 {/* Tabela */}
                 <div className="table-responsive mt-3">
-                    <table className="table">
-                        <thead className="table-dark text-center">
-                            <tr>
-                                <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>Chamados em andamento</th>
-                                <th>Chamados finalizados</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-center align-middle">
-                            {usuariosFiltrados.map((u) => (
-                                <tr key={u.id}>
-                                    <td>{u.nome}</td>
-                                    <td>{u.email}</td>
-                                    <td>{u.chamadosEmAndamento}</td>
-                                    <td>{u.chamadosConcluidos}</td>
-                                    <td>{u.status === "ativo" ? "Ativo" : "Inativo"}</td>
-                                    <td>
-                                        <div className="d-flex justify-content-center gap-2">
-                                            {u.status === 'ativo' ? (
-                                                <>
-                                                    <DetalhesUsuarioModal
-                                                        usuario={u}
-                                                        modalId={`detalhesUsuarioModal${u.id}`}
-                                                    />
-                                                    <ChamadosAtribuidosModal
-                                                        usuario={u} modalId=
-                                                        {`chamadosUsuarioModal${u.id}`}
-                                                    />
-                                                    <DesativarUsuarioModal
-                                                        usuario={u}
-                                                        modalId={`desativarUsuario${u.id}`}
-                                                    />
-                                                </>
-                                            ) : <AtivarUsuarioModal
-                                                usuario={u}
-                                                modalId={`ativarUsuario${u.id}`}
-                                            />}
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    {usuariosFiltrados.length > 0 ? (
+                        <>
+                            {width >= 992 ? (
+                                <table className="table">
+                                    <thead className="table-dark text-center">
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>E-mail</th>
+                                            <th>Chamados em andamento</th>
+                                            <th>Chamados finalizados</th>
+                                            <th>Status</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="text-center align-middle">
+                                        {usuariosFiltrados.map((u) => (
+                                            <tr key={u.id}>
+                                                <td>{u.nome}</td>
+                                                <td>{u.email}</td>
+                                                <td>{u.chamadosEmAndamento}</td>
+                                                <td>{u.chamadosConcluidos}</td>
+                                                <td>{u.status === "ativo" ? "Ativo" : "Inativo"}</td>
+                                                <td>
+                                                    <div className="d-flex justify-content-center gap-2">
+                                                        {u.status === "ativo" ? (
+                                                            <>
+                                                                <DetalhesUsuarioModal
+                                                                    usuario={u}
+                                                                    modalId={`detalhesUsuarioModal${u.id}`}
+                                                                />
+                                                                <ChamadosAtribuidosModal
+                                                                    usuario={u}
+                                                                    modalId={`chamadosUsuarioModal${u.id}`}
+                                                                />
+                                                                <DesativarUsuarioModal
+                                                                    usuario={u}
+                                                                    modalId={`desativarUsuario${u.id}`}
+                                                                />
+                                                            </>
+                                                        ) : (
+                                                            <AtivarUsuarioModal
+                                                                usuario={u}
+                                                                modalId={`ativarUsuario${u.id}`}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                usuariosFiltrados.map((u) => (
+                                    <CardResponsivoUserAdm key={u.id} u={u} />
+                                ))
+                            )}
+                        </>
+                    ) : (
+                        <h3 className="text-center">Nenhum usuário encontrado</h3>
+                    )}
                 </div>
-
             </div >
 
 

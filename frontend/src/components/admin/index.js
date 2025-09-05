@@ -22,3 +22,9 @@ export { default as AtivarUsuarioModal } from "./AtivarUsuarioModal"
 export { default as DuvidasCriacaoModal } from "./poolsModal/DuvidasCriacaoModal"
 
 export { default as CardAtribuicoes } from "./CardAtribuicoes"
+
+export { default as CardChamadosResponsivoAdm } from "./CardChamadosResponsivoAdm"
+
+export { default as CardResponsivoUserAdm } from "./usuarios/CardResponsivoUserAdm"
+
+export { default as CardResponsivoTecAdm } from "./tecnicos/CardResponsivoTecAdm"
