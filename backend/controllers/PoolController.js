@@ -1,4 +1,4 @@
-import { listarPools, obterPoolPorId, listarTecnicosPorPool, criarPool, editarPool, deletarPool } from "../models/Pools.js";
+import { listarPools, obterPoolPorId, listarTecnicosPorPool, criarPool, editarPool, deletarPool, editarPoolTecnico, listarPoolsPorTecnico } from "../models/Pools.js";
 import { obterUsuarioPorId } from "../models/Usuarios.js";
 import { carregarPoolsParaTecnico, formatarTituloPool } from "../utils.js"
 
@@ -124,15 +124,27 @@ const deletarPoolController = async (req, res) => {
     }
 }
 
-const editarPoolTecnico = async (req, res) => {
+const editarPoolTecnicoController = async (req, res) => {
     const tecnicoId = req.params.id;
     const { poolId } = req.body;
 
     try {
         const tecnico = await obterUsuarioPorId(tecnicoId, 'tecnico');
         if (!tecnico) return res.status(404).json({ error: 'Técnico não encontrado' })
-        
-        
+
+        const pool = await obterPoolPorId(poolId);
+        if (!pool) return res.status(404).json({ error: 'Pool não encontrado' })
+
+        const poolTecnico = await listarPoolsPorTecnico(tecnicoId)
+        if (poolTecnico) {
+            const response = await editarPoolTecnico({ id_pool: poolId }, tecnicoId);
+            return res.status(200).json({ mensagem: 'Pool e técnico relacionados com sucesso', response })
+        } else {
+            const response = await criarPoolController({ id_pool: poolId, id_tecnico: tecnicoId });
+            return res.status(200).json({ mensagem: 'Pool e técnico relacionados com sucesso', response })
+
+        }
+
     } catch (error) {
         console.error('Erro ao editar pool_tecnico: ', error);
         return res.status(500).json({ error: 'Ocorreu um erro ao editar a relação do técnico com seu pool.' });
@@ -140,5 +152,6 @@ const editarPoolTecnico = async (req, res) => {
 }
 
 export {
-    listarPoolsController, obterPoolPorId, listarPoolsPorTecnicoController, listarTecnicosPorPoolController, criarPoolController, editarPoolController, deletarPoolController
+    listarPoolsController, obterPoolPorId, listarPoolsPorTecnicoController, listarTecnicosPorPoolController, criarPoolController, editarPoolController, deletarPoolController,
+    editarPoolTecnicoController
 }

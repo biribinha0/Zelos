@@ -4,6 +4,7 @@ import { API_URL } from "@/utils/api";
 import axios from "axios";
 import { getToken } from "@/utils/auth";
 import { useRouter } from "next/navigation";
+import styles from "./ChamadosAtribuidosModal.module.css"
 
 export default function ChamadosAtribuidosModal({
   usuario,
@@ -95,32 +96,44 @@ export default function ChamadosAtribuidosModal({
                           className="card border-0 shadow-sm rounded-3"
                         >
                           <div className="card-body d-flex flex-column">
-                         
-                            <div className="d-flex justify-content-between align-items-center mb-2">
-                              <h5 className="card-title mb-0 text-start">
-                                <i className="bi bi-journal-text text-secondary me-2"></i>
-                                {c.titulo}
-                              </h5>
+
+                            <div className={`d-flex justify-content-between align-items-center mb-2`}>
+                              <h5
+                                className={`card-title mb-0 text-start text-secondary
+                              ${styles.tituloLinha}
+                              ${c.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}
+                              >
+                                {c.urgencia === 'Urgente' ?
+                                  (<i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>) 
+                                  : <i className="bi bi-journal-text text-secondary me-2"></i>}{c?.titulo}</h5>
                               <span
-                                className={`badge px-3 py-2 rounded-pill ${
-                                  c.status === "concluído"
-                                    ? "bg-success"
-                                    : "bg-warning text-dark"
-                                }`}
+                                className={`badge px-3 py-2 rounded-pill d-none d-md-block ${c.status === "concluído"
+                                  ? "bg-success"
+                                  : c.status === "pendente" ? "bg-danger" : "bg-warning text-dark"
+                                  } ${styles.statusChamadoUm}`}
                               >
                                 {c.status}
                               </span>
+
+                              <span
+                                className={`d-block d-md-none rounded-circle bg-success ps-4 ${c.status === "concluído"
+                                  ? "bg-success"
+                                  : "bg-warning text-dark"
+                                  } ${styles.statusChamadoUm}`}
+                                style={{
+                                  width: "12px",
+                                  height: "24px",
+                                  display: "inline-block",
+                                }}
+                              ></span>
+
                             </div>
 
-                            
-                            <p className="card-text text-start text-muted mb-3">
-                              {c.descricao?.length > 100
-                                ? c.descricao.slice(0, 100) + "..."
-                                : c.descricao}
-                            </p>
+
+                            <p dangerouslySetInnerHTML={{ __html: c.descricao }} className="card-text text-start text-muted mb-3" />
 
 
-                         
+
                             <button
                               role="link"
                               onClick={() =>
@@ -146,7 +159,7 @@ export default function ChamadosAtribuidosModal({
               )}
             </div>
 
-            
+
             <div className="modal-footer border-0">
               <button
                 type="button"

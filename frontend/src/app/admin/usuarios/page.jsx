@@ -89,12 +89,12 @@ export default function UsuariosPage() {
                     {usuariosFiltrados.length > 0 ? (
                         <>
                             {width >= 992 ? (
-                                <table className="table">
-                                    <thead className="table-dark text-center">
-                                        <tr>
+                                <table className="table table-over mt-3 border">
+                                    <thead className="bg-dark text-white text-center">
+                                        <tr className="titulo-da-tabela">
                                             <th>Nome</th>
                                             <th>E-mail</th>
-                                            <th>Chamados em andamento</th>
+                                            <th className="px-5">Chamados em andamento</th>
                                             <th>Chamados finalizados</th>
                                             <th>Status</th>
                                             <th>Ações</th>

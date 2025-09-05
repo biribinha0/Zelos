@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./Error404.module.css";
+import Link from 'next/link';
 
 export default function Error404() {
   return (
@@ -11,10 +12,12 @@ export default function Error404() {
         </div>
 
         <p className={styles.messageError}>
-          Essa rota não foi encontrada <br /> em nosso manual técnico.
+          Essa rota não foi encontrada em nosso manual técnico.
         </p>
 
-        <button className={`${styles.buttonError} ${styles.botaoVoltarHome}`}><i className="bi bi-arrow-left-short"></i> Voltar para a home</button>
+        <Link href={'/'}>
+          <button className={`${styles.buttonError} ${styles.botaoVoltarHome}`}><i className="bi bi-arrow-left-short"></i> Voltar para a home</button>
+        </Link>
       </div>
     </div>
   );

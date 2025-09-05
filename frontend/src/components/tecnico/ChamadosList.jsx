@@ -96,7 +96,7 @@ export default function ChamadosList() {
             <div className="container mb-4">
                 <div className="row g-3 align-items-end">
                     <div className="col-md-3">
-                        <label className="form-label fw-bold">Status:</label>
+                        <label className="form-label fw-bold inputAfter">Status:</label>
                         <select
                             className="form-control text-secondary fw-bold rounded py-2 "
                             name="status"
@@ -174,7 +174,7 @@ export default function ChamadosList() {
                                             <tr key={chamado.id}>
                                                 <td className="text-center">{chamado.id}</td>
                                                 <td>{chamado.pool}</td>
-                                                <td>{chamado.titulo}</td>
+                                                <td className={`textTabela text-black-75 ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado.titulo}</td>
                                                 <td className="text-center">{chamado.patrimonio ?? "--"}</td>
                                                 <td
                                                     className={`fw-bold text-${chamado.status === "concluído"

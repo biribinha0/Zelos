@@ -55,7 +55,7 @@ export default function DetalhesChamadoUsuario() {
 
     if (loading) return <p className="text-center mt-4">Carregando...</p>;
     if (!chamado) return <p className="text-center mt-4">Chamado não encontrado.</p>;
-    if (chamado.usuario_id !== decoded.id) return <p className="text-center mt-4">403</p>
+    if (chamado.usuario_id !== decoded.id) return <Error403></Error403>
 
     return (
 
@@ -90,12 +90,19 @@ export default function DetalhesChamadoUsuario() {
                 <div className="dc-grid row g-4">
                     <div className="col-12 col-md-6">
                         <label className="dc-label">Título:</label>
-                        <p className="dc-info">{chamado.titulo}</p>
+                        <p className={`dc-info ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.titulo}
+
+                            {chamado.urgencia === 'Urgente' && (
+                                <>
+                                    <i className="bi ms-3 bi-exclamation-triangle-fill text-danger"></i> <span className="small">Chamado urgente</span>
+                                </>
+                            )}
+                        </p>
                     </div>
 
                     <div className="col-12 col-md-6">
                         <label className="dc-label">Status atual:</label>
-                        <p className={`dc-info status status-${chamado.status === 'concluído' ? 'sucesso' : chamado.status === 'pedente' ? 'perigo' : 'andamento'}`}>
+                        <p className={`dc-info status status-${chamado.status === 'concluído' ? 'sucesso' : chamado.status === 'pendente' ? 'perigo' : 'andamento'}`}>
                             {(chamado.status)}
                         </p>
                     </div>

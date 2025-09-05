@@ -194,10 +194,14 @@ export default function Relatorios() {
                 <div className="col-md-3">
                     <label className="form-label fw-bold">Tipo de relatório</label>
                     <select
-                        className="form-select input-vermelho"
+                        className="form-select input-vermelho py-2 fw-bold"
                         name="tipoRelatorio"
                         value={filtros.tipoRelatorio}
                         onChange={handleChange}
+                         style={{
+                        backgroundColor: "#a0a0a057",
+                        color: "gray",
+                    }}
                     >
                         <option value="status">Status</option>
                         <option value="tipo">Tipo de Chamado</option>
@@ -208,31 +212,43 @@ export default function Relatorios() {
                     <label className="form-label fw-bold">Data de início</label>
                     <input
                         type="date"
-                        className="form-control input-vermelho"
+                        className="form-control input-vermelho fw-bold py-2"
                         name="dataInicio"
                         value={filtros.dataInicio}
                         onChange={handleChange}
+                        style={{
+                        backgroundColor: "#a0a0a057",
+                        color: "gray",
+                    }}
                     />
                 </div>
                 <div className="col-md-3">
                     <label className="form-label fw-bold">Data de fim</label>
                     <input
                         type="date"
-                        className="form-control input-vermelho"
+                        className="form-control input-vermelho fw-bold py-2"
                         name="dataFim"
                         min={filtros.dataInicio}
                         value={filtros.dataFim}
                         onChange={handleChange}
+                        style={{
+                        backgroundColor: "#a0a0a057",
+                        color: "gray",
+                    }}
                     />
                 </div>
                 {filtros.tipoRelatorio === "atividades-tecnicos" && (
                     <div className="col-md-3">
                         <label className="form-label fw-bold">Técnico</label>
                         <select
-                            className="form-select input-vermelho"
+                            className="form-select input-vermelho py-2 fw-bold"
                             name="tecnicoId"
                             value={filtros.tecnicoId}
                             onChange={handleChange}
+                            style={{
+                        backgroundColor: "#a0a0a057",
+                        color: "gray",
+                    }}
                         >
                             <option value="">Selecione</option>
                             {loading ? (

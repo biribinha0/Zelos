@@ -161,7 +161,7 @@ export default function MeusChamados() {
                     <tr key={chamado.id} className={index % 2 !== 0 ? 'tr-cinza' : ''} >
                       <td className="textTabela text-black-75">{chamado.id}</td>
                       <td className="textTabela text-black-75">{chamado.pool}</td>
-                      <td className="textTabela text-black-75">{chamado.titulo}</td>
+                      <td className={`textTabela text-black-75 ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado.titulo}</td>
                       <td className="textTabela text-black-75">{chamado?.patrimonio?.EQUIPAMENTO ?? "--"}</td>
                       <td className={`fw-bold text-${chamado.status === 'concluído' ? 'success' : chamado.status === 'pendente' ? 'danger' : 'warning'}`}>
                         {chamado.status}
@@ -188,7 +188,7 @@ export default function MeusChamados() {
                 onChange={setCurrent}
                 showSizeChanger={true}
               />
-              
+
             </div>) : chamadosFiltrados.map((chamado) => {
               return (
                 <CardChamadosResponsivo key={chamado.id} chamado={chamado} />

@@ -1,30 +1,4 @@
-.bannerSobre {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
 
-.bannersobrenos,
-.bannersobremobile {
-  width: 100%;
-  display: block;
-  margin: auto;
-}
-
-/* Texto centralizado no meio do banner */
-.textoBanner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;         
-  font-size: clamp(3rem, 6vw, 5rem); 
-  font-style: italic;
-  text-align: center;
-  z-index: 2;
-}
-
-/* Esconde o banner mobile no desktop */
 @media (min-width: 769px) {
   .bannersobremobile {
     display: none;
@@ -39,26 +13,6 @@
 }
 
 
-.fundoSobre{
-  background-image: url('/img/imgFundoChamados.png');
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
-
-}
-
-.titulo {
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
-  font-weight: bold;
-  margin: 1rem 0;
-  padding-top: 0.3rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap; 
-}
 
 .preto {
   color: #333;
@@ -79,11 +33,19 @@ justify-content: center;
 }
 
 .senaizelos{
-   max-width: 55%;
+   max-width: 45%;
    height:auto;
-   margin-top: 1%;
+   margin-top: 5%;
    
+}
 
+.TextoSobre{
+  align-items: center;
+  text-align: justify;
+   margin-top: 4%;
+     margin-right: 6%;
+  margin-left: 6%;
+  font-size:18px;
 }
 
 .sobretexto{
@@ -91,7 +53,7 @@ justify-content: center;
   margin-right: 6%;
   margin-left: 6%;
   text-align: center;
-  margin-top: 10%;
+  margin-top:5%;
 }
           
 .NossosDepoimentos{
@@ -114,110 +76,7 @@ margin: 0;
       max-width: 1200px;
     }
    
-    .titulo {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 40px;
-      color: #1a1a40;
-    }
-    .titulo span {
-      color: #e50914;
-    }
- 
-    .depoimentos {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-    }
- 
-    .seta {
-      font-size: 40px;
-      color: #a00;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.6s;
-    }
-    .seta:hover {
-      transform: scale(1.2);
-    }
- 
-    .cards-container {
-      display: flex;
-      overflow: hidden;
-      width: 950px;
-    }
- 
-    .cards {
-      display: flex;
-      gap: 20px;
-      transition: transform 0.5s ease;
-    }
- 
-    .card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 20px;
-      width: 300px;
-      text-align: left;
-      flex-shrink: 0;
-    }
- 
-    .perfil {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
- 
-    .perfil-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-right: 10px;
-      object-fit: cover;
-    }
- 
-    .perfil-info {
-      font-size: 14px;
-    }
- 
-    .perfil-info strong {
-      display: block;
-      font-size: 16px;
-    }
- 
-    .texto {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 15px;
-      line-height: 1.4;
-    }
- 
-    .footer-card {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
- 
-    .data {
-      color: #e50914;
-      font-size: 13px;
-      font-weight: bold;
-    }
- 
-    .estrelas {
-      color: #e50914;
-      font-size: 18px;
-    }
-     .conteudo {
-      max-width: 800px;
-      margin: auto;
-      padding: 50px;
-      background: rgba(255, 255, 255, 0.219);
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-     }
+    
   
 
 .containerEstatisticas {
@@ -306,112 +165,7 @@ margin: 0;
   }
 }
 
-/* Área do carrossel */
-.depoimentos {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 
-/* Container dos cards */
-.cardsContainer {
-  overflow-x: auto;
-  flex: 1;
-  padding: 10px 0;
-
-  scroll-behavior: smooth;
-
-  /* Esconde barra */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-}
-.cardsContainer::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
-}
-
-/* Linha de cards */
-.cards {
-  display: flex;
-  gap: 16px;
-}
-
-/* Card individual */
-.card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-
-  /* Responsividade: ajusta de acordo com a tela */
-  flex: 0 0 clamp(240px, 70vw, 300px);
-
-  text-align: left;
-  transition: transform 0.2s;
-}
-.card:hover {
-  transform: translateY(-5px);
-}
-
-/* Perfil dentro do card */
-.perfil {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.perfilIcon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-  object-fit: cover;
-}
-.perfilInfo {
-  font-size: 14px;
-}
-.perfilInfo strong {
-  display: block;
-  font-size: 16px;
-}
-
-/* Texto do depoimento */
-.texto {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 15px;
-  line-height: 1.4;
-}
-
-/* Rodapé do card */
-.footerCard {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.data {
-  color: #e50914;
-  font-size: 13px;
-  font-weight: bold;
-}
-.estrelas {
-  color: #e50914;
-  font-size: 18px;
-}
-
-/* Setas do carrossel */
-.seta {
-  background: transparent;
-  border: none;
-  font-size: 40px;
-  color: #a00;
-  cursor: pointer;
-  user-select: none;
-  transition: transform 0.2s ease;
-  padding: 5px;
-  flex-shrink: 0;
-}
-.seta:hover {
-  transform: scale(1.2);
-}
 
 /* Responsividade */
 @media (max-width: 768px) {

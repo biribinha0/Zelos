@@ -34,6 +34,17 @@
 }
 
 /* Botão */
+.buttonError {
+  padding: 0.8rem 1.5rem;
+  background: #c5c5c5;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-style: italic;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 .buttonError403 {
   margin-top: 1.5rem;
   padding: 0.8rem 1.5rem;
@@ -47,6 +58,34 @@
 }
 .buttonError403:hover {
   background: #ffffff;
+}
+
+.botaoVoltarHome { 
+  transform: translateY(15%); 
+  border: none;
+  font-weight: bold;
+  color: #a73128;
+  text-transform: uppercase;
+  background: #ffffff;
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 0.4s ease;
+  width: 70%;
+  max-width: 530px;
+  z-index: 10;
+  border-radius: 6px;
+}
+
+.botaoVoltarHome::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: #212121;
+  z-index: -1;
+  transition: all 0.4s ease;
+  border-radius: 6px;
 }
 
 .botaoVoltarHome:hover {

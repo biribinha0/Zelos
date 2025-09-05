@@ -4,7 +4,7 @@ import { create, readAll, read, update } from '../config/database.js';
 // Lista de chamados para usuários sem login
 const listarChamadosPublicos = async () => {
     try {
-        return await readAll('chamados', `status = 'em andamento'`);
+        return await readAll('chamados', `status = 'em andamento' `);
     } catch (error) {
         console.error('Erro ao listar chamados públicos: ', error);
         throw error;
@@ -24,7 +24,9 @@ const criarChamado = async (chamadoData) => {
 // Lista de chamadas feitas por um usuários específico
 const listarChamadosPorUsuario = async (id) => {
     try {
-        return await readAll('chamados', `usuario_id = ${id} ORDER BY atualizado_em DESC`)
+        return await readAll('chamados', `usuario_id = ${id} ORDER BY
+            CASE WHEN urgencia = 'urgente' THEN 1 ELSE 2 END, 
+            atualizado_em DESC`)
     } catch (error) {
         console.error('Erro ao listar chamados por usuário: ', error);
         throw error;
@@ -34,7 +36,9 @@ const listarChamadosPorUsuario = async (id) => {
 // Lista de chamadas feitas por um usuários específico
 const listarChamadosPorTecnico = async (id) => {
     try {
-        return await readAll('chamados', `tecnico_id = ${id} ORDER BY atualizado_em DESC`)
+        return await readAll('chamados', `tecnico_id = ${id} ORDER BY
+            CASE WHEN urgencia = 'urgente' THEN 1 ELSE 2 END, 
+            atualizado_em DESC`)
     } catch (error) {
         console.error('Erro ao listar chamados por técnico: ', error);
         throw error;
@@ -56,7 +60,7 @@ const obterChamadoPorId = async (id) => {
 // Ler todos os chamados 
 const listarChamados = async () => {
     try {
-        return await readAll('chamados', 'id > 0 ORDER BY atualizado_em DESC');
+        return await readAll('chamados', 'id > 0 ORDER BY CASE WHEN urgencia = "urgente" THEN 1 ELSE 2 END, atualizado_em DESC');
     } catch (error) {
         console.error('Erro ao listar chamados: ', error);
         throw error;
@@ -86,7 +90,13 @@ const chamadosSemTecnico = async (whereClause = '') => {
             ? `${baseCondition} AND ${whereClause}` 
             : baseCondition;
 
-        return await readAll('chamados', finalCondition);
+        const orderedCondition = `
+            ${finalCondition}
+            ORDER BY CASE WHEN urgencia = 'urgente' THEN 1 ELSE 2 END,
+                criado_em DESC
+        `
+
+        return await readAll('chamados', orderedCondition);
     } catch (error) {
         console.error('Erro ao ler chamado para autoatribuição: ', error);
         throw error;

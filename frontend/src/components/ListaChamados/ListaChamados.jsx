@@ -4,7 +4,7 @@ import { ItemChamado } from "../common";
 import axios from "axios";
 import { API_URL } from "@/utils/api";
 
-export default function ListaChamados() {
+export default function     ListaChamados() {
     const [chamados, setChamados] = useState({});
     const [loading, setLoading] = useState(false);
     const [quantidade, setQuantidade] = useState(5)
@@ -35,7 +35,12 @@ export default function ListaChamados() {
                 })
                 : ''
             }
-            {chamados.length > quantidade && <button onClick={() => setQuantidade(quantidade + 5)}>Ver mais</button>}
+            {chamados.length > quantidade &&
+                <button
+                    className="botaoVerMais"
+                    onClick={() => setQuantidade(quantidade + 5)}>
+                    Ver mais
+                </button>}
         </div>
     )
 }

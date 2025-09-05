@@ -69,7 +69,7 @@ export default function CardChamadosResponsivoAdm({ chamado, tecnicosList }) {
                     </ul>
                 </div>
                 {secao === 1 && <div className="card-body p-4 pb-3">
-                    <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
+                    <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
                     <p className="pb-2"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
 
@@ -149,7 +149,7 @@ export default function CardChamadosResponsivoAdm({ chamado, tecnicosList }) {
                 </div>}
 
                 {secao === 2 && <div className="card-body p-4 pb-0">
-                    <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
+                    <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
                     <p className="pb-2"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
 
@@ -189,7 +189,7 @@ export default function CardChamadosResponsivoAdm({ chamado, tecnicosList }) {
 
 
                 {secao === 3 && <div className="card-body p-4 pb-3">
-                    <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
+                    <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
                     <p className="mb-0"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
 

@@ -17,18 +17,7 @@ export default function CardChamadosResponsivo({ chamado }) {
 
     const statusClass = statusColors[chamado?.status] || "btn-secondary";
 
-    ///BERNARDO OLHA ESSA PARTE AQUI/////
     const [ativo, setAtivo] = useState(null);
-
-    const handleClick = (tipo) => {
-        setAtivo(tipo);
-
-        fetch("/api/selecao", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ opcao: tipo }),
-        });
-    };
 
     return (
         <>
@@ -66,7 +55,7 @@ export default function CardChamadosResponsivo({ chamado }) {
                     </ul>
                 </div>
                 {secao === 1 && <div className="card-body p-4 pb-3">
-                    <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
+                    <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
                     <p className="pb-2"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
 
@@ -129,7 +118,7 @@ export default function CardChamadosResponsivo({ chamado }) {
                 </div>}
 
                 {secao === 2 && <div className="card-body p-4 pb-0">
-                    <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
+                        <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
                     <p className="pb-2"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
 
@@ -169,7 +158,7 @@ export default function CardChamadosResponsivo({ chamado }) {
 
 
                 {secao === 3 && <div className="card-body p-4 pb-3">
-                    <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
+                       <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
                     <p className="mb-0"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
 
@@ -185,7 +174,7 @@ export default function CardChamadosResponsivo({ chamado }) {
                             {/* <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "urgencia" ? styles.ativo : ""}`} onClick={() => handleClick("urgencia")}>
                                 <i className="bi bi-exclamation-triangle-fill text-danger p-2"></i>
                                 <p className="card-text pb-0 mb-0">Urgência</p>
-                            </a> Adicionar funcionalidade de urgência */}
+                            </a> Adicionar funcionalidade de urgência  */}
 
                             <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "reabertura" ? styles.ativo : ""}`} onClick={() => handleClick("reabertura")}>
                                 <i className="bi bi-bell-fill text-danger p-2"></i>

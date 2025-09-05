@@ -43,6 +43,7 @@ export default function Header() {
     router.push('/')
   }
   return (
+    
     <nav className={`navbar navbar-expand-lg ${styles.Header}`}>
       <div className={`container-fluid ${styles.espacamentoNav}`}>
         <div className="row">

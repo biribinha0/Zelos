@@ -2,5 +2,9 @@
 .titulo-da-tabela{
     vertical-align: middle;
 }
-  
+
+.inputAfter:focus {
+  border-color: #808080; 
+  box-shadow: 0 0 5px rgba(128, 128, 128, 0.5); 
+}
 

@@ -62,7 +62,7 @@
 
 .botaoChamadoNav {
     background-color: #EFEFEF;
-    padding: 7% 13% !important;
+    padding: 7% 7% !important;
     margin: 5% 5% !important;
     border: none;
     font-size: small;
@@ -70,11 +70,33 @@
     color: #E30613;
     font-weight: 600;
     transition: 0.4s;
+    border-radius: 7px;
+    transition: all 1s ease;
+}
+
+.botaoChamadoNav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: #212121;
+  z-index: -1;
+  transition: all 1s ease;
+  border-radius: 7px;
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+}
+
+.botaoChamadoNav:hover::before {
+  width: 100%;
+  border-radius: 7px;
 }
 
 .botaoChamadoNav:hover {
-    background-color: rgb(207, 207, 207);
     transform: scale(1.06);
+    border-radius: 7px;
+    color: #e8e8e8;
 }
 
 /* Nav item link */
@@ -90,6 +112,10 @@ li.itens a {
 
 li.itens a:hover {
     color: var(--hovered-color);
+}
+
+li.itens a:focus {
+    color: #ffffff;
 }
 
 li.itens a.ativo {
@@ -171,6 +197,8 @@ li.itens a:hover::before {
         display: block;
         text-align: center;
     }
+
+
 }
 
 @media (max-width: 991px) {
@@ -192,6 +220,8 @@ li.itens a:hover::before {
         display: block;
         text-align: center;
     }
+
+    
 }
 
 @media (max-width: 320px) {
@@ -200,5 +230,5 @@ li.itens a:hover::before {
         align-items: center !important;
         margin-top: 20px;
     }
-    
+
 }

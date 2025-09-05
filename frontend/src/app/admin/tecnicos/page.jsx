@@ -7,6 +7,8 @@ import { getToken } from '@/utils/auth';
 import { ChamadosAtribuidosModal, DetalhesUsuarioModal, DuvidasTecnicosModal, DesativarUsuarioModal, AtivarUsuarioModal } from '@/components/admin';
 import useWindowWidth from '@/hooks/useWindowWidth';
 import { CardResponsivoTecAdm } from "@/components/admin";
+import PoolTecnico from '@/app/tecnico/pool/page';
+import PoolTecnicoModal from '@/components/admin/PoolTecnicoModal';
 
 export default function TecnicosPage() {
     const [tecnicos, setTecnicos] = useState([]);
@@ -113,6 +115,7 @@ export default function TecnicosPage() {
                                         <tr>
                                             <th className="align-content-center">Nome</th>
                                             <th className="align-content-center">E-mail</th>
+                                            <th className="align-content-center">Tipo</th>
                                             <th className="align-content-center">Chamados em andamento</th>
                                             <th className="align-content-center">Chamados finalizados</th>
                                             <th className="align-content-center">Tempo médio de atendimento</th>
@@ -125,6 +128,7 @@ export default function TecnicosPage() {
                                             <tr key={tec.id}>
                                                 <td className="TextTabela">{tec.nome}</td>
                                                 <td className="TextTabela">{tec.email}</td>
+                                                <td className="textTabela">{tec.pool.titulo}<PoolTecnicoModal tec={tec} modalId={`poolTecnico${tec.id}`} poolId={tec?.pool?.id}/></td>
                                                 <td className="TextTabela">{tec.chamadosEmAndamento}</td>
                                                 <td className="TextTabela">{tec.chamadosConcluidos}</td>
                                                 <td className="TextTabela">{tec.tempoMedio || "-"}</td>

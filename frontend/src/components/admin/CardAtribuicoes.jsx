@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function CardAtribuicoes({ chamado }) {
-    const [tecnico, setTecnico ] = useState({
+    const [tecnico, setTecnico] = useState({
         nome: "",
         id: ""
     });
@@ -35,12 +35,14 @@ export default function CardAtribuicoes({ chamado }) {
             className="card rounded-2 border-0 p-3"
             style={{ width: "100%", maxWidth: "750px", height: "auto", background: "rgba(220, 220, 220, 1)", justifyContent: "center" }} // Aumentando a largura máxima
         >
-            <div className="d-flex justify-content-between align-items-center mb-3">
+            <div className="d-flex justify-content-between align-items-start mb-3">
                 <p
                     className="fw-bold mb-0 d-flex flex-column fs-6"
                     style={{ color: "#b42727bd" }}
                 >
-                    {chamado?.titulo}
+                    <span className="d-flex">
+                        {chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>} {chamado?.titulo}
+                    </span>
                     <span className="small text-secondary"> {chamado.pool}</span>
                     <Link
                         className="d-flex align-items-center red-link small opacity-75 mt-2"
@@ -52,13 +54,13 @@ export default function CardAtribuicoes({ chamado }) {
                     </Link>
                 </p>
 
-                <img
+                {chamadoImg && <img
                     src={chamadoImg}
-                    width={42}
-                    height={42}
+                    width={80}
+                    height={50}
                     className="img-fluid"
                     alt="Ícone do chamado"
-                />
+                />}
             </div>
 
 

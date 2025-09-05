@@ -56,7 +56,7 @@ export default function DetalhesChamadoTecnico() {
 
     if (loading) return <p className="text-center mt-4">Carregando...</p>;
     if (!chamado) return <p className="text-center mt-4">Chamado não encontrado.</p>;
-    if (chamado.tecnico_id !== decoded.id) return <p className="text-center mt-4">403</p>
+    if (chamado.tecnico_id !== decoded.id) return <Error403></Error403>
     return (
         <div className="dc-outer d-flex justify-content-center bg-detalhes">
             <div className="dc-inner p-4 shadow rounded bg-white" style={{ width: cardWidth }}>

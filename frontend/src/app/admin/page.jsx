@@ -62,7 +62,7 @@ export default function HomePage() {
             <Link href="#">
               <img
                 className="img-fluid w-100"
-                src="/img/bannerUmMobileAdm.png"
+                src="/img/bannerUmCelularAdm.png"
                 alt="bannerUmMobile"
               />
             </Link>

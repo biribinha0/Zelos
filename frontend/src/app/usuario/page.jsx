@@ -66,7 +66,7 @@ export default function Usuario() {
         e.preventDefault();
         axios.post(`${API_URL}/publico/mensagem`, formData)
             .then((res) => {
-                setMensagem('Feedback enviado com sucesso');
+                setMensagem('Feedback enviado com sucesso!');
                 setFormData({
                     ...formData,
                     mensagem: ''

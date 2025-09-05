@@ -82,7 +82,7 @@ async function relatorioChamadosPorTipoEStatus({ status, dataInicio, dataFim }) 
 }
 
 async function contarChamadosPorUsuario(usuarioId) {
-  const usuario = await read("usuarios", `id = ${usuarioId}`); 
+  const usuario = await read("usuarios", `id = ${usuarioId}`);
 
   if (!usuario) {
     throw new Error("Usuário não encontrado");

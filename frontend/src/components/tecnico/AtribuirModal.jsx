@@ -85,7 +85,7 @@ export default function AtribuirModal({ chamado, modalId = 'AtribuirModal' }) {
                             <div className="modal-body">
                                 {!mensagem && (
                                     <>
-                                        Me atribuir ao chamado{" "}
+                                        Solicitar a atribuição do chamado{" "}
                                         <span className="fst-italic">"{chamado.titulo}"</span>
                                         {loading && (
                                             <div className="spinner-border text-danger ms-2" role="status">

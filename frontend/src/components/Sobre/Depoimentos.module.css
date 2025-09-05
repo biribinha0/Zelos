@@ -1,0 +1,111 @@
+.principaisDiv {
+  overflow: hidden;
+}
+
+.bordaDiv img {
+  object-fit: cover;
+}
+
+.carrosselDiv {
+  padding-bottom: 2rem;
+  padding: 0% 0% !important;
+  padding-bottom: 1.5% !important;
+  width: 100%;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.swiper {
+  padding: 2rem 1rem;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #6b4a19;
+}
+
+.imgMargem1,
+.imgMargem2 {
+  object-fit: cover;
+}
+
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after {
+  color: #a40000;
+}
+
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after {
+  color: #a40000;
+}
+
+.swiper-slide-active {
+  transform: scale(1.2);
+  transition: transform 0.5s ease;
+}
+
+.swiper-slide {
+  transition: transform 0.5s ease;
+}
+
+.p-xx {
+  padding: 64px !important;
+}
+
+.swiper-scrollbar-drag {
+  background: #a40000 !important;
+}
+
+.principaisDiv {
+  background-image: url("/img/bgDoisHome.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover !important;
+}
+
+.imgMargem2 {
+  width: 100%;
+}
+
+p.card-titulo {
+  margin-bottom: 0 !important;
+}
+
+.tituloProfissionaisHome {
+  text-transform: uppercase;
+  color: #b4b4b4;
+}
+
+.equipeZelosImg {
+  padding: 0% 15%;
+}
+
+:global(.swiper-button-next),
+:global(.swiper-button-prev) {
+  color: #b9b9b9 !important;
+  padding: 0% 5%;
+}
+
+@media (max-width: 768px) {
+  .carrosselDiv {
+    margin: revert-layer;
+    padding-bottom: 3% !important;
+  }
+}
+
+@media (max-width: 310px) {
+  .tituloProfissionaisHome {
+    text-align: center !important;
+    font-size: small;
+  }
+
+  .espacoProfissionaisHome {
+    padding-top: 5% !important;
+  }
+}

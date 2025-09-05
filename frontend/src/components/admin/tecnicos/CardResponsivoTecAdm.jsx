@@ -55,7 +55,7 @@ export default function CardResponsivoTecAdm({ tec }) {
                                     </div>
 
                                     {/* Item 1 */}
-                                    <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
+                                    <div className="mb-4 p-3 bg-light rounded-3 shadow-sm">
                                         <i className="bi bi-envelope-at text-danger"></i>
                                         <span className="text-dark ms-3 fw-semibold">{tec?.email}</span>
                                     </div>
@@ -147,7 +147,6 @@ export default function CardResponsivoTecAdm({ tec }) {
                                 />
                             )}
                         </div>
-
                     </div>
                 </div>}
 

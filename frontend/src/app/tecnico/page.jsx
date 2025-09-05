@@ -129,7 +129,7 @@ export default function Tecnico() {
                                         <tr key={chamado.id}>
                                             <td className="text-center">{chamado.id}</td>
                                             <td>{chamado.pool}</td>
-                                            <td>{chamado.titulo}</td>
+                                            <td className={`textTabela text-black-75 ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado.titulo}</td>
                                             <td className="text-center">{chamado.patrimonio ?? "--"}</td>
                                             <td
                                                 className={`fw-bold text-${chamado.status === "concluído"
@@ -170,7 +170,6 @@ export default function Tecnico() {
                             </table>
                         </div>
                     ) : (
-                        // versão responsiva em cards
                         chamados.slice(0, 3).map((chamado) => (
                             <CardChamadosResponsivoTec key={chamado.id} chamado={chamado} />
                         ))
@@ -180,14 +179,14 @@ export default function Tecnico() {
             </div>
 
             {/* título para mostrar o calendário */}
-            <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
+            {/* <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
                     <i className="bi bi-calendar-check mx-2 my-2"></i>
                     <span className="text-dark">
                         Confira seu <span className="text-danger">calendário:</span>
                     </span>
                 </h4>
-            </div>
+            </div> */}
 
             {/* <Calendario /> // Posteriormente, usar calendario para organizar prazos.  */} 
 

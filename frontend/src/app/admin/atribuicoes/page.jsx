@@ -63,7 +63,8 @@ export default function atribuicoes() {
                             spaceBetween={20}
                             observer={true}
                             observeParents={true}
-                            className="d-flex"
+                            className={`p-5 d-flex ${styles.carrosselAtribuicoesAdm}`}
+                             
                             onSwiper={(swiper) => {
                                 swiperRef.current = swiper;
                             }}
@@ -73,7 +74,6 @@ export default function atribuicoes() {
                                 768: { slidesPerView: 3 },
                                 992: { slidesPerView: 4 }
                             }}
-                            className={`p-5 ${styles.carrosselAtribuicoesAdm}`}
                         >
                             {chamados?.map((chamado) => (
                                 <SwiperSlide key={chamado.id} className="d-flex justify-content-center">

@@ -1,6 +1,6 @@
 import { listarUsuarios, obterUsuarioPorId, criarUsuario, editarUsuario } from "../models/Usuarios.js";
 
-import { carregarPoolsParaTecnico, primeiroNomeInicial } from "../utils.js";
+import { carregarPoolsParaTecnico, formatarTituloPool, primeiroNomeInicial } from "../utils.js";
 import { buscarEquipamentos, obterEquipamentoPorPatrimonio } from "../models/Equipamentos.js";
 import e from "express";
 import { contarChamadosPorUsuario, relatorioAtividadesTecnicos } from "../models/Relatorios.js";
@@ -39,7 +39,9 @@ const listarUsuariosController = async (req, res) => {
                 }
 
                 if (usuario.funcao === "tecnico") {
-                    usuario.pools = await carregarPoolsParaTecnico(usuario.id);
+                    const pools = await carregarPoolsParaTecnico(usuario.id);
+                    usuario.pools = pools;
+                    usuario.pool = { id: pools[0].id, titulo: formatarTituloPool(pools[0].titulo) }
                     function formatDate(date) {
                         return date.toISOString().slice(0, 19).replace('T', ' ');
                     }
@@ -113,7 +115,7 @@ const criarUsuarioController = async (req, res) => {
 }
 
 const editarUsuarioController = async (req, res) => {
-    const { nome, senha, email, funcao, status } = req.body;
+    const { nome, senha, email, funcao } = req.body;
     const usuarioId = req.params.id;
 
     if (!nome || !senha || !email || !funcao) {

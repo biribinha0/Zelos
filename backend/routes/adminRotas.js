@@ -4,6 +4,7 @@ import { listarChamadosController, editarChamadoController, fecharChamadoControl
 import { listarUsuariosController, mudarStatusController } from "../controllers/UsuarioController.js";
 import { gerarRelatorio } from '../controllers/RelatorioContoller.js';
 import { listarMensagensController } from "../controllers/MensagemController.js";
+import { editarPoolTecnicoController } from "../controllers/PoolController.js";
 
 const router = express.Router();
 
@@ -29,6 +30,8 @@ router.post('/chamados/:id/fechar', fecharChamadoSemApontamento);
 
 // Lista todos os usuários comuns (CRUD)
 router.get('/usuarios', listarUsuariosController);
+
+router.put('/usuarios/:id/pool', editarPoolTecnicoController);
 
 // Controla o status de um usuário
 router.post('/usuarios/:id/status', mudarStatusController)

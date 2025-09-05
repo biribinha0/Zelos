@@ -8,6 +8,8 @@ import { API_URL } from "@/utils/api";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
 import { useSearchParams } from "next/navigation";
+import { Checkbox } from "@/components/usuarios";
+import Link from "next/link";
 
 
 export default function CriarChamado() {
@@ -18,7 +20,8 @@ export default function CriarChamado() {
     usuario_id: null,
     patrimonio: "",
     sala: "",
-    equipamento: ""
+    equipamento: "",
+    urgencia: "Comum"
   });
 
 
@@ -31,7 +34,7 @@ export default function CriarChamado() {
   const [buscandoPatrimonio, setBuscandoPatrimonio] = useState(false);
 
   const [paginaAtual, setPaginaAtual] = useState(1);
-  const itensPorPagina = 3;
+  const itensPorPagina = 2;
 
   const params = useSearchParams();
   const tipoId = params.get('tipo_id');
@@ -98,10 +101,11 @@ export default function CriarChamado() {
 
     try {
       const token = getToken();
-      await axios.post(`${API_URL}/usuario/chamados/`, chamadoData, {
+      const response = await axios.post(`${API_URL}/usuario/chamados/`, chamadoData, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setMessage({ type: "success", text: "Chamado criado com sucesso!" });
+      console.log("Dados retornados do servidor:", response);
+      setMessage({ type: "success", text: response.data.mensagem || "Chamado criado com sucesso!", chamadoId: response.data.chamadoId });
       setChamadoData(prev => ({
         titulo: "",
         descricao: "",
@@ -109,7 +113,8 @@ export default function CriarChamado() {
         usuario_id: prev.usuario_id,
         patrimonio: "",
         sala: "",
-        equipamento: ""
+        equipamento: "",
+        urgencia: ""
       }));
       setUsarPatrimonio(false);
       setListaPatrimonio([]);
@@ -121,6 +126,15 @@ export default function CriarChamado() {
       setLoading(false);
     }
   };
+  const handleChangeUrgencia = (e) => {
+    const urgencia = e.target.checked ? 'Urgente' : 'Comum'
+    setChamadoData(prev => ({
+      ...prev,
+      urgencia: urgencia
+    }))
+
+
+  }
 
   if (chamadoData.usuario_id === null) return <div className="text-white p-4">Carregando...</div>;
 
@@ -135,10 +149,10 @@ export default function CriarChamado() {
         {/* Formulário */}
         <div className="col-12">
           <h5 className="chamado">CHAMADOS</h5>
+        </div>
+        <div className="col-12 col-lg-6">
           <h1 className="titulo">Solicitar chamado</h1>
           <p className="subtitulo text-white">Crie um chamado para sua necessidade</p>
-        </div>
-        <div className="col-12 col-md-6">
 
           <form id="chamadoForm" onSubmit={handleSubmit}>
             <h6 className="tituloInput">Tipo de chamado</h6>
@@ -152,8 +166,25 @@ export default function CriarChamado() {
 
             <h6 className="tituloInput">Descrição do problema:</h6>
             <textarea className="form-control mb-3 py-3 inputCriar" rows={3} name="descricao" value={chamadoData.descricao} onChange={handleChange} required />
-            {message && <div className={`my-3 d-none d-md-block alert ${message.type === "success" ? "alert-success" : "alert-danger"}`}>{message.text}</div>}
-            <button formTarget="chamadoForm" type="submit" className="btn buttonC py-4 d-none d-md-block mt-5" disabled={loading}>
+
+            <div className="d-flex gap-1 align-items-center">
+              <div className="form-check m-0 p-0 my-2 d-flex justify-content-center">
+                <Checkbox
+                  checked={chamadoData.urgencia == 'Urgente'}
+                  onChange={handleChangeUrgencia}
+                  id={'urgencia'} />
+
+              </div>
+
+              <p className={`text-light m-0 ${chamadoData.urgencia === 'Comum' ? 'opacity-50' : ''}`}>Marcar como urgente</p>
+            </div>
+
+            {message && <div className={`my-3 d-none d-lg-flex align-items-center flex-column alert ${message.type === "success" ? "alert-success" : "alert-danger"}`}>{message.text}
+              <Link className="red-link fst-underline text-danger link-opacity-50-hover link-underline-primary  " href={`/usuario/chamados/${message.chamadoId}`}>Ver detalhes do chamado</Link>
+            </div>
+
+            }
+            <button formTarget="chamadoForm" type="submit" className="btn buttonC py-4 d-none d-lg-block mt-5" disabled={loading}>
               {loading ? "Enviando..." : "Solicitar"}
             </button>
 
@@ -165,7 +196,7 @@ export default function CriarChamado() {
             <div
               className={`d-flex flex-column input-group patrimonioMae ${usarPatrimonio ? "" : "disabled-bloco"}`}
             >
-              <h5 className="tituloInput">Busque o Patrimônio</h5>
+              <h4 className="tituloInput">Busque o Patrimônio</h4>
               <p className="tituloInput text-break d-flex flex-wrap">
                 Insira as informações do patrimônio que deseja associar ao chamado. Caso não encontre, desmarque a checkbox e envie sem patrimônio.
               </p>
@@ -217,7 +248,7 @@ export default function CriarChamado() {
                       <div>
                         <p><b>Patrimônio:</b> {item.PATRIMONIO}</p>
                         <p><b>Sala:</b> {item.SALA}</p>
-                        <p><b>Equipamento:</b> {item.EQUIPAMENTO}</p>
+                        <p className="m-0"><b>Equipamento:</b> {item.EQUIPAMENTO}</p>
                       </div>
                       {chamadoData.patrimonio === item.PATRIMONIO && <span className="badge bg-success">Selecionado</span>}
                     </div>
@@ -240,9 +271,10 @@ export default function CriarChamado() {
                 <div className="alert alert-warning mt-3">{listaPatrimonio[0].erro}</div>
               )}
 
-              {listaPatrimonio.length === 0 && message && (
-                <div className="alert alert-warning mt-3">Patrimônio não encontrado</div>
-              )}
+              {(listaPatrimonio.length === 0 && message && (
+                !chamadoData.patrimonio || !chamadoData.sala || !chamadoData.equipamento)) && (
+                  <div className="alert alert-warning mt-3">Patrimônio não encontrado</div>
+                )}
             </div>
           )}
           <div className="form-check mb-3">
@@ -267,10 +299,11 @@ export default function CriarChamado() {
           </div>
         </div>
       </div>
-      <button formTarget="chamadoForm" type="submit" className="btn buttonC py-4 d-block d-md-none" disabled={loading}>
+      <button formTarget="chamadoForm" type="submit" className="btn buttonC py-4 d-block d-lg-none" disabled={loading}>
         {loading ? "Enviando..." : "Solicitar"}
       </button>
-      {message && <div className={`d-block my-3 d-md-none alert ${message.type === "success" ? "alert-success" : "alert-danger"}`}>{message.text}</div>}
+      {message && <div className={`d-block my-3 d-lg-none alert ${message.type === "success" ? "alert-success" : "alert-danger"}`}>{message.text}
+      </div>}
     </div>
   );
 }

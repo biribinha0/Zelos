@@ -210,9 +210,9 @@ export default function AdminChamadosPage() {
                     <>
                         {width >= 992 ? (
                             <>
-                    <table className="table">
-                        <thead className="table-dark text-center">
-                            <tr>
+                    <table className="table table-hover mt-3 border">
+                        <thead className="bg-dark text-white text-center">
+                            <tr className="titulo-da-tabela" >
                                 <th>ID</th>
                                 <th>Título</th>
                                 <th>Tipo de chamado</th>
@@ -232,7 +232,7 @@ export default function AdminChamadosPage() {
                                 chamadosPaginados.map((c) => (
                                     <tr key={c.id}>
                                         <td>{c.id}</td>
-                                        <td>{c.titulo}</td>
+                                        <td className={`textTabela text-black-75 ${c.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{c.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{c.titulo}</td>
                                         <td>{c.pool}</td>
                                         <td className={`text-capitalize fw-bold text-${c.status === 'concluído' ? 'success' : c.status === 'pendente' ? 'danger' : 'warning'}`}>
                                             {c.status}

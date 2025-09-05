@@ -113,7 +113,7 @@ color: white;
   width: 0;
   background-color: #212121;
   z-index: -1;
-  transition: all 0.4s ease;
+  transition: all 1s ease;
 }
 
 .botaoBannerContato:hover {
@@ -157,28 +157,68 @@ color: white;
 }
 
 
+/* BOTÃO DO FORMULÁRIO */
 .botaoContato {
-    padding: 1.0em 2.5em; 
-    border: none; 
-    font-weight: bold;
-    font-size: 18px; 
-    color: #a73128;
-    text-transform: uppercase; 
-    background: #ffffff; 
-    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-    transition: all 0.4s ease;
-    width: 100%;
-    max-width: 530px; 
-    z-index: 10; 
-    margin-top: 15px;
+  padding: 3% 3%;
+  border: unset;
+  z-index: 1;
+  background: #ffffff;
+  position: relative;
+  font-weight: bold;
+  font-size: 17px !important;
+  color: #6e0707;
+  text-transform: uppercase;
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 1000ms;
+  overflow: hidden;
+  width: 100%;
+  max-width: 530px;
+  border-radius: 3px;
+  display: block;
+  margin: auto;
 }
 
+.botaoContato::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: #212121;
+  z-index: -1;
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 1s;
+}
 
 .botaoContato:hover {
-    color: #ffffff;
-    background-color: black; 
+  color: #e8e8e8 !important;
 }
 
+.botaoContato:hover::before {
+  width: 100%;
+}
+
+@keyframes shine {
+  0% {
+    left: -75px;
+  }
+
+  100% {
+    left: 120%;
+  }
+}
+
+.contatoHighlight{
+  color: rgb(255, 255, 255);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.856);
+  display: inline-block; /* garante que o border acompanhe o texto */
+  padding-bottom: -1px; 
+}
+
+.formContato{
+  height: 100%;
+}
 
 .formContato ::placeholder {
   color: rgba(255, 255, 255, 0.632) ;
@@ -197,4 +237,19 @@ color: white;
   background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
+.mapContainer {
+  width: 100%;
+  max-width: 600px; 
+  aspect-ratio: 10 / 4; 
+  margin-bottom: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
 

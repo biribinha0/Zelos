@@ -71,5 +71,22 @@ const deletarPool = async (id) => {
     }
 }
 
+const editarPoolTecnico = async (poolTecnicoData, tecnicoId) => {
+    try {
+        return await update('pool_tecnico', poolTecnicoData, `id = ${tecnicoId}`)
+    } catch (error) {
+        console.error('Erro ao editar pool técnico: ', error);
+        throw error;
+    }
+}
 
-export { listarPools, obterPoolPorId, listarPoolsPorTecnico, listarTecnicosPorPool, criarPool, editarPool, deletarPool }
+const criarPoolTecnico = async (poolTecnicoData) => {
+    try {
+        return await create('pool_tecnico', poolTecnicoData)
+    } catch (error) {
+        console.error('Erro ao criar pool técnico: ', error);
+        throw error;
+    }
+}
+
+export { listarPools, obterPoolPorId, listarPoolsPorTecnico, listarTecnicosPorPool, criarPool, editarPool, deletarPool, editarPoolTecnico, criarPoolTecnico }

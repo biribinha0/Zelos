@@ -1,7 +1,18 @@
+main {
+  flex: 1; 
+  display: block;
+}
+
+.footer {
+  margin-top: auto; 
+
+}
+
 .footer {
     background-color: #d3d2d2;
     font-family: Arial, sans-serif;
     color: #222;
+    margin-top: auto;
 }
 
 

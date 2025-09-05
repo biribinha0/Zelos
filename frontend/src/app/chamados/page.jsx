@@ -22,7 +22,14 @@ export default function Chamados() {
             </div>
 
             <div className="fundo">
-                <h1 className="tituloChamados">Chamados</h1>
+                 <div  className="dc-outer d-flex container my-5">
+                <h4 className="fw-bold text-break">
+                    <i className="bi bi-gear-fill mx-2 my-2"></i>
+                    <span className="text-dark">
+                        Chamados <span className="text-danger">atuais:</span>
+                    </span>
+                </h4>
+            </div>
                 <ListaChamados />
 
             </div>

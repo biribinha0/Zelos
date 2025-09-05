@@ -47,54 +47,51 @@ export default function DetalhesUsuarioModal({
             </div>
 
             {/* Body */}
-            <div className="modal-body p-4">
+            <div className="modal-body text-dark p-4 fs-6">
               <div className="row g-3">
                 <div className="col-12">
-                  <div className="p-3 border rounded-3 bg-light d-flex align-items-center">
-                    <i className="bi bi-person-fill  me-2"></i>
-                    <strong>Nome:</strong>&nbsp; {usuario.nome}
+                  <div className="p-3 border rounded-3 bg-light text-wrap align-items-center">
+                    <i className="bi bi-person-fill text-danger me-2"></i>
+                    <strong>Nome </strong>: {usuario.nome}
                   </div>
                 </div>
 
                 <div className="col-12">
-                  <div className="p-3 border rounded-3 bg-light d-flex align-items-center">
-                    <i className="bi bi-envelope-fill me-2"></i>
-                    <strong>Email:</strong>&nbsp; {usuario.email}
+                  <div className="p-3 border rounded-3 bg-light text-wrap text-wrap align-items-center">
+                    <i className="bi bi-envelope-fill text-danger me-2"></i>
+                    <strong>Email </strong>:  {usuario.email}
                   </div>
                 </div>
 
                 <div className="col-12">
-                  <div className="p-3 border rounded-3 bg-light d-flex align-items-center">
-                    <i className="bi bi-briefcase-fill me-2"></i>
-                    <strong>Função:</strong>&nbsp; {usuario.funcaoFormatada}
+                  <div className="p-3 border rounded-3 bg-light text-wrap align-items-center">
+                    <i className="bi bi-briefcase-fill text-danger me-2"></i>
+                    <strong>Função</strong>: {usuario.funcaoFormatada}
                   </div>
                 </div>
 
                 {usuario.funcao === "tecnico" && (
                   <div className="col-12">
-                    <div className="p-3 border rounded-3 bg-light d-flex align-items-center">
-                      <i className="bi bi-tools me-2"></i>
-                      <strong>Atribuição:</strong>&nbsp;
-                      {usuario.pools[0].nome_formatado}
+                    <div className="p-3 border rounded-3 bg-light text-wrap align-items-center">
+                      <i className="bi bi-tools text-danger me-2"></i>
+                      <strong>Atribuição </strong>: {usuario.pools[0].nome_formatado}
                     </div>
                   </div>
                 )}
 
-                <div className="col-12 col-md-6">
-                  <div className="p-3 border rounded-3 bg-light d-flex align-items-center">
-                    <i className="bi bi-calendar-event-fill  me-2"></i>
-                    <strong>Criado em:</strong>&nbsp;
-                    {format(usuario.criado_em, "dd/MM/yyyy HH:mm", {
+                <div className="col-12 col-md-12">
+                  <div className="p-3 border rounded-3 bg-light align-items-center">
+                    <i className="bi bi-calendar-event-fill text-wrap text-danger me-2"></i>
+                    <strong>Criado em</strong>: {format(usuario.criado_em, "dd/MM/yyyy HH:mm", {
                       locale: ptBR,
                     })}
                   </div>
                 </div>
 
-                <div className="col-12 col-md-6">
-                  <div className="p-3 border rounded-3 bg-light d-flex align-items-center">
-                    <i className="bi bi-arrow-repeat me-2"></i>
-                    <strong>Atualizado em:</strong>&nbsp;
-                    {format(usuario.atualizado_em, "dd/MM/yyyy HH:mm", {
+                <div className="col-12 col-md-12">
+                  <div className="p-3 border rounded-3 bg-light align-items-center">
+                    <i className="bi bi-arrow-repeat text-wrap text-danger me-2"></i>
+                    <strong>Atualizado em</strong>: {format(usuario.atualizado_em, "dd/MM/yyyy HH:mm", {
                       locale: ptBR,
                     })}
                   </div>
@@ -103,7 +100,7 @@ export default function DetalhesUsuarioModal({
             </div>
 
             {/* Footer */}
-            <div className="modal-footer border-0">
+            <div className="modal-footer border-0 pt-0">
               <button
                 type="button"
                 className="btn btn-dark rounded-pill px-5"

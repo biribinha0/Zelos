@@ -64,7 +64,7 @@ const Contato = () => {
             <div className="container-fluid p-0">
 
                 <div className={`position-relative ${styles.bannerContato}`}>
-                    
+
                     <img
                         src="/img/bannerContato.png"
                         className={`img-fluid px-20 d-none d-md-block ${styles.bannerContatoDesktop}`}
@@ -88,7 +88,9 @@ const Contato = () => {
                         <div className="col-md-6">
                             <div className={`p-3  text-white text-break ${styles.formContato}`}>
                                 <h6>Contate-nos</h6>
-                                <h2 className="fw-bold fst-italic text-break">Entre em contato</h2>
+                                <h2 className="fw-bold fst-italic text-break">
+                                    Entre em <span className={styles.contatoHighlight}> contato </span>
+                                    </h2>
                                 <form onSubmit={handleContato}>
                                     <div className="mb-2">
                                         <label htmlFor="name" className="form-label fw-semibold text-break">Nome:</label>
@@ -113,7 +115,7 @@ const Contato = () => {
                                             value={formData.email}
                                             onChange={handleChange}
                                             required
-                                             placeholder="Insira seu email"
+                                            placeholder="Insira seu email"
                                         />
                                     </div>
                                     <div className="mb-2">
@@ -185,30 +187,24 @@ const Contato = () => {
                                     <p className={`text-break ${styles.subtituloContato}`}>R. Boa Vista, 825 - SCS</p>
                                 </div>
                             </div>
-<iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.7171624700615!2d-46.55207368541615!3d-23.62467498466467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5c7d2f0d2d2d%3A0xb7a8a4c90d4f5b1d!2sR.%20Boa%20Vista%2C%20825%20-%20Boa%20Vista%2C%20S%C3%A3o%20Caetano%20do%20Sul%20-%20SP%2C%2009572-300!5e0!3m2!1spt-BR!2sbr!4v1628270400000!5m2!1spt-BR!2sbr"
-  width="100%"
-  height="190"
-  style={{ border: 0 }}
-  allowFullScreen
-  loading="lazy"
-/>
-
-
+                            <div className={styles.mapContainer}>
+                                <iframe
+                                    className={styles.map}
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58486.83479488587!2d-46.60610804104802!3d-23.624868183810243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce4328c992748f%3A0xcea3c3e698444297!2sSENAI%20S%C3%A3o%20Caetano%20do%20Sul!5e0!3m2!1spt-BR!2sbr!4v1757095272644!5m2!1spt-BR!2sbr"
+                                ></iframe>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-
-               
                 <div className={`position-relative ${styles.banner2Contato}`}>
-                  
+
                     <img src="/img/banner2Contato.png" alt="Banner Desktop" className={`img-fluid px-20 d-none d-md-block ${styles.bannerContato2Desktop}`} />
 
-                    
+
                     <img src="/img/bannerContato2Mobile.png" alt="Banner Mobile" className={`img-fluid d-block d-md-none w-100 px-20 ${styles.bannerContato2Mobile}`} />
 
-                   
+
                     <Link href={bannerHref}>
                         <button className={styles.botaoBannerContato}>COMECE AGORA</button>
                     </Link>

@@ -1,32 +1,47 @@
-.card {
-  transition: all 0.3s ease-in-out;
-  background-color: #ffffff;
-  border-radius: 1px; /* cantos mais arredondados */
-  padding: 1.2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  margin-bottom: 1rem;
-  border-left: 5px solid #8B0000; /* detalhe de destaque */
+
+/* container que envolve todos os cards */
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: stretch; /* fundamental: faz os cards terem a mesma altura na linha */
 }
 
-.card:hover {
+/* alvo os .card dentro do container (funciona com o bootstrap .card) */
+.cardsContainer .card {
+  flex: 1 1 320px;       /* largura mínima / comportamento responsivo */
+  display: flex;         /* transforma o próprio card em flex container */
+  flex-direction: column;/* conteúdo do card empilha em coluna */
+  min-height: 18rem;     /* aqui você força uma altura mínima igual para todos — ajuste conforme quiser */
+  padding: 1.2rem;
+  background-color: #ffffff;
+  border-radius: 1px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-left: 5px solid #8B0000;
+  transition: all 0.3s ease-in-out;
+}
+
+/* hover visual igual ao seu original */
+.cardsContainer .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
 }
 
-.title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #1f1f1f;
-  margin-bottom: 0.6rem;
+/* faz o card-body preencher o card (assim mt-auto funciona) */
+.cardsContainer .card .card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
 }
 
-.text {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: #555;
+/* descrição expande para empurrar o botão para baixo */
+.cardsContainer .card .card-body .descricao,
+.cardsContainer .card .card-body p {
+  flex: 1 1 auto;
   margin-bottom: 1rem;
 }
 
+/* botão (mantive suas regras) */
 .button {
   background: linear-gradient(135deg, #8B0000, #a40000);
   border: none;
@@ -39,9 +54,37 @@
   transition: all 0.3s ease-in-out;
   box-shadow: 0 3px 6px rgba(139, 0, 0, 0.2);
 }
-
 .button:hover {
   background: linear-gradient(135deg, #a40000, #c00000);
   transform: scale(1.05);
   box-shadow: 0 5px 12px rgba(139, 0, 0, 0.25);
 }
+
+/* responsividade: ajusta min-height conforme tela */
+@media (max-width: 992px) {
+  .cardsContainer .card { 
+    min-height: 16rem; 
+    margin-bottom: 5%;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1024px) {
+  .cardsContainer .card { 
+    min-height: 23rem; 
+  }
+}
+
+@media (width: 1029px) and (height: 593px) {
+  .cardsContainer .card { 
+    min-height: 23rem; 
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .cardsContainer .card { 
+    min-height: 20rem; 
+  }
+}
+
+

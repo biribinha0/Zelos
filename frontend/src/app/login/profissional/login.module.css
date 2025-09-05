@@ -1,7 +1,7 @@
 
 /* Fundo com imagem customizada */
 .loginBackground {
-    background-image: url('/img/imgFundo.png');
+    background-image: url('/img/imgFundoProfi.png');
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -58,6 +58,7 @@
     font-size: 14px;
 }
 
+
 .inputWrapper .icon {
     position: absolute;
     right: 10px;
@@ -75,7 +76,7 @@
 .btn {
     transition: all 0.3s ease-in-out;
     font-family: "Dosis", sans-serif;
-    width: 90%;
+    width: 100%;
     max-width: 330px;
     height: 40px;
     border-radius: 0px;

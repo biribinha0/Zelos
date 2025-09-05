@@ -67,7 +67,7 @@ export default function CardChamadosResponsivoTec({ chamado }) {
                     </ul>
                 </div>
                 {secao === 1 && <div className="card-body p-4 pb-3">
-                    <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
+                    <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
                     <p className="pb-2"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
 
@@ -147,7 +147,7 @@ export default function CardChamadosResponsivoTec({ chamado }) {
                 </div>}
 
                 {secao === 2 && <div className="card-body p-4 pb-0">
-                    <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
+                    <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
                     <p className="pb-2"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
 
@@ -187,13 +187,13 @@ export default function CardChamadosResponsivoTec({ chamado }) {
 
 
                 {secao === 3 && <div className="card-body p-4 pb-3">
-                    <h3 className={`card-title pt-1 ${styles.tituloLinha}`}>{chamado?.titulo}</h3>
+                    <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
                     <p className="mb-0"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
 
                         <div className="row d-flex align-items-center justify-content-center p-3 gap-3 row-gap-3">
 
-                            <a className={`col-9 col-sm-7 col-md-9 p-2 border border-white rounded ${styles.hoverBotao} ${styles.decorationNone}`}>
+                            <div className={`col-9 col-sm-7 col-md-9 p-2 border border-white rounded ${styles.hoverBotao} ${styles.decorationNone}`}>
                                 <Link
                                     key={chamado.id}
                                     href={`/tecnico/chamados/${chamado.id}`}
@@ -202,22 +202,22 @@ export default function CardChamadosResponsivoTec({ chamado }) {
                                     <i className={`bi bi-file-earmark-text-fill text-danger p-2 ${styles.decorationNone}`}></i>
                                     <p className={`card-text pb-0 mb-0 ${styles.decorationNone}`}>Ver Detalhes</p>
                                 </Link>
-                            </a>
+                            </div>
 
-                            
-                                {chamado.status === "concluído" ? (
-                                    <p className="py-1 m-0">
-                                        <i className="bi bi-check-all text-success me-1"></i>
-                                        Concluído
-                                    </p>
-                                ) : (
-                                    <FecharChamadoModal
-                                        chamado={chamado}
-                                        buttonStyle="col-9 col-sm-7 col-md-9 p-2 border border-white rounded"
-                                        modalId={`FecharModal${chamado.id}`}
-                                    />
-                                )}
-                            
+
+                            {chamado.status === "concluído" ? (
+                                <p className="py-1 m-0">
+                                    <i className="bi bi-check-all text-success me-1"></i>
+                                    Concluído
+                                </p>
+                            ) : (
+                                <FecharChamadoModal
+                                    chamado={chamado}
+                                    buttonStyle="col-9 col-sm-7 col-md-9 p-2 border border-white rounded"
+                                    modalId={`FecharModal${chamado.id}`}
+                                />
+                            )}
+
 
 
                         </div>

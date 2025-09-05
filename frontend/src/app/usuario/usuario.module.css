@@ -123,7 +123,7 @@
   z-index: 1;
   background: #d70101;
   position: relative;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 17px !important;
   color: #eeeeee;
   text-transform: uppercase;
@@ -147,7 +147,7 @@
   background-color: #212121;
   z-index: -1;
   box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-  transition: all 1000ms;
+  transition: all 1s;
 }
 
 .botaoAcessarChamados:hover {
@@ -228,8 +228,12 @@
 }
 
 .feedbackHighlight {
-  color: #ff7070;
+  color: rgb(255, 255, 255);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.856);
+  display: inline-block; /* garante que o border acompanhe o texto */
+  padding-bottom: -1px;   /* espaço entre texto e linha */
 }
+
 
 .subtitle {
   font-size: 0.95rem;
@@ -291,7 +295,7 @@
   background-color: #212121;
   z-index: -1;
   box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
-  transition: all 1000ms;
+  transition: all 1s;
 }
 
 .form button:hover {

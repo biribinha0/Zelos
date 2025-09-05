@@ -167,8 +167,8 @@ const listarChamadosController = async (req, res) => {
 }
 
 const criarChamadoController = async (req, res) => {
-    const { titulo, descricao, tipo_id, usuario_id, patrimonio } = req.body
-    if (!titulo || !descricao || !tipo_id || !usuario_id) {
+    const { titulo, descricao, tipo_id, usuario_id, patrimonio, urgencia, } = req.body
+    if (!titulo || !descricao || !tipo_id || !usuario_id || !urgencia) {
         return res.status(400).json({ error: 'Todos os campos obrigatórios devem ser preenchidos.' });
     }
 
@@ -189,6 +189,7 @@ const criarChamadoController = async (req, res) => {
             descricao,
             tipo_id,
             usuario_id,
+            urgencia: urgencia || 'Comum',
             patrimonio: patrimonio ? patrimonio : null
         }
 

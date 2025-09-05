@@ -1,3 +1,4 @@
+
 export default function ItemChamado(chamadoData) {
     const chamado = chamadoData.chamado
     return (

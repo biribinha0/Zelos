@@ -75,7 +75,7 @@
 .btn {
     transition: all 0.3s ease-in-out;
     font-family: "Dosis", sans-serif;
-    width: 90%;
+    width: 100%;
     max-width: 330px;
     height: 40px;
     border-radius: 0px;

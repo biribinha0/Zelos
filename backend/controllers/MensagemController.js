@@ -35,4 +35,17 @@ const criarMensagemController = async (req, res) => {
     }
 }
 
-export { listarMensagensController, criarMensagemController }
+const listarFeedbacksController = async (req, res) => {
+    try {
+        const feedbacks = await listarFeedbacks();
+
+        if (feedbacks.length == 0) return res.status(404).json({ error: 'Nenhum feedback encontrado' })
+
+        res.status(200).json(feedbacks)
+    } catch (error) {
+        console.error('Erro ao listar feedbacks: ', error);
+        return res.status(500).json({ error: 'Ocorreu um erro interno ao listar feedbacks.' });
+    }
+}
+
+export { listarMensagensController, criarMensagemController,listarFeedbacksController}
