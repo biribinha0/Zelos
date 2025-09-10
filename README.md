@@ -4,6 +4,8 @@
 
 Este é um projeto de **sistema de chamados** para a **Escola SENAI Armando de Arruda Pereira**, desenvolvido para gerenciar solicitações de manutenção, apoio técnico e outros serviços para itens identificados pelo número de patrimônio da escola. O sistema foi construído com **Next.js**, **Node.js** e **MySQL**.
 
+[Manual de Uso](https://www.canva.com/design/DAGylVkbiP0/KowHH5cAoBXdDcAUj4rSoA/edit?utm_content=DAGylVkbiP0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 ## Índice
 
 1. [Sobre o Projeto](#sobre-o-projeto)
