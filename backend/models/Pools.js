@@ -73,7 +73,7 @@ const deletarPool = async (id) => {
 
 const editarPoolTecnico = async (poolTecnicoData, tecnicoId) => {
     try {
-        return await update('pool_tecnico', poolTecnicoData, `id = ${tecnicoId}`)
+        return await update('pool_tecnico', poolTecnicoData, `id_tecnico = ${tecnicoId}`)
     } catch (error) {
         console.error('Erro ao editar pool técnico: ', error);
         throw error;

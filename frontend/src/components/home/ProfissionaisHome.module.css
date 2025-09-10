@@ -86,8 +86,8 @@ p.card-titulo {
   padding: 0% 30%;
 }
 
-:global(.swiper-button-next),
-:global(.swiper-button-prev) {
+.swiperWrapper :global(.swiper-button-next),
+.swiperWrapper :global(.swiper-button-prev) {
   color: #b9b9b9 !important;
   padding: 0% 5%;
 }

@@ -103,7 +103,7 @@ export default function LoginProfissional() {
 
                     {mensagem && <p className="text-center pt-3">{mensagem}</p>}
 
-                    <p className={styles.registerText}>
+                    <p className={`pb-0 mb-0 ${styles.registerText}`}>
                         Esqueceu sua senha? Entre em <Link href="/contato">contato</Link> com a nossa secretaria.
                     </p>
                 </form>

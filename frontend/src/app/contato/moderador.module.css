@@ -1,46 +1,43 @@
-
-.formContato{
-background-color: #862922;
-color: white;
+.formContato {
+  background-color: #2f2f2f;
+  color: white;
 }
 
 
 .formContato input:focus,
 .formContato textarea:focus {
-    border-color: #fff !important; 
-    color: #fff; 
-    background-color: rgba(255, 255, 255, 0.25); 
+  border-color: #fff !important;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 
-.formContato input:focus + label,
-.formContato textarea:focus + label {
-    color: #fff !important;
+.formContato input:focus+label,
+.formContato textarea:focus+label {
+  color: #fff !important;
 }
 
 .formContato .form-label {
-    color: #fff !important; 
+  color: #fff !important;
 }
 
-
-
-.texto1Contato{
-    color: #862922;
+.texto1Contato {
+  color: #862922;
 }
 
-.iconeContato{
-    color: #862922;
+.iconeContato {
+  color: #862922;
 }
 
-.tituloContato{
- color: #862922;
- font-weight: bold;
+.tituloContato {
+  color: #862922;
+  font-weight: bold;
 }
 
-.subtituloContato{
-    color: #862922;
-    font-weight: 100;
-    font-size: small;
+.subtituloContato {
+  color: #862922;
+  font-weight: 100;
+  font-size: small;
 }
 
 /* BANNER */
@@ -64,14 +61,13 @@ color: white;
   margin: auto;
 }
 
-.espaco{
-    margin-top: 120px;
+.espaco {
+  margin-top: 45px;
 }
-
 
 .banner2Contato {
   width: 100%;
-  position: relative; 
+  position: relative;
   top: 0;
   overflow: hidden;
 }
@@ -87,9 +83,9 @@ color: white;
 
 .botaoBannerContato {
   position: absolute;
-  top: 65%;  
-  left: 8%;  
-  transform: translateY(15%); 
+  top: 65%;
+  left: 8%;
+  transform: translateY(15%);
   padding: 1.0em 2.5em;
   border: none;
   font-weight: bold;
@@ -166,7 +162,7 @@ color: white;
   position: relative;
   font-weight: bold;
   font-size: 17px !important;
-  color: #6e0707;
+  color: #7d2e2e;
   text-transform: uppercase;
   box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
   transition: all 1000ms;
@@ -185,7 +181,7 @@ color: white;
   left: 0;
   height: 100%;
   width: 0;
-  background-color: #212121;
+  background-color: #85241F;
   z-index: -1;
   box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
   transition: all 1s;
@@ -209,21 +205,22 @@ color: white;
   }
 }
 
-.contatoHighlight{
+.contatoHighlight {
   color: rgb(255, 255, 255);
   border-bottom: 2px solid rgba(255, 255, 255, 0.856);
-  display: inline-block; /* garante que o border acompanhe o texto */
-  padding-bottom: -1px; 
+  display: inline-block;
+  /* garante que o border acompanhe o texto */
+  padding-bottom: -1px;
 }
 
-.formContato{
+.formContato {
   height: 100%;
 }
 
 .formContato ::placeholder {
-  color: rgba(255, 255, 255, 0.632) ;
-  opacity: 1; 
-  font-weight:bold;
+  color: rgba(255, 255, 255, 0.632);
+  opacity: 1;
+  font-weight: bold;
 
 }
 
@@ -239,11 +236,11 @@ color: white;
 
 .mapContainer {
   width: 100%;
-  max-width: 600px; 
-  aspect-ratio: 10 / 4; 
+  max-width: 600px;
+  aspect-ratio: 10 / 4;
   margin-bottom: 5px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .map {
@@ -252,4 +249,79 @@ color: white;
   border: none;
   display: block;
 }
+
+
+
+/* ÁREA DE REABRIR CHAMADOS. EXPLICAÇÃO */
+.botaoBanner3Contato {
+  position: absolute;
+  top: 70%;
+  left: 40%;
+  transform: translateY(15%);
+  padding: 1.0em 2.5em;
+  border: none;
+  font-weight: bold;
+  font-size: 18px;
+  color: #a73128;
+  text-transform: uppercase;
+  background: #ffffff;
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 0.4s ease;
+  width: 100%;
+  max-width: 530px;
+  z-index: 10;
+}
+
+.botaoBanner3Contato::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: #85241F;
+  z-index: -1;
+  transition: all 1s ease;
+}
+
+.botaoBanner3Contato:hover {
+  color: #e8e8e8;
+}
+
+.botaoBanner3Contato:hover::before {
+  width: 100%;
+}
+
+/* Responsividade */
+@media (min-width: 600px) and (max-width: 1024px) {
+  .botaoBanner3Contato {
+    font-size: 16px;
+    padding: 1em 2em;
+    max-width: 40%;
+    left: 40%;
+    top: 70%;
+  }
+}
+
+@media (max-width: 768px) {
+  .botaoBanner3Contato {
+    font-size: 16px;
+    padding: 1em 1em;
+    top: 75%;
+    left: 10%;
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .botaoBanner3Contato {
+    font-size: 15px;
+    padding: 1em 1.5em;
+    top: 70%;
+    display: block;
+    margin: auto;
+    max-width: 80%;
+  }
+}
+
 

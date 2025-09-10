@@ -90,7 +90,7 @@ const Contato = () => {
                                 <h6>Contate-nos</h6>
                                 <h2 className="fw-bold fst-italic text-break">
                                     Entre em <span className={styles.contatoHighlight}> contato </span>
-                                    </h2>
+                                </h2>
                                 <form onSubmit={handleContato}>
                                     <div className="mb-2">
                                         <label htmlFor="name" className="form-label fw-semibold text-break">Nome:</label>
@@ -106,7 +106,7 @@ const Contato = () => {
                                         />
                                     </div>
                                     <div className="mb-2">
-                                        <label htmlFor="email" className="form-label fw-semibold text-break">Email:</label>
+                                        <label htmlFor="email" className="form-label fw-semibold text-break">E-mail:</label>
                                         <input
                                             type="email"
                                             className="form-control bg-white bg-opacity-25 border-0 text-white"
@@ -153,7 +153,7 @@ const Contato = () => {
 
                         <div className="col-md-6 d-flex flex-column justify-content-center gap-1">
                             <p className={`text-break ${styles.texto1Contato}`}>
-                                Em caso de dúvidas ou suporte, entre em contato com nossa equipe para podemos te ajudar.
+                                Em caso de dúvidas ou suporte, entre em contato com nossa equipe para podermos te ajudar.
                             </p>
                             <div className="row text text-center fs-6 fw-semibold">
                                 <div className="col-6 mb-2">
@@ -167,7 +167,7 @@ const Contato = () => {
                                     <div className="mb-1 fs-3">
                                         <i className={`bi bi-envelope ${styles.iconeContato}`}></i>
                                     </div>
-                                    <h5 className={`text-break ${styles.tituloContato}`}>Email</h5>
+                                    <h5 className={`text-break ${styles.tituloContato}`}>E-mail</h5>
                                     <p className={`text-break ${styles.subtituloContato}`}>senai@sp.senai.br</p>
                                 </div>
                             </div>
@@ -176,7 +176,7 @@ const Contato = () => {
                                     <div className="mb-1 fs-3">
                                         <i className={`bi bi-whatsapp ${styles.iconeContato}`}></i>
                                     </div>
-                                    <h5 className={`text-break ${styles.tituloContato}`}>Whatsapp</h5>
+                                    <h5 className={`text-break ${styles.tituloContato}`}>WhatsApp</h5>
                                     <p className={`text-break ${styles.subtituloContato}`}>(11) 9876-5432</p>
                                 </div>
                                 <div className="col-6 mb-2">
@@ -209,7 +209,25 @@ const Contato = () => {
                         <button className={styles.botaoBannerContato}>COMECE AGORA</button>
                     </Link>
                 </div>
+            </div>
 
+            {/* terceiro banner */}
+            <div className={`position-relative ${styles.bannerContato}`}>
+                <img
+                    src="/img/banner3Contato.png"
+                    className={`img-fluid px-20 d-none d-md-block ${styles.banner3Contato}`}
+                    alt="Banner Desktop"
+                />
+
+                <img
+                    src="/img/banner3ContatoMobile.png"
+                    className={`img-fluid d-block d-md-none w-100 px-20 ${styles.banner3ContatoMobile}`}
+                    alt="Banner Mobile"
+                />
+
+                <Link href={'/login/usuario'}>
+                    <button className={styles.botaoBanner3Contato}>COMECE AGORA</button>
+                </Link>
             </div>
 
 

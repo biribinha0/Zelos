@@ -22,7 +22,7 @@ router.get('/chamados/usuario/:id', listarChamadosPorUsuarioController);
 // /admin/chamados/:id	Editar chamado (status, técnico, dados gerais)
 router.put('/chamados/:id', editarChamadoController);
 
-// /admin/chamados/:id	Editar chamado (status, técnico, dados gerais)
+// /admin/chamados/:id	atribuir o tecnico a um chamado
 router.post('/chamados/:id/atribuir', atribuirTecnicoController);
 
 // Fechar chamado com resolução

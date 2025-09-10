@@ -210,7 +210,7 @@ const editarChamadoController = async (req, res) => {
     const chamadoId = req.params.id;
     const { titulo, descricao, tipo_id, tecnico_id, status, patrimonio, atualizado_em } = req.body
 
-    if (!titulo || !descricao || !tipo_id || !tecnico_id || !status) {
+    if (!titulo || !descricao || !tipo_id || !status) {
         return res.status(400).json({ error: 'Todos os campos obrigatórios devem ser preenchidos.' });
     }
 
@@ -219,7 +219,7 @@ const editarChamadoController = async (req, res) => {
             titulo,
             descricao,
             tipo_id,
-            tecnico_id,
+            tecnico_id : tecnico_id ? tecnico_id : null,
             status,
             patrimonio: patrimonio ? patrimonio : null,
             atualizado_em: atualizado_em ? atualizado_em : null

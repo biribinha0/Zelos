@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 import CardDepoimentos from "./CardDepoimentos";
 
 import 'swiper/css';
@@ -41,25 +41,29 @@ export default function Depoimentos() {
             {/* Carrossel */}
             <div className={`${styles.carrosselDiv}`}>
                 <Swiper
-                    modules={[Navigation, Pagination, Scrollbar, A11y]}
-                    navigation
+                    modules={[ Pagination, Scrollbar, A11y, Autoplay]}
+                    
                     speed={1200}
                     loop={true}
                     spaceBetween={20}
-                    observer={true}
-                    observeParents={true}
+                    autoplay={{
+                        delay:3000, 
+                        disableOnInteraction:false,
+                        pauseOnMouseEnter: false
+                    }}
                     onSwiper={(swiper) => {
                         swiperRef.current = swiper;
+                        swiper.autoplay.start()
                     }}
                     breakpoints={{
                         0: { slidesPerView: 1 },
                         768: { slidesPerView: 2 },
                         1024: { slidesPerView: 3 }
                     }}
-                    className={`p-5 pb-0 ${styles.espacoProfissionaisHome}`}
+                    className={`p-5 ${styles.espacoProfissionaisHome}`}
                 >
                     {feedbacks.length === 0 ? (
-                        <h5>Nenhuma mensagem de feedback encontrada</h5>
+                        <h5 className="text-center">Nenhuma mensagem de feedback encontrada</h5>
                     ) : (
                         feedbacks.map((f, index) => (
                             <SwiperSlide key={index} className="d-flex justify-content-center">

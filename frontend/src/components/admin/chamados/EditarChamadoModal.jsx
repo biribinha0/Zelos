@@ -52,8 +52,9 @@ export default function EditarChamadoModal({
                     window.location.reload();
                 }, 3000);
             })
-            .catch(() => {
-                setMensagem("❌ Erro ao atualizar o chamado.");
+            .catch((error) => {
+                console.log(error)
+                setMensagem(error.response.data.error || "❌ Erro ao atualizar o chamado.");
             });
     }
 
@@ -163,7 +164,6 @@ export default function EditarChamadoModal({
                                     name="tecnico_id"
                                     value={form.tecnico_id}
                                     onChange={handleChange}
-                                    required
                                 >
                                     <option value="">Selecione</option>
                                     {tecnicos.map((t, i) => {

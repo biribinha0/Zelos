@@ -34,6 +34,7 @@ main {
     margin: 0;
     padding: 0;
     transition: color 0.3s ease !important; /* suaviza a mudança */
+  
 }
 
 .footer-menu Link {
@@ -43,20 +44,25 @@ main {
 
  .footer-menu :hover {
   color: #00000093 !important;
+  transition: color 1.0s ease !important;
+  transform: scale(1.085) !important;
+  transition: transform 1.0s ease !important;
 }
 
 
 .cadastroCor Link{
     color: #9a1915 !important;
-    transition: color 0.3s ease !important;
+    transition: color 1.0s ease !important;
 }
 .cadastroCor Link:hover{
     color: #00000093 !important;
+    transition: color 1.0s ease !important;
 }
+
 
 .loginCor{
     color: #9a1915 !important;
-    transition: color 0.3s ease !important;
+    transition: color 1.0s ease !important;
 }
 .loginCor:hover{
     color: #00000093 !important;

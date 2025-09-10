@@ -5,15 +5,17 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 export default function PoolTecnicoModal({ tec, poolId, modalId = `PoolTecnico` }) {
+    const token = getToken();
     const [mensagem, setMensagem] = useState('');
     const [tipos, setTipos] = useState([])
     const [pool, setPool] = useState('');
 
     useEffect(() => {
+        console.log(tec, poolId)
         axios.get(`${API_URL}/meta/pools`, { headers: { Authorization: `Bearer ${token}` } })
             .then((res) => setTipos(res.data))
             .catch(() => setTipos([]))
-            
+
     }, [])
 
     useEffect(() => {
@@ -23,7 +25,6 @@ export default function PoolTecnicoModal({ tec, poolId, modalId = `PoolTecnico` 
     }, [poolId]);
 
 
-    const token = getToken();
 
     const handleSubmit = () => {
         axios.put(`${API_URL}/admin/usuarios/${tec.id}/pool`, {
@@ -69,7 +70,7 @@ export default function PoolTecnicoModal({ tec, poolId, modalId = `PoolTecnico` 
                         {/* Cabeçalho */}
                         <div className="d-flex align-items-center mb-3">
                             <i className="bi bi-pencil-fill fs-3 me-2"></i>
-                            <h5 className="fw-bold text-dark m-0">Editar relação pool técnico {poolId}  </h5>
+                            <h5 className="fw-bold text-dark m-0">Editar relação pool técnico</h5>
                         </div>
 
                         <div className="col-12 my-2">
@@ -83,7 +84,7 @@ export default function PoolTecnicoModal({ tec, poolId, modalId = `PoolTecnico` 
                             >
                                 <option value="">Todos</option>
                                 {tipos.map((t) => (
-                                    < option key={t.id} value={t.id} > {t.id} {t.titulo} </option>
+                                    < option key={t.id} value={t.id} > {t.titulo} </option>
                                 ))}
                             </select>
                         </div>

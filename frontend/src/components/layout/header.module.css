@@ -4,12 +4,27 @@
 }
 
 .espacamentoNav {
-    padding: 0% 4% !important;
-    padding-right: 5.5% !important;
+    padding: 0% 4%;
+    padding-right: 5.5%;
 }
 
 .logo {
     margin: 10% 0%;
+}
+
+.usuarioBotao{
+    transition: .3s;
+    color: #fff
+}
+.usuarioBotao:hover,
+.usuarioBotao:target,
+.usuarioBotao:active
+.usuarioBotao:focus{
+    color: #9A1915 ;
+}
+a.dropdown-icon {
+    color: #9A1915 !important;
+
 }
 
 .itensHeader {
@@ -197,7 +212,12 @@ li.itens a:hover::before {
         display: block;
         text-align: center;
     }
-
+    .AltHeader{
+        padding-left: 60px;
+    }
+    .AltEspacamentoNav{
+        padding: 0;
+    }
 
 }
 

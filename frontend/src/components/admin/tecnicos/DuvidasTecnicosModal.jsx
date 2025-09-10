@@ -29,6 +29,12 @@ export default function DuvidasTecnicosModal() {
           </p>
           <div className="mt-2">
             <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
+              <i className="bi bi-pencil-fill text-danger" title="Editar"></i>
+              <span className="ms-3 fw-semibold">
+                Muda o tipo de chamado que o técnico é atribuído.
+              </span>
+            </div>
+            <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
               <i className="bi bi-eye text-secondary"></i>
               <span className="ms-3 fw-semibold">
                 Permite a visualização dos dados detalhados do técnico.

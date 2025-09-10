@@ -136,7 +136,7 @@ const editarPoolTecnicoController = async (req, res) => {
         if (!pool) return res.status(404).json({ error: 'Pool não encontrado' })
 
         const poolTecnico = await listarPoolsPorTecnico(tecnicoId)
-        if (poolTecnico) {
+        if (poolTecnico && poolTecnico.length>0) {
             const response = await editarPoolTecnico({ id_pool: poolId }, tecnicoId);
             return res.status(200).json({ mensagem: 'Pool e técnico relacionados com sucesso', response })
         } else {

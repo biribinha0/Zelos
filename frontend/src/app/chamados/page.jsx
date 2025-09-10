@@ -3,34 +3,46 @@ import ListaChamados from '@/components/ListaChamados/ListaChamados';
 
 export default function Chamados() {
     return (
-        <>
+      <>
+      {/* Mobile */}
+      <div className="d-block d-sm-none">
+        <img
+          className="img-fluid w-100"
+          src="/img/bannerManutencaoMobile.png"
+          alt="bannerUmMobile"
+        />
+      </div>
+    
+      {/* Tablet */}
+      <div className="d-none d-sm-block d-md-none">
+        <img
+          className="img-fluid w-100"
+          src="/img/bannerManutencaoDesktop.png"
+          alt="bannerUmTablet"
+        />
+      </div>
+    
+      {/* Desktop */}
+      <div className="d-none d-md-block">
+        <img
+          className="img-fluid w-100"
+          src="/img/imgBannerChamados.png"
+          alt="bannerUmDesktop"
+        />
+      </div>
+    
+        
 
-         <div className="position-relative bannerChamados">
-                {/* Imagem para desktop (aparece só em md+) */}
-                <img
-                    src="/img/imgBannerChamados.png"
-                    className="img-fluid d-none d-md-block bannerDesktop"
-                    alt="Banner Desktop"
-                />
-
-                {/* Imagem para mobile (aparece só em sm/md-) */}
-                <img
-                    src="/img/bannerChamadosMobile.png"
-                    className="img-fluid d-block d-md-none w-100 px-20 bannerChamadosMobile"
-                    alt="Banner Mobile"
-                />
-            </div>
-
-            <div className="fundo">
+            <div className="fundoChamados">
                  <div  className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
                     <i className="bi bi-gear-fill mx-2 my-2"></i>
-                    <span className="text-dark">
-                        Chamados <span className="text-danger">atuais:</span>
+                    <span className="tituloChamados">
+                        Chamados <span className="tituloChamados2">atuais:</span>
                     </span>
                 </h4>
             </div>
-                <ListaChamados />
+                <ListaChamados/>
 
             </div>
         </>

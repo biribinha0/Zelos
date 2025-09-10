@@ -114,24 +114,18 @@ body {
 
 
 .rc-pagination-item-active a {
-  color: rgb(107, 3, 13) !important;
   font-weight: 700;
-  border-bottom: 2px solid #9b0413; 
   outline: none;
 }
 
 
-.rc-pagination-item:hover a {
-  color: #702323;
-}
 
 
 .rc-pagination-item:focus a,
 .rc-pagination-item a:focus {
   outline: none;  
   border: none;          
-  color: rgb(130, 16, 28) !important;  
-  border-bottom: 2px solid #67040e;
+  
 }
 
 

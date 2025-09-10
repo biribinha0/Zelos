@@ -48,11 +48,11 @@ export default function Footer() {
       <footer className="footer">
         <div className="footer-top fst-italic d-flex flex-wrap">
           <ul className="footer-menu d-flex flex-wrap">
-            <li className="text-break Link"><Link href={'/'} >Home</Link></li>
-            <li className="text-break Link"><Link href={'/sobre'} >Sobre nós</Link></li>
-            <li className="text-break Link"><Link href={'/servicos'} >Serviços</Link></li>
-            <li className="text-break Link"><Link href={'/chamados'} >Chamados</Link></li>
-            <li className="text-break Link"><Link href={'/contato'} >Contato</Link></li>
+            <li className="text-break Link"><Link href={'/'} className="homeCor">Home</Link></li>
+            <li className="text-break Link"><Link href={'/sobre'} className="sobreCor">Sobre nós</Link></li>
+            <li className="text-break Link"><Link href={'/servicos'} className="servicoCor" >Serviços</Link></li>
+            <li className="text-break Link"><Link href={'/chamados'} className="chamadosCor" >Chamados</Link></li>
+            <li className="text-break Link"><Link href={'/contato'} className="contatoCor">Contato</Link></li>
             <li className="text-break Link"><Link href={'/login/profissional'} className="loginCor">Login Profissional</Link></li>
             <li className="text-break Link"><Link href={'/login/usuario'} className="loginCor">Login Usuário</Link></li>
           </ul>

@@ -67,15 +67,15 @@ export default function AdminMensagens() {
                   </div>
                 </div>
                 <p
-                  className="m-0 text-uppercase small text-muted fw-bold mb-1 text-truncate"
+                  className="m-0 text-uppercase small text-muted fw-bold mb-1"
                   title={et.titulo}
                 >
                   {et.titulo}
                 </p>
                 <p
-                  className="text-muted small mb-3 flex-grow-1 overflow-hidden text-truncate"
+                  className="text-muted small mb-3 flex-grow-1 overflow-hidden"
                   title={et.mensagem}
-                  style={{ maxHeight: "100px", whiteSpace: "nowrap" }}
+                  style={{ maxHeight: "100px" }}
                 >
                   {et.mensagem}
                 </p>
@@ -123,9 +123,9 @@ export default function AdminMensagens() {
                   </div>
                 </div>
                 <p
-                  className="text-muted small mb-3 flex-grow-1 overflow-hidden text-truncate"
+                  className="text-muted small mb-3 flex-grow-1 overflow-hidden"
                   title={c.mensagem}
-                  style={{ maxHeight: "100px", whiteSpace: "nowrap" }}
+                  style={{ maxHeight: "100px"}}
                 >
                   {c.mensagem}
                 </p>
@@ -191,9 +191,9 @@ export default function AdminMensagens() {
                   </div>
                 </div>
                 <p
-                  className="text-muted small mb-3 flex-grow-1 overflow-hidden text-truncate"
+                  className="text-muted small mb-3 flex-grow-1 overflow-hidden"
                   title={f.mensagem}
-                  style={{ maxHeight: "100px", whiteSpace: "nowrap" }}
+                  style={{ maxHeight: "100px" }}
                 >
                   {f.mensagem}
                 </p>

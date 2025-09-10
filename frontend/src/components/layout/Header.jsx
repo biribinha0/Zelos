@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 export default function Header() {
   const router = useRouter()
   const pathName = usePathname();
+  const [altHeader, setAltHeader] = useState(false)
 
   const itensNav = [
     { href: '/', label: 'Home' },
@@ -29,13 +30,25 @@ export default function Header() {
     // Chama já na primeira renderização
     checkAuth();
 
+
     // Escuta mudanças no localStorage (inclusive de outros tabs)
     window.addEventListener("storage", checkAuth);
 
     return () => {
       window.removeEventListener("storage", checkAuth);
     };
+
   }, []);
+
+  useEffect(()=> {
+     if (pathName.startsWith('/usuario') ||
+      pathName.startsWith('/tecnico') ||
+      pathName.startsWith('/admin')) {
+      setAltHeader(true)
+    } else {
+      setAltHeader(false)
+    }
+  }, [pathName])
 
 
   const handleLogout = () => {
@@ -43,21 +56,21 @@ export default function Header() {
     router.push('/')
   }
   return (
-    
-    <nav className={`navbar navbar-expand-lg ${styles.Header}`}>
-      <div className={`container-fluid ${styles.espacamentoNav}`}>
+
+    <nav className={`navbar navbar-expand-lg ${styles.Header} ${altHeader ? styles?.AltHeader : ''}`}>
+      <div className={`container-fluid ${styles.espacamentoNav}  ${altHeader ? styles?.AltEspacamentoNav : ''}`}>
         <div className="row">
           <div className="col-12 col-lg-2 d-flex align-items-center">
             <div className="d-flex justify-content-between row">
 
-              <Link className="col-4 col-lg-12 navbar-brand d-flex align-items-center justify-content-center ps-4 m-0" href={'/'}>
+              <Link className="col-6 col-sm-4 col-lg-12 navbar-brand d-flex align-items-center justify-content-center ps-4 m-0" href={'/'}>
                 <img
                   className={`img-fluid w-75 ${styles.logo}`}
                   src="/img/logoBranco.png"
                   alt="logo"
                 />
               </Link>
-              <div className="col-2 d-flex justify-content-center align-items-center">
+              <div className="col-4 col-sm-2 d-flex justify-content-center align-items-center">
 
                 <button
                   className={`navbar-toggler  me-sm-4 bg-light border-none ${styles.hamburguer}`}
@@ -81,7 +94,7 @@ export default function Header() {
                 {itensNav.map((item) => (
                   <li className={`nav-item fst-italic ${styles.itens}`} key={item.href}>
                     <Link
-                      className={`nav-link ${pathName === item.href ? styles.ativo : ''}`}
+                      className={`nav-link ${pathName === item.href ? styles?.ativo : ''}`}
                       aria-current="page"
                       href={item.href}
                     >
@@ -104,11 +117,11 @@ export default function Header() {
                       </Link>
                     </div>
                   ) : (
-                      <div className={`d-flex justify-content-center px-3 col-12 ${decoded.funcao === 'usuario' ? 'col-sm-6' : 'col-sm-12'} align-items-center`}>
+                    <div className={`d-flex justify-content-center px-3 col-12 ${decoded.funcao === 'usuario' ? 'col-sm-6' : 'col-sm-12'} align-items-center`}>
 
                       <div className="dropdown">
                         <button
-                          className="btn btn-outline-light dropdown-toggle"
+                          className={`btn btn-outline-light dropdown-toggle ${styles.usuarioBotao}`}
                           type="button"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"

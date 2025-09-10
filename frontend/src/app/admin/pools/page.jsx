@@ -1,3 +1,6 @@
+
+// Página ilustrativa, para a possibilidade de criar e editar tipos de chamados. Por enquanto, o banco de dados registra os tipos de chamados em uma tabela como ENUM, e são referenciados como FK na tabela de chamados
+
 "use client";
 import React, { useState } from 'react';
 import { DuvidasCriacaoModal } from '@/components/admin';

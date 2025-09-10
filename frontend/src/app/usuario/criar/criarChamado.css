@@ -1,5 +1,5 @@
 .criar-background {
-  background-image: url('/img/fundoCChamado1.jpg');
+  background-image: url('/img/fundoCChamado1.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -83,11 +83,6 @@
 .buttonC:hover::before {
   width: 100%;
 }
-
-* {
-  max-width: 100%;
-}
-
 
 
 .patrimonioMae {

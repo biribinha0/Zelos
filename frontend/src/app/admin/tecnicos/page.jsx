@@ -128,7 +128,17 @@ export default function TecnicosPage() {
                                             <tr key={tec.id}>
                                                 <td className="TextTabela">{tec.nome}</td>
                                                 <td className="TextTabela">{tec.email}</td>
-                                                <td className="textTabela">{tec.pool.titulo}<PoolTecnicoModal tec={tec} modalId={`poolTecnico${tec.id}`} poolId={tec?.pool?.id}/></td>
+                                                <td className="textTabela">
+                                                    <div className="d-flex justify-content-center gap-2">
+
+                                                        {tec.pool.titulo}
+                                                        <PoolTecnicoModal
+                                                            tec={tec}
+                                                            modalId={`poolTecnico${tec.id}`}
+                                                            poolId={tec?.pool?.id}
+                                                        />
+                                                    </div>
+                                                </td>
                                                 <td className="TextTabela">{tec.chamadosEmAndamento}</td>
                                                 <td className="TextTabela">{tec.chamadosConcluidos}</td>
                                                 <td className="TextTabela">{tec.tempoMedio || "-"}</td>
