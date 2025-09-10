@@ -22,7 +22,7 @@ export default function Sobre() {
     <>
       <div className={styles.bannerSobre}>
         <img
-          className={`img-fluid ${styles.bannersobrenos}`}
+          className={`img-fluid w-100 ${styles.bannersobrenos}`}
           src="/img/bannersobredefinitivo.png"
           alt="banner desktop"
         />
