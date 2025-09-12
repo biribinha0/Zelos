@@ -50,7 +50,6 @@ router.post('/login', (req, res, next) => {
             id: user.sAMAccountName,
             email: user.userPrincipalName,
             nome: formatarNome(user.givenName),
-            nomeCompleto: formatarNome(user.displayName),
             senha: senhaHasheada,
             funcao: 'usuario',
           }
