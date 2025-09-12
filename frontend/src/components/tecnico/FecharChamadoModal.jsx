@@ -195,6 +195,7 @@ export default function FecharChamadoModal({ chamado, buttonStyle, modalId = 'Fe
                                     className="btn btn-vermelho"
                                     form="fecharChamadoForm"
                                     disabled={loading}
+                                    onClick={handleSubmit}
                                 >
                                     {loading ? (
                                         <>

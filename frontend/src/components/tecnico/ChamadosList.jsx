@@ -98,15 +98,14 @@ export default function ChamadosList() {
                     <div className="col-md-3">
                         <label className="form-label fw-bold inputAfter">Status:</label>
                         <select
-                            className="form-control text-secondary fw-bold rounded py-2 "
+                            className="form-control text-secondary fw-bold rounded py-2 input-vermelho"
                             name="status"
                             value={filtros.status}
                             onChange={handleChange}
                             style={{ backgroundColor: "#b3b3b371" }}
                         >
                             <option value="">Todos</option>
-                            <option value="pendente">Pendente</option>
-                            <option value="andamento">Em andamento</option>
+                            <option value="em andamento">Em andamento</option>
                             <option value="concluído">Concluído</option>
                         </select>
                     </div>
@@ -115,7 +114,7 @@ export default function ChamadosList() {
                         <label className="form-label fw-bold">Data inicial:</label>
                         <input
                             type="date"
-                            className="form-control text-secondary fw-bold rounded py-2"
+                            className="form-control text-secondary fw-bold rounded py-2 input-vermelho"
                             name="dataInicio"
                             value={filtros.dataInicio}
                             onChange={handleChange}
@@ -127,7 +126,7 @@ export default function ChamadosList() {
                         <label className="form-label fw-bold">Palavra-chave:</label>
                         <input
                             type="text"
-                            className="form-control text-secondary fw-bold rounded py-2"
+                            className="form-control text-secondary fw-bold rounded py-2 input-vermelho"
                             placeholder="Ex: impressora"
                             name="palavra"
                             value={filtros.palavra}

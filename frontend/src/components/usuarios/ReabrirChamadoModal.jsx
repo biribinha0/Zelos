@@ -44,15 +44,12 @@ export default function ReabrirChamadoModal({ chamado, buttonStyle, modalId = 'R
             {/* BOTÃO QUE ABRE O MODAL */}
 
             <button
-                className={`me-2 ${styles.buttonStyle}`}
+                className={`${buttonStyle  }`}
                 data-bs-toggle="modal"
                 data-bs-target={`#${modalId}`}
             >
                 <span>
-                    <i className="bi bi-arrow-clockwise me-2">
-                        <path d="M0 0h24v24H0z" fill="none"></path>
-                        <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
-                    </i>
+                    <i className="bi bi-arrow-clockwise me-2"></i>
                     Reabrir
                 </span>
             </button>
@@ -66,7 +63,7 @@ export default function ReabrirChamadoModal({ chamado, buttonStyle, modalId = 'R
                 aria-hidden="true"
             >
                 <div className="modal-dialog">
-                    <div className="modal-content">
+                    <div className="modal-content text-black">
 
                         {/* HEADER */}
                         <div className="modal-header">

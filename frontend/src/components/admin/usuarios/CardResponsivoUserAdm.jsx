@@ -57,7 +57,7 @@ export default function CardResponsivoUserAdm({ u }) {
                                     {/* Item 1 */}
                                     <div className="d-flex align-items-center mb-4 p-3 bg-light rounded-3 shadow-sm">
                                         <i className="bi bi-envelope-at text-danger"></i>
-                                        <span className="text-dark ms-3 fw-semibold">{u?.email}</span>
+                                        <span className="text-dark text-break ms-3 fw-semibold">{u?.email}</span>
                                     </div>
                                 </div>
                             </div>

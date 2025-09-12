@@ -4,7 +4,13 @@ import { API_URL } from "@/utils/api";
 import axios from "axios";
 import { getToken } from "@/utils/auth";
 
-export default function AdminFecharChamadoModal({ chamado, modalId = "fecharChamadoModal", ativo }) {
+export default function AdminFecharChamadoModal({
+    chamado,
+    buttonStyle,
+    modalId = "fecharChamadoModal",
+    ativo,
+    texto = null
+}) {
     const [mensagem, setMensagem] = useState("");
     const token = getToken();
 
@@ -34,17 +40,19 @@ export default function AdminFecharChamadoModal({ chamado, modalId = "fecharCham
             {/* Botão que abre o modal */}
             <button
                 type="button"
-                className={`btn p-0 border-0 bg-transparent`}
+                className={buttonStyle}
                 data-bs-toggle="modal"
                 data-bs-target={`#${modalId}`}
                 disabled={!ativo}
             >
                 <i className={`bi bi-check-square-fill ${ativo ? "text-black" : "text-secondary"}`}></i>
+                <span className="ms-2 small">{texto}</span>
+
             </button>
 
             {/* Modal */}
             <div className="modal fade" id={modalId} tabIndex="-1" aria-labelledby={`${modalId}Label`} aria-hidden="true">
-                <div className="modal-dialog">
+                <div className="modal-dialog text-dark">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id={`${modalId}Label`}>Fechar Chamado</h5>

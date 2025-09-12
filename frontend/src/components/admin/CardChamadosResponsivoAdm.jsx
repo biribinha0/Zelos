@@ -217,10 +217,12 @@ export default function CardChamadosResponsivoAdm({ chamado, tecnicosList }) {
                                     Concluído
                                 </p>
                             ) : (
-                                <FecharChamadoModal
+                                <AdminFecharChamadoModal
                                     chamado={chamado}
                                     buttonStyle="col-9 col-sm-7 col-md-9 p-2 border border-white rounded"
                                     modalId={`FecharModal${chamado.id}`}
+                                    ativo={true}
+                                    texto={'Fechar'}
                                 />
                             )}
 

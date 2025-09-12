@@ -266,6 +266,7 @@ export default function AdminChamadosPage() {
                                                     chamado={c}
                                                     modalId={`fecharChamadoModal${c.id}`}
                                                     ativo={c.status !== 'concluído'}
+                                                    buttonStyle={'btn p-0 border-0 bg-transparent'}
                                                 />
                                             </div>
                                         </td>

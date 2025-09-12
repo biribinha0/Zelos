@@ -45,7 +45,7 @@ export default function Footer() {
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       />
 
-      <footer className="footer">
+      <footer className="footer ms-60">
         <div className="footer-top fst-italic d-flex flex-wrap">
           <ul className="footer-menu d-flex flex-wrap">
             <li className="text-break Link"><Link href={'/'} className="homeCor">Home</Link></li>

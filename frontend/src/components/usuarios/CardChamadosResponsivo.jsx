@@ -1,3 +1,5 @@
+
+// Arrumar 
 "use client";
 import { useState } from "react";
 import styles from "./CardChamadosResponsivo.module.css";
@@ -5,6 +7,7 @@ import Link from 'next/link';
 
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { ReabrirChamadoModal } from ".";
 
 export default function CardChamadosResponsivo({ chamado }) {
     const [secao, setSecao] = useState(1)
@@ -111,6 +114,7 @@ export default function CardChamadosResponsivo({ chamado }) {
 
                     <div className="d-flex align-items-center justify-content-center p-3">
                         <p className="card-text pb-0 mb-0 pe-3">Status:</p>
+                        {/* ARRUMAR BOTAO STATUS TOPO */}
                         <a href="#" className={`btn ${statusClass}`}>
                             {chamado?.status}
                         </a>
@@ -118,7 +122,7 @@ export default function CardChamadosResponsivo({ chamado }) {
                 </div>}
 
                 {secao === 2 && <div className="card-body p-4 pb-0">
-                        <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
+                    <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
                     <p className="pb-2"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
 
@@ -158,28 +162,45 @@ export default function CardChamadosResponsivo({ chamado }) {
 
 
                 {secao === 3 && <div className="card-body p-4 pb-3">
-                       <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
+                    <h3 className={`card-title pt-1 ${styles.tituloLinha} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado?.titulo}</h3>
                     <p className="mb-0"><span>ID:</span> {chamado?.id}</p>
                     <div className="mt-2">
 
                         <div className="row d-flex align-items-center justify-content-center p-3 gap-3 row-gap-3">
 
                             <div className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao}`}>
-                                <Link key={chamado.id} href={`/usuario/chamados/${chamado.id}`}>
+                                <Link
+                                    className="text-decoration-none"
+                                    key={chamado.id}
+                                    href={`/usuario/chamados/${chamado.id}`}>
                                     <i className={`bi bi-file-earmark-text-fill text-danger p-2 ${styles.decorationNone}`}></i>
-                                    <p className={`card-text pb-0 mb-0 ${styles.decorationNone}`}>Ver Detalhes</p>
+                                    <p className={`card-text text-decoration-none pb-0 mb-0 ${styles.decorationNone}`}>Ver Detalhes</p>
                                 </Link>
                             </div>
 
                             {/* <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "urgencia" ? styles.ativo : ""}`} onClick={() => handleClick("urgencia")}>
                                 <i className="bi bi-exclamation-triangle-fill text-danger p-2"></i>
                                 <p className="card-text pb-0 mb-0">Urgência</p>
-                            </a> Adicionar funcionalidade de urgência  */}
-
-                            <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "reabertura" ? styles.ativo : ""}`} onClick={() => handleClick("reabertura")}>
-                                <i className="bi bi-bell-fill text-danger p-2"></i>
-                                <p className="card-text pb-0 mb-0">Reabertura</p>
                             </a>
+                            
+                            Urgência no próprio criar chamado
+                            
+                            */}
+                            {chamado.status === 'concluído' && (
+                                <>
+                                {/* Rever botão funcional vs bonito */}
+                                    <ReabrirChamadoModal
+                                        chamado={chamado}
+                                        buttonStyle={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "reabertura" ? styles.ativo : ""}`}
+                                        modalId={`ReabrirChamado${chamado.id}`}
+                                    />
+                                    <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "reabertura" ? styles.ativo : ""}`}
+                                    >
+                                        <i className="bi bi-bell-fill text-danger p-2"></i>
+                                        <p className="card-text pb-0 mb-0">Reabertura</p>
+                                    </a>
+                                </>
+                            )}
                         </div>
 
                     </div>

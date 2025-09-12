@@ -56,12 +56,19 @@ export default function SideBarAdmin({ decoded }) {
                             <span className="link-text">Atribuição</span>
                         </Link>
                     </li>
+                    {/*
+
+                    Página ilustrativa, para a possibilidade de criar e editar tipos de chamados. Por enquanto, o banco de dados registra os tipos de chamados em uma tabela como ENUM, e são referenciados como FK na tabela de chamados
+
+                    
                     <li className="nav-item">
                         <Link className="nav-link sidebar-link text-light" href={'/admin/pools'}>
                             <i className="bi bi-journal-medical sidebar-icon"></i>
                             <span className="link-text">Tipos de Chamado</span>
                         </Link>
-                    </li>
+                    </li> 
+                    
+                    */}
                     <li className="nav-item">
                         <Link className="nav-link sidebar-link text-light" href={'/admin/relatorios'}>
                             <i className="bi bi-clipboard2-data sidebar-icon"></i>

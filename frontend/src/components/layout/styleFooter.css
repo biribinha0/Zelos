@@ -8,6 +8,10 @@ main {
 
 }
 
+.ms-60{
+  padding-left: 60px !important;
+}
+
 .footer {
     background-color: #d3d2d2;
     font-family: Arial, sans-serif;

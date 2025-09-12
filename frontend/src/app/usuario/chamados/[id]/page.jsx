@@ -78,7 +78,10 @@ export default function DetalhesChamadoUsuario() {
                                     <i className="bi bi-check-all text-success me-1"></i>
                                     Concluído
                                 </p>
-                                <ReabrirChamadoModal chamado={chamado} buttonStyle={"btn btn-vermelho py-2 mt-2 px-3 small w-100"} modalId={`ReabrirChamado${chamado.id}`} />
+                                <ReabrirChamadoModal
+                                    chamado={chamado}
+                                    buttonStyle={"btn btn-vermelho py-2 mt-2 px-3 small w-100"} modalId={`ReabrirChamado${chamado.id}`}
+                                />
                             </>
                             : ""
 
