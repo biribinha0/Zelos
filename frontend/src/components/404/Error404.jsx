@@ -3,7 +3,7 @@
 import styles from "./Error404.module.css";
 import Link from 'next/link';
 
-export default function Error404() {
+export default function Error404({mensagem = 'Essa rota não foi encontrada em nosso manual técnico.', linkHref = '/', textoBotao= 'Voltar para a home'}) {
   return (
     <div className={styles.containerError}>
       <div className={styles.contentError}>
@@ -12,11 +12,11 @@ export default function Error404() {
         </div>
 
         <p className={styles.messageError}>
-          Essa rota não foi encontrada em nosso manual técnico.
+          {mensagem}
         </p>
 
-        <Link href={'/'}>
-          <button className={`${styles.buttonError} ${styles.botaoVoltarHome}`}><i className="bi bi-arrow-left-short"></i> Voltar para a home</button>
+        <Link href={linkHref}>
+          <button className={`${styles.buttonError} ${styles.botaoVoltarHome}`}><i className="bi bi-arrow-left-short"></i>{textoBotao}</button>
         </Link>
       </div>
     </div>

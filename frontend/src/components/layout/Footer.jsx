@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import "./styleFooter.css";
 import Link from "next/link";
 import { getDecodedToken, isAuthenticated } from "@/utils/auth";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const [rating, setRating] = useState(0);
+  const [altFooter, setAltFooter] = useState(false)
   const senaiUrl = "https://share.google/V4dHjbqxeBWD8p8wO";
 
   const handleStarClick = (star) => {
@@ -36,6 +38,15 @@ export default function Footer() {
     };
   }, []);
 
+  const pathname = usePathname();
+
+  const routesWithSidebar = ['/usuario', '/tecnico', '/admin'];
+
+  useEffect(() => {
+    const match = routesWithSidebar.some(route => pathname === route || pathname.startsWith(`${route}/`));
+    setAltFooter(match);
+  }, [pathname]);
+
 
   return (
     <>
@@ -45,7 +56,7 @@ export default function Footer() {
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       />
 
-      <footer className="footer ms-60">
+      <footer className={`footer ${altFooter ? 'ms-60' : ''}`}>
         <div className="footer-top fst-italic d-flex flex-wrap">
           <ul className="footer-menu d-flex flex-wrap">
             <li className="text-break Link"><Link href={'/'} className="homeCor">Home</Link></li>

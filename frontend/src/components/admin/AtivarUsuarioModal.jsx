@@ -43,14 +43,14 @@ export default function AtivarUsuarioModal({ usuario, modalId = `ativarUsuario` 
                 tabIndex="-1"
                 aria-hidden="true"
             >
-                <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-dialog modal-dialog-centered text-dark">
                     <div className="modal-content p-4 rounded-4 shadow-lg border-0">
                         <h5 className="fw-bold">Ativar Usuário</h5>
                         <p className="m-0">
                             Deseja realmente ativar a conta do {usuario.funcaoFormatada.toLowerCase()}{" "}
                             <b>{usuario?.nome || "este usuário"}</b>?
                         </p>
-                        <p className="mb-2">Ele poderá ser reativado a qualquer momento.</p>
+                        <p className="mb-2">Ele poderá ser desativado a qualquer momento.</p>
                         {/* Mensagem de feedback */}
                         {mensagem && (
                             <div className="alert alert-info text-center py-2">

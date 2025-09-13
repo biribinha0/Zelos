@@ -115,9 +115,9 @@ export default function CardChamadosResponsivo({ chamado }) {
                     <div className="d-flex align-items-center justify-content-center p-3">
                         <p className="card-text pb-0 mb-0 pe-3">Status:</p>
                         {/* ARRUMAR BOTAO STATUS TOPO */}
-                        <a href="#" className={`btn ${statusClass}`}>
+                        <span className={`btn ${statusClass} m-0`}>
                             {chamado?.status}
-                        </a>
+                        </span>
                     </div>
                 </div>}
 
@@ -187,19 +187,19 @@ export default function CardChamadosResponsivo({ chamado }) {
                             
                             */}
                             {chamado.status === 'concluído' && (
-                                <>
+                                <div className="d-flex flex-column justify-content-center align-items-center">
                                 {/* Rever botão funcional vs bonito */}
                                     <ReabrirChamadoModal
                                         chamado={chamado}
                                         buttonStyle={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "reabertura" ? styles.ativo : ""}`}
                                         modalId={`ReabrirChamado${chamado.id}`}
                                     />
-                                    <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "reabertura" ? styles.ativo : ""}`}
+                                    {/* <a className={`col-9 col-sm-4 col-md-5 p-2 border border-white rounded ${styles.hoverBotao} ${ativo === "reabertura" ? styles.ativo : ""}`}
                                     >
                                         <i className="bi bi-bell-fill text-danger p-2"></i>
                                         <p className="card-text pb-0 mb-0">Reabertura</p>
-                                    </a>
-                                </>
+                                    </a> */}
+                                </div>
                             )}
                         </div>
 

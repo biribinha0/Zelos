@@ -10,6 +10,7 @@ import { intervalToDuration } from 'date-fns';
 import { ReabrirChamadoModal } from '@/components/usuarios';
 import Link from 'next/link';
 import Error403 from '@/components/403/Error403';
+import Error404 from '@/components/404/Error404';
 
 export default function DetalhesChamadoUsuario() {
     const params = useParams();
@@ -54,7 +55,11 @@ export default function DetalhesChamadoUsuario() {
 
 
     if (loading) return <p className="text-center mt-4">Carregando...</p>;
-    if (!chamado) return <p className="text-center mt-4">Chamado não encontrado.</p>;
+    if (!chamado) return <Error404
+        mensagem="Chamado não encontrado"
+        textoBotao="Voltar para chamados"
+        linkHref='/usuario/chamados'
+    />;
     if (chamado.usuario_id !== decoded.id) return <Error403></Error403>
 
     return (

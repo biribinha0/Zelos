@@ -40,15 +40,15 @@ export default function Header() {
 
   }, []);
 
-  useEffect(()=> {
-     if (pathName.startsWith('/usuario') ||
-      pathName.startsWith('/tecnico') ||
-      pathName.startsWith('/admin')) {
-      setAltHeader(true)
-    } else {
-      setAltHeader(false)
-    }
-  }, [pathName])
+
+  const pathname = usePathname();
+
+  const routesWithSidebar = ['/usuario', '/tecnico', '/admin'];
+
+  useEffect(() => {
+    const match = routesWithSidebar.some(route => pathname === route || pathname.startsWith(`${route}/`));
+    setAltHeader(match);
+  }, [pathname]);
 
 
   const handleLogout = () => {
@@ -90,7 +90,7 @@ export default function Header() {
 
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
 
-              <ul className="navbar-nav column-gap-4 me-auto d-flex flex-wrap justify-content-center align-items-start align-items-lg-center">
+              <ul className="col-lg-7 navbar-nav column-gap-4 me-auto d-flex flex-wrap justify-content-center align-items-start align-items-lg-center">
                 {itensNav.map((item) => (
                   <li className={`nav-item fst-italic ${styles.itens}`} key={item.href}>
                     <Link
@@ -103,10 +103,10 @@ export default function Header() {
                   </li>
                 ))}
               </ul>
-              <div className="row d-flex flex-column flex-sm-row">
+              <div className=" col-lg-5 row d-flex flex-column flex-sm-row">
                 {!isAuth ?
                   (
-                    <div className={`col-12 col-sm-6 d-flex flex-row m-0 justify-content-center align-items-center px-0 px-md-4 py-3 px-1 py-lg-0 row ${styles.iconsHeader}`}>
+                    <div className={`col-12 col-sm-6 d-flex flex-row m-0 justify-content-center align-items-center px-0 px-md-1 py-3 px-1 py-lg-0 row ${styles.iconsHeader}`}>
                       <Link href={'/login/profissional'} className={`col-6 p-0 ${styles.iconTecnicoNav}`}>
                         <i className={`bi bi-person-fill-gear ${styles.iconNav}`}></i>
                         <p className={`text-center ${styles.noMargin} ${styles.pLoginNav}`}>Profissionais</p>
@@ -149,7 +149,7 @@ export default function Header() {
                   href={isAuth ? '/usuario/criar' : '/login/usuario'}
                   role="button">
 
-                  <button className={`${styles.botaoChamadoNav}  `}>
+                  <button className={`${styles.botaoChamadoNav}`}>
                     Solicite um <span className="text-decoration-underline text-center">chamado de manutenção</span>
                   </button>
                 </Link>}

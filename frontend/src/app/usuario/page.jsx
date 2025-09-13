@@ -114,7 +114,7 @@ export default function Usuario() {
 
             {/* últimos chamados */}
             {chamados.length > 0 ? (
-                <div className={styles.listaChamados}>
+                <div className={`${styles.listaChamados} px-0 px-md-5`}>
                     {chamados.slice(0, 3).map((chamado) => (
                         <Link key={chamado.id} href={`/usuario/chamados/${chamado.id}`}>
                             <div className={styles.chamado}>

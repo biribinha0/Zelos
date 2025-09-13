@@ -10,6 +10,7 @@ import { intervalToDuration } from 'date-fns';
 import Link from 'next/link';
 
 import { EditarChamadoModal, AdminFecharChamadoModal, AtribuirFuncionario } from "@/components/admin";
+import Error404 from '@/components/404/Error404';
 
 
 export default function DetalhesChamadoAdmin() {
@@ -86,7 +87,11 @@ export default function DetalhesChamadoAdmin() {
 
 
     if (loading) return <p className="text-center mt-4">Carregando...</p>;
-    if (!chamado) return <p className="text-center mt-4">Chamado não encontrado.</p>;
+    if (!chamado) return <Error404
+        mensagem="Chamado não encontrado"
+        textoBotao="Voltar para chamados"
+        linkHref='/admin/chamados'
+    />;
     return (
         <div className="dc-outer d-flex justify-content-center bg-detalhes">
             <div className="dc-inner p-4 shadow rounded bg-white" style={{ width: cardWidth }}>

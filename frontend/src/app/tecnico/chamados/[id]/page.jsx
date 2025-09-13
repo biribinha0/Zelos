@@ -11,6 +11,7 @@ import { CriarApontamentoModal, FecharChamadoModal } from '@/components/tecnico'
 import TipoErradoModal from '@/components/tecnico/TipoErradoModal';
 import Error403 from '@/components/403/Error403';
 import Link from 'next/link';
+import Error404 from '@/components/404/Error404';
 
 export default function DetalhesChamadoTecnico() {
     const params = useParams();
@@ -55,7 +56,11 @@ export default function DetalhesChamadoTecnico() {
 
 
     if (loading) return <p className="text-center mt-4">Carregando...</p>;
-    if (!chamado) return <p className="text-center mt-4">Chamado não encontrado.</p>;
+    if (!chamado) return <Error404
+        mensagem="Chamado não encontrado"
+        textoBotao="Voltar para chamados"
+        linkHref='/tecnico/chamados'
+    />;
     if (chamado.tecnico_id !== decoded.id) return <Error403></Error403>
     return (
         <div className="dc-outer d-flex justify-content-center bg-detalhes">
@@ -113,7 +118,7 @@ export default function DetalhesChamadoTecnico() {
                     <div className="col-12 col-md-6">
                         <label className="dc-label">Tipo de chamado:</label>
                         <p className="dc-info">{chamado.pool}</p>
-                        <TipoErradoModal chamado={chamado}/>
+                        <TipoErradoModal chamado={chamado} />
                     </div>
 
                     <div className="col-12">
