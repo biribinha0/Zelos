@@ -96,7 +96,7 @@ export default function Header() {
 
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
 
-              <ul className="col-lg-7 navbar-nav column-gap-4 me-auto d-flex flex-wrap justify-content-center align-items-start align-items-lg-center">
+              <ul className="col-lg-7 navbar-nav column-gap-4 me-auto d-flex flex-wrap justify-content-start align-items-start align-items-lg-center">
                 {itensNav.map((item) => (
                   <li className={`nav-item fst-italic ${styles.itens}`} key={item.href}>
                     <Link

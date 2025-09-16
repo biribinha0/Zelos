@@ -27,21 +27,25 @@ const BarChart = forwardRef(({ labels, values, title }, ref) => {
     };
     const options = {
         responsive: true,
-        animation: {
-            duration: 1000,
-            easing: "easeOutQuart"
-        },
+        maintainAspectRatio: false,
         plugins: {
-            legend: {
-                position: "bottom"
-            },
-            title: {
-                display: true,
-                text: title
+            legend: { position: "bottom" },
+            title: { display: true, text: title }
+        },
+        scales: {
+            x: {
+                ticks: {
+                    maxRotation: 0,     // não deixa inclinar
+                    minRotation: 0
+                }
             }
         }
     };
-    return <Bar ref={ref} data={data} options={options} redraw />;
+
+    return <div style={{ height: "400px" }}>
+        <Bar ref={ref} data={data} options={options} redraw />
+    </div>
+
 });
 
 export default BarChart;

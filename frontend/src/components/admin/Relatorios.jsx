@@ -289,7 +289,7 @@ export default function Relatorios() {
             {relatorio?.length > 0 && (
                 <>
                     <div className="row">
-                        <div className="col-12 col-md-6 mb-3">
+                        <div className="col-12 col-md-6 mb-3 p-0 px-md-3">
                             <BarChart
                                 ref={barChartRef}
                                 labels={relatorio.map((r) => r.status || r.tipo_chamado || r.usuario)}
@@ -297,7 +297,7 @@ export default function Relatorios() {
                                 title={`Gráfico de Barras - ${filtros.tipoRelatorio}`}
                             />
                         </div>
-                        <div className="col-12 col-md-6 mb-3">
+                        <div className="col-12 col-md-6 mb-3 p-0 px-md-3">
                             <PieChart
                                 ref={pieChartRef}
                                 labels={relatorio.map((r) => r.status || r.tipo_chamado || r.usuario)}
