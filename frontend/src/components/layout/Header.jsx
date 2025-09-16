@@ -44,11 +44,17 @@ export default function Header() {
   const pathname = usePathname();
 
   const routesWithSidebar = ['/usuario', '/tecnico', '/admin'];
-
+  
   useEffect(() => {
-    const match = routesWithSidebar.some(route => pathname === route || pathname.startsWith(`${route}/`));
-    setAltHeader(match);
-  }, [pathname]);
+    const hasSidebarRoute = routesWithSidebar.some(
+      (route) => pathname === route || pathname.startsWith(`${route}/`)
+    );
+
+    const matchFuncao = decoded?.funcao ? pathname.startsWith(`/${decoded.funcao}`) : false;
+
+    setAltHeader(hasSidebarRoute && matchFuncao);
+  }, [pathname, decoded]);
+
 
 
   const handleLogout = () => {

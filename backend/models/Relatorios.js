@@ -43,8 +43,8 @@ async function relatorioAtividadesTecnicos({ dataInicio, dataFim, tecnicoId }) {
     FROM chamados c
     INNER JOIN usuarios u ON c.tecnico_id = u.id
     WHERE c.status = 'concluído'
-      -- escolha 1: filtrar pelo período de criação do chamado
-      AND c.criado_em >= ? AND c.criado_em < DATE_ADD(?, INTERVAL 1 DAY)
+      AND c.atualizado_em >= ? 
+  AND c.atualizado_em < DATE_ADD(?, INTERVAL 1 DAY)
   `;
 
   const params = [dataInicio, dataFim];

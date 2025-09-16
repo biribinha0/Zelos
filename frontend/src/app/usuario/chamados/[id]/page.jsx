@@ -60,7 +60,7 @@ export default function DetalhesChamadoUsuario() {
         textoBotao="Voltar para chamados"
         linkHref='/usuario/chamados'
     />;
-    if (chamado.usuario_id !== decoded.id) return <Error403></Error403>
+    if (chamado.usuario_id !== decoded.id) return <Error403 mensagem='Este chamado não é seu' textoBotao='Ver meus chamados' linkbotao='/usuario/chamados'></Error403>
 
     return (
 

@@ -166,3 +166,20 @@
     transform: rotate(-10deg) scale(1.2);
   }
 }
+
+.lista-patrimonio .alert {
+  width: 100%;              
+  max-width: 100%;           
+  word-break: break-word;    
+  overflow-wrap: anywhere;   
+  white-space: normal;       
+}
+
+.lista-patrimonio {
+  width: 100%;
+  min-width: 0; /* importante em layouts com flex */
+}
+
+.btn-buscar{
+  height: 100%;
+}

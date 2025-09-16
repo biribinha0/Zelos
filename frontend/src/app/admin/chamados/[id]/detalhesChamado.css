@@ -158,3 +158,16 @@
       left: 120%;
     }
   }
+
+  @media (max-width: 576px) {
+  .bg-detalhes {
+    padding: 5% !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .bg-detalhes {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}

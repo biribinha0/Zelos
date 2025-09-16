@@ -11,7 +11,7 @@ export default function CategoriasServicos() {
                             <a href="#ServicosUm">
                                 <div className={`card ${styles.cardCategoriasServicos}`}>
                                     <img src="/img/categoriaUm.png" className={`img-fluid ${styles.cardCategoriasServicosImg}`} alt="..." />
-                                    <div className="card-body">
+                                    <div className="card-body px-0">
                                         <h6 className="card-title">Reparo físico</h6>
                                     </div>
                                 </div>
@@ -19,7 +19,7 @@ export default function CategoriasServicos() {
                             <a href="#ServicosDois">
                                 <div className={`card ${styles.cardCategoriasServicos}`}>
                                     <img src="/img/categoriaDois.png" className={`img-fluid ${styles.cardCategoriasServicosImg}`} alt="..." />
-                                    <div className="card-body">
+                                    <div className="card-body px-0">
                                         <h6 className="card-title">Apoio técnico</h6>
                                     </div>
                                 </div>
@@ -30,7 +30,7 @@ export default function CategoriasServicos() {
                             <a href="#ServicosTres">
                                 <div className={`card ${styles.cardCategoriasServicos}`}>
                                     <img src="/img/categoriaTres.png" className={`img-fluid ${styles.cardCategoriasServicosImg}`} alt="..." />
-                                    <div className="card-body pb-0">
+                                    <div className="card-body px-0 pb-0">
                                         <h6 className="card-title">Externos</h6>
                                     </div>
                                 </div>
@@ -38,7 +38,7 @@ export default function CategoriasServicos() {
                             <a href="#ServicosQuatro">
                                 <div className={`card ${styles.cardCategoriasServicos}`}>
                                     <img src="/img/categoriaQuatro.png" className={`img-fluid ${styles.cardCategoriasServicosImg}`} alt="..." />
-                                    <div className="card-body pb-0">
+                                    <div className="card-body px-0 pb-0">
                                         <h6 className="card-title">Limpeza</h6>
                                     </div>
                                 </div>

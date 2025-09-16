@@ -11,7 +11,7 @@ export default function Error404({mensagem = 'Essa rota não foi encontrada em n
           <img src="/img/404img.png" alt="Erro 404" className={styles.imgError} />
         </div>
 
-        <p className={styles.messageError}>
+        <p className={`fs-5 text ${styles.messageError}`}>
           {mensagem}
         </p>
 

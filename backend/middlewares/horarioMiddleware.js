@@ -19,9 +19,9 @@ export default function horarioMiddleware(req, res, next) {
     //     return res.status(403).json({ error: "Acesso permitido apenas em dias úteis." });
     // }
 
-    if (atual < inicio || atual > fim) {
-        return res.status(403).json({ error: "Acesso permitido apenas entre 08h00 e 18h00." });
-    }
+    // if (atual < inicio || atual > fim) {
+    //     return res.status(403).json({ error: "Acesso permitido apenas entre 08h00 e 18h00." });
+    // }
     next();
 
 }

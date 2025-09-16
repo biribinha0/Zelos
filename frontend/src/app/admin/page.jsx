@@ -92,8 +92,11 @@ export default function HomePage() {
 
       {/* Estatísticas */}
       <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
-        <h4 className="fw-bold">
-          <i className="bi bi-activity"></i> <span className="text-danger">Estatísticas </span> de chamados:
+        <h4 className="fw-bold text-break">
+          <i className="bi bi-activity mx-2 my-2"></i>
+          <span className="text-danger">
+            Estatísticas <span className="text-dark">de chamados:</span>
+          </span>
         </h4>
       </div>
 

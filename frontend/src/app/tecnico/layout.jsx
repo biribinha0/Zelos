@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getDecodedToken, isAuthenticated, isExpired } from "@/utils/auth";
 import dynamic from "next/dynamic";
 import AlertModal from "@/components/common/AlertModal";
+import Error403 from "@/components/403/Error403";
 
 const SideBarTecnico = dynamic(() => import("@/components/sideBarTecnico/SideBarTecnico"), { ssr: false });
 
@@ -75,16 +76,7 @@ export default function TecnicoLayout({ children }) {
     }
 
     if (decoded?.funcao !== 'tecnico') {
-        return (
-            <div className="bgModal">
-                <AlertModal
-                    titulo={"Aviso"}
-                    descricao={"Você não tem acesso à essa página"}
-                    textoBotao={"Ir para Painel de Controle"}
-                    linkBotao={`/${decoded?.funcao}`}
-                />
-            </div>
-        );
+        return <Error403 mensagem='Você não tem acesso a essa página' textoBotao='Painel de Controle' linkbotao={`/${decoded?.funcao}`}></Error403>
     }
 
     return (

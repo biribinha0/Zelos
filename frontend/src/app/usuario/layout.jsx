@@ -9,6 +9,7 @@ const SideBarUsuario = dynamic(() => import("@/components/sideBarUsuario/SideBar
 });
 
 import AlertModal from "@/components/common/AlertModal";
+import Error403 from "@/components/403/Error403";
 
 export default function UserLayout({ children }) {
     const [authChecked, setAuthChecked] = useState(false);
@@ -70,16 +71,7 @@ export default function UserLayout({ children }) {
         )
     }
     if (decoded.funcao !== 'usuario') {
-        return (
-            <div className="bgModal">
-                <AlertModal
-                    titulo={"Aviso"}
-                    descricao={"Você não tem acesso à essa página"}
-                    textoBotao={"Ir para Painel de Controle"}
-                    linkBotao={`/${decoded.funcao}`}
-                />
-            </div>
-        )
+        return  <Error403 mensagem='Você não tem acesso a essa página' textoBotao='Painel de Controle' linkbotao={`/${decoded?.funcao}`}></Error403>
     }
 
     return (

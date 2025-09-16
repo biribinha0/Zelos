@@ -40,16 +40,16 @@ export default function atribuicoes() {
             <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
                     <i className="bi bi-check2-circle mx-2 my-2"></i>
-                    <span className="text-dark">
-                        Atribuir <span className="text-danger">chamado</span> a um técnico:
+                    <span className="text-danger">
+                        Atribuir <span className="text-dark">chamado a um técnico:</span>
                     </span>
                 </h4>
             </div>
 
-            <span className="text-secondary ms-5 ps-2">
-                <i className="bi bi-lightbulb"></i>
-                Dica: Veja os detalhes do chamado antes de atribuir a um técnico
-            </span>
+            <div className="text-secondary ms-5 ps-2 p-3">
+                <i className="bi bi-lightbulb me-2"></i>
+                Dica: Veja os detalhes do chamado antes de atribuir a um técnico.
+            </div>
 
             <div className={`container-fluid ${styles.atribuicoesAdm}`}>
                 <div className={styles.carrosselAdm}>
@@ -64,16 +64,17 @@ export default function atribuicoes() {
                             observer={true}
                             observeParents={true}
                             className={`p-5 d-flex ${styles.carrosselAtribuicoesAdm}`}
-                             
+
                             onSwiper={(swiper) => {
                                 swiperRef.current = swiper;
                             }}
                             breakpoints={{
                                 0: { slidesPerView: 1 },
-                                576: { slidesPerView: 2 },
-                                768: { slidesPerView: 3 },
-                                992: { slidesPerView: 4 }
+                                768: { slidesPerView: 2 },
+                                992: { slidesPerView: 3 },
+                                1200: { slidesPerView: 4 }
                             }}
+
                         >
                             {chamados?.map((chamado) => (
                                 <SwiperSlide key={chamado.id} className="d-flex justify-content-center">

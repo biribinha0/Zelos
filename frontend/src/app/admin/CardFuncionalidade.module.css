@@ -1,16 +1,15 @@
 .cardFuncionalidadesAdm {
-    background-color: #ffffff00 !important;
-    border: none !important;
-    transition: 0.4s;
+  background-color: transparent !important;
+  border: none !important;
+  transition: 0.4s;
+  overflow: visible !important;
+  position: relative;
+  z-index: 11;
 }
+
 
 .cardFuncionalidadesAdm:hover {
     transform: scale(1.05);
-}
-
-.textClamp {
-    font-size: clamp(0.85em, 0.1em + 0.1vw, 2.0em);
-    color: #e4dfdf;
 }
 
 @media (max-width: 865px) {
@@ -35,4 +34,13 @@
     .textClamp {
         font-size: clamp(0.7em, 1.0em + 0.4vw, 2.0em) !important;
     }
+}
+
+
+.textClamp {
+  font-size: clamp(0.85em, 0.1em + 0.1vw, 2em);
+  color: #e4dfdf;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

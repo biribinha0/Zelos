@@ -97,7 +97,7 @@ export default function AdminChamadosPage() {
     return (
         <>
 
-            <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
+            <div id="AdmEstatistica" className="dc-outer d-flex container my-5 p-4">
                 <h4 className="fw-bold text-break">
                     <i className="bi bi-card-list mx-2 my-2"></i>
                     <span className="text-dark">

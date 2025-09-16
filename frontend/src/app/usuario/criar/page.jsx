@@ -144,7 +144,7 @@ export default function CriarChamado() {
   const listaAtual = listaPatrimonio.slice(indexPrimeiro, indexUltimo);
 
   return (
-    <div className="container-fluid position-relative py-5 px-5 criar-background">
+    <div className="container-fluid position-relative py-5 px-2 px-sm-5 criar-background">
       <div className="row position-relative" style={{ zIndex: 1 }}>
         {/* Formulário */}
         <div className="col-12">
@@ -201,40 +201,52 @@ export default function CriarChamado() {
                 Insira as informações do patrimônio que deseja associar ao chamado. Caso não encontre, desmarque a checkbox e envie sem patrimônio.
               </p>
 
-              <div className="input-group mb-3">
-                <input
-                  type="text"
-                  className="form-control inputCriar col-md-3"
-                  placeholder="Número do Patrimônio"
-                  name="patrimonio"
-                  value={chamadoData.patrimonio}
-                  onChange={handleChange}
-                />
-                <input
-                  type="text"
-                  className="form-control inputCriar col-md-3"
-                  placeholder="Sala"
-                  name="sala"
-                  value={chamadoData.sala}
-                  onChange={handleChange}
-                />
-                <input
-                  type="text"
-                  className="form-control inputCriar col-md-3"
-                  placeholder="Equipamento"
-                  name="equipamento"
-                  value={chamadoData.equipamento}
-                  onChange={handleChange}
-                />
-                <button
-                  type="button"
-                  className="btn btn-outline-light col-md-2"
-                  onClick={handleBuscarPatrimonio}
-                  disabled={buscandoPatrimonio}
-                >
-                  {buscandoPatrimonio ? "Buscando..." : "Buscar"}
-                </button>
+              <div className="row g-2 mb-3">
+                <div className="col-12 col-md-3">
+                  <input
+                    type="text"
+                    className="form-control inputCriar"
+                    placeholder="Número do Patrimônio"
+                    name="patrimonio"
+                    value={chamadoData.patrimonio}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="col-12 col-md-3">
+                  <input
+                    type="text"
+                    className="form-control inputCriar"
+                    placeholder="Sala"
+                    name="sala"
+                    value={chamadoData.sala}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="col-12 col-md-3">
+                  <input
+                    type="text"
+                    className="form-control inputCriar"
+                    placeholder="Equipamento"
+                    name="equipamento"
+                    value={chamadoData.equipamento}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="col-12 col-md-3">
+                  <button
+                    type="button"
+                    className="btn btn-outline-light w-100 btn-buscar"
+                    onClick={handleBuscarPatrimonio}
+                    disabled={buscandoPatrimonio}
+                  >
+                    {buscandoPatrimonio ? "Buscando..." : "Buscar"}
+                  </button>
+                </div>
               </div>
+
 
               {listaPatrimonio.length > 0 && !listaPatrimonio[0].erro && (
                 <div className="lista-patrimonio mt-3">

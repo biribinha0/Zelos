@@ -8,11 +8,12 @@
 
 .carrosselDiv {
   padding-bottom: 2rem;
-  padding: 0% 0% !important;
+  padding: 0 1rem;
   padding-bottom: 1.5% !important;
   width: 100%;
   opacity: 1;
   transition: opacity 0.3s ease;
+
 }
 
 .swiper {
@@ -22,8 +23,14 @@
 .swiper-slide {
   display: flex;
   justify-content: center;
-  align-items: center;
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
 }
+
+
+
 
 .swiper-button-next,
 .swiper-button-prev {
@@ -76,6 +83,7 @@
 p.card-titulo {
   margin-bottom: 0 !important;
 }
+
 
 .tituloProfissionaisHome {
   text-transform: uppercase;

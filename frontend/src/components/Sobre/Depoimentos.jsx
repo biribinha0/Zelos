@@ -23,32 +23,32 @@ export default function Depoimentos() {
 
     useEffect(() => {
         axios.get(`${API_URL}/publico/feedbacks`)
-        .then((res) => {
-            console.log(res.data);
-            setFeedbacks(res.data || []);
-        }).catch((err) => {
-            console.error("Erro ao buscar feedbacks:", err);
-        });
+            .then((res) => {
+                console.log(res.data);
+                setFeedbacks(res.data || []);
+            }).catch((err) => {
+                console.error("Erro ao buscar feedbacks:", err);
+            });
     }, []);
 
     return (
         <div className={`${styles.principaisDiv}`}>
-            <div className="col-12 d-flex flex-column justify-content-center align-items-center p-5 pb-0">
-                <img src="/img/feedbacksImg.png" className={`img-fluid ${styles.equipeZelosImg}`} alt="..." />
-                <h1 className={`${styles.tituloProfissionaisHome}`}>que reafirmam nosso propósito</h1>
+            <div className="col-12 d-flex flex-column justify-content-center align-items-center p-0 p-md-5 pb-0">
+                <img src="/img/feedbacksImg.png" className={`img-fluid p-sm-0 ${styles.equipeZelosImg}`} alt="..." />
+                <h1 className={`${styles.tituloProfissionaisHome} text-center`}>que reafirmam nosso propósito</h1>
             </div>
 
             {/* Carrossel */}
             <div className={`${styles.carrosselDiv}`}>
                 <Swiper
-                    modules={[ Pagination, Scrollbar, A11y, Autoplay]}
-                    
+                    modules={[Pagination, Scrollbar, A11y, Autoplay]}
+
                     speed={1200}
                     loop={true}
                     spaceBetween={20}
                     autoplay={{
-                        delay:3000, 
-                        disableOnInteraction:false,
+                        delay: 3000,
+                        disableOnInteraction: false,
                         pauseOnMouseEnter: false
                     }}
                     onSwiper={(swiper) => {
@@ -56,11 +56,12 @@ export default function Depoimentos() {
                         swiper.autoplay.start()
                     }}
                     breakpoints={{
-                        0: { slidesPerView: 1 },
-                        768: { slidesPerView: 2 },
-                        1024: { slidesPerView: 3 }
+                        0: { slidesPerView: 1, spaceBetween: 16 },
+                        768: { slidesPerView: 2, spaceBetween: 20 },
+                        1024: { slidesPerView: 3, spaceBetween: 20 }
                     }}
-                    className={`p-5 ${styles.espacoProfissionaisHome}`}
+
+                    className={`${styles.espacoProfissionaisHome}`}
                 >
                     {feedbacks.length === 0 ? (
                         <h5 className="text-center">Nenhuma mensagem de feedback encontrada</h5>

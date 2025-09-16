@@ -50,7 +50,7 @@ export default function Sobre() {
           <div className={styles.principaisDiv}>
          <div className="col-12 d-flex flex-column justify-content-center align-items-center p-5 pb-0">
                 <img src="/img/tituloSobrePrincipal.png" className={`img-fluid ${styles.equipeZelosImg}`}/>
-                <h1 className={`${styles.tituloSobrePrincipal}`}>VEJA UM POUCO SOBRE A ZELOS</h1>
+                <h1 className={`${styles.tituloSobrePrincipal} text-center`}>VEJA UM POUCO SOBRE A ZELOS</h1>
             </div>
             </div>
         </div>

@@ -42,10 +42,15 @@ export default function Footer() {
 
   const routesWithSidebar = ['/usuario', '/tecnico', '/admin'];
 
-  useEffect(() => {
-    const match = routesWithSidebar.some(route => pathname === route || pathname.startsWith(`${route}/`));
-    setAltFooter(match);
-  }, [pathname]);
+useEffect(() => {
+    const hasSidebarRoute = routesWithSidebar.some(
+      (route) => pathname === route || pathname.startsWith(`${route}/`)
+    );
+
+    const matchFuncao = decoded?.funcao ? pathname.startsWith(`/${decoded.funcao}`) : false;
+
+    setAltFooter(hasSidebarRoute && matchFuncao);
+  }, [pathname, decoded]);
 
 
   return (

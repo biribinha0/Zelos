@@ -73,3 +73,34 @@
         text-align: center !important;
     }
 }
+
+
+.carrosselAtribuicoesAdm :global(.swiper-slide) {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  height: auto !important;
+}
+
+.carrosselAtribuicoesAdm :global(.swiper-slide-active) {
+  transform: scale(1.05);
+  transform-origin: center center;
+  transition: transform 0.4s ease;
+}
+
+.carrosselAtribuicoesAdm :global(.swiper-wrapper) {
+  align-items: stretch; 
+}
+
+
+.carrosselAtribuicoesAdm :global(.swiper-slide > div) {
+  flex: 1;
+  display: flex;
+  height: 100%;
+}
+
+@media (max-width: 320px) {
+  .carrosselAtribuicoesAdm{
+    padding: 0rem !important;
+  }
+}

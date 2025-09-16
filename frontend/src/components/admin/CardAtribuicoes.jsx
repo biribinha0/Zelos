@@ -32,9 +32,15 @@ export default function CardAtribuicoes({ chamado }) {
     return (
 
         <div
-            className="card rounded-2 border-0 p-3"
-            style={{ width: "100%", maxWidth: "750px", height: "auto", background: "rgba(220, 220, 220, 1)", justifyContent: "center" }} // Aumentando a largura máxima
+            className="card rounded-2 border-0 p-3 h-100"
+            style={{
+                width: "100%",
+                background: "rgba(220, 220, 220, 1)",
+                justifyContent: "space-between",
+            }}
         >
+
+
             <div className="d-flex justify-content-between align-items-start mb-3">
                 <p
                     className="fw-bold mb-0 d-flex flex-column fs-6"
@@ -58,7 +64,7 @@ export default function CardAtribuicoes({ chamado }) {
                     src={chamadoImg}
                     width={80}
                     height={50}
-                    className="img-fluid"
+                    className={` img-fluid ${styles.chamadoIcone}`}
                     alt="Ícone do chamado"
                 />}
             </div>

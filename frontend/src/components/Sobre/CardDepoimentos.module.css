@@ -15,3 +15,15 @@
   border-bottom: 2px solid red;
   padding-bottom: 5px;
 }
+
+.cardDepoimento {
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  max-width: 100%;
+}
+
+.cardDepoimento * {
+  min-width: 0; 
+}
