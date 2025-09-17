@@ -4,8 +4,8 @@ import { ptBR } from "date-fns/locale";
 
 export default function CardDepoimentos({ item }) {
     return (
-        <div className="d-flex h-100">
-            <div key={item?.id} className={`card rounded-3 shadow-sm p-3 bg-white d-flex flex-column ${styles.cardDepoimento}`}>
+        <div className="d-flex h-100 w-100">
+            <div key={item?.id} className={`card w-100 rounded-3 shadow-sm p-3 bg-white d-flex flex-column ${styles.cardDepoimento}`}>
                 <div className="d-flex flex-wrap align-items-center mb-2">
                     <div
                         className="rounded-circle bg-light d-flex align-items-center justify-content-center"

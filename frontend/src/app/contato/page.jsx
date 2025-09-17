@@ -13,7 +13,7 @@ const Contato = () => {
 
 
     const [formData, setFormData] = useState({
-        tipo: 'feedback',
+        tipo: 'contato',
         nome: '',
         email: '',
         titulo: '',
