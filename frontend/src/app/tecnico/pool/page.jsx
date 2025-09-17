@@ -6,7 +6,7 @@ export default function PoolTecnico() {
         <>
 
             {/* título para mostrar os chamados disponíveis */}
-            <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
+            <div className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
                     <i className="bi bi-megaphone-fill me-2"></i>
                     <span className="text-dark">

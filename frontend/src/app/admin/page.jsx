@@ -59,31 +59,31 @@ export default function HomePage() {
     <div className="container-fluid p-0">
         <div className="row">
           <div className={`d-md-none ${styles.xs}`}>
-            <Link href="#">
+      
               <img
                 className="img-fluid w-100"
                 src="/img/bannerUmCelularAdm.png"
                 alt="bannerUmMobile"
               />
-            </Link>
+          
           </div>
           <div className={`d-md-none ${styles.smPersonalizado}`}>
-            <Link href="#">
+            
               <img
                 className="img-fluid w-100"
                 src="/img/bannerUmTabletAdm.png"
                 alt="bannerUmMobile"
               />
-            </Link>
+            
           </div>
           <div className="d-none d-md-block">
-            <Link href="#">
+            
               <img
                 className="img-fluid w-100"
                 src="/img/bannerUmAdm.png"
                 alt="bannerUm"
               />
-            </Link>
+            
           </div>
         </div>
       </div>

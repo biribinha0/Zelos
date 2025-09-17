@@ -82,7 +82,7 @@ export default function ChamadosList() {
     const width = useWindowWidth();
 
     return (
-        <div className="row my-2 w-100">
+        <div className="my-2 w-100">
             <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
                     <i className="bi bi-card-list mx-2 my-2"></i>

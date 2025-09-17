@@ -5,6 +5,7 @@ import { formatarTituloPool, primeiroNomeInicial } from "../utils.js";
 import { obterUsuarioPorId } from "../models/Usuarios.js";
 import { obterEquipamentoPorPatrimonio, verificarChamadoPatrimonio } from "../models/Equipamentos.js";
 import { formatarNome } from '../utils.js';
+import { tecnicoEstatisticas } from "../models/Relatorios.js";
 
 
 const listarChamadosPublicosController = async (req, res) => {
@@ -219,7 +220,7 @@ const editarChamadoController = async (req, res) => {
             titulo,
             descricao,
             tipo_id,
-            tecnico_id : tecnico_id ? tecnico_id : null,
+            tecnico_id: tecnico_id ? tecnico_id : null,
             status,
             patrimonio: patrimonio ? patrimonio : null,
             atualizado_em: atualizado_em ? atualizado_em : null
@@ -443,6 +444,19 @@ const reabrirChamadoController = async (req, res) => {
     }
 }
 
+const tecnicoEstatisticasController = async (req, res) => {
+    const tecnicoId = req.params.id
+    try {
+        const results = await tecnicoEstatisticas(tecnicoId);
+
+
+        return res.status(200).json(results)
+    } catch (error) {
+        console.error('Erro ao ler chamado para autoatribuição: ', error);
+        throw error;
+    }
+}
+
 
 export {
     listarChamadosPublicosController,
@@ -458,5 +472,6 @@ export {
     fecharChamadoSemApontamento,
     listarChamadosDisponiveis,
     atribuirTecnicoController,
-    reabrirChamadoController
+    reabrirChamadoController,
+    tecnicoEstatisticasController
 }

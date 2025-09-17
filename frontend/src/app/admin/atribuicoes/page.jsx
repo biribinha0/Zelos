@@ -37,7 +37,7 @@ export default function atribuicoes() {
     return (
         <>
 
-            <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
+            <div className={`dc-outer d-flex container my-5 ${styles.tituloInicial}`}>
                 <h4 className="fw-bold text-break">
                     <i className="bi bi-check2-circle mx-2 my-2"></i>
                     <span className="text-danger">
@@ -84,7 +84,7 @@ export default function atribuicoes() {
                             ))}
                         </Swiper>
                     }
-                    {chamados.length === 0 && <h3>Nenhum chamado diponível</h3>}
+                    {(chamados.length === 0 && !loading) && <h3>Nenhum chamado diponível</h3>}
                 </div>
             </div>
         </>

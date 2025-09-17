@@ -116,7 +116,26 @@ async function contarChamadosPorUsuario(usuarioId) {
   return counts;
 }
 
+async function tecnicoEstatisticas(tecnicoId) {
+  const tecnico = await read("usuarios", `id = ${tecnicoId}`);
 
+  if (!tecnico) {
+    throw new Error("Técnico não encontrado");
+  }
+
+  const sql = `
+  SELECT
+    COUNT(*) AS total_chamados,
+    COUNT(CASE WHEN status = 'em andamento' THEN 1 END) AS em_andamento,
+    COUNT(CASE WHEN status = 'concluído' THEN 1 END) AS concluidos
+  FROM zelos.chamados
+  WHERE tecnico_id = ?;
+`
+
+  const result = await readRaw(sql, [tecnicoId]);
+
+  return result[0]
+}
 
 
 export {
@@ -124,5 +143,6 @@ export {
   relatorioChamadosPorTipo,
   relatorioAtividadesTecnicos,
   relatorioChamadosPorTipoEStatus,
-  contarChamadosPorUsuario
+  contarChamadosPorUsuario,
+  tecnicoEstatisticas
 };

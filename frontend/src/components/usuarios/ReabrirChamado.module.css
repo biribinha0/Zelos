@@ -25,3 +25,10 @@
     background-color: #ffff;
   }
   
+
+  @media (max-width: 767px){
+    .buttonStyle {
+      padding: 0.1em 1.2em 0.2em 1em;
+      height: 50% !important;
+    }
+  }

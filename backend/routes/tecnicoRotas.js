@@ -1,5 +1,5 @@
 import express from "express";
-import { chamadosSemTecnicoController, autoAtribuirAoChamadoController, obterChamadoPorIdController, listarChamadosPorTecnicoController, fecharChamadoController } from "../controllers/ChamadoController.js";
+import { chamadosSemTecnicoController, autoAtribuirAoChamadoController, obterChamadoPorIdController, listarChamadosPorTecnicoController, fecharChamadoController, tecnicoEstatisticasController } from "../controllers/ChamadoController.js";
 import { criarApontamentoController } from "../controllers/ApontamentoController.js";
 import { criarMensagemController } from "../controllers/MensagemController.js";
 
@@ -24,5 +24,8 @@ router.post('/chamados/:id/apontamento', criarApontamentoController);
 
 // Fechar chamado com resolução
 router.post('/chamados/:id/fechar', fecharChamadoController);
+
+// Estastísticas do técnico
+router.get('/:id/estatisticas', tecnicoEstatisticasController)
 
 export default router;

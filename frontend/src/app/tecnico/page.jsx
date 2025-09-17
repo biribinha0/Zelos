@@ -16,6 +16,8 @@ import { CardChamadosResponsivoTec } from "@/components/tecnico";
 
 export default function Tecnico() {
     const [chamados, setChamados] = useState([]);
+    const [estatisticas, setEstatisticas] = useState([]);
+    const [disponiveis, setDisponiveis] = useState([]);
     const token = getToken();
     const decoded = getDecodedToken();
     const [loading, setLoading] = useState(false);
@@ -24,11 +26,32 @@ export default function Tecnico() {
 
     useEffect(() => {
         setLoading(true);
+        axios.get(`${API_URL}/tecnico/${decoded.id}/estatisticas`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then((res) => {
+                console.log("Estatisticas recebidas:", res.data);
+                setEstatisticas(res.data);
+            })
+            .catch((err) => {
+                console.error("Erro ao buscar estatisticas:", err);
+                setEstatisticas([]);
+            })
+
+        axios.post(`${API_URL}/tecnico/${decoded.id}/pool-chamadas`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then(function (response) {
+                setDisponiveis(response.data)
+            })
+
         axios.get(`${API_URL}/tecnico/${decoded.id}/chamados`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((res) => {
-                console.log("Chamados recebidos:", res.data); // 👈 debug
+                console.log("Chamados recebidos:", res.data);
                 setChamados(res.data);
             })
             .catch((err) => {
@@ -71,31 +94,33 @@ export default function Tecnico() {
             <div className={`${styles.container}`}>
                 <div className={styles.card}>
                     <img src="/img/imgChamadosTecnicos.png" className={styles.iconeChamados} alt="Chamados totais" />
-                    <h3 className={`text-break ${styles.numero}`}>40</h3>
-                    <p className={`text-break ${styles.texto}`}>Chamados totais</p>
+                    <h3 className={`text-break ${styles.numero}`}>{estatisticas.total_chamados}</h3>
+                    <p className={`text-break ${styles.texto}`}>Chamados atuais</p>
+                </div>
+
+                <div className={styles.card}>
+                    <img src="/img/imgNaoIniciadoTecnicos.png" className={styles.iconeChamados} alt="Não iniciado" />
+                    <h3 className={`text-break ${styles.numero}`}>{disponiveis.length}</h3>
+                    <p className={`text-break ${styles.texto}`}>Não iniciado</p>
                 </div>
 
                 <div className={styles.card}>
                     <img src="/img/imgAndamentoTecnicos.png" className={styles.iconeChamados} alt="Em andamento" />
-                    <h3 className={`text-break ${styles.numero}`}>22</h3>
+                    <h3 className={`text-break ${styles.numero}`}>{estatisticas.em_andamento}</h3>
                     <p className={`text-break ${styles.texto}`}>Em andamento</p>
                 </div>
 
                 <div className={styles.card}>
                     <img src="/img/imgConcluidoTecnicos.png" className={styles.iconeChamados} alt="Concluído" />
-                    <h3 className={`text-break ${styles.numero}`}>18</h3>
-                    <p className={`text-break ${styles.texto}`}>Concluído</p>
+                    <h3 className={`text-break ${styles.numero}`}>{estatisticas.concluidos}</h3>
+                    <p className={`text-break ${styles.texto}`}>Concluídos</p>
                 </div>
 
-                <div className={styles.card}>
-                    <img src="/img/imgNaoIniciadoTecnicos.png" className={styles.iconeChamados} alt="Não iniciado" />
-                    <h3 className={`text-break ${styles.numero}`}>10</h3>
-                    <p className={`text-break ${styles.texto}`}>Não iniciado</p>
-                </div>
+
             </div>
 
             {/* título para mostrar os chamados recentes */}
-            <div id="AdmEstatistica" className="dc-outer d-flex container my-5">
+            <div className="dc-outer d-flex container my-5">
                 <h4 className="fw-bold text-break">
                     <i className="bi bi-stopwatch mx-2 my-2"></i>
                     <span className="text-dark">
@@ -105,77 +130,77 @@ export default function Tecnico() {
             </div>
             <div className="m-3 mt-0">
                 {(chamados.length === 0 && loading) ? (
-                <Loading />
-            ) : (
-                <div>
-                    {width >= 992 ? (
-                        <div className={styles.containerTabela}>
-                            <table className={styles.tabela}>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Tipo de chamado</th>
-                                        <th>Título</th>
-                                        <th>Patrimônio</th>
-                                        <th>Status</th>
-                                        <th>Usuário</th>
-                                        <th>Data de Abertura</th>
-                                        <th>Última Atualização</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {chamados.slice(0, 3).map((chamado) => (
-                                        <tr key={chamado.id}>
-                                            <td className="text-center">{chamado.id}</td>
-                                            <td>{chamado.pool}</td>
-                                            <td className={`textTabela text-black-75 ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado.titulo}</td>
-                                            <td className="text-center">{chamado.patrimonio ?? "--"}</td>
-                                            <td
-                                                className={`fw-bold text-${chamado.status === "concluído"
-                                                    ? "success"
-                                                    : chamado.status === "pendente"
-                                                        ? "danger"
-                                                        : "warning"
-                                                    } text-center`}
-                                            >
-                                                {chamado.status}
-                                            </td>
-                                            <td>{chamado.usuario ?? "--"}</td>
-                                            <td>{format(chamado.criado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
-                                            <td>{format(chamado.atualizado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
-                                            <td className="text-center">
-                                                <Link
-                                                    href={`/tecnico/chamados/${chamado.id}`}
-                                                    className="text-dark text-decoration-none fw-bold"
-                                                >
-                                                    Ver Detalhes
-                                                </Link>
-                                                {chamado.status === "concluído" ? (
-                                                    <p className="py-1 m-0">
-                                                        <i className="bi bi-check-all text-success me-1"></i>
-                                                        Concluído
-                                                    </p>
-                                                ) : (
-                                                    <FecharChamadoModal
-                                                        chamado={chamado}
-                                                        buttonStyle="btn btn-danger py-1 px-2 small w-100"
-                                                        modalId={`FecharModal${chamado.id}`}
-                                                    />
-                                                )}
-                                            </td>
+                    <Loading />
+                ) : (
+                    <div>
+                        {width >= 992 ? (
+                            <div className={styles.containerTabela}>
+                                <table className={styles.tabela}>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Tipo de chamado</th>
+                                            <th>Título</th>
+                                            <th>Patrimônio</th>
+                                            <th>Status</th>
+                                            <th>Usuário</th>
+                                            <th>Data de Abertura</th>
+                                            <th>Última Atualização</th>
+                                            <th>Ações</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    ) : (
-                        chamados.slice(0, 3).map((chamado) => (
-                            <CardChamadosResponsivoTec key={chamado.id} chamado={chamado} />
-                        ))
-                    )}
-                </div>
-            )}
+                                    </thead>
+                                    <tbody>
+                                        {chamados.slice(0, 3).map((chamado) => (
+                                            <tr key={chamado.id}>
+                                                <td className="text-center">{chamado.id}</td>
+                                                <td>{chamado.pool}</td>
+                                                <td className={`textTabela text-black-75 ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>{chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}{chamado.titulo}</td>
+                                                <td className="text-center">{chamado.patrimonio ?? "--"}</td>
+                                                <td
+                                                    className={`fw-bold text-${chamado.status === "concluído"
+                                                        ? "success"
+                                                        : chamado.status === "pendente"
+                                                            ? "danger"
+                                                            : "warning"
+                                                        } text-center`}
+                                                >
+                                                    {chamado.status}
+                                                </td>
+                                                <td>{chamado.usuario ?? "--"}</td>
+                                                <td>{format(chamado.criado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
+                                                <td>{format(chamado.atualizado_em, "dd/MM/yyyy HH:mm", { locale: ptBR })}</td>
+                                                <td className="text-center">
+                                                    <Link
+                                                        href={`/tecnico/chamados/${chamado.id}`}
+                                                        className="text-dark text-decoration-none fw-bold"
+                                                    >
+                                                        Ver Detalhes
+                                                    </Link>
+                                                    {chamado.status === "concluído" ? (
+                                                        <p className="py-1 m-0">
+                                                            <i className="bi bi-check-all text-success me-1"></i>
+                                                            Concluído
+                                                        </p>
+                                                    ) : (
+                                                        <FecharChamadoModal
+                                                            chamado={chamado}
+                                                            buttonStyle="btn btn-danger py-1 px-2 small w-100"
+                                                            modalId={`FecharModal${chamado.id}`}
+                                                        />
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        ) : (
+                            chamados.slice(0, 3).map((chamado) => (
+                                <CardChamadosResponsivoTec key={chamado.id} chamado={chamado} />
+                            ))
+                        )}
+                    </div>
+                )}
             </div>
 
             {/* título para mostrar o calendário */}
@@ -188,7 +213,7 @@ export default function Tecnico() {
                 </h4>
             </div> */}
 
-            {/* <Calendario /> // Posteriormente, usar calendario para organizar prazos.  */} 
+            {/* <Calendario /> // Posteriormente, usar calendario para organizar prazos.  */}
 
             {/* banner 2 */}
             <div className={`position-relative ${styles.banner2Tecnico}`}>

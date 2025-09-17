@@ -123,7 +123,7 @@ export default function Header() {
                       </Link>
                     </div>
                   ) : (
-                    <div className={`d-flex justify-content-center px-3 col-12 ${decoded.funcao === 'usuario' ? 'col-sm-6' : 'col-sm-12'} align-items-center`}>
+                    <div className={`d-flex ${decoded.funcao === 'usuario' ? "justify-content-center": 'justify-content-end'} px-3 col-12 ${decoded.funcao === 'usuario' ? 'col-sm-6' : 'col-sm-12'} align-items-center`}>
 
                       <div className="dropdown">
                         <button

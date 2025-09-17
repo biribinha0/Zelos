@@ -12,13 +12,7 @@
   }
 }
 
-.preto {
-  color: #333;
-}
 
-.vermelho {
-  color: red;
-}
 
 .titulo i {
   font-size: clamp(1.2rem, 2vw, 1.6rem); 
@@ -30,46 +24,34 @@ display: flex;
 justify-content: center;
 }
 
-.senaizelos{
-   max-width: 45%;
-   height:auto;
-   margin-top: 2%;
-   
+
+
+.TextoSobre {
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  text-align: justify; 
+  margin: 4% 10%; 
+  font-size: 17px; 
+  margin-bottom: -10%; 
+  color: rgba(91, 91, 91, 0.877);
 }
 
-.TextoSobre{
-  align-items: center;
-  text-align: justify;
-  margin-top: 4%;
-  margin-right: 10%;
-  margin-left: 10%;
-  font-size:100%;
-  margin-bottom: -8%;
-  color: rgb(72, 72, 72);
+
+@media (max-width: 600px) {
+  .TextoSobre {
+    font-size: 13px; 
+    margin: 3% 5%; 
+  }
 }
 
-.sobretexto{
-  font-size: clamp(1.0rem, 1.5vw, 1.2rem);
-  margin-right: 6%;
-  margin-left: 6%;
-  text-align: center;
-  margin-top:5%;
-}
-          
+      
 .NossosDepoimentos{
   margin: 5%;
   font-size: clamp(1.2rem, 2vw, 1.6rem);
 }
 
-.body{
-margin: 0;
-      font-family: Arial, sans-serif;
-      background: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+
  
     .container {
       width: 90%;
@@ -85,7 +67,7 @@ margin: 0;
 
 .equipeZelosImg {
   padding: 0% 15%;
- max-width: 90%;
+ max-width: 71%;
 }
 
 .principaisDiv {
@@ -93,7 +75,8 @@ margin: 0;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover !important;
-  margin-top: 2%;
+  
+
 }
 
 .containerEstatisticas {
@@ -106,6 +89,7 @@ margin: 0;
 background: linear-gradient(358deg, rgba(140, 4, 12, 1) 0%, rgba(179, 4, 12, 1) 100%);
   margin-top: 15%;
   padding: 2rem 1rem;
+  margin-bottom: -3%;
 }
 
 /* Texto da esquerda */

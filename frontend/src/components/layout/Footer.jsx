@@ -90,8 +90,9 @@ useEffect(() => {
               <button className="chamado-btn text-break">Solicite um chamado de manutenção</button>
             </Link>
             }
-            {(isAuth && decoded.funcao !== 'usuario') && <Link href={`/${decoded.funcao}`}>
-              <button className="chamado-btn text-break chamado-btnTec">Acessar {decoded.funcao === 'admin' ? 'painel de administração' : 'página de técnico'}</button>
+            {(isAuth && decoded.funcao !== 'usuario') && 
+            <Link href={`/${decoded.funcao}`} className="container-fluid">
+              <button className="chamado-btn text-break w-100 mx-auto d-block p-3" style={{marginBottom: '5%'}}>Acessar {decoded.funcao === 'admin' ? 'painel de administração' : 'página de técnico'}</button>
             </Link>}
 
             <div className="avaliacao">

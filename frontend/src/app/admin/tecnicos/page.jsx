@@ -49,7 +49,7 @@ export default function TecnicosPage() {
     return (
         <>
 
-            <div id="AdmEstatistica" className="dc-outer d-flex container my-5 p-4">
+            <div id="AdmEstatistica" className="dc-outer d-flex container my-5 p-2">
                 <h4 className="fw-bold text-break">
                     <i className="bi bi-wrench-adjustable-circle-fill mx-2 my-2"></i>
                     <span className="text-dark">

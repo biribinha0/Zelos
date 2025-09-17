@@ -111,9 +111,9 @@ export default function CardResponsivoTecAdm({ tec }) {
 
                             <div className="d-flex align-items-center justify-content-center p-3">
                                 <p className="card-text pb-0 mb-0 pe-3">Status:</p>
-                                <a href="#" className={`btn ${statusClass}`}>
+                                <p className={`btn ${statusClass} m-0`}>
                                     {tec.status === "ativo" ? "Ativo" : "Inativo"}
-                                </a>
+                                </p>
                             </div>
                         </div>
                     </div>

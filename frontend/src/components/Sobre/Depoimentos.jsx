@@ -39,7 +39,7 @@ export default function Depoimentos() {
             </div>
 
             {/* Carrossel */}
-            <div className={`${styles.carrosselDiv}`}>
+            <div className={`${styles.carrosselDiv} d-flex h-100`}>
                 <Swiper
                     modules={[Pagination, Scrollbar, A11y, Autoplay]}
 
@@ -67,7 +67,7 @@ export default function Depoimentos() {
                         <h5 className="text-center">Nenhuma mensagem de feedback encontrada</h5>
                     ) : (
                         feedbacks.map((f, index) => (
-                            <SwiperSlide key={index} className="d-flex justify-content-center">
+                            <SwiperSlide key={index} className="d-flex justify-content-center align-items-center h-100">
                                 <CardDepoimentos item={f} />
                             </SwiperSlide>
                         ))

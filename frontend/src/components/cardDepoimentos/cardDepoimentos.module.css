@@ -1,57 +1,60 @@
-.containerCardDepoimentos{
+.containerCardDepoimentos {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: flex-start;
-  gap: 20px; 
-  flex-wrap: wrap; 
+  gap: 20px;
+  flex-wrap: wrap;
   padding: 20px;
 }
 
 .cardDepoimentos {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border-radius: 0.75rem; 
+  border-radius: 0.75rem;
   overflow: hidden;
-  width: 280px; 
+  width: 280px;
   max-width: 100%;
-  }
+  height: 320px; 
+  display: flex; 
+  flex-direction: column; 
+}
 
-  .cardDepoimentos:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  }
-  
-  .cardDepoimentosBody {
-    padding: 1.25rem; 
-  }
-  
-  .cardDepoimentosTitle {
-    font-weight: 600;
-    color: #212529; 
-  }
-  
-  .cardDepoimentosSubtitle {
-    font-size: 0.9rem;
-    color: #6c757d; 
-  }
-  
-  .cardDepoimentosText {
-    color: #495057;
-    line-height: 1.5;
-  }
-  
-  .cardDepoimentosLink {
-    color: #0d6efd; 
-    transition: color 0.2s ease;
-  }
-  
-  .cardDepoimentosLink:hover {
-    color: #0a58ca;
-  }
-  
+.cardDepoimentos:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
 
-  @media (max-width: 768px) {
-    .cardDepoimentos {
-      width: 100% !important;
-    }
+.cardDepoimentosBody {
+  padding: 1.25rem;
+  flex-grow: 1; 
+}
+
+.cardDepoimentosTitle {
+  font-weight: 600;
+  color: #212529;
+}
+
+.cardDepoimentosSubtitle {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.cardDepoimentosText {
+  color: #495057;
+  line-height: 1.5;
+}
+
+.cardDepoimentosLink {
+  color: #0d6efd;
+  transition: color 0.2s ease;
+}
+
+.cardDepoimentosLink:hover {
+  color: #0a58ca;
+}
+
+@media (max-width: 768px) {
+  .cardDepoimentos {
+    width: 100% !important;
+    height: auto;
   }
-  
+}

@@ -1,4 +1,5 @@
 import { create, readAll, read, update } from '../config/database.js';
+import { tecnicoEstatisticas } from './Relatorios.js';
 
 
 // Lista de chamados para usuários sem login
@@ -86,8 +87,8 @@ const chamadosSemTecnico = async (whereClause = '') => {
             AND status IN ('pendente', 'em andamento')
         `;
 
-        const finalCondition = whereClause 
-            ? `${baseCondition} AND ${whereClause}` 
+        const finalCondition = whereClause
+            ? `${baseCondition} AND ${whereClause}`
             : baseCondition;
 
         const orderedCondition = `

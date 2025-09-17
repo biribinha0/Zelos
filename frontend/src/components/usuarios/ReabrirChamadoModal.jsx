@@ -44,7 +44,7 @@ export default function ReabrirChamadoModal({ chamado, buttonStyle, modalId = 'R
             {/* BOTÃO QUE ABRE O MODAL */}
 
             <button
-                className={`${buttonStyle  }`}
+                className={`ms-3 ${styles.buttonStyle}`}
                 data-bs-toggle="modal"
                 data-bs-target={`#${modalId}`}
             >

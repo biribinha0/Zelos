@@ -48,11 +48,11 @@ export default function Sobre() {
       <div className={styles.fundoSobre}>
         <div className={styles.containersobre}>
           <div className={styles.principaisDiv}>
-         <div className="col-12 d-flex flex-column justify-content-center align-items-center p-5 pb-0">
-                <img src="/img/tituloSobrePrincipal.png" className={`img-fluid ${styles.equipeZelosImg}`}/>
-                <h1 className={`${styles.tituloSobrePrincipal} text-center`}>VEJA UM POUCO SOBRE A ZELOS</h1>
+            <div className="col-12 d-flex flex-column justify-content-center align-items-center p-5 pb-0">
+              <img src="/img/tituloSobrePrincipal.png" className={`w-30 img-fluid ${styles.equipeZelosImg}`} />
+              <h1 className={`${styles.tituloSobrePrincipal} text-center`}>VEJA UM POUCO SOBRE A ZELOS</h1>
             </div>
-            </div>
+          </div>
         </div>
         <p className={styles.TextoSobre}>A Zelos nasceu com o propósito de transformar a gestão de manutenção nas instituições de ensino em um processo mais eficiente, organizado e confiável. Sabemos que o bom funcionamento do ambiente escolar é determinante para a qualidade do ensino e para o bem-estar de toda a comunidade acadêmica.
 

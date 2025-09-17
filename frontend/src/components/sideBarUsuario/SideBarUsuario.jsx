@@ -35,13 +35,13 @@ export default function SideBarUsuario({ decoded }) {
                     <li className="nav-item">
                         <Link className="nav-link sidebar-link text-light" href={'/usuario/criar'}>
                             <i className="bi bi-plus-circle sidebar-icon"></i>
-                            <span className="link-text">Criar Chamado</span>
+                            <span className="link-text">Criar chamado</span>
                         </Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link sidebar-link text-light" href={'/usuario/chamados'}>
                             <i className="bi bi-card-list sidebar-icon"></i>
-                            <span className="link-text">Meus Chamados</span>
+                            <span className="link-text">Meus chamados</span>
                         </Link>
                     </li>
                 </ul>

@@ -4,8 +4,8 @@ import styles from "./ChamadoCard.module.css";
 export default function ChamadoCard({ chamado }) {
     return (
 
-        <div className={styles.cardsContainer}>
-            <div className={`card ${styles.card}`}>
+        <div className={`${styles.cardsContainer} w-100`}>
+            <div className={`card ${styles.card} w-100`}>
                 <div className="card-body d-flex flex-column">
                     <h5 className={`card-title pt-1 ${styles.title} ${chamado.urgencia === 'Urgente' ? 'text-danger fw-bold' : ''}`}>
                         {chamado.urgencia === 'Urgente' && <i className="bi bi-exclamation-triangle-fill text-danger me-2"></i>}

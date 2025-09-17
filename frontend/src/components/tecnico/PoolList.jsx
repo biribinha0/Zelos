@@ -40,7 +40,7 @@ export default function PoolList() {
             {chamados?.length > 0 ? (
                 chamados.map((chamado) => {
                     return (
-                        <div key={chamado.id} className="col-12 col-md-3 d-flex">
+                        <div key={chamado.id} className="py-3 col-12 col-sm-6 col-lg-4 col-xl-3 d-flex">
                             <ChamadoCard chamado={chamado} />
                         </div>
                     )
