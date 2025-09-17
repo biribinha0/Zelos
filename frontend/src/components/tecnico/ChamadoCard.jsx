@@ -13,10 +13,20 @@ export default function ChamadoCard({ chamado }) {
                         {chamado?.titulo}
                     </h5>
                     <p className={`${styles.text} flex-grow-1`} dangerouslySetInnerHTML={{ __html: chamado.descricao }} />
-                    <Link className="text-danger small" href={`/tecnico/chamados/${chamado.id}`} >Detalhes</Link>
-                    <div className="d-flex justify-content-end mt-auto">
-                        <AtribuirModal chamado={chamado} modalId={`AtribuirModal${chamado.id}`} className={styles.button} />
+                    <div className="d-flex flex-column align-items-end mt-auto">
+                        <AtribuirModal
+                            chamado={chamado}
+                            modalId={`AtribuirModal${chamado.id}`}
+                            className="btn btn-danger"
+                        />
+                        <Link
+                            href={`/tecnico/chamados/${chamado.id}`}
+                            className="text-danger small mt-2 text-decoration-underline"
+                        >
+                            Detalhes
+                        </Link>
                     </div>
+
                 </div>
             </div>
         </div>

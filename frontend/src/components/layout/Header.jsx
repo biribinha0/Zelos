@@ -151,7 +151,7 @@ export default function Header() {
                   )
                 }
 
-                {(!isAuth || decoded.funcao === 'usuario') && <Link className="col-12 col-sm-6 d-flex align-items-center justify-content-center text-decoration-none flex-column"
+                {(!isAuth || decoded.funcao === 'usuario') && <Link className="p-0 col-12 col-sm-6 d-flex align-items-center justify-content-center text-decoration-none flex-column"
                   href={isAuth ? '/usuario/criar' : '/login/usuario'}
                   role="button">
 
