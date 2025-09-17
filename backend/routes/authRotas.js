@@ -49,7 +49,7 @@ router.post('/login', (req, res, next) => {
           const usuarioData = {
             id: user.sAMAccountName,
             email: user.userPrincipalName,
-            nome: formatarNome(user.givenName),
+            nome: formatarNome(user.displayName),
             senha: senhaHasheada,
             funcao: 'usuario',
           }

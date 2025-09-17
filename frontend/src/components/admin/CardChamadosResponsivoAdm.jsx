@@ -20,7 +20,6 @@ export default function CardChamadosResponsivoAdm({ chamado, tecnicosList }) {
 
     const statusClass = statusColors[chamado?.status] || "btn-secondary";
 
-    ///BERNARDO OLHA ESSA PARTE AQUI/////
     const [ativo, setAtivo] = useState(null);
 
     const handleClick = (tipo) => {

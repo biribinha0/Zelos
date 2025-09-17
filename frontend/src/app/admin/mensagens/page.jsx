@@ -28,7 +28,7 @@ export default function AdminMensagens() {
         <h4 className="fw-bold text-break">
           <i className="bi bi-chat-dots mx-2 my-2"></i>
           <span className="text-dark">
-            Mensagens de contato e <span className="text-danger">feedback</span> dos usuários:
+            Mensagens de <span className="text-danger">contato</span>  e <span className="text-danger">feedback</span> dos usuários:
           </span>
         </h4>
       </div>
@@ -125,7 +125,7 @@ export default function AdminMensagens() {
                 <p
                   className="text-muted small mb-3 flex-grow-1 overflow-hidden"
                   title={c.mensagem}
-                  style={{ maxHeight: "100px"}}
+                  style={{ maxHeight: "100px" }}
                 >
                   {c.mensagem}
                 </p>

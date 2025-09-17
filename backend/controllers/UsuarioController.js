@@ -79,7 +79,7 @@ const obterUsuarioPorIdController = async (req, res) => {
     try {
         const usuario = obterUsuarioPorId(usuarioId)
         if (usuario.funcao === 'tecnico') {
-            usuario.pools = await carregarPoolsParaTecnico(usuario.id);
+            usuario.pools = await carregarPoolsParaTecnico(usuario.id) || null;
         }
         res.status(200).json(usuario);
     } catch (error) {

@@ -142,7 +142,6 @@ export default function AdminChamadosPage() {
                     </div>
                     <div className="col-md-2">
                         <label className="form-label fw-bold">Técnico atribuído:</label>
-                        {filtros.tecnico}
                         <select
                             className="form-select form-control inputParte1"
                             name="tecnico"
