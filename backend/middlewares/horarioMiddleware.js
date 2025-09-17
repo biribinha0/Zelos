@@ -15,13 +15,13 @@ export default function horarioMiddleware(req, res, next) {
     // só permitir segunda (1) a sexta (5)
     const dia = agora.getDay(); // 0=domingo, 1=segunda ...
 
-    // if (dia === 0 || dia === 6) {
-    //     return res.status(403).json({ error: "Acesso permitido apenas em dias úteis." });
-    // }
+    if (dia === 0 || dia === 6) {
+        return res.status(403).json({ error: "Acesso permitido apenas em dias úteis." });
+    }
 
-    // if (atual < inicio || atual > fim) {
-    //     return res.status(403).json({ error: "Acesso permitido apenas entre 08h00 e 18h00." });
-    // }
+    if (atual < inicio || atual > fim) {
+        return res.status(403).json({ error: "Acesso permitido apenas entre 08h00 e 18h00." });
+    }
     next();
 
 }
