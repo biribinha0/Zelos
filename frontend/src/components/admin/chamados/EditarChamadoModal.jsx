@@ -167,7 +167,7 @@ export default function EditarChamadoModal({
                                 >
                                     <option value="">Selecione</option>
                                     {tecnicos.map((t, i) => {
-                                        const temPoolComum = t.pool_tecnico.some(pool => pool.id_pool === chamado.tipo_id);
+                                        const temPoolComum = t.pool_tecnico.some(pool => pool.id_pool == form.tipo_id);
                                         if (!temPoolComum) return null; 
 
                                         return (
