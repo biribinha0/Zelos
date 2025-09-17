@@ -107,7 +107,7 @@ export default function AtribuirFuncionarioModal({ ativo, tecnicos, modalId, cha
                             <select className="form-select inputParte1 form-select-sm"
                                 name="tecnico_id"
                                 value={tecnico}
-                                onChange={(e) => setTecnico(e.target.value)}
+                                onChange={(e) => setTecnico(String(e.target.value))}
                                 required
                             >
                                 <option value="">Selecione</option>
@@ -135,7 +135,7 @@ export default function AtribuirFuncionarioModal({ ativo, tecnicos, modalId, cha
                                 style={{
                                     background: "linear-gradient(90deg, #9b2929ff, #ff0000)",
                                 }}
-                                disabled={tecnico == '' || mensagem}
+                                disabled={tecnico === ''}
                                 onClick={handleAtribuir}
 
                             >
