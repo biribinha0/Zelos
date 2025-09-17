@@ -63,12 +63,13 @@ export default function DetalhesChamadoAdmin() {
         })
             .then((response) => {
                 setChamado(response.data);
-                setLoading(false);
+
             })
             .catch((error) => {
                 console.error(error);
-                setLoading(false);
-            });
+
+            })
+            .finally(() => setLoading(false))
     }, [chamadoId]);
 
     const cardWidth = 'min(800px, 98vw)';
@@ -86,8 +87,8 @@ export default function DetalhesChamadoAdmin() {
     }
 
 
-    if (loading) return <p className="text-center mt-4">Carregando...</p>;
-    if (!chamado) return <Error404
+    if (loading) return <p className="text-center mt-4">Carregando...</p>
+    else if (!chamado && !loading) return <Error404
         mensagem="Chamado não encontrado"
         textoBotao="Voltar para chamados"
         linkHref='/admin/chamados'
