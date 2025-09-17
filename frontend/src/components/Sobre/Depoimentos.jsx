@@ -34,7 +34,7 @@ export default function Depoimentos() {
     return (
         <div className={`${styles.principaisDiv}`}>
             <div className="col-12 d-flex flex-column justify-content-center align-items-center p-0 p-md-5 pb-0">
-                <img src="/img/feedbacksImg.png" className={`img-fluid p-sm-0 ${styles.equipeZelosImg}`} alt="..." />
+                <img src="/img/feedbacksImg.png" className={`img-fluid p-sm-0 w-50 ${styles.equipeZelosImg}`} alt="..." />
                 <h1 className={`${styles.tituloProfissionaisHome} text-center`}>que reafirmam nosso propósito</h1>
             </div>
 

@@ -1,18 +1,16 @@
 
-/* container que envolve todos os cards */
 .cardsContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  align-items: stretch; /* fundamental: faz os cards terem a mesma altura na linha */
+  align-items: stretch; 
 }
 
-/* alvo os .card dentro do container (funciona com o bootstrap .card) */
 .cardsContainer .card {
-  flex: 1 1 320px;       /* largura mínima / comportamento responsivo */
-  display: flex;         /* transforma o próprio card em flex container */
-  flex-direction: column;/* conteúdo do card empilha em coluna */
-  min-height: 18rem;     /* aqui você força uma altura mínima igual para todos — ajuste conforme quiser */
+  flex: 1 1 320px;      
+  display: flex;         
+  flex-direction: column;
+  min-height: 18rem;     
   padding: 1.2rem;
   background-color: #ffffff;
   border-radius: 1px;
@@ -63,27 +61,31 @@
 /* responsividade: ajusta min-height conforme tela */
 @media (max-width: 992px) {
   .cardsContainer .card { 
-    min-height: 16rem; 
+    min-height: 6rem; 
     margin-bottom: 5%;
   }
 }
 
 @media (min-width: 600px) and (max-width: 1024px) {
   .cardsContainer .card { 
-    min-height: 23rem; 
+    min-height: 2rem; 
+  }
+
+  .card{
+  margin-right: 10%;
   }
 }
 
 @media (width: 1029px) and (height: 593px) {
   .cardsContainer .card { 
-    min-height: 23rem; 
+    min-height: 2rem; 
   }
 }
 
 
 @media (min-width: 1200px) {
   .cardsContainer .card { 
-    min-height: 20rem; 
+    min-height: 2rem; 
   }
 }
 
