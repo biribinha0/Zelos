@@ -1,10 +1,47 @@
-
-.titulo-da-tabela{
-    vertical-align: middle;
+.titulo-da-tabela {
+  vertical-align: middle;
 }
 
 .inputAfter:focus {
-  border-color: #808080; 
-  box-shadow: 0 0 5px rgba(128, 128, 128, 0.5); 
+  border-color: #808080;
+  box-shadow: 0 0 5px rgba(128, 128, 128, 0.5);
 }
 
+.buttonChamadosList {
+  padding: 3% 8%;
+  border: unset;
+  z-index: 1;
+  background: #D10914;
+  background: linear-gradient(184deg, rgba(209, 9, 20, 1) 46%, rgba(140, 4, 12, 1) 85%);
+  position: relative;
+  font-weight: bold;
+  font-size: 16px;
+  color: #ffffff;
+  transition: all 1000ms;
+  overflow: hidden;
+  width: 150%;
+  height: 100%;
+  /* max-width: 530px; */
+}
+
+.buttonChamadosList::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: #212121;
+  z-index: -1;
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 1000ms;
+}
+
+.buttonChamadosList:hover {
+  color: #e8e8e8;
+}
+
+.buttonChamadosList:hover::before {
+  width: 100%;
+
+}

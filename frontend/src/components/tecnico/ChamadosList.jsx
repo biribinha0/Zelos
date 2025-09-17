@@ -136,7 +136,7 @@ export default function ChamadosList() {
                     </div>
 
                     <div className="col-md-2">
-                        <button className="btn w-100 fw-bold text-white py-2" onClick={buscarChamados} style={{ background: "#820505be", background: "linear-gradient(172deg,rgba(209, 9, 20, 1) 46%, rgba(107, 2, 9, 1) 83%)" }}>
+                        <button className="btn buttonChamadosList w-100 fw-bold text-white py-2" onClick={buscarChamados} style={{ background: "#820505be", background: "linear-gradient(172deg,rgba(209, 9, 20, 1) 46%, rgba(107, 2, 9, 1) 83%)" }}>
                             Pesquisar
                         </button>
                     </div>

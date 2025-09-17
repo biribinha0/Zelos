@@ -66,13 +66,13 @@ export default function TipoErradoModal({ chamado, modalId = 'tipoErradoModal' }
             <button
                 type="button"
                 style={{ all: "unset", cursor: "pointer" }}
-                className="m-0 p-0 text-start"
+                className="m-0 p-0 text-start "
                 data-bs-toggle="modal"
                 data-bs-target={`#${modalId}`}
 
             >
                 <i className="bi bi-exclamation-triangle-fill me-1 text-danger"></i>
-                O tipo de chamado está errado? Clique Aqui!
+                O tipo de chamado está errado? <span className="text-decoration-underline">Clique Aqui!</span>
             </button>
 
             <div

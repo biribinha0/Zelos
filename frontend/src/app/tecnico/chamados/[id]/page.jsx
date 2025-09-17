@@ -61,7 +61,7 @@ export default function DetalhesChamadoTecnico() {
         textoBotao="Voltar para chamados"
         linkHref='/tecnico/chamados'
     />;
-    if (chamado.tecnico_id !== decoded.id) return <Error403 mensagem='Este chamado não está atribuído a você' textoBotao='Ver meus chamados' linkbotao='/tecnico/chamados'></Error403>
+    if (chamado.tecnico_id !== decoded.id && chamado.tecnico_id) return <Error403 mensagem='Este chamado não está atribuído a você' textoBotao='Ver meus chamados' linkbotao='/tecnico/chamados'></Error403>
     return (
         <div className="dc-outer d-flex justify-content-center bg-detalhes p-4">
             <div className="dc-inner p-4 shadow rounded bg-white" style={{ width: cardWidth }}>

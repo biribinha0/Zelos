@@ -1,3 +1,4 @@
+import Link from "next/link";
 import AtribuirModal from "./AtribuirModal";
 import styles from "./ChamadoCard.module.css";
 
@@ -12,6 +13,7 @@ export default function ChamadoCard({ chamado }) {
                         {chamado?.titulo}
                     </h5>
                     <p className={`${styles.text} flex-grow-1`} dangerouslySetInnerHTML={{ __html: chamado.descricao }} />
+                    <Link className="text-danger small" href={`/tecnico/chamados/${chamado.id}`} >Detalhes</Link>
                     <div className="d-flex justify-content-end mt-auto">
                         <AtribuirModal chamado={chamado} modalId={`AtribuirModal${chamado.id}`} className={styles.button} />
                     </div>
