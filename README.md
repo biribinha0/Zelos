@@ -4,7 +4,7 @@
 
 Este é um projeto de **sistema de chamados** para a **Escola SENAI Armando de Arruda Pereira**, desenvolvido para gerenciar solicitações de manutenção, apoio técnico e outros serviços para itens identificados pelo número de patrimônio da escola. O sistema foi construído com **Next.js**, **Node.js** e **MySQL**.
 
-[Manual de Uso](https://bybeauty.my.canva.site/manual-do-sistema-zelos)
+[Manual de Uso](https://bybeauty.my.canva.site/sen)
 
 ## Índice
 
