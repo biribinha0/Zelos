@@ -12,16 +12,17 @@
     margin: 10% 0%;
 }
 
-.usuarioBotao{
+.usuarioBotao {
     transition: .3s;
     color: #fff
 }
+
 .usuarioBotao:hover,
 .usuarioBotao:target,
-.usuarioBotao:active
-.usuarioBotao:focus{
-    color: #9A1915 ;
+.usuarioBotao:active .usuarioBotao:focus {
+    color: #9A1915;
 }
+
 a.dropdown-icon {
     color: #9A1915 !important;
 
@@ -90,22 +91,22 @@ a.dropdown-icon {
 }
 
 .botaoChamadoNav::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  background-color: #212121;
-  z-index: -1;
-  transition: all 1s ease;
-  border-radius: 7px;
-  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: #212121;
+    z-index: -1;
+    transition: all 1s ease;
+    border-radius: 7px;
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
 }
 
 .botaoChamadoNav:hover::before {
-  width: 100%;
-  border-radius: 7px;
+    width: 100%;
+    border-radius: 7px;
 }
 
 .botaoChamadoNav:hover {
@@ -174,6 +175,11 @@ li.itens a:hover::after {
     width: 60%;
 }
 
+.navDropItem:active {
+    text-decoration: none;
+    background-color: #9A1915;
+}
+
 /* Hover bolinha */
 li.itens a:hover::before {
     opacity: 1;
@@ -212,10 +218,12 @@ li.itens a:hover::before {
         display: block;
         text-align: center;
     }
-    .AltHeader{
+
+    .AltHeader {
         padding-left: 60px;
     }
-    .AltEspacamentoNav{
+
+    .AltEspacamentoNav {
         padding: 0;
     }
 
@@ -241,7 +249,7 @@ li.itens a:hover::before {
         text-align: center;
     }
 
-    
+
 }
 
 @media (max-width: 320px) {

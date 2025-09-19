@@ -4,6 +4,10 @@
     margin-bottom: 5%;
 }
 
+.btnStatus {
+    pointer-events: none !important;
+}
+
 .infosPastinha {
     margin-left: auto;
 }

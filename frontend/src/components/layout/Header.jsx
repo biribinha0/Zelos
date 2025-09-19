@@ -136,12 +136,12 @@ export default function Header() {
                         </button>
                         <ul className={`dropdown-menu shadow ${styles.activeTransicao}`}>
                           <li>
-                            <Link className={`dropdown-item`} href={`/${decoded?.funcao}`}>
+                            <Link className={`dropdown-item ${styles.navDropItem}`} href={`/${decoded?.funcao}`}>
                               Painel de controle
                             </Link>
                           </li>
                           <li>
-                            <button className="dropdown-item" onClick={handleLogout}>
+                            <button className={`dropdown-item ${styles.navDropItem}`} onClick={handleLogout}>
                               <i className="bi bi-box-arrow-left"></i> Sair
                             </button>
                           </li>

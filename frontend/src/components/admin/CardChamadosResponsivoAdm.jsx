@@ -141,7 +141,7 @@ export default function CardChamadosResponsivoAdm({ chamado, tecnicosList }) {
 
                     <div className="d-flex align-items-center justify-content-center p-3">
                         <p className="card-text pb-0 mb-0 pe-3">Status:</p>
-                        <p className={`btn ${statusClass} m-0`}>
+                        <p className={`btn ${statusClass} ${styles.btnStatus} m-0`}>
                             {chamado?.status}
                         </p>
                     </div>

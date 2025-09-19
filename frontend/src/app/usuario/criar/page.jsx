@@ -155,10 +155,10 @@ export default function CriarChamado() {
           <p className="subtitulo text-white">Crie um chamado para sua necessidade</p>
 
           <form id="chamadoForm" onSubmit={handleSubmit}>
-            <h6 className="tituloInput">Tipo de chamado</h6>
+            <h6 className="tituloInput">Tipo de chamado:</h6>
             <select className="form-control mb-3 inputCriar" name="tipo_id" value={chamadoData.tipo_id} onChange={handleChange} required>
-              <option value="">Selecione</option>
-              {pools.map(pool => <option key={pool.id} value={pool.id}>{pool.titulo}</option>)}
+              <option className="tipoOption" value="">Selecione</option>
+              {pools.map(pool => <option className="tipoOption" key={pool.id} value={pool.id}>{pool.titulo}</option>)}
             </select>
 
             <h6 className="tituloInput">Título:</h6>
@@ -184,7 +184,7 @@ export default function CriarChamado() {
             </div>
 
             }
-            <button formTarget="chamadoForm" type="submit" className="btn buttonC py-4 d-none d-lg-block mt-5" disabled={loading}>
+            <button formTarget="chamadoForm" type="submit" className="btn buttonCriarChamado py-4 d-none d-lg-block mt-5" disabled={loading}>
               {loading ? "Enviando..." : "Solicitar"}
             </button>
 
@@ -311,7 +311,7 @@ export default function CriarChamado() {
           </div>
         </div>
       </div>
-      <button formTarget="chamadoForm" type="submit" className="btn buttonC py-4 d-block d-lg-none" disabled={loading}>
+      <button formTarget="chamadoForm" type="submit" className="btn buttonCriarChamado py-4 d-block d-lg-none" disabled={loading}>
         {loading ? "Enviando..." : "Solicitar"}
       </button>
       {message && <div className={`d-block my-3 d-lg-none alert ${message.type === "success" ? "alert-success" : "alert-danger"}`}>{message.text}

@@ -46,7 +46,7 @@
 
 
 
-.buttonC {
+.buttonCriarChamado {
   border: unset;
   color: #212121;
   z-index: 1;
@@ -63,7 +63,7 @@
   max-width: 530px;
 }
 
-.buttonC::before {
+.buttonCriarChamado::before {
   content: "";
   position: absolute;
   top: 0;
@@ -76,11 +76,11 @@
   transition: all 1000ms;
 }
 
-.buttonC:hover {
+.buttonCriarChamado:hover {
   color: #e8e8e8;
 }
 
-.buttonC:hover::before {
+.buttonCriarChamado:hover::before {
   width: 100%;
 }
 
@@ -139,11 +139,11 @@
 }
 
 /* ------ On check event ------ */
-.urgencia-container input:checked ~ .urgencia-clipboard {
+.urgencia-container input:checked~.urgencia-clipboard {
   display: none;
 }
 
-.urgencia-container input:checked ~ .urgencia-clipboard-check {
+.urgencia-container input:checked~.urgencia-clipboard-check {
   display: block;
 }
 
@@ -162,24 +162,32 @@
     transform: rotate(0deg) scale(0);
     opacity: 0;
   }
+
   50% {
     transform: rotate(-10deg) scale(1.2);
   }
 }
 
 .lista-patrimonio .alert {
-  width: 100%;              
-  max-width: 100%;           
-  word-break: break-word;    
-  overflow-wrap: anywhere;   
-  white-space: normal;       
+  width: 100%;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .lista-patrimonio {
   width: 100%;
-  min-width: 0; /* importante em layouts com flex */
+  min-width: 0;
+  /* importante em layouts com flex */
 }
 
-.btn-buscar{
+.btn-buscar {
   height: 100%;
+}
+
+.tipoOption:active{
+  text-decoration: none;
+  background-color: #9A1915 !important;
+
 }
