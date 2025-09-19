@@ -7,13 +7,14 @@ import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import Link from "next/link";
 
-export default function CriarApontamentoModal({ chamado, buttonStyle }) {
+export default function CriarApontamentoModal({ chamado, buttonStyle, desativado = false }) {
     const [apontamento, setApontamento] = useState({
         descricao: "",
         comeco: '',
         fim: '',
         chamado_id: null,
-        tecnico_id: null
+        tecnico_id: null,
+
     });
     const [loading, setLoading] = useState(false);
     const [mensagem, setMensagem] = useState(null);
@@ -77,6 +78,7 @@ export default function CriarApontamentoModal({ chamado, buttonStyle }) {
                 className={buttonStyle}
                 data-bs-toggle="modal"
                 data-bs-target="#ApontamentoModal"
+                disabled={desativado}
             >
                 <i className="bi bi-plus-circle me-2"></i>
                 <span className="small">Apontamento</span>

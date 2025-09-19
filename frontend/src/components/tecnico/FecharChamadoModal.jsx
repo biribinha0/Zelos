@@ -7,7 +7,7 @@ import axios from 'axios';
 import { API_URL } from '@/utils/api';
 import Link from "next/link";
 
-export default function FecharChamadoModal({ chamado, buttonStyle, modalId = 'FecharModal' }) {
+export default function FecharChamadoModal({ chamado, buttonStyle, modalId = 'FecharModal', desativado = false }) {
     const [apontamento, setApontamento] = useState({
         descricao: "",
         comeco: '',
@@ -71,6 +71,7 @@ export default function FecharChamadoModal({ chamado, buttonStyle, modalId = 'Fe
                 className={buttonStyle}
                 data-bs-toggle="modal"
                 data-bs-target={`#${modalId}`}
+                disabled={desativado}
             >
                 <i className="bi bi-clipboard-check me-2"></i>
                 <span className="small">Concluir</span>

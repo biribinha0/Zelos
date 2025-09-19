@@ -31,8 +31,14 @@ const criarApontamentoController = async (req, res) => {
             comeco,
             fim
         }
-        await editarChamado(chamado_id, {atualizado_em: Date.now()})
-        // Cria o usuário no banco
+
+
+        await editarChamado(chamado_id, {
+            atualizado_em: new Date()  
+        });
+
+
+        // Cria o apontamento no banco
         const apontamentoId = await criarApontamento(apontamentoData);
 
         return res.status(201).json({

@@ -58,7 +58,7 @@ export default function DetalhesChamadoTecnico() {
     if (loading) return <p className="text-center mt-4">Carregando...</p>;
     if (!loading && !chamado) return <Error404
         mensagem="Chamado não encontrado"
-        textoBotao="Voltar para chamados"
+        textoBotao="Meus chamados"
         linkHref='/tecnico/chamados'
     />;
     if (chamado.tecnico_id !== decoded.id && chamado.tecnico_id) return <Error403 mensagem='Este chamado não está atribuído a você' textoBotao='Ver meus chamados' linkbotao='/tecnico/chamados'></Error403>
@@ -85,8 +85,16 @@ export default function DetalhesChamadoTecnico() {
                                 Concluído
                             </p> :
                             <>
-                                <CriarApontamentoModal chamado={chamado} buttonStyle={"btn btn-vermelho py-2 px-3 small w-100"} />
-                                <FecharChamadoModal chamado={chamado} buttonStyle={"btn btn-vermelho py-2 px-3 small w-100"} />
+                                <CriarApontamentoModal
+                                    chamado={chamado}
+                                    buttonStyle={"btn btn-vermelho py-2 px-3 small w-100"}
+                                    desativado={chamado.tecnico_id != decoded.id}
+                                />
+                                <FecharChamadoModal
+                                    chamado={chamado}
+                                    buttonStyle={"btn btn-vermelho py-2 px-3 small w-100"}
+                                    desativado={chamado.tecnico_id != decoded.id}
+                                />
                             </>}
                     </div>
                 </div>

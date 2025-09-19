@@ -90,7 +90,7 @@ export default function DetalhesChamadoAdmin() {
     if (loading) return <p className="text-center mt-4">Carregando...</p>
     else if (!chamado && !loading) return <Error404
         mensagem="Chamado não encontrado"
-        textoBotao="Voltar para chamados"
+        textoBotao="Meus chamados"
         linkHref='/admin/chamados'
     />;
     return (

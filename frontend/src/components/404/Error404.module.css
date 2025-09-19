@@ -59,6 +59,7 @@
   max-width: 530px;
   z-index: 10;
   border-radius: 6px;
+  transition: 1s;
 }
 
 .botaoVoltarHome::before {

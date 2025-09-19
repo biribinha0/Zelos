@@ -57,7 +57,7 @@ export default function DetalhesChamadoUsuario() {
     if (loading) return <p className="text-center mt-4">Carregando...</p>;
     if (!chamado) return <Error404
         mensagem="Chamado não encontrado"
-        textoBotao="Voltar para chamados"
+        textoBotao="Meus chamados"
         linkHref='/usuario/chamados'
     />;
     if (chamado.usuario_id !== decoded.id) return <Error403 mensagem='Este chamado não é seu' textoBotao='Ver meus chamados' linkbotao='/usuario/chamados'></Error403>
