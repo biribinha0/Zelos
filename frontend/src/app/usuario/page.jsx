@@ -75,6 +75,17 @@ export default function Usuario() {
             .catch((err) => setMensagem('Erro ao enviar feedback'))
     }
 
+    const statusColors = {
+        "em andamento": "btn-warning",
+        "concluído": "btn-success",
+        "pendente": "btn-danger"
+    };
+
+    const statusClass = (status) => {
+        return statusColors[status] || "btn-secondary";
+    }
+
+
     return (
         <>
             {/* nome do usuário e boas vindas */}
@@ -123,8 +134,14 @@ export default function Usuario() {
 
                                     <i className={`bi bi-tools ${styles.statusIcon} ${styles.andamento} ${styles.iconRed}`}></i>
                                 </div>
-                                <p className={styles.descricao} dangerouslySetInnerHTML={{ __html: chamado.descricao }} />
+                                <p className={`${styles.descricao} mb-2`} dangerouslySetInnerHTML={{ __html: chamado.descricao }} />
+
+                                <p className={`text-black small m-0 opacity-75 status status-${chamado.status === 'concluído' ? 'sucesso' : chamado.status === 'pendente' ? 'perigo' : 'andamento'}`}>
+                                    {(chamado.status)}
+                                </p>
+
                             </div>
+                        
                         </Link>
                     ))}
                     <Link href={'/usuario/chamados'}>
