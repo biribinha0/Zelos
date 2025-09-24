@@ -114,7 +114,7 @@ export default function CriarChamado() {
         patrimonio: "",
         sala: "",
         equipamento: "",
-        urgencia: ""
+        urgencia: "Comum"
       }));
       setUsarPatrimonio(false);
       setListaPatrimonio([]);
@@ -180,7 +180,7 @@ export default function CriarChamado() {
             </div>
 
             {message && <div className={`my-3 d-none d-lg-flex align-items-center flex-column alert ${message.type === "success" ? "alert-success" : "alert-danger"}`}>{message.text}
-              <Link className="red-link fst-underline text-danger link-opacity-50-hover link-underline-primary  " href={`/usuario/chamados/${message.chamadoId}`}>Ver detalhes do chamado</Link>
+              {message.type === "success" && <Link className="red-link fst-underline text-danger link-opacity-50-hover link-underline-primary  " href={`/usuario/chamados/${message.chamadoId}`}>Ver detalhes do chamado</Link>}
             </div>
 
             }
@@ -311,10 +311,11 @@ export default function CriarChamado() {
           </div>
         </div>
       </div>
-      <button formTarget="chamadoForm" type="submit" className="btn buttonCriarChamado py-4 d-block d-lg-none" disabled={loading}>
+      <button formTarget="chamadoForm" type="submit" className="btn buttonCriarChamado py-4 d-block d-lg-none mt-5" disabled={loading}>
         {loading ? "Enviando..." : "Solicitar"}
       </button>
-      {message && <div className={`d-block my-3 d-lg-none alert ${message.type === "success" ? "alert-success" : "alert-danger"}`}>{message.text}
+      {message && <div className={`my-3 d-flex d-lg-none align-items-center flex-column alert ${message.type === "success" ? "alert-success" : "alert-danger"}`}>{message.text}
+        {message.type === "success" && <Link className="red-link fst-underline text-danger link-opacity-50-hover link-underline-primary  " href={`/usuario/chamados/${message.chamadoId}`}>Ver detalhes do chamado</Link>}
       </div>}
     </div>
   );

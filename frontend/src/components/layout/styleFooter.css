@@ -4,8 +4,7 @@ main {
 }
 
 .footer {
-  margin-top: auto; 
-
+  margin-top: 100% !important; 
 }
 
 .ms-60{
@@ -166,7 +165,6 @@ main {
     align-items: flex-start;
   
 }
-
 
 .chamado-btn {
     background-color: #555;

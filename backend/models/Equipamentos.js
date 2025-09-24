@@ -23,7 +23,8 @@ const obterEquipamentoPorPatrimonio = async (patrimonio) => {
 const verificarChamadoPatrimonio = async (patrimonio, tipoId) => {
     try {
         const chamado = await read('chamados', `patrimonio = ${patrimonio} AND status != 'concluído' AND tipo_id = ${tipoId}`);
-        const res = chamado.length === 0 ? true : false;
+        console.log(chamado)
+        const res = (chamado === null) ? true : false;
         return res;
     } catch (error) {
         console.error('Erro ao verificar chamado com patrimonio: ', error);
