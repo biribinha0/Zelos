@@ -34,7 +34,7 @@ export default function CriarChamado() {
   const [buscandoPatrimonio, setBuscandoPatrimonio] = useState(false);
 
   const [paginaAtual, setPaginaAtual] = useState(1);
-  const itensPorPagina = 2;
+  const itensPorPagina = 10;
 
   const params = useSearchParams();
   const tipoId = params.get('tipo_id');
@@ -250,21 +250,21 @@ export default function CriarChamado() {
 
               {listaPatrimonio.length > 0 && !listaPatrimonio[0].erro && (
                 <div className="lista-patrimonio mt-3">
-                  {listaAtual.map((item) => (
-                    <div
-                      key={item.PATRIMONIO}
-                      className="alert alert-light d-flex justify-content-between align-items-center"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => handleSelectPatrimonio(item)}
-                    >
-                      <div>
-                        <p><b>Patrimônio:</b> {item.PATRIMONIO}</p>
-                        <p><b>Sala:</b> {item.SALA}</p>
-                        <p className="m-0"><b>Equipamento:</b> {item.EQUIPAMENTO}</p>
-                      </div>
-                      {chamadoData.patrimonio === item.PATRIMONIO && <span className="badge bg-success">Selecionado</span>}
-                    </div>
-                  ))}
+                  <ul className="list-group">
+                    {listaAtual.map((item) => (
+                      <li
+                        key={item.PATRIMONIO}
+                        className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center ${chamadoData.patrimonio === item.PATRIMONIO ? 'patrimonioAtivo' : ''}`}
+                        onClick={() => handleSelectPatrimonio(item)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <span>
+                          <b>{item.PATRIMONIO}</b> | {item.SALA} | {item.EQUIPAMENTO}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
 
                   {/* Paginação com rc-pagination */}
                   <Pagination

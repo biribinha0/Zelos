@@ -35,7 +35,7 @@ const BarChart = forwardRef(({ labels, values, title }, ref) => {
         scales: {
             x: {
                 ticks: {
-                    maxRotation: 0,     // não deixa inclinar
+                    maxRotation: 0,    
                     minRotation: 0
                 }
             }

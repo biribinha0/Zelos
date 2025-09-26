@@ -191,3 +191,9 @@
   background-color: #9A1915 !important;
 
 }
+
+.patrimonioAtivo{
+  background-color: #9A1915 !important;
+  color: #fff !important;
+  transition: .2s;
+}
